@@ -1,13 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Container, Header } from "../../components";
+import {
+  Container,
+  FeedsNav,
+  HomeHeader,
+  LatestUpdatesNav,
+  SearchBar,
+} from "../../components";
 
 const HomeScreen = () => {
   return (
     <Container>
-      <View>
-        <Header />
-      </View>
+      <HomeHeader />
+      <SearchBar />
+      <LatestUpdatesNav />
+      <FeedsNav />
     </Container>
   );
 };

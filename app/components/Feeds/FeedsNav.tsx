@@ -1,19 +1,64 @@
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+  Dimensions,
+} from "react-native";
 import React from "react";
-import { Globalstyles, SPACING } from "../../globals/styles";
+import { Globalstyles } from "../../globals/styles";
+import { FontAwesome5, FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { COLORS } from "../../constants/color";
+import { ScrollView } from "react-native-gesture-handler";
+
+const { width } = Dimensions.get("window");
+
+const data = [
+  {
+    name: "Events",
+    icon: <FontAwesome5 name="calendar-check" size={45} color={COLORS.icon} />,
+  },
+  {
+    name: "Meetings",
+    icon: <FontAwesome5 name="calendar-check" size={45} color={COLORS.icon} />,
+  },
+  {
+    name: "Gallery",
+    icon: <FontAwesome name="picture-o" size={45} color={COLORS.icon} />,
+  },
+  {
+    name: "Fund A Project",
+    icon: <FontAwesome5 name="gift" size={45} color={COLORS.icon} />,
+  },
+  {
+    name: "Service Request",
+    icon: (
+      <MaterialIcons name="home-repair-service" size={45} color={COLORS.icon} />
+    ),
+  },
+];
+
+const FeedNavButton = ({ icon, name }: { icon: any; name: string }) => {
+  return (
+    <TouchableOpacity activeOpacity={0.5} style={styles.feedNavButton}>
+      <View>{icon}</View>
+      <Text style={{ fontSize: 14 }}>{name}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const FeedsNav = () => {
-  const FeedNavButton = ({ icon, name }: { icon: any; name: string }) => {
-    return (
-      <View style={styles.feedNavButton}>
-        <View>{icon}</View>
-        <Text>{name}</Text>
-      </View>
-    );
-  };
   return (
     <View style={[Globalstyles.section]}>
-      <Text style={[Globalstyles.sectionHeaderText]}>FeedsNav</Text>
+      <Text style={[Globalstyles.sectionHeaderText, { marginBottom: 20 }]}>
+        Feeds
+      </Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {data.map((item, index) => (
+          <FeedNavButton key={index} icon={item.icon} name={item.name} />
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -24,5 +69,6 @@ const styles = StyleSheet.create({
   feedNavButton: {
     alignItems: "center",
     justifyContent: "center",
+    marginRight: 20,
   },
 });

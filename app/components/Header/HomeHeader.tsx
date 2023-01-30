@@ -5,11 +5,21 @@ import { images } from "../../assets/dummyData";
 import { horizontalScale, verticalScale } from "../../constants/metric";
 import { COLORS } from "../../constants/color";
 import { SPACING } from "../../globals/styles";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const HomeHeader = () => {
+interface Props {
+  navigation: any;
+}
+const HomeHeader = ({ navigation }: Props) => {
   return (
     <View style={styles.headerContainer}>
-      <Ionicons name="ios-menu" size={32} />
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => navigation.openDrawer()}
+      >
+        <Ionicons name="menu" color={COLORS.primary} size={30} />
+      </TouchableOpacity>
+
       <Text style={{ fontSize: 16, fontWeight: "500" }}>
         Welcome, Tomiwa Ayandele
       </Text>

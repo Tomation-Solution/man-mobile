@@ -12,6 +12,7 @@ interface DrawerLabelProps {
   hasSubMenus?: boolean;
   subMenus?: any;
   navigation?: any;
+  isAnAction?: any;
 }
 
 const DrawerLabel = ({
@@ -22,6 +23,7 @@ const DrawerLabel = ({
   hasSwitch,
   navigation,
   subMenus,
+  isAnAction,
 }: DrawerLabelProps) => {
   const [showSubMenus, setShowSubMenus] = React.useState(false);
   const [on, setOn] = React.useState(false);
@@ -34,6 +36,8 @@ const DrawerLabel = ({
             setOn(!on);
           } else if (hasSubMenus) {
             setShowSubMenus(!showSubMenus);
+          } else if (isAnAction) {
+            isAnAction();
           } else {
             navigation.navigate(title);
           }

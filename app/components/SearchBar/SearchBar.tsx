@@ -1,13 +1,36 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { SPACING } from "../../globals/styles";
+import { COLORS } from "../../constants/color";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const SearchBar = () => {
+interface SearchBarProps {
+  hasFilter?: boolean;
+}
+
+const SearchBar = ({ hasFilter }: SearchBarProps) => {
   return (
     <View style={styles.searchContainer}>
-      <AntDesign name="search1" size={20} style={{ marginRight: 10 }} />
-      <TextInput placeholder="Search..." style={{ fontSize: 14, flex: 1 }} />
+      <View style={{ flex: 1 }}>
+        <AntDesign
+          color={COLORS.primary}
+          name="search1"
+          size={20}
+          style={{ marginRight: 10 }}
+        />
+        <TextInput placeholder="Search..." style={{ fontSize: 14, flex: 1 }} />
+      </View>
+      {hasFilter && (
+        <TouchableOpacity activeOpacity={0.7}>
+          <Ionicons
+            color={COLORS.primary}
+            name="filter"
+            size={20}
+            style={{ marginRight: 10 }}
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

@@ -33,6 +33,7 @@ const DrawerNav = () => {
         <Drawer.Screen name="Election" component={Election} />
         <Drawer.Screen name="Resources" component={Resources} />
         <Drawer.Screen name="Support" component={Support} />
+        {/* soupport screens  */}
         <Drawer.Screen name="Gallery" component={Gallery} />
         <Drawer.Screen name="Services" component={Services} />
       </Drawer.Navigator>

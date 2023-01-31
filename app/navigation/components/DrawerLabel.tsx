@@ -111,6 +111,7 @@ const DrawerLabel = ({
           {subMenus.map((item: any) => {
             return (
               <TouchableOpacity
+                onPress={() => navigation.navigate(item.title)}
                 activeOpacity={0.7}
                 key={item.id}
                 style={{

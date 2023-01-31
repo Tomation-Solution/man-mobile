@@ -118,13 +118,20 @@ const DrawerContent = ({ navigation, state, index }: any) => {
         subMenus={[
           {
             id: 1,
-            title: "Give",
+            title: "Support",
             icon: <Ionicons name="heart" size={20} color={COLORS.primary} />,
           },
           {
             id: 2,
-            title: "Contact",
-            icon: <Ionicons name="heart" size={20} color={COLORS.primary} />,
+            title: "Admin Suport",
+            icon: <Ionicons name="people" size={20} color={COLORS.primary} />,
+          },
+          {
+            id: 3,
+            title: "Technical Suport",
+            icon: (
+              <Ionicons name="construct" size={20} color={COLORS.primary} />
+            ),
           },
         ]}
       />

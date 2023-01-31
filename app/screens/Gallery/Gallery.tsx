@@ -1,11 +1,24 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { Container } from "../../components";
+import React, { useState } from "react";
+import { Container, HomeHeader, SearchBar } from "../../components";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Home from "./Home";
 
-const Gallery = () => {
+const Stack = createNativeStackNavigator();
+
+const Gallery = ({ navigation }: any) => {
+  const [title, setTitle] = useState("Gallery");
+
   return (
     <Container>
-      <Text>Gallery</Text>
+      <HomeHeader navigation={navigation} title={title} />
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
     </Container>
   );
 };

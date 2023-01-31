@@ -9,8 +9,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface Props {
   navigation: any;
+  title?: string;
 }
-const HomeHeader = ({ navigation }: Props) => {
+const HomeHeader = ({ navigation, title }: Props) => {
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity
@@ -20,18 +21,26 @@ const HomeHeader = ({ navigation }: Props) => {
         <Ionicons name="menu" color={COLORS.primary} size={30} />
       </TouchableOpacity>
 
-      <Text style={{ fontSize: 16, fontWeight: "500" }}>
-        Welcome, Tomiwa Ayandele
-      </Text>
-
-      <View>
-        <View style={styles.imageContainer}>
-          <Image
-            source={images.man}
-            style={{ width: verticalScale(30), height: horizontalScale(30) }}
-          />
-        </View>
-      </View>
+      {title ? (
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>{title}</Text>
+      ) : (
+        <>
+          <Text style={{ fontSize: 16, fontWeight: "500" }}>
+            Welcome, Tomiwa Ayandele
+          </Text>
+          <View>
+            <View style={styles.imageContainer}>
+              <Image
+                source={images.man}
+                style={{
+                  width: verticalScale(30),
+                  height: horizontalScale(30),
+                }}
+              />
+            </View>
+          </View>
+        </>
+      )}
       <View style={styles.notificationContainer}>
         <FontAwesome name="bell" color={COLORS.primary} size={20} />
         <View style={styles.redDot} />

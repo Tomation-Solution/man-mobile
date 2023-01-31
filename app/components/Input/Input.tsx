@@ -11,8 +11,10 @@ export const ThemedTextInputV2 = forwardRef(
     ...otherProps
   } = props
 
+  // && Localization.decimalSeparator !== '.'
+
   const getKeyboardType = (): KeyboardTypeOptions | undefined => {
-    if (keyboardType === 'numeric' && Platform.OS === 'ios' && Localization.decimalSeparator !== '.') {
+    if (keyboardType === 'numeric' && Platform.OS === 'ios' ) {
       return 'default'
     }
     return keyboardType

@@ -10,15 +10,22 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 interface Props {
   navigation: any;
   title?: string;
+  back?: any;
 }
-const HomeHeader = ({ navigation, title }: Props) => {
+const HomeHeader = ({ navigation, title, back }: Props) => {
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => navigation.openDrawer()}
+        onPress={() => {
+          back ? back() : navigation.openDrawer();
+        }}
       >
-        <Ionicons name="menu" color={COLORS.primary} size={30} />
+        <Ionicons
+          name={back ? "chevron-back" : "menu"}
+          color={COLORS.primary}
+          size={30}
+        />
       </TouchableOpacity>
 
       {title ? (

@@ -12,7 +12,7 @@ interface SearchBarProps {
 const SearchBar = ({ hasFilter }: SearchBarProps) => {
   return (
     <View style={styles.searchContainer}>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, flexDirection: "row" }}>
         <AntDesign
           color={COLORS.primary}
           name="search1"

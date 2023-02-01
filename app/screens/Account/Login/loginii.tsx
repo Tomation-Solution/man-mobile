@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TextInput } from 'react-native';
+import { View, StyleSheet, Text, TextInput ,Image} from 'react-native';
 // import client from '../api/client';
 // import { useLogin } from '../context/LoginProvider';
 // import { isValidEmail, isValidObjField, updateError } from '../utils/methods';
@@ -55,7 +55,11 @@ const LoginForm = () => {
   return (
 
 <View style={{paddingVertical:130}}>
-
+<View >
+<Image
+style={{ position:'absolute', width:100,height:100,marginTop:20}}
+source= {require('../../../assets/app/images/logo/Ellipse143.png')}/>
+</View>
 <View style={{paddingHorizontal:25,paddingVertical:10,
 }} >
 <Text style={styles.Loginheading}> Login</Text>

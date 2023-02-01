@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }: any) => {
         <SearchBar />
         <LatestUpdatesNav />
         <FeedsNav />
-        <NewsNav />
+        <NewsNav navigation={navigation} />
       </ScrollView>
     </Container>
   );

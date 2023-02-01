@@ -65,6 +65,7 @@ const DetailsImage = ({ images }: any) => {
     </View>
   );
 };
+
 const Details = ({ route, navigation }: DetailsProps) => {
   const data = route.params.gallery;
 

@@ -9,10 +9,10 @@ const FormInput = props => {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          marginBottom: 5,
+          marginBottom: 10,
         }}
       >
-        <Text style={{ fontWeight: '100',color:'#9DA292' }}>{label}</Text>
+        {/* <Text style={{ fontWeight: '700',color:'#9DA292',fontSize:12,lineHeight:18 }}>{label}</Text> */}
         {error ? (
           <Text style={{ color: 'red', fontSize: 16 }}>{error}</Text>
         ) : null}
@@ -27,9 +27,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#9DA292',
     height: 35,
+    color:'rbga(0,0,18, 0.16)',
     borderRadius: 8,
     fontSize: 15,
-    paddingLeft: 10,
+    paddingLeft: 6,
 
   },
 });

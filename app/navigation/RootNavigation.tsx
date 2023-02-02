@@ -2,9 +2,7 @@ import { StyleSheet, View } from "react-native";
 
 import { useReducer, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import Login from './../screens/Account/Login/loginii';
-
-
+import { Login } from "../screens";
 const RootNavigation = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 

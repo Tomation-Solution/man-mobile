@@ -3,35 +3,51 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
 import FormContainer from '../FormContainer';
 import FormSubmitButton from '../../../components/form/FormBtn';
+import FormInput from '../../../components/Input/input2'
 import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
 import {ComfirmationInput} from '../../../components'
-import { useNavigation } from '@react-navigation/native';
 
 
-const VerifyUser = () => {
+
+
+const ChangePassword = () => {
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
   });
-  const Navigate= useNavigation()
 
   const [error, setError] = useState('');
 
 
   return (
+
 <>
 <Container>
 <View style={{paddingVertical:100}}>
 <View style={{paddingHorizontal:3,paddingVertical:10,
 }} >
-<Text style={styles.Loginheading}> Code </Text>
-<Text style={styles.heading}> A code was sent to your email kindly {'\n'}input the code recieved</Text>
+<Text style={styles.Loginheading}> Set New password </Text>
+<Text style={styles.heading}> Input new password to recover account </Text>
 </View>
 <View style={[styles.card,styles.shawdowProp]}>
-<ComfirmationInput/>
+
+<FormInput
+placeholder='Password'
+autoCapitalize='none'
+secureTextEntry
+
+/>
+
+<FormInput
+placeholder='Confirm Password'
+autoCapitalize='none'
+secureTextEntry
+
+/>
+
 <FormSubmitButton
-            title='Verify'
-            onPress={()=> Navigate.navigate('ForgotPassword')}
+            title='Submit'
+            style ={[styles.add]}
 
 />
   </View>
@@ -46,6 +62,9 @@ const styles = StyleSheet.create({
     marginTop: 100,
     alignItems: "center",
     justifyContent: "center",
+  },
+  add:{
+    marginTop:12
   },
     card:{
 
@@ -97,5 +116,6 @@ color:'rgba(0,0,34,0.6)'
       },
 });
 
-export default VerifyUser;
+export default ChangePassword ;
+
 

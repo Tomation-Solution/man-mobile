@@ -8,13 +8,16 @@ import FormInput from '../../../components/Input/input2';
 import FormSubmitButton from '../../../components/form/FormBtn';
 import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
 import { Container } from '../../../components';
+import { useNavigation } from '@react-navigation/native';
+
+
 const RegistrationForm = () => {
 //   const { setIsLoggedIn, setProfile } = useLogin();
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
   });
-
+const Navigate = useNavigation()
   const [error, setError] = useState('');
 
 //   const { email, password } = userInfo;
@@ -140,9 +143,13 @@ const RegistrationForm = () => {
             <FormSubmitButton
             style ={[styles.add]}
             title='Register'
+            onPress={()=> Navigate.navigate('VerifyUser')}
+
 
             />
-      <TouchableOpacity style={{display:'flex',flexDirection:'row',}}>
+      <TouchableOpacity
+      onPress={()=> Navigate.navigate('Login')}
+      style={{display:'flex',flexDirection:'row',}}>
 <Text style={styles.register}> Already have an account? </Text>
 <Text style={styles.login}> Login </Text>
             </TouchableOpacity>

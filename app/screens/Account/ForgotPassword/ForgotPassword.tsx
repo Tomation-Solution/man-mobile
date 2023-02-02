@@ -6,16 +6,18 @@ import FormSubmitButton from '../../../components/form/FormBtn';
 import FormInput from '../../../components/Input/input2'
 import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
 import {ComfirmationInput} from '../../../components'
+import { useNavigation } from '@react-navigation/native';
 
 
 
-const VerifyUser = () => {
+const ForgetPassword = () => {
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
   });
 
   const [error, setError] = useState('');
+  const Navigate=useNavigation()
 
 
   return (
@@ -40,6 +42,7 @@ secureTextEntry
 <FormSubmitButton
             title='Continue'
             style ={[styles.add]}
+            onPress={()=> Navigate.navigate( 'VerifyCode')}
 
 />
   </View>
@@ -108,5 +111,5 @@ color:'rgba(0,0,34,0.6)'
       },
 });
 
-export default VerifyUser;
+export default ForgetPassword;
 

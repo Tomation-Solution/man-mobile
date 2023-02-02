@@ -25,15 +25,13 @@ const VerifyUser = () => {
 <View style={{paddingHorizontal:3,paddingVertical:10,
 }} >
 <Text style={styles.Loginheading}> Code </Text>
-<Text style={styles.heading}> A code was sent to your email kindly {'\n'}input the code recieved</Text>
+<Text style={styles.heading}> Enter 4 digit code recieved to proceed</Text>
 </View>
 <View style={[styles.card,styles.shawdowProp]}>
-<ComfirmationInput/>
-<FormSubmitButton
-            title='Verify'
-            onPress={()=> Navigate.navigate('ForgotPassword')}
 
-/>
+<ComfirmationInput/>
+
+<FormSubmitButton title='Continue' onPress={()=> Navigate.navigate('ChangePassword')}/>
   </View>
   </View>
     </Container>

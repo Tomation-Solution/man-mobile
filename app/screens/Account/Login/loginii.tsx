@@ -7,6 +7,7 @@ import FormContainer from '../FormContainer';
 import FormInput from '../../../components/Input/input2';
 import FormSubmitButton from '../../../components/form/FormBtn';
 import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
+import { useNavigation } from '@react-navigation/native';
 import { Container } from '../../../components';
 
 
@@ -18,7 +19,7 @@ const LoginForm = () => {
     email: '',
     password: '',
   });
-
+const Navigate =useNavigation()
   const [error, setError] = useState('');
 
 //   const { email, password } = userInfo;
@@ -103,11 +104,16 @@ source= {require('../../../assets/app/images/logo/Ellipse143.png')}/>
             title='Login'
 
             />
-            <TouchableOpacity>
+            <TouchableOpacity
+                  onPress={()=> Navigate.navigate('ForgotPassword')}
+
+            >
 <Text style={styles.forgotPassword}> Forgot password?</Text>
             </TouchableOpacity>
 
-     <TouchableOpacity style={{display:'flex',flexDirection:'row',}}>
+     <TouchableOpacity
+     onPress={()=> Navigate.navigate('Registration')}
+      style={{display:'flex',flexDirection:'row',}}>
 <Text style={styles.register}> Don't have an account? </Text>
 <Text style={styles.registerText}> Register</Text>
 
@@ -164,7 +170,8 @@ const styles = StyleSheet.create({
         marginTop:12
       },
       forgotPassword:{
-        color:'rgba(0,0,34,0.6)'
+        color:'rgba(0,0,34,0.6)',
+        paddingVertical:7
       },
       register:{
 paddingHorizontal:30,

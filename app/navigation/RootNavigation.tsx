@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 
 import { useReducer, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { Login } from "../screens";
+import WalletNavigation from "./walletNavigation";
 const RootNavigation = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -13,7 +13,7 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        <Login />
+        <WalletNavigation />
       </View>
     </NavigationContainer>
   );

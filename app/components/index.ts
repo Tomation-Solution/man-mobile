@@ -12,6 +12,7 @@ export { default as KeyboardAvoidingViewWrapper } from "./form/KeyboardAvoidngwr
 export { default as FormContainer } from "../screens/Account/FormContainer";
 export { default as ConfirmationInput } from "./form/ComfirmationInput";
 export { default as FormInput } from "./Input/FormInput";
+export {default as CustomModal} from './CustomModal'
 
 
 

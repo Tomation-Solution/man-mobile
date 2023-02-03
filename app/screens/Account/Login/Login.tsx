@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Container,AcountHeader,Formbtn,KeyboardAvoidingViewWrapper, FormContainer,FormInput} from '../../../components';
+import { Container,AcountHeader,Formbtn,KeyboardAvoidingViewWrapper, FormContainer,FormInput,CustomModal} from '../../../components';
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 
 
 const LoginForm = () => {
 
+  const [modalVisible, setModalVisible] = useState(true);
+
+  const onModalPress = () => {
+    setModalVisible(!modalVisible);
+  };
 const Navigate =useNavigation()
 
 
   return (
 <>
 
-
+<CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
+        {/* <Rejected onPress={onPress} /> */}
+      </CustomModal>
 
 
 <KeyboardAvoidingViewWrapper>

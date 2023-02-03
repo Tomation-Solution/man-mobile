@@ -3,8 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { useReducer, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import WalletNavigation from "./walletNavigation";
-// import OnSuccess from "../components/OnSucess/OnPasswordSuccess";
-import LoginForm from "../screens/Account/Registration/registration";
+import LoginForm from "../screens/Account/component/LockedWithPay";
 import {OnSuccess}from '../components'
 
 const RootNavigation = () => {
@@ -17,7 +16,7 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        <WalletNavigation />
+        <WalletNavigation/>
       </View>
     </NavigationContainer>
   );

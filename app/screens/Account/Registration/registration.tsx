@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
-import { AcountHeader,FormContainer, FormInput, Formbtn, KeyboardAvoidingViewWrapper} from '../../../components';
+import { AcountHeader,FormContainer, FormInput, Formbtn, KeyboardAvoidingViewWrapper,CustomModal} from '../../../components';
 import { useNavigation } from '@react-navigation/native';
+import Locked from '../component/LockedWithPay'
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 
 const Registration = () => {
+
+  <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
+         <Locked onPress={onModalPress} />
+      </CustomModal>
 
 const Navigate = useNavigation()
   return (

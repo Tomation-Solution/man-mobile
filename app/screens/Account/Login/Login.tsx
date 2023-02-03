@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-
 import { useNavigation } from '@react-navigation/native';
 import { Container,AcountHeader,Formbtn,KeyboardAvoidingViewWrapper, FormContainer,FormInput,CustomModal} from '../../../components';
 import { Formik, Field } from 'formik'
+import Locked from '../component/Locked'
 import * as yup from 'yup'
 
 
@@ -20,7 +21,7 @@ const Navigate =useNavigation()
 <>
 
 <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
-        {/* <Rejected onPress={onPress} /> */}
+         <Locked onPress={onModalPress} />
       </CustomModal>
 
 
@@ -58,7 +59,7 @@ const Navigate =useNavigation()
 
 
                      <Formbtn  style ={[styles.btn]}
-                      onPress={()=>Navigate.navigate('Registration')}
+                      onPress={()=>{ onModalPress()}}
                      title='Login'  />
                      </>
             )}

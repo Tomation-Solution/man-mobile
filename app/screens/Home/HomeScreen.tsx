@@ -16,7 +16,7 @@ const HomeScreen = ({ navigation }: any) => {
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <SearchBar />
         <LatestUpdatesNav />
-        <FeedsNav />
+        <FeedsNav navigation={navigation} />
         <NewsNav navigation={navigation} />
       </ScrollView>
     </Container>

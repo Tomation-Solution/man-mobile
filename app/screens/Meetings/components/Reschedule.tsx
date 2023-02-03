@@ -1,6 +1,7 @@
 import { Text, View } from "react-native";
 import React from "react";
 import { COLORS } from "../../../constants/color";
+import { Globalstyles } from "../../../globals/styles";
 
 interface RescheduleProps {
   onPress: any;
@@ -8,15 +9,7 @@ interface RescheduleProps {
 
 const Reschedule = ({ onPress }: RescheduleProps) => {
   return (
-    <View
-      style={{
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 20,
-        width: "80%",
-        alignItems: "center",
-      }}
-    >
+    <View style={Globalstyles.modalContainer}>
       <Text
         style={{
           fontSize: 20,

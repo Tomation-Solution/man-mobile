@@ -13,14 +13,14 @@ const OnSuccessScreen = () => {
          image={require('../../../assets/app/images/logo/AcctSuccess.png')}
          text={`Account successfully created`}
          title='Continue'
-        //  onPress={()=> Navigate.navigate('VerifyCode')}
+         onPress={()=> Navigate.navigate('VerifyCode')}
         />
 
-<TouchableOpacity>
+{/* <TouchableOpacity>
     <Text> Subscibe</Text>
     <Text> OR</Text>
     <Text> Continue to 72 hours free trial </Text>
-</TouchableOpacity>
+</TouchableOpacity> */}
 </View>
 
     </Container>

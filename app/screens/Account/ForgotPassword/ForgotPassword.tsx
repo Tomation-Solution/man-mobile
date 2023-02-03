@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
-import FormContainer from '../FormContainer';
-import {Formbtn,KeyboardAvoidingViewWrapper,ComfirmationInput,Container,} from '../../../components';
+import {Formbtn,AcountHeader,FormContainer,KeyboardAvoidingViewWrapper,ComfirmationInput,Container,FormInput} from '../../../components';
 import { useNavigation } from '@react-navigation/native';
-import FormInput from '../../../components/Input/input2'
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 
@@ -15,9 +13,12 @@ const ForgetPassword = () => {
 <Container>
 <View style={{paddingVertical:100}}>
 <View style={{paddingHorizontal:3,paddingVertical:10,
-}} >
-<Text style={styles.Loginheading}> Forgot password </Text>
-<Text style={styles.heading}> Enter email address to recover account</Text>
+}}>
+  <AcountHeader
+  title=' Forgot password  '
+  text="Enter email address to recover account"
+  />
+
 </View>
 
 
@@ -88,7 +89,9 @@ const styles = StyleSheet.create({
 
       },
       btn:{
-        marginTop:18
+        marginTop:28,
+        width:267,
+        marginLeft:4
       },
       forgotPassword:{
         color:'rgba(0,0,34,0.6)'

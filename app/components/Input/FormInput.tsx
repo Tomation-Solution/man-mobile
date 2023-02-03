@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 
-const FormInput = (props) => {
-
+const FormInput =(props) =>{
   const {
     field: { name, onBlur, onChange, value },
     form: { errors, touched, setFieldTouched },
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
 
   },
   textInput: {
-    height: 50,
+    height: 55,
     width: '100%',
     backgroundColor: 'white',
     borderColor: 'gray',

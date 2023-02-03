@@ -1,10 +1,7 @@
 import Container from './../../../components/Container';
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
-import FormContainer from '../FormContainer';
-import FormInput from '../../../components/Input/input2'
-import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
-import {ComfirmationInput,Formbtn} from '../../../components'
+import {ComfirmationInput,Formbtn,AcountHeader,FormInput,FormContainer} from '../../../components'
 import { useNavigation } from '@react-navigation/native';
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
@@ -21,8 +18,12 @@ const ChangePassword = () => {
 <View style={{paddingVertical:100}}>
 <View style={{paddingHorizontal:3,paddingVertical:10,
 }} >
-<Text style={styles.Loginheading}> Set New password </Text>
-<Text style={styles.heading}> Input new password to recover account </Text>
+    <AcountHeader
+  title=' Set New password '
+  text={'Input new password to recover account '}
+
+  />
+
 </View>
 <View style={[styles.card,styles.shawdowProp]}>
 <Formik
@@ -61,8 +62,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  add:{
-    marginTop:12
+  btn:{
+    marginTop:28,
+    width:267,
+    marginLeft:4
   },
     card:{
 

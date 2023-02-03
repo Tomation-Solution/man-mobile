@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
-import FormContainer from '../FormContainer';
-import FormInput from '../../../components/Input/input2';
-import FormSubmitButton from '../../../components/form/FormBtn';
-import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
-import { Container } from '../../../components';
+import { AcountHeader,FormContainer, FormInput, Formbtn, KeyboardAvoidingViewWrapper} from '../../../components';
 import { useNavigation } from '@react-navigation/native';
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
@@ -14,11 +10,14 @@ const Registration = () => {
 const Navigate = useNavigation()
   return (
 <KeyboardAvoidingViewWrapper>
-<View style={{paddingVertical:60}}>
+<View style={{paddingVertical:55}}>
 <View style={{paddingHorizontal:25,paddingVertical:1,
 }} >
-<Text style={styles.Loginheading}> Registration</Text>
-<Text style={styles.heading}> Input details to register as alumnus</Text>
+  <AcountHeader
+  title='  Registration'
+  text=' Input details to register as alumnus'
+  />
+
 </View>
 
     <FormContainer>
@@ -46,9 +45,6 @@ const Navigate = useNavigation()
               <Field    component={FormInput}    name="email" placeholder="Email address" />
               <Field    component={FormInput}    name="username" placeholder="Username" />
               <Field    component={FormInput}    name="password" placeholder="Password" />
-
-
-
               <View style={{display:'flex',flexDirection:'row', width:'100%',paddingVertical:21, }}>
   <View style={{width:'45%',flexDirection:'column',display:'flex', }}>
   <Field    component={FormInput}    name="phonenumber" placeholder="Phone number" />
@@ -61,8 +57,8 @@ const Navigate = useNavigation()
       </View>
       </View>
 
-      <FormSubmitButton
-            style ={[styles.add]}
+      <Formbtn
+            style ={[styles.btn]}
             title='Register'
             onPress={()=> Navigate.navigate('VerifyUser')}/>
 
@@ -123,10 +119,11 @@ const styles = StyleSheet.create({
       fontWeight:'700',
       lineHeight:21.86,
       color:'rgba(0,0,34,0.41)',
-
       },
-      add:{
-        marginTop:12
+      btn:{
+        marginTop:20,
+        width:274,
+        marginLeft:6
       },
       register:{
         paddingHorizontal:30,

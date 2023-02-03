@@ -1,10 +1,6 @@
-import Container from './../../../components/Container';
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
-import FormContainer from '../FormContainer';
-import FormSubmitButton from '../../../components/form/FormBtn';
-import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
-import {ComfirmationInput,Formbtn} from '../../../components'
+import {ComfirmationInput,Formbtn,AcountHeader,FormContainer,Container} from '../../../components'
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -20,8 +16,12 @@ const VerifyUser = () => {
 <View style={{paddingVertical:100}}>
 <View style={{paddingHorizontal:3,paddingVertical:10,
 }} >
-<Text style={styles.Loginheading}> Code </Text>
-<Text style={styles.heading}> Enter 4 digit code recieved to proceed</Text>
+  <AcountHeader
+  title=' Code '
+  text={'Enter 4 digit code recieved to proceed'}
+  />
+
+
 </View>
 <View style={[styles.card,styles.shawdowProp]}>
 

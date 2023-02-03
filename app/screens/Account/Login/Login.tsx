@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
-import FormContainer from '../FormContainer';
-import FormInput from '../../../components/Input/input2';
-import FormSubmitButton from '../../../components/form/FormBtn';
-import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
 import { useNavigation } from '@react-navigation/native';
-import { Container } from '../../../components';
+import { Container,AcountHeader,Formbtn,KeyboardAvoidingViewWrapper, FormContainer,FormInput} from '../../../components';
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 
@@ -22,14 +18,15 @@ const Navigate =useNavigation()
 
 
 <KeyboardAvoidingViewWrapper>
-
-
-
 <View style={{paddingVertical:130}}>
 <View style={{paddingHorizontal:25,paddingVertical:10,
 }} >
-<Text style={styles.Loginheading}> Login</Text>
-<Text style={styles.heading}> Input details to register as alumnus</Text>
+  <AcountHeader
+  title=' Login'
+  text='Input details to register as alumnus'
+  />
+
+
 </View>
 
 
@@ -53,7 +50,7 @@ const Navigate =useNavigation()
               <Field    component={FormInput}    name="password" placeholder="password" />
 
 
-                     <FormSubmitButton  style ={[styles.btn]}
+                     <Formbtn  style ={[styles.btn]}
                       onPress={()=>Navigate.navigate('Registration')}
                      title='Login'  />
                      </>
@@ -118,11 +115,14 @@ const styles = StyleSheet.create({
 
       },
       btn:{
-        marginTop:15
+        marginTop:28,
+        width:274,
+        marginLeft:6
       },
       forgotPassword:{
         color:'rgba(0,0,34,0.6)',
-        paddingVertical:15
+        paddingVertical:15,
+        fontWeight:'300',
 
       },
       register:{

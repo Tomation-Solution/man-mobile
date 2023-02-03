@@ -12,15 +12,11 @@ import { CustomModal, HomeHeader } from "../../components";
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { COLORS } from "../../constants/color";
-import Reschedule from "./components/Reschedule";
-
-interface DetailsProps {
-  route?: any;
-  navigation?: any;
-}
+import Rejected from "./components/Rejected";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Details = ({ route, navigation }: any) => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
   const altRoute = useRoute();
   const data = route?.params?.meeting || altRoute?.params || {};
 
@@ -31,110 +27,80 @@ const Details = ({ route, navigation }: any) => {
   return (
     <>
       <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
-        <Reschedule onPress={onPress} />
+        <Rejected onPress={onPress} />
       </CustomModal>
       <HomeHeader
         navigation={navigation}
         title={data.title + " Details" || "Details " + data.id}
         back={() => navigation.goBack()}
       />
-      <View
+      <ScrollView
+        showsVerticalScrollIndicator={false}
         style={{
-          borderTopRightRadius: 20,
-          borderTopLeftRadius: 20,
-          overflow: "hidden",
-        }}
-      >
-        <Image source={data.image} style={{ width: "100%", height: 300 }} />
-      </View>
-
-      <Text
-        style={{
-          fontSize: 18,
-          fontWeight: "300",
-          marginTop: 3,
-          marginLeft: 10,
-        }}
-      >
-        Meeting
-      </Text>
-
-      <View
-        style={{
-          marginTop: 15,
+          flex: 1,
+          position: "relative",
+          marginBottom: 120,
         }}
       >
         <View
           style={{
-            borderTopColor: "#e0e0e0",
-            borderTopWidth: 1,
-            paddingVertical: 10,
-            paddingHorizontal: 10,
+            borderTopRightRadius: 20,
+            borderTopLeftRadius: 20,
+            overflow: "hidden",
           }}
         >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Ionicons name="calendar-outline" size={30} color="#000" />
-            <View
-              style={{
-                marginLeft: 10,
-              }}
-            >
-              <Text
-                style={{
-                  fontWeight: "300",
-                }}
-              >
-                {data.date}
-              </Text>
-              <Text>
-                {data.startTime} to {data.endTime}
-              </Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: 10,
-            }}
-          >
-            <Ionicons name="location" size={30} color="#000" />
-            <Text
-              style={{
-                marginLeft: 10,
-                fontWeight: "300",
-                alignContent: "flex-start",
-              }}
-            >
-              {data.location}
-            </Text>
-          </View>
+          <Image source={data.image} style={{ width: "100%", height: 300 }} />
         </View>
 
-        <View
+        <Text
           style={{
-            borderTopColor: "#e0e0e0",
-            borderTopWidth: 1,
-            paddingVertical: 10,
-            paddingHorizontal: 10,
+            fontSize: 18,
+            fontWeight: "300",
+            marginTop: 3,
+            marginLeft: 10,
           }}
         >
-          <Text
+          Meeting
+        </Text>
+
+        <View
+          style={{
+            marginTop: 15,
+          }}
+        >
+          <View
             style={{
-              fontSize: 18,
-              fontWeight: "300",
+              borderTopColor: "#e0e0e0",
+              borderTopWidth: 1,
+              paddingVertical: 10,
+              paddingHorizontal: 10,
             }}
           >
-            Organizer
-          </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Ionicons name="calendar-outline" size={30} color="#000" />
+              <View
+                style={{
+                  marginLeft: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    fontWeight: "300",
+                  }}
+                >
+                  {data.date}
+                </Text>
+                <Text>
+                  {data.startTime} to {data.endTime}
+                </Text>
+              </View>
+            </View>
 
-          <View>
             <View
               style={{
                 flexDirection: "row",
@@ -142,64 +108,123 @@ const Details = ({ route, navigation }: any) => {
                 marginTop: 10,
               }}
             >
-              <Image
-                source={data.organizer.image}
-                style={{ width: 70, height: 70, borderRadius: 100 }}
-              />
-
-              <View
+              <Ionicons name="location" size={30} color="#000" />
+              <Text
                 style={{
-                  marginLeft: 20,
+                  marginLeft: 10,
+                  fontWeight: "300",
+                  alignContent: "flex-start",
                 }}
               >
-                <Text
+                {data.location}
+              </Text>
+            </View>
+          </View>
+
+          <View
+            style={{
+              borderTopColor: "#e0e0e0",
+              borderTopWidth: 1,
+              paddingVertical: 10,
+              paddingHorizontal: 10,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "300",
+              }}
+            >
+              Organizer
+            </Text>
+
+            <View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginTop: 10,
+                }}
+              >
+                <Image
+                  source={data.organizer.image}
+                  style={{ width: 70, height: 70, borderRadius: 100 }}
+                />
+
+                <View
                   style={{
-                    fontWeight: "500",
-                    fontSize: 16,
+                    marginLeft: 20,
                   }}
                 >
-                  {data.organizer.name}
-                </Text>
-                <Text
-                  style={{
-                    fontWeight: "400",
-                    fontSize: 16,
-                  }}
-                >
-                  {data.organizer.position}
-                </Text>
+                  <Text
+                    style={{
+                      fontWeight: "500",
+                      fontSize: 16,
+                    }}
+                  >
+                    {data.organizer.name}
+                  </Text>
+                  <Text
+                    style={{
+                      fontWeight: "400",
+                      fontSize: 16,
+                    }}
+                  >
+                    {data.organizer.position}
+                  </Text>
+                  <Text
+                    style={{
+                      fontWeight: "300",
+                      fontSize: 16,
+                    }}
+                  >
+                    {data.organizer.major}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <View
+            style={{
+              borderTopColor: "#e0e0e0",
+              borderTopWidth: 1,
+              paddingVertical: 10,
+              paddingHorizontal: 10,
+              borderBottomColor: "#e0e0e0",
+              borderBottomWidth: 1,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "500",
+                color: COLORS.primary,
+              }}
+            >
+              Details
+            </Text>
+
+            <View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginTop: 10,
+                }}
+              >
                 <Text
                   style={{
                     fontWeight: "300",
                     fontSize: 16,
+                    textAlign: "justify",
                   }}
                 >
-                  {data.organizer.major}
+                  {data.organizer.details}
                 </Text>
               </View>
             </View>
           </View>
-        </View>
-
-        <View
-          style={{
-            borderTopColor: "#e0e0e0",
-            borderTopWidth: 1,
-            paddingVertical: 10,
-            paddingHorizontal: 10,
-            borderBottomColor: "#e0e0e0",
-            borderBottomWidth: 1,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 18,
-              fontWeight: "500",
-              color: COLORS.primary,
-            }}
-          >
-            Details
-          </Text>
 
           <View>
             <View
@@ -207,92 +232,90 @@ const Details = ({ route, navigation }: any) => {
                 flexDirection: "row",
                 alignItems: "center",
                 marginTop: 10,
+                paddingHorizontal: 10,
               }}
             >
+              <Entypo name="attachment" size={20} color="#000" />
               <Text
                 style={{
-                  fontWeight: "300",
+                  fontWeight: "500",
                   fontSize: 16,
+                  marginLeft: 10,
                 }}
               >
-                {data.organizer.details}
+                attachment.doc
               </Text>
             </View>
           </View>
         </View>
+      </ScrollView>
 
-        <View>
-          <View
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          width: "100%",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          // paddingHorizontal: 20,
+        }}
+      >
+        <View
+          style={{
+            width: "100%",
+            paddingBottom: 10,
+          }}
+        >
+          <TouchableOpacity
             style={{
-              flexDirection: "row",
+              backgroundColor: COLORS.primary,
+              padding: 10,
+              borderRadius: 10,
+              width: "100%",
               alignItems: "center",
               marginTop: 10,
-              paddingHorizontal: 10,
             }}
+            activeOpacity={0.8}
+            onPress={onPress}
           >
-            <Entypo name="attachment" size={20} color="#000" />
             <Text
               style={{
+                color: "white",
                 fontWeight: "500",
                 fontSize: 16,
-                marginLeft: 10,
+                textAlign: "center",
               }}
             >
-              attachment.doc
+              Join
             </Text>
-          </View>
+          </TouchableOpacity>
 
-          <View>
-            <TouchableOpacity
+          <TouchableOpacity
+            style={{
+              backgroundColor: "white",
+              padding: 10,
+              borderRadius: 10,
+              width: "100%",
+              alignItems: "center",
+              marginTop: 10,
+              borderColor: COLORS.primary,
+              borderWidth: 1,
+            }}
+            activeOpacity={0.8}
+            onPress={onPress}
+          >
+            <Text
               style={{
-                backgroundColor: COLORS.primary,
-                padding: 10,
-                borderRadius: 10,
-                width: "100%",
-                alignItems: "center",
-                marginTop: 10,
+                color: COLORS.primary,
+                fontWeight: "500",
+                fontSize: 16,
+                textAlign: "center",
               }}
-              activeOpacity={0.8}
-              onPress={onPress}
             >
-              <Text
-                style={{
-                  color: "white",
-                  fontWeight: "500",
-                  fontSize: 16,
-                  textAlign: "center",
-                }}
-              >
-                Join
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{
-                backgroundColor: "white",
-                padding: 10,
-                borderRadius: 10,
-                width: "100%",
-                alignItems: "center",
-                marginTop: 10,
-                borderColor: COLORS.primary,
-                borderWidth: 1,
-              }}
-              activeOpacity={0.8}
-              onPress={onPress}
-            >
-              <Text
-                style={{
-                  color: COLORS.primary,
-                  fontWeight: "500",
-                  fontSize: 16,
-                  textAlign: "center",
-                }}
-              >
-                Request Reschedule
-              </Text>
-            </TouchableOpacity>
-          </View>
+              Request Reschedule
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </>

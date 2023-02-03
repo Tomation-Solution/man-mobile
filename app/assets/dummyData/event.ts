@@ -1,6 +1,6 @@
 import { images } from ".";
 
-export const meetings = [
+export const events = [
   {
     id: 1,
     title: "Meeting 1",

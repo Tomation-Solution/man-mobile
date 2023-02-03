@@ -2,9 +2,8 @@ import Container from './../../../components/Container';
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
 import FormContainer from '../FormContainer';
-import FormSubmitButton from '../../../components/form/FormBtn';
 import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
-import {ComfirmationInput} from '../../../components'
+import {ComfirmationInput,Formbtn} from '../../../components'
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -29,7 +28,7 @@ const VerifyUser = () => {
 </View>
 <View style={[styles.card,styles.shawdowProp]}>
 <ComfirmationInput/>
-<FormSubmitButton
+<Formbtn
             title='Verify'
             onPress={()=> Navigate.navigate('ForgotPassword')}
 

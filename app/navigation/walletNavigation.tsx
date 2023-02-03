@@ -1,6 +1,6 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import {VerifyUser, Registration,Login,ForgotPassword,ChangePassword,VerifyCode} from '../screens'
+import {VerifyUser, Registration,Login,ForgotPassword,ChangePassword,VerifyCode,OnAccountSuccess,OnSuccessScreen} from '../screens'
 
 
 
@@ -18,6 +18,8 @@ const WalletNavigation = () => {
            <WalletStack.Screen name="ChangePassword" component={ChangePassword}/>
            <WalletStack.Screen name="VerifyUser" component={VerifyUser}/>
            <WalletStack.Screen name="VerifyCode" component={VerifyCode}/>
+           <WalletStack.Screen name="OnAccountSuccess" component={OnAccountSuccess}/>
+           <WalletStack.Screen name="onSucess" component={OnSuccessScreen}/>
 
 
         {/* <WalletStack.Screen

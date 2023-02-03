@@ -1,25 +1,15 @@
-import Container from './../../../components/Container';
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
 import FormContainer from '../FormContainer';
-import FormSubmitButton from '../../../components/form/FormBtn';
-import FormInput from '../../../components/Input/input2'
-import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
-import {ComfirmationInput} from '../../../components'
+import {Formbtn,KeyboardAvoidingViewWrapper,ComfirmationInput,Container,} from '../../../components';
 import { useNavigation } from '@react-navigation/native';
-
+import FormInput from '../../../components/Input/input2'
+import { Formik, Field } from 'formik'
+import * as yup from 'yup'
 
 
 const ForgetPassword = () => {
-  const [userInfo, setUserInfo] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [error, setError] = useState('');
   const Navigate=useNavigation()
-
-
   return (
 <>
 <Container>
@@ -29,22 +19,28 @@ const ForgetPassword = () => {
 <Text style={styles.Loginheading}> Forgot password </Text>
 <Text style={styles.heading}> Enter email address to recover account</Text>
 </View>
+
+
 <View style={[styles.card,styles.shawdowProp]}>
+<Formik
+            initialValues={{
+              email: '',
+            }}
+            onSubmit={values => console.log(values)}>
 
-<FormInput
-label='EMAIL ADDRESS'
-placeholder='Enter Email Address'
-autoCapitalize='none'
-secureTextEntry
+            {({ handleSubmit, isValid }) => (
+              <>
 
-/>
+         <Field    component={FormInput}    name="Email" placeholder="email" />
 
-<FormSubmitButton
-            title='Continue'
-            style ={[styles.add]}
-            onPress={()=> Navigate.navigate( 'VerifyCode')}
 
-/>
+
+                     <Formbtn  style ={[styles.btn]}
+                      onPress={()=>Navigate.navigate('OnAccountSuccess')}
+                     title='Login'  />
+                     </>
+            )}
+          </Formik>
   </View>
   </View>
     </Container>
@@ -91,8 +87,8 @@ const styles = StyleSheet.create({
       color:'rgba(0,0,34,0.41)',
 
       },
-      add:{
-        marginTop:12
+      btn:{
+        marginTop:18
       },
       forgotPassword:{
         color:'rgba(0,0,34,0.6)'

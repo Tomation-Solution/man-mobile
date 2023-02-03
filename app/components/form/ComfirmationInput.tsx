@@ -20,7 +20,7 @@ import {
 
 const CELL_COUNT = 4;
 
-const VerificationInput = ({ setValue, value }) => {
+const ConfirmationInput = ({ setValue, value }) => {
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -79,4 +79,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default VerificationInput;
+export default ConfirmationInput;

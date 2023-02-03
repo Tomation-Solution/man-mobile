@@ -2,22 +2,17 @@ import Container from './../../../components/Container';
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-native';
 import FormContainer from '../FormContainer';
-import FormSubmitButton from '../../../components/form/FormBtn';
 import FormInput from '../../../components/Input/input2'
 import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
-import {ComfirmationInput} from '../../../components'
-
+import {ComfirmationInput,Formbtn} from '../../../components'
+import { useNavigation } from '@react-navigation/native';
+import { Formik, Field } from 'formik'
+import * as yup from 'yup'
 
 
 
 const ChangePassword = () => {
-  const [userInfo, setUserInfo] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [error, setError] = useState('');
-
+  const Navigate =useNavigation()
 
   return (
 
@@ -30,26 +25,29 @@ const ChangePassword = () => {
 <Text style={styles.heading}> Input new password to recover account </Text>
 </View>
 <View style={[styles.card,styles.shawdowProp]}>
+<Formik
+            initialValues={{
+              password: '',
+              confirmpassword:''
+            }}
+            onSubmit={values => console.log(values)}>
 
-<FormInput
-placeholder='Password'
-autoCapitalize='none'
-secureTextEntry
+            {({ handleSubmit, isValid }) => (
+              <>
 
-/>
+         <Field    component={FormInput}    name="password" placeholder="Password" />
+         <Field    component={FormInput}    name="confirmpassword" placeholder=" Confirm Password" />
 
-<FormInput
-placeholder='Confirm Password'
-autoCapitalize='none'
-secureTextEntry
 
-/>
 
-<FormSubmitButton
-            title='Submit'
-            style ={[styles.add]}
 
-/>
+                     <Formbtn  style ={[styles.btn]}
+                      onPress={()=>Navigate.navigate('onSucess')}
+                     title='Login'  />
+                     </>
+            )}
+          </Formik>
+
   </View>
   </View>
     </Container>
@@ -96,8 +94,8 @@ const styles = StyleSheet.create({
       color:'rgba(0,0,34,0.41)',
 
       },
-      add:{
-        marginTop:12
+      btn:{
+        marginTop:16
       },
       forgotPassword:{
         color:'rgba(0,0,34,0.6)'

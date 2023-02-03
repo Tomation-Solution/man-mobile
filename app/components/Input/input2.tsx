@@ -1,23 +1,32 @@
 import React from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 
-const FormInput = props => {
-  const { placeholder, label, error } = props;
+const FormInput = (props) => {
+
+  const {
+    field: { name, onBlur, onChange, value },
+    form: { errors, touched, setFieldTouched },
+    ...inputProps
+  } = props
+
+  const hasError = errors[name] && touched[name]
+
+
   return (
     <>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginBottom: 10,
-        }}
-      >
-        {/* <Text style={{ fontWeight: '700',color:'#9DA292',fontSize:12,lineHeight:18 }}>{label}</Text> */}
-        {error ? (
-          <Text style={{ color: 'red', fontSize: 16 }}>{error}</Text>
-        ) : null}
-      </View>
-      <TextInput {...props} placeholder={placeholder} style={styles.input} />
+
+      <TextInput
+             style={[styles.textInput,    hasError && styles.errorInput  ]}
+              value={value}
+              onChangeText={(text) => onChange(name)(text)}
+              onBlur={() => {
+                setFieldTouched(name)
+                onBlur(name)
+              }}
+       {...inputProps }
+       />
+             {hasError && <Text style={styles.errorText}>{errors[name]}</Text>}
+
     </>
   );
 };
@@ -33,6 +42,27 @@ const styles = StyleSheet.create({
     paddingLeft: 6,
 
   },
+  textInput: {
+    height: 50,
+    width: '100%',
+    backgroundColor: 'white',
+    borderColor: 'gray',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderRadius: 10,
+    paddingHorizontal:10,
+    paddingTop:15,
+
+
+
+  },
+  errorText: {
+    fontSize: 10,
+    color: 'red',
+  },
+  errorInput: {
+    borderColor: 'red',
+  }
+
 });
 
 export default FormInput;

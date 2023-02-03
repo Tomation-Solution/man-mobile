@@ -4,18 +4,14 @@ import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-
 import FormContainer from '../FormContainer';
 import FormSubmitButton from '../../../components/form/FormBtn';
 import KeyboardAvoidingViewWrapper from '../../../components/form/KeyboardAvoidngwrapper'
-import {ComfirmationInput} from '../../../components'
+import {ComfirmationInput,Formbtn} from '../../../components'
 import { useNavigation } from '@react-navigation/native';
 
 
 const VerifyUser = () => {
-  const [userInfo, setUserInfo] = useState({
-    email: '',
-    password: '',
-  });
+
   const Navigate= useNavigation()
 
-  const [error, setError] = useState('');
 
 
   return (
@@ -31,7 +27,7 @@ const VerifyUser = () => {
 
 <ComfirmationInput/>
 
-<FormSubmitButton title='Continue' onPress={()=> Navigate.navigate('ChangePassword')}/>
+<Formbtn title='Continue' onPress={()=> Navigate.navigate('ChangePassword')}/>
   </View>
   </View>
     </Container>

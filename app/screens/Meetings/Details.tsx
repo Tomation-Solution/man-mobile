@@ -16,7 +16,7 @@ import Rejected from "./components/Rejected";
 import { ScrollView } from "react-native-gesture-handler";
 
 const Details = ({ route, navigation }: any) => {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const altRoute = useRoute();
   const data = route?.params?.meeting || altRoute?.params || {};
 
@@ -257,8 +257,8 @@ const Details = ({ route, navigation }: any) => {
           width: "100%",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between",
-          // paddingHorizontal: 20,
+          justifyContent: "center",
+          alignSelf: "center",
         }}
       >
         <View

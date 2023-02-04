@@ -3,6 +3,8 @@ import React from "react";
 import { Container, HomeHeader, SearchBar } from "../../components";
 import { COLORS } from "../../constants/color";
 import CompanyWide from "./EventTypes/CompanyWide";
+import Team from "./EventTypes/Team";
+import Staff from "./EventTypes/Staff";
 
 const NavButton = ({
   name,
@@ -47,7 +49,7 @@ const Home = ({ navigation }: any) => {
           paddingHorizontal: 20,
         }}
       >
-        <HomeHeader navigation={navigation} />
+        <HomeHeader title={`${active} Events`} navigation={navigation} />
         <SearchBar hasFilter />
       </View>
       <View
@@ -62,7 +64,9 @@ const Home = ({ navigation }: any) => {
         <NavButton name="Staff" active={active} setActive={setActive} />
       </View>
       <View>
-        <CompanyWide navigation={navigation} />
+        {active === "Company Wide" && <CompanyWide navigation={navigation} />}
+        {active === "Team" && <Team navigation={navigation} />}
+        {active === "Staff" && <Staff navigation={navigation} />}
       </View>
     </View>
   );
@@ -72,7 +76,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     paddingTop: 35,
   },
   navButton: {},

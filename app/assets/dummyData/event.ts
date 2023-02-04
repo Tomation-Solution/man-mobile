@@ -3,7 +3,7 @@ import { images } from ".";
 export const events = [
   {
     id: 1,
-    title: "Meeting 1",
+    title: "Event 1",
     date: "January 1nd 2021",
     startTime: "12:00",
     endTime: "13:00",
@@ -21,7 +21,7 @@ export const events = [
   },
   {
     id: 2,
-    title: "Meeting 2",
+    title: "Event 2",
     date: "January 2nd 2022",
     startTime: "12:00",
     endTime: "13:00",
@@ -39,7 +39,7 @@ export const events = [
   },
   {
     id: 3,
-    title: "Meeting 3",
+    title: "Event 3",
     date: "January 3nd 2022",
     startTime: "12:00",
     endTime: "13:00",
@@ -57,7 +57,7 @@ export const events = [
   },
   {
     id: 4,
-    title: "Meeting 4",
+    title: "Event 4",
     date: "January 3nd 2022",
     startTime: "12:00",
     endTime: "13:00",
@@ -75,7 +75,7 @@ export const events = [
   },
   {
     id: 5,
-    title: "Meeting 5",
+    title: "Event 5",
     date: "January 3nd 2022",
     startTime: "12:00",
     endTime: "13:00",
@@ -93,7 +93,7 @@ export const events = [
   },
   {
     id: 6,
-    title: "Meeting 6",
+    title: "Event 6",
     date: "January 3nd 2022",
     startTime: "12:00",
     endTime: "13:00",

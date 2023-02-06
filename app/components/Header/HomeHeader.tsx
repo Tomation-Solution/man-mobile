@@ -35,7 +35,7 @@ const HomeHeader = ({ navigation, title, back }: Props) => {
           <Text style={{ fontSize: 16, fontWeight: "500" }}>
             Welcome, Tomiwa Ayandele
           </Text>
-          <View>
+          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
             <View style={styles.imageContainer}>
               <Image
                 source={images.man}
@@ -45,7 +45,7 @@ const HomeHeader = ({ navigation, title, back }: Props) => {
                 }}
               />
             </View>
-          </View>
+          </TouchableOpacity>
         </>
       )}
       <View style={styles.notificationContainer}>

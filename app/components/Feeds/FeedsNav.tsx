@@ -24,6 +24,10 @@ const data = [
     icon: <FontAwesome5 name="calendar-check" size={45} color={COLORS.icon} />,
   },
   {
+    name: "Publications",
+    icon: <FontAwesome name="picture-o" size={45} color={COLORS.icon} />,
+  },
+  {
     name: "Gallery",
     icon: <FontAwesome name="picture-o" size={45} color={COLORS.icon} />,
   },

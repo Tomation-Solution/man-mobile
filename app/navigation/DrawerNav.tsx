@@ -8,6 +8,8 @@ import Events from "../screens/Events/Events";
 import DrawerContent from "./components/DrawerContent";
 import { Election, Gallery, Resources, Services, Support } from "../screens";
 import Meetings from "../screens/Meetings/Meetings";
+import Profile from "../screens/Profile/Profile";
+import Publications from "../screens/Publications/Publications";
 
 const Drawer = createDrawerNavigator();
 
@@ -36,8 +38,10 @@ const DrawerNav = () => {
         <Drawer.Screen name="Support" component={Support} />
         {/* soupport screens  */}
         <Drawer.Screen name="Gallery" component={Gallery} />
+        <Drawer.Screen name="Profile" component={Profile} />
         <Drawer.Screen name="Services" component={Services} />
         <Drawer.Screen name="Meetings" component={Meetings} />
+        <Drawer.Screen name="Publications" component={Publications} />
       </Drawer.Navigator>
     </>
   );

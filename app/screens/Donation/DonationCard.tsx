@@ -11,7 +11,7 @@ interface DonationCardProps {
 
 const DonationCard = ({ item, onPress }: DonationCardProps) => {
   return (
-    <View style={styles.newsCabinet} onPress={onPress}>
+    <View style={styles.newsCabinet}>
       <View style={styles.newsImageActionContainer}>
         <View style={styles.newsImageContainer}>
           <Image

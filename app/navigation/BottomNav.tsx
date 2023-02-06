@@ -6,7 +6,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { HomeScreen } from "../screens";
 import Chat from "../screens/Home/Chat/Chat";
 import { Account } from "../screens/Home";
-import Memebers from "../screens/Home/Members/Memebers";
+import Members from "../screens/Home/Members/Members";
+import Excos from "../screens/Excos/Excos";
+import Donation from "../screens/Donation/Donation";
 
 const Tab = createBottomTabNavigator();
 
@@ -62,8 +64,8 @@ const BottomNav = () => {
             <Ionicons name="people" color={color} size={28} />
           ),
         }}
-        name="Members"
-        component={Memebers}
+        name="Donation"
+        component={Donation}
       />
     </Tab.Navigator>
   );

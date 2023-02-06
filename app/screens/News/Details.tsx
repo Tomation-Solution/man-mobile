@@ -142,7 +142,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
     <>
       <HomeHeader
         navigation={navigation}
-        title={data.title || "Details " + data.id}
+        title={data.title || "Details" + data.id}
         back={() => navigation.goBack("Details")}
       />
       <ScrollView

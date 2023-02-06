@@ -3,9 +3,10 @@ import React from "react";
 
 interface Props {
   children: React.ReactNode;
+  style: any;
 }
-const Container: React.FunctionComponent<Props> = ({ children }) => {
-  return <View style={styles.container}>{children}</View>;
+const Container: React.FunctionComponent<Props> = ({ children, style }) => {
+  return <View style={[styles.container, style]}>{children}</View>;
 };
 
 export default Container;

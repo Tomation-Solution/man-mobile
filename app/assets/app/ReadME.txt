@@ -8,5 +8,5 @@ All assets here are required for the app
 
 === data.ts: {
     // Contains the organization info
-    // any chnage made there woul reflect accross the app
+    // any change made there would reflect accross the app
 }

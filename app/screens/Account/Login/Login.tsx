@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TextInput ,Image,TouchableOpacity} from 'react-
 import { useNavigation } from '@react-navigation/native';
 import { Container,AcountHeader,Formbtn,KeyboardAvoidingViewWrapper, FormContainer,FormInput,CustomModal} from '../../../components';
 import { Formik, Field } from 'formik'
-import Locked from '../component/Locked'
+import Locked from '../component/lockedWithPayment'
 import * as yup from 'yup'
 
 
@@ -26,7 +26,7 @@ const Navigate =useNavigation()
 
 
 <KeyboardAvoidingViewWrapper>
-<View style={{paddingVertical:130}}>
+<View style={{paddingVertical:90}}>
 <View style={{paddingHorizontal:25,paddingVertical:10,
 }} >
   <AcountHeader

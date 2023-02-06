@@ -10,6 +10,7 @@ interface RescheduleProps {
 
 const Reschedule = ({ onPress }: RescheduleProps) => {
   return (
+    <>
     <View style={Globalstyles.modalContainer}>
       <Text
         style={{
@@ -19,15 +20,13 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
       >
         Acount Locked!
       </Text>
-      <Text
-        style={{
-          marginVertical: 15,
-          textAlign: "center",
-          fontSize: 16,
-        }}
-      >
-        Pay outstanding fee to gain access to \n account
-      </Text>
+<View style={{display:'flex', flexDirection:'column',justifyContent:'space-between'}}>
+<View style={{display:'flex', flexDirection:'row',justifyContent:'space-around'}}>
+  <Text  > TOTAL OUTSTANDING </Text>
+  <Text style={{fontWeight:'700',}}>  25,000,00 </Text>
+</View>
+<Text style={{ fontSize:12,fontWeight:'400',lineHeight:20}} > pay partial amount of Total outstanding</Text>
+</View>
 
       <View
         style={{
@@ -52,6 +51,7 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
         </Text>
       </View>
     </View>
+    </>
   );
 };
 

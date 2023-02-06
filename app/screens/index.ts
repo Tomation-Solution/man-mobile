@@ -14,6 +14,8 @@ export {default as ForgotPassword} from './Account/ForgotPassword/ForgotPassword
 export {default as ChangePassword} from './Account/ChangePassword/ChangePassword'
 export {default as OnAccountSuccess} from './Account/OnSucessScreen/OnAccountSuccess'
 export {default as OnSuccessScreen} from './Account/OnSucessScreen/onSucess'
+export {default as OnPasswordSuccess} from './Account/OnSucessScreen/OnPasswordSuccess'
+
 
 
 

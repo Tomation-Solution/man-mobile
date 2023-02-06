@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { useReducer, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import WalletNavigation from "./walletNavigation";
-import LoginForm from "../screens/Account/component/LockedWithPay";
+import LoginForm from "../screens/Account/component/lockedWithPayment";
 import {OnSuccess}from '../components'
 
 const RootNavigation = () => {

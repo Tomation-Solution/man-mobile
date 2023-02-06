@@ -3,20 +3,21 @@ import React from 'react';
 import Container from '../Container';
 import FormSubmitButton from '../form/FormBtn';
 const OnSuccess = (props) => {
-    const { images, text,title,style,onPress} =  props
+    const {images, text,title,testStyle,onPress,imageStyles} =  props
   return (
     <Container>
         <View style={styles.row}  >
          <View style={styles.container}>
         <Image
-        style={{width:300,height:230.86,}}
-        source={images }/>
+        style={[imageStyles]}
+        source={images}/>
          <Text style={styles.fineText}> {text}</Text>
          <FormSubmitButton
-style={[style]}
+style={[testStyle]}
 title={title}
 onPress={onPress}
 />
+
          </View>
 
         </View>
@@ -31,13 +32,13 @@ row:{
 justifyContent: 'center',
 },
 container:{
-    paddingVertical:60,
+    paddingVertical:70,
     paddingHorizontal:25,
     display:'flex',
 },
 fineText:{
   textAlign:'center',
-  paddingVertical:15,
+  paddingVertical:30,
   fontSize:16,
   lineHeight:21.86,
   fontWeight:'700'

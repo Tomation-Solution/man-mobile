@@ -5,44 +5,7 @@ import { Globalstyles } from "../../globals/styles";
 import { images } from "../../assets/dummyData";
 import { ScrollView } from "react-native-gesture-handler";
 import NewsCard from "./NewsCard";
-
-const data = [
-  {
-    id: 1,
-    title: "Lorem ipsum dolor sit amet.",
-    image: images.meeting_1,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus corrupti aut tempore nobis tempora deleniti velit amet voluptatum animi incidunt quibusdam, eaque dolore omnis molestiae.",
-  },
-  {
-    id: 2,
-    title: "Lorem ipsum dolor sit amet.",
-    image: images.meeting_2,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus corrupti aut tempore nobis tempora deleniti velit amet voluptatum animi incidunt quibusdam, eaque dolore omnis molestiae.",
-  },
-  {
-    id: 3,
-    title: "Lorem ipsum dolor sit amet.",
-    image: images.meeting_3,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus corrupti aut tempore nobis tempora deleniti velit amet voluptatum animi incidunt quibusdam, eaque dolore omnis molestiae.",
-  },
-  {
-    id: 4,
-    title: "Lorem ipsum dolor sit amet.",
-    image: images.meeting_1,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus corrupti aut tempore nobis tempora deleniti velit amet voluptatum animi incidunt quibusdam, eaque dolore omnis molestiae.",
-  },
-  {
-    id: 5,
-    title: "Lorem ipsum dolor sit amet.",
-    image: images.meeting_1,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus corrupti aut tempore nobis tempora deleniti velit amet voluptatum animi incidunt quibusdam, eaque dolore omnis molestiae.",
-  },
-];
+import { news } from "../../assets/dummyData/news";
 
 const NewsNav = ({ navigation }: any) => {
   return (
@@ -56,7 +19,7 @@ const NewsNav = ({ navigation }: any) => {
         </TouchableOpacity>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {data.map((item) => {
+        {news.map((item) => {
           return (
             <NewsCard
               key={item.id}

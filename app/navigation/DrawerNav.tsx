@@ -7,6 +7,7 @@ import News from "../screens/News/News";
 import Events from "../screens/Events/Events";
 import DrawerContent from "./components/DrawerContent";
 import { Election, Gallery, Resources, Services, Support } from "../screens";
+import Meetings from "../screens/Meetings/Meetings";
 
 const Drawer = createDrawerNavigator();
 
@@ -27,7 +28,7 @@ const DrawerNav = () => {
         }}
         drawerContent={(props: any) => <DrawerContent {...props} />}
       >
-        <Drawer.Screen name="Home" component={BottomNav} />
+        <Drawer.Screen name="Homescreen" component={BottomNav} />
         <Drawer.Screen name="News" component={News} />
         <Drawer.Screen name="Events" component={Events} />
         <Drawer.Screen name="Election" component={Election} />
@@ -36,6 +37,7 @@ const DrawerNav = () => {
         {/* soupport screens  */}
         <Drawer.Screen name="Gallery" component={Gallery} />
         <Drawer.Screen name="Services" component={Services} />
+        <Drawer.Screen name="Meetings" component={Meetings} />
       </Drawer.Navigator>
     </>
   );

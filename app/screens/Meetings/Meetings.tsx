@@ -2,14 +2,14 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Container } from "../../components";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./Home";
 import Details from "./Details";
+import Home from "./Home";
 
 const Stack = createNativeStackNavigator();
 
-const Events = ({ navigation }: any) => {
+const News = ({ navigation }: any) => {
   return (
-    <>
+    <Container>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
@@ -23,10 +23,10 @@ const Events = ({ navigation }: any) => {
           {(props) => <Details {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
-    </>
+    </Container>
   );
 };
 
-export default Events;
+export default News;
 
 const styles = StyleSheet.create({});

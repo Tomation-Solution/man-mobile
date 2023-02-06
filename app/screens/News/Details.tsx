@@ -128,9 +128,7 @@ const Comment = () => {
 
 const Details = ({ route, navigation }: DetailsProps) => {
   const altRoute = useRoute();
-  const altNavigation = useNavigation();
   const data = route?.params?.news || altRoute?.params || {};
-  console.log(data);
 
   const [showAll, setShowAll] = React.useState(3);
 
@@ -142,8 +140,8 @@ const Details = ({ route, navigation }: DetailsProps) => {
     <>
       <HomeHeader
         navigation={navigation}
-        title={data.title || "Details" + data.id}
-        back={() => navigation.goBack("Details")}
+        title={data.title || "Details " + data.id}
+        back={() => navigation.goBack("News")}
       />
       <ScrollView
         showsVerticalScrollIndicator={false}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
+
 interface FAQProps {
     question: any;
     answer: any;
@@ -11,7 +12,10 @@ const FAQ = ({ question, answer }: FAQProps) => {
     const [expanded, setExpanded] = useState(false);
 
     return (
+
+
         <View style={styles.container}>
+
             <TouchableOpacity onPress={() => setExpanded(!expanded)} style={styles.questionContainer}>
                 <Text style={[styles.question, expanded && styles.activeQuestion]}>{question}</Text>
                 <Text style={styles.sign}>{expanded ? '-' : '+'}</Text>
@@ -24,23 +28,44 @@ const FAQ = ({ question, answer }: FAQProps) => {
 const styles = StyleSheet.create({
     container: {
         marginVertical: 10,
+        display: 'flex',
     },
     questionContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        justifyContent: 'center',
+        display: 'flex'
+
     },
     question: {
         fontWeight: 'bold',
         flex: 1,
+        fontSize: 15,
+        paddingBottom: 10
     },
     activeQuestion: {
-        backgroundColor: '#107382',
+        color: '#000022'
+
     },
     sign: {
         marginHorizontal: 10,
+        borderColor: '#4ECB71',
+        borderRadius: 200,
+        borderWidth: 1,
+        color: '#107382',
+        width: 40,
+        alignItems: 'center',
+        textAlign: 'center',
+        justifyContent: 'center',
+        display: 'flex'
     },
     answer: {
-        paddingLeft: 20,
+        paddingLeft: 0,
+        color: '#000022',
+        shadowOpacity: 0.7,
+        fontSize: 12,
+        lineHeight: 16
     },
 });
 

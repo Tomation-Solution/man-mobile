@@ -7,22 +7,26 @@ import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 
 const Registration = () => {
+  const [modalVisible, setModalVisible] = useState(true);
+  const Navigate = useNavigation()
 
-  <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
+  const onModalPress = () => {
+    setModalVisible(!modalVisible);
+  };
+      <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
          <Locked onPress={onModalPress} />
       </CustomModal>
 
-const Navigate = useNavigation()
   return (
+
 <KeyboardAvoidingViewWrapper>
-<View style={{paddingVertical:55}}>
+<View style={{paddingVertical:20}}>
 <View style={{paddingHorizontal:25,paddingVertical:1,
 }} >
   <AcountHeader
   title='  Registration'
   text=' Input details to register as alumnus'
   />
-
 </View>
 
     <FormContainer>
@@ -65,7 +69,8 @@ const Navigate = useNavigation()
       <Formbtn
             style ={[styles.btn]}
             title='Register'
-            onPress={()=> Navigate.navigate('VerifyUser')}/>
+            onPress={()=>Navigate.navigate('VerifyUser')}
+          />
 
 
 

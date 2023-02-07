@@ -3,7 +3,6 @@ import React from 'react'
 import { OnSuccess,Container,Formbtn} from '../../../components'
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
-import { images } from './../../../assets/dummyData/index';
 
 const OnSuccessScreen = () => {
     const Navigate =useNavigation()
@@ -11,11 +10,12 @@ const OnSuccessScreen = () => {
     <Container>
 <View style={styles.container}>
 <OnSuccess
-         images={{uri:'https://i.ibb.co/qsPy90K/Acct-Success.png'}}
-         text={`Account successfully created`}
+         images={{uri:'https://i.ibb.co/NsCffmB/checker.png'}}
+         text={`Password successfully changed`}
          title='Continue'
-         onPress={()=> Navigate.navigate('PasswordChanged')}
+         onPress={()=> Navigate.navigate('Login')}
          imageStyles={[styles.image]}
+
         />
 
 {/* <TouchableOpacity>
@@ -32,13 +32,12 @@ const styles = StyleSheet.create({
     container:{
 display:'flex',
 flexDirection:'row',
-justifyContent:'center'
-},
-image:{
-width:300,
-height:200
-}
+justifyContent:'center'},
 
+        image:{
+          width:320,
+          height:300
+          }
 })
 
 

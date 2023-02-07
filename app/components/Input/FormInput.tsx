@@ -1,41 +1,50 @@
 import React from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 
-const FormInput =(props) =>{
+const FormInput = (props) => {
   const {
-    field: { name, onBlur, onChange, value },
-    form: { errors, touched, setFieldTouched },
+    field,
+    customstyles,
+    form,
     ...inputProps
-  } = props
+  } = props;
 
-  const hasError = errors[name] && touched[name]
-
+  const hasError = form && form.errors[field.name] && form.touched[field.name];
 
   return (
     <>
-
       <TextInput
-             style={[styles.textInput,    hasError && styles.errorInput  ]}
-              value={value}
-              onChangeText={(text) => onChange(name)(text)}
-              onBlur={() => {
-                setFieldTouched(name)
-                onBlur(name)
-              }}
-       {...inputProps }
-       />
-             {hasError && <Text style={styles.errorText}>{errors[name]}</Text>}
-
+        style={[customstyles, styles.textInput, hasError && styles.errorInput]}
+        value={field ? field.value : inputProps.value}
+        onChangeText={(text) => {
+          if (field) {
+            field.onChange(text);
+          } else {
+            inputProps.onChange(text);
+          }
+        }}
+        onBlur={() => {
+          if (field) {
+            form.setFieldTouched(field.name);
+            field.onBlur(field.name);
+          } else {
+            inputProps.onBlur();
+          }
+        }}
+        {...inputProps}
+      />
+      {hasError && <Text style={styles.errorText}>{form.errors[field.name]}</Text>}
     </>
   );
 };
+
 
 const styles = StyleSheet.create({
   input: {
     borderBottomWidth: 1,
     borderColor: '#9DA292',
     height: 35,
-    color:'rbga(0,0,18, 0.16)',
+    color: 'rbga(0,0,18, 0.16)',
     borderRadius: 8,
     fontSize: 15,
     paddingLeft: 6,
@@ -48,8 +57,8 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderRadius: 10,
-    paddingHorizontal:10,
-    paddingTop:15,
+    paddingHorizontal: 10,
+    paddingTop: 15,
 
 
 

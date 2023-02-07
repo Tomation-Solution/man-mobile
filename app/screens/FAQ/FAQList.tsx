@@ -1,6 +1,6 @@
 import React from 'react';
 import FAQ from './ FAQ';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { Container, HomeHeader, FormInput, Formbtn } from '../../components';
 import { Formik, Field } from 'formik'
 
@@ -46,7 +46,7 @@ const FAQList = ({ navigation }: any) => {
                 <HomeHeader
                     title=' Frequently asked question '
                     navigation={navigation}
-                    back={navigation.goBack()}
+                // back={navigation.goBack()}
                 />
                 {faqs.map((faq, index) => (
                     <FAQ key={index} question={faq.question} answer={faq.answer} />
@@ -59,15 +59,47 @@ const FAQList = ({ navigation }: any) => {
 
 
 
-                        <FormInput
-                            label="Email"
-                            type="email"
-                        // value={field.value}
-                        // onChange={field.onChange}
-                        // onBlur={field.onBlur}
-                        // error={form.errors.email}
-                        // touched={form.touched.email}
-                        />
+
+                        <Formik
+                            initialValues={{ email: '', password: '' }}
+                            onSubmit={(values, actions) => {
+                                // Perform login logic here
+                                console.log(values);
+                                actions.resetForm();
+                            }}
+                        >
+                            {({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
+                                <>
+                                    <Field name="email">
+                                        {({ field }) => (
+                                            <FormInput
+                                                customstyles={[styles.update]}
+                                                label="Email"
+                                                type="email"
+                                            // field={field}
+                                            // form={{ errors, touched }}
+                                            // placeholder='hlle'
+                                            // onChange={handleChange}
+                                            // onBlur={handleBlur}
+                                            />
+                                        )}
+                                    </Field>
+                                    {/* <Field name="password">
+                                        {({ field }) => (
+                                            <FormInput
+                                                label="Password"
+                                                type="password"
+                                                field={field}
+                                                form={{ errors, touched }}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            />
+                                        )}
+                                    </Field> */}
+                                    {/* <Button title="Login" onPress={handleSubmit} /> */}
+                                </>
+                            )}
+                        </Formik>
 
 
 
@@ -79,5 +111,15 @@ const FAQList = ({ navigation }: any) => {
         </ScrollView>
     );
 };
+
+const styles = StyleSheet.create({
+
+    update: {
+        width: '100%',
+        backgroundColor: '#000'
+    }
+
+})
+
 
 export default FAQList;

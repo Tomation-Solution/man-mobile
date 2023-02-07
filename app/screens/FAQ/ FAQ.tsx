@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Formik, Field } from 'formik'
 
 
 interface FAQProps {
@@ -29,6 +30,8 @@ const styles = StyleSheet.create({
     container: {
         marginVertical: 10,
         display: 'flex',
+        alignItems: 'center',
+
     },
     questionContainer: {
         flexDirection: 'row',
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
 
     },
     question: {
-        fontWeight: 'bold',
+        fontWeight: '500',
         flex: 1,
         fontSize: 15,
         paddingBottom: 10

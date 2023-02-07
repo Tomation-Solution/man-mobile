@@ -11,8 +11,8 @@ const WalletNavigation = () => {
   const WalletStack = createNativeStackNavigator()
   return (
     <WalletStack.Navigator screenOptions={navigationScreenOptions}>
-      <WalletStack.Screen name="FlagList" component={FlagList} />
-      <WalletStack.Screen name="Registration" component={Registration} />
+      {/* <WalletStack.Screen name="FlagList" component={FlagList} /> */}
+      {/* <WalletStack.Screen name="Registration" component={Registration} /> */}
       <WalletStack.Screen name="ForgotPassword" component={ForgotPassword} />
       <WalletStack.Screen name="ChangePassword" component={ChangePassword} />
       <WalletStack.Screen name="VerifyUser" component={VerifyUser} />

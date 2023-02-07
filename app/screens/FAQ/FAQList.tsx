@@ -1,7 +1,9 @@
 import React from 'react';
 import FAQ from './ FAQ';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { Container, HomeHeader } from '../../components';
+import { Container, HomeHeader, FormInput, Formbtn } from '../../components';
+import { Formik, Field } from 'formik'
+
 // import { NavigationStackProp } from '@react-navigation/native';
 
 
@@ -49,6 +51,30 @@ const FAQList = ({ navigation }: any) => {
                 {faqs.map((faq, index) => (
                     <FAQ key={index} question={faq.question} answer={faq.answer} />
                 ))}
+
+                <View style={{ flex: 1, justifyContent: 'space-between', alignItems: 'center' }} >
+                    <Text style={{ fontSize: 16, lineHeight: 22, fontWeight: '600', }}> Contact</Text>
+
+                    <View>
+
+
+
+                        <FormInput
+                            label="Email"
+                            type="email"
+                        // value={field.value}
+                        // onChange={field.onChange}
+                        // onBlur={field.onBlur}
+                        // error={form.errors.email}
+                        // touched={form.touched.email}
+                        />
+
+
+
+
+                    </View>
+
+                </View>
             </Container>
         </ScrollView>
     );

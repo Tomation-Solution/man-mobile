@@ -47,7 +47,7 @@ const FAQList = ({ navigation }: any) => {
                 <HomeHeader
                     title=' Frequently asked question '
                     navigation={navigation}
-                // back={navigation.goBack()}
+                    back={navigation.goBack}
                 />
                 {faqs.map((faq, index) => (
                     <FAQ key={index} question={faq.question} answer={faq.answer} />

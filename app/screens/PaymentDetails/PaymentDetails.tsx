@@ -1,172 +1,25 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from "react-native";
-import { Container, AccountHeader } from "../../components";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import { Container, HomeHeader } from "../../components";
+import CompletedPayment from "./Tabs/CompletedPaymen";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import PendingPayment from "./Tabs/PendingPayment";
+import { COLORS } from "../../constants/color";
 
 
 
-const CompletedPayment = () => {
-    const [tableData, setTableData] = useState([
-        ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["registration levy", "$800", "02/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["registration levy", "$800", "02/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["registration levy", "$800", "02/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-    ]);
-    const tableHead = ["Reason", "Amount", "Date", "Action"];
-
-    const onButtonClick = () => {
-        Alert.alert('Pay your bills');
-    };
-
-    const buttonElement = () => (
-        <TouchableOpacity onPress={onButtonClick}>
-            <View style={styles.btn}>
-                <Text style={styles.btnText}>Receipt</Text>
-            </View>
-        </TouchableOpacity>
-    );
-
-    return (
-        <View style={styles.container}>
-            {/* <TableComponent
-                tableHead={tableHead}
-                tableData={tableData}
-                backgroundColor={"#555D42"}
-            /> */}
-            <Table borderStyle={{ borderColor: 'transparent' }}>
-                <Row data={tableHead} flexArr={[1, 1, 1, 1]} style={styles.head} textStyle={styles.text} />
-                <ScrollView>
-                    {
-                        tableData.map((rowData, index) => (
-                            <TableWrapper key={index} style={styles.row}>
-                                {
-                                    rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={cellIndex === 3 ? buttonElement() : cellData} textStyle={styles.text} />
-                                    ))
-                                }
-                            </TableWrapper>
-                        ))
-                    }
-                </ScrollView>
-            </Table>
-        </View >
-    );
-};
+const Top = createMaterialTopTabNavigator();
 
 
-
-
-
-
-
-
-
-const PendingPayment = () => {
-    const [tableData, setTableData] = useState([
-        ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["registration levy", "$800", "02/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["registration levy", "$800", "02/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["registration levy", "$800", "02/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-    ]);
-    const tableHead = ["Reason", "Amount", "Date", "Action"];
-
-    const onButtonClick = () => {
-        Alert.alert('Pay your bills');
-    };
-
-    const buttonElement = () => (
-        <TouchableOpacity onPress={onButtonClick}>
-            <View style={styles.btn}>
-                <Text style={styles.btnText}>Pay</Text>
-            </View>
-        </TouchableOpacity>
-    );
-
-    return (
-        <View style={styles.container}>
-            {/* <TableComponent
-                tableHead={tableHead}
-                tableData={tableData}
-                backgroundColor={"#555D42"}
-            /> */}
-            <Table borderStyle={{ borderColor: 'transparent' }}>
-                <Row data={tableHead} flexArr={[1, 1, 1, 1]} style={styles.head} textStyle={styles.text} />
-                <ScrollView>
-                    {
-                        tableData.map((rowData, index) => (
-                            <TableWrapper key={index} style={styles.row}>
-                                {
-                                    rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={cellIndex === 3 ? buttonElement() : cellData} textStyle={styles.text} />
-                                    ))
-                                }
-                            </TableWrapper>
-                        ))
-                    }
-                </ScrollView>
-            </Table>
-        </View >
-    );
-};
-
-const PaymentScreen = () => {
-    const [index, setIndex] = useState(0);
-    const [routes] = useState([
-        { key: "completed", title: "Completed Payment" },
-        { key: "pending", title: "Pending Payment" }
-    ]);
-
-    const renderScene = SceneMap({
-        completed: CompletedPayment,
-        pending: PendingPayment
-    });
-
-
-    const renderTabBar = props => (
-        <TabBar
-            {...props}
-            activeColor={'black'}
-            inactiveColor={'black'}
-            labelStyle={[styles.label]}
-            tabStyle={[styles.tab, { height: 38, maxHeight: 38, minHeight: 38, padding: 0 }]}
-            indicatorStyle={{ backgroundColor: '#555D42' }}
-            contentContainerStyle={{ borderRadius: 100, elevation: 0 }}
-            style={{ marginTop: 25, backgroundColor: '#fff' }}
-            bounces='false'
-        />
-    );
-
-
-
+const PaymentScreen = ({ navigation }: any) => {
 
     return (
 
         <Container>
-            <AccountHeader
+            <HomeHeader
                 title=" My Account"
+                navigation={navigation}
+                back={navigation.goBack}
             />
             <View style={[styles.card]}>
 
@@ -182,14 +35,22 @@ const PaymentScreen = () => {
                     </View>
                 </View>
             </View>
-            <TabView
-                navigationState={{ index, routes }}
-                renderScene={renderScene}
-                onIndexChange={setIndex}
-                // initialLayout={{ width: layout.width }}
-                renderTabBar={renderTabBar}
 
-            />
+
+            <Top.Navigator
+                screenOptions={{
+                    tabBarActiveTintColor: COLORS.primary,
+                    tabBarIndicatorStyle: { backgroundColor: COLORS.primary },
+                    tabBarLabelStyle: { fontSize: 12, fontWeight: "bold", width: '100%' },
+                    tabBarStyle: { backgroundColor: "white", marginTop: 2 },
+                }}>
+
+                <Top.Screen name="Compeleted Payment" component={CompletedPayment} />
+                <Top.Screen name="Pending Payment" component={PendingPayment} />
+
+            </Top.Navigator>
+
+
 
         </Container>
     );
@@ -226,7 +87,7 @@ const styles = StyleSheet.create({
         // paddingVertical: 20,
         width: 181,
         height: 91,
-        // marginVertical: 10,
+        marginVertical: 10,
         // paddingBottom: 25
         shadowColor: '#171717',
         shadowOffset: { width: 0, height: 1 },

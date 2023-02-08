@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import { Container } from "../../components";
-import { AntDesign } from '@expo/vector-icons';
-import { images } from "../../assets/dummyData";
+import { Container, EventsCard } from "../../../components";
+import { images } from "../../../assets/dummyData";
+
 
 const data = [
     {
@@ -54,12 +54,11 @@ const Events = () => {
 
         <View style={styles.container}>
             {data.map((gallery) => (
-                <View key={gallery.id} style={styles.row}>
-                    <View style={{ flexDirection: 'column', }}>
-                        <Text style={{ fontSize: 14 }}> {gallery.description}</Text>
-                        <Text style={{ fontSize: 11, marginVertical: 5, color: '#4d4d4d84' }}> {gallery.title}</Text>
-                    </View>
-                </View>
+                <EventsCard
+                    key={gallery.id}
+                    title={gallery.title}
+                    description={gallery.description}
+                />
             ))}
 
         </View>
@@ -72,19 +71,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    row: {
-        flexDirection: 'row',
-        paddingVertical: 8,
-        borderColor: '#4d4d4d84 ',
-        borderBottomWidth: StyleSheet.hairlineWidth,
-    },
-    controw: {
-        flexDirection: 'row',
-        flex: 0.9,
-        alignItems: 'center',
-        justifyContent: 'space-between'
 
-
-    }
 
 });

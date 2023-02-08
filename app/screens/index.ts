@@ -16,8 +16,8 @@ export {default as OnAccountSuccess} from './Account/OnSucessScreen/OnAccountSuc
 export {default as OnSuccessScreen} from './Account/OnSucessScreen/onSucess'
 export {default as OnPasswordSuccess} from './Account/OnSucessScreen/OnPasswordSuccess'
 export {default as PaymentDetails} from './PaymentDetails/PaymentDetails';
-export {default as CompletedPayment} from './PaymentDetails/CompletedPaymen';
-export {default as PendingPayment} from './PaymentDetails/PendingPayment';
+export {default as CompletedPayment} from './PaymentDetails/Tabs/CompletedPaymen';
+export {default as PendingPayment} from './PaymentDetails/Tabs/PendingPayment';
 export {default as FlagList} from './FAQ/FAQList';
 export {default as Notification} from './Notification/Notification';
 

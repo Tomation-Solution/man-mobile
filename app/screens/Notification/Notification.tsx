@@ -1,45 +1,22 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import Events from './Events'
-import Messaging from './Messaging'
+import Events from './Tabs/Events'
+import Messaging from './Tabs/Messaging'
+import { COLORS } from "../../constants/color";
 import { Container, NotificationHeader } from '../../components';
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
 
 interface NotificationProps {
     navigation: any;
 }
 
+const Top = createMaterialTopTabNavigator();
+
 
 const NotificationScreen = ({ navigation }: NotificationProps) => {
 
-    const [index, setIndex] = useState(0);
 
-    const [routes] = useState([
-        { key: "completed", title: " Messaging" },
-        { key: "pending", title: " Events" }
-    ]);
-
-    const renderScene = SceneMap({
-        completed: Messaging,
-        pending: Events
-    });
-
-
-
-
-    const renderTabBar = props => (
-        <TabBar
-            {...props}
-            activeColor={'black'}
-            inactiveColor={'black'}
-            labelStyle={[styles.label]}
-            tabStyle={[styles.tab, { height: 38, maxHeight: 38, minHeight: 38, padding: 0 }]}
-            indicatorStyle={{ backgroundColor: '#555D42' }}
-            contentContainerStyle={{ borderRadius: 100, elevation: 0 }}
-            style={{ marginTop: 2, backgroundColor: '#fff' }}
-            bounces='false'
-        />
-    );
     return (
         <>
             <Container>
@@ -49,14 +26,18 @@ const NotificationScreen = ({ navigation }: NotificationProps) => {
                     navigation={navigation}
                 />
 
-                <TabView
-                    navigationState={{ index, routes }}
-                    renderScene={renderScene}
-                    onIndexChange={setIndex}
-                    // initialLayout={{ width: layout.width }}
-                    renderTabBar={renderTabBar}
+                <Top.Navigator
+                    screenOptions={{
+                        tabBarActiveTintColor: COLORS.primary,
+                        tabBarIndicatorStyle: { backgroundColor: COLORS.primary },
+                        tabBarLabelStyle: { fontSize: 12, fontWeight: "bold" },
+                        tabBarStyle: { backgroundColor: "white" },
+                    }}
+                >
+                    <Top.Screen name="Messaging" component={Messaging} />
+                    <Top.Screen name="Events" component={Events} />
+                </Top.Navigator>
 
-                />
             </Container>
         </>
     )

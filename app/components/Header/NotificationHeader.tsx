@@ -1,12 +1,13 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useState } from "react";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { images } from "../../assets/dummyData";
 import { horizontalScale, verticalScale } from "../../constants/metric";
 
 import { COLORS } from "../../constants/color";
 import { SPACING } from "../../globals/styles";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import CustomModal from "../CustomModal";
+import NotificationModal from "../Notification/NotificationModal";
 
 interface Props {
     navigation: any;
@@ -14,6 +15,15 @@ interface Props {
     back?: any;
 }
 const NotificationHeader = ({ navigation, title, back }: Props) => {
+
+    const [modalVisible, setModalVisible] = useState(true);
+
+    const onModalPress = () => { setModalVisible(!modalVisible); };
+
+    <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
+        <NotificationModal onPress={onModalPress} />
+    </CustomModal>
+
     return (
         <View style={styles.headerContainer}>
             <TouchableOpacity
@@ -50,8 +60,8 @@ const NotificationHeader = ({ navigation, title, back }: Props) => {
                 </>
             )}
             <View style={styles.notificationContainer}>
-                <TouchableOpacity>
-                    <Text style={{ color: '4d4d4d84', fontWeight: '500' }}> Clear </Text>
+                <TouchableOpacity onPress={() => { onModalPress() }} >
+                    <Text style={{ color: '#4d4d4d84', fontWeight: '500', fontSize: 15 }}> Clear </Text>
                 </TouchableOpacity>
             </View>
         </View>

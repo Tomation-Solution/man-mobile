@@ -19,8 +19,10 @@ const FAQ = ({ question, answer }: FAQProps) => {
         <View style={styles.container}>
 
             <TouchableOpacity onPress={() => setExpanded(!expanded)} style={styles.questionContainer}>
-                <Text style={[styles.question, expanded && styles.activeQuestion]}>{question}</Text>
-                <Text style={styles.sign}>{expanded ? '-' : '+'}</Text>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderBottomWidth: StyleSheet.hairlineWidth, }}>
+                    <Text style={[styles.question, expanded && styles.activeQuestion]}>{question}</Text>
+                    <Text style={styles.sign}>{expanded ? '-' : '+'}</Text>
+                </View>
             </TouchableOpacity>
             {expanded && <Text style={styles.answer}>{answer}</Text>}
         </View>
@@ -37,9 +39,10 @@ const styles = StyleSheet.create({
     questionContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderBottomWidth: StyleSheet.hairlineWidth,
         justifyContent: 'center',
-        display: 'flex'
+        display: 'flex',
+        paddingHorizontal: 10
+
 
     },
     question: {
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
         justifyContent: 'center',
-        display: 'flex'
+        display: 'flex',
     },
     answer: {
         paddingVertical: 10,

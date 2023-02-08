@@ -1,48 +1,58 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from "react-native";
-import { Container, AccountHeader } from "../../components";
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from "react-native"
+import { Container, AccountHeader } from "../../../components";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 
 
-const PendingPayment = () => {
+const CompletedPayment = () => {
     const [tableData, setTableData] = useState([
         ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["Registartion levy", "$800", "02/01/2020", "Completed"],
-        ["Registartion levy", "$500", "03/01/2020", "Completed"],
-        ["Registartion levy", "$500", "03/01/2020", "Completed"],
-        ["Registartion levy", "$500", "03/01/2020", "Completed"],
+        ["registration levy", "$800", "02/01/2020", "Completed"],
+        ["registration levy", "$500", "03/01/2020", "Completed"],
+        ["registration levy", "$500", "03/01/2020", "Completed"],
+        ["registration levy", "$500", "03/01/2020", "Completed"],
         ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["Registartion levy", "$800", "02/01/2020", "Completed"],
-        ["Registartion levy", "$500", "03/01/2020", "Completed"],
-        ["Registartion levy", "$500", "03/01/2020", "Completed"],
-        ["Registartion levy", "$500", "03/01/2020", "Completed"],
+        ["registration levy", "$800", "02/01/2020", "Completed"],
+        ["registration levy", "$500", "03/01/2020", "Completed"],
+        ["registration levy", "$500", "03/01/2020", "Completed"],
+        ["registration levy", "$500", "03/01/2020", "Completed"],
         ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["Registartion levy", "$800", "02/01/2020", "Completed"],
-        ["Registartion levy", "$500", "03/01/2020", "Completed"],
-        ["Registartion levy", "$500", "03/01/2020", "Completed"],
-        ["Registartion levy", "$500", "03/01/2020", "Completed"],
+        ["registration levy", "$800", "02/01/2020", "Completed"],
+        ["registration levy", "$500", "03/01/2020", "Completed"],
+        ["registration levy", "$500", "03/01/2020", "Completed"],
+        ["registration levy", "$500", "03/01/2020", "Completed"],
     ]);
     const tableHead = ["Reason", "Amount", "Date", "Action"];
 
+    const onButtonClick = () => {
+        Alert.alert('Pay your bills');
+    };
+
+    const buttonElement = () => (
+        <TouchableOpacity onPress={onButtonClick}>
+            <View style={styles.btn}>
+                <Text style={styles.btnText}>Receipt</Text>
+            </View>
+        </TouchableOpacity>
+    );
     return (
         <View style={styles.container}>
             {/* <TableComponent
-                tableHead={tableHead}
-                tableData={tableData}
-                backgroundColor={"#555D42"}
-            /> */}
+                    tableHead={tableHead}
+                    tableData={tableData}
+                    backgroundColor={"#555D42"}
+                /> */}
             <Table borderStyle={{ borderColor: 'transparent' }}>
-                <Row data={tableHead} flexArr={[2, 1, 1, 1]} style={styles.head} textStyle={styles.text} />
-                <ScrollView style={styles.dataWrapper}>
-
+                <Row data={tableHead} flexArr={[1, 1, 1, 1]} style={styles.head} textStyle={styles.text} />
+                <ScrollView>
                     {
                         tableData.map((rowData, index) => (
                             <TableWrapper key={index} style={styles.row}>
                                 {
                                     rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={cellData} textStyle={styles.text} />
+                                        <Cell key={cellIndex} data={cellIndex === 3 ? buttonElement() : cellData} textStyle={styles.text} />
                                     ))
                                 }
                             </TableWrapper>
@@ -51,8 +61,9 @@ const PendingPayment = () => {
                 </ScrollView>
             </Table>
         </View >
-    );
-};
+    )
+}
+
 
 const styles = StyleSheet.create({
     head: { width: '100%', height: 45, backgroundColor: '#555D42' },
@@ -93,14 +104,11 @@ const styles = StyleSheet.create({
         shadowRadius: 2.22,
         elevation: 3
     },
-    text: { margin: 1, textAlign: 'center', fontWeight: '600', fontSize: 11 },
-    dataWrapper: { marginTop: -1 },
-    row: {
-        flexDirection: 'row',
-    },
-    btn: { width: 48, height: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: '#78B7BB', borderRadius: 10 },
-    btnText: { textAlign: 'center', color: '#fff' }
-
+    text: { margin: 6, textAlign: 'center', width: '100%', fontWeight: '600', fontSize: 11 },
+    dataWrapper: { marginTop: -8, },
+    row: { flexDirection: 'row' },
+    btn: { width: 60, backgroundColor: '#555D42', borderRadius: 10, marginLeft: 14 },
+    btnText: { textAlign: 'center', color: '#fff', fontSize: 13, }
 });
 
-export default PendingPayment
+export default CompletedPayment

@@ -40,6 +40,8 @@ const BottomNav = () => {
       />
       <Tab.Screen
         options={{
+          tabBarStyle: { display: "none" },
+
           tabBarIcon: ({ color }) => (
             <Ionicons name="chatbox" color={color} size={28} />
           ),

@@ -9,7 +9,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface Props {
   navigation: any;
-  title?: string;
+  title?: any;
   back?: any;
 }
 const HomeHeader = ({ navigation, title, back }: Props) => {

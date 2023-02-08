@@ -14,6 +14,7 @@ import { COLORS } from "../../constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import PicturePreview from "../../components/Profile/PicturePreview";
 import Picture from "../../components/Profile/Picture";
+import { Picker } from "@react-native-picker/picker";
 
 const { width } = Dimensions.get("window");
 
@@ -32,6 +33,8 @@ const Profile = ({ navigation }: any) => {
   const [slice, setSlice] = useState(3);
   const [modal, setShowModal] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
+  const [gender, setGender] = useState();
+  const [citzenship, setCitzenship] = useState();
 
   return (
     <>
@@ -99,6 +102,10 @@ const Profile = ({ navigation }: any) => {
               <Text style={styles.text}>Tomiwa Ayandele</Text>
             </View>
             <View style={styles.feidlContainer}>
+              <Text style={styles.label}>PHONE NUMBER</Text>
+              <Text style={styles.text}>+234 816 453 7857</Text>
+            </View>
+            <View style={styles.feidlContainer}>
               <Text style={styles.label}>EMAIL</Text>
               <Text style={styles.text}>JohnKolawole98@yahoo.com</Text>
             </View>
@@ -108,6 +115,35 @@ const Profile = ({ navigation }: any) => {
                 No 20, Kings Avenue, Ikoyi, Lagos.
               </Text>
             </View>
+            <View style={styles.feidlContainer}>
+              <Text style={styles.label}>Date of Birth</Text>
+              <Text style={styles.text}>12/200</Text>
+            </View>
+            <View style={styles.feidlContainer}>
+              <Text style={styles.label}>Citizenship</Text>
+
+              <Picker
+                selectedValue={citzenship}
+                onValueChange={(itemValue, itemIndex) =>
+                  setCitzenship(itemValue)
+                }
+              >
+                <Picker.Item label="Nigeria" value="nigeria" />
+                <Picker.Item label="others" value="others" />
+              </Picker>
+            </View>
+            <View style={styles.feidlContainer}>
+              <Text style={styles.label}>Gender</Text>
+
+              <Picker
+                selectedValue={gender}
+                onValueChange={(itemValue, itemIndex) => setGender(itemValue)}
+              >
+                <Picker.Item label="Male" value="male" />
+                <Picker.Item label="female" value="female" />
+              </Picker>
+            </View>
+
             <View style={styles.outerContainer}>
               <View style={[styles.feidlContainer, { flex: 1 }]}>
                 <Text style={styles.label}>Role</Text>
@@ -120,7 +156,10 @@ const Profile = ({ navigation }: any) => {
                 <Text style={styles.text}>2005</Text>
               </View>
             </View>
-
+            <View style={styles.feidlContainer}>
+              <Text style={styles.label}>EDUCATION</Text>
+              <Text style={styles.text}>12/200</Text>
+            </View>
             <View style={styles.outerContainer}>
               <View style={[styles.feidlContainer, { flex: 1 }]}>
                 <Text style={styles.label}>Employment type</Text>
@@ -133,7 +172,6 @@ const Profile = ({ navigation }: any) => {
                 <Text style={styles.text}>+234 816 453 7857</Text>
               </View>
             </View>
-
             <View style={styles.feidlContainer}>
               <Text style={styles.label}>BIO</Text>
               <Text style={styles.text}>
@@ -145,7 +183,6 @@ const Profile = ({ navigation }: any) => {
                 vero nesciunt maxime asperiores consectetur expedita quaerat!
               </Text>
             </View>
-
             <View>
               <Text style={styles.label}>PICTURES</Text>
               <View

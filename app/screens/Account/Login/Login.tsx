@@ -65,7 +65,7 @@ const LoginForm = ({ navigation }: any) => {
               </Formik>
 
               <TouchableOpacity
-                onPress={() => navigation('Login').navigate('ForgotPassword')}   >
+                onPress={() => navigation.navigate('ForgotPassword')}   >
                 <Text style={styles.forgotPassword}> Forgot password?</Text>
               </TouchableOpacity>
 

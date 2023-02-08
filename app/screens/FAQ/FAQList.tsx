@@ -1,8 +1,9 @@
 import React from 'react';
 import FAQ from './ FAQ';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { Container, HomeHeader, FormInput, Formbtn } from '../../components';
 import { Formik, Field } from 'formik'
+import ContactForm from './ContactForm';
 
 // import { NavigationStackProp } from '@react-navigation/native';
 
@@ -52,60 +53,8 @@ const FAQList = ({ navigation }: any) => {
                     <FAQ key={index} question={faq.question} answer={faq.answer} />
                 ))}
 
-                <View style={{ flex: 1, justifyContent: 'space-between', alignItems: 'center' }} >
-                    <Text style={{ fontSize: 16, lineHeight: 22, fontWeight: '600', }}> Contact</Text>
-
-                    <View>
-
-
-
-
-                        <Formik
-                            initialValues={{ email: '', password: '' }}
-                            onSubmit={(values, actions) => {
-                                // Perform login logic here
-                                console.log(values);
-                                actions.resetForm();
-                            }}
-                        >
-                            {({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
-                                <>
-                                    <Field name="email">
-                                        {({ field }) => (
-                                            <FormInput
-                                                customstyles={[styles.update]}
-                                                label="Email"
-                                                type="email"
-                                            // field={field}
-                                            // form={{ errors, touched }}
-                                            // placeholder='hlle'
-                                            // onChange={handleChange}
-                                            // onBlur={handleBlur}
-                                            />
-                                        )}
-                                    </Field>
-                                    {/* <Field name="password">
-                                        {({ field }) => (
-                                            <FormInput
-                                                label="Password"
-                                                type="password"
-                                                field={field}
-                                                form={{ errors, touched }}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                            />
-                                        )}
-                                    </Field> */}
-                                    {/* <Button title="Login" onPress={handleSubmit} /> */}
-                                </>
-                            )}
-                        </Formik>
-
-
-
-
-                    </View>
-
+                <View style={{ flex: 0.4 }} >
+                    <ContactForm />
                 </View>
             </Container>
         </ScrollView>

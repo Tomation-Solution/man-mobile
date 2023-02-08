@@ -1,5 +1,6 @@
 export { default as HomeHeader } from "./Header/HomeHeader";
 export { default as AccountHeader } from "./Header/AccountHeader";
+export { default as NotificationHeader } from "./Header/NotificationHeader";
 export { default as Container } from "./Container";
 export { default as LatestUpdatesNav } from "./LatestUpdates/LatestUpdatesNav";
 export { default as SearchBar } from "./SearchBar/SearchBar";

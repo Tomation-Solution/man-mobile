@@ -19,4 +19,6 @@ export {default as PaymentDetails} from './PaymentDetails/PaymentDetails';
 export {default as CompletedPayment} from './PaymentDetails/CompletedPaymen';
 export {default as PendingPayment} from './PaymentDetails/PendingPayment';
 export {default as FlagList} from './FAQ/FAQList';
+export {default as Notification} from './Notification/Notification';
+
 

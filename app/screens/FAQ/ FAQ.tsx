@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Formik, Field } from 'formik'
+import { COLORS } from "../../constants/color";
 
 
 interface FAQProps {
@@ -45,10 +46,11 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         flex: 1,
         fontSize: 15,
-        paddingBottom: 10
+        paddingBottom: 10,
     },
     activeQuestion: {
-        color: '#000022'
+        color: COLORS.primary
+
 
     },
     sign: {
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
         borderColor: '#4ECB71',
         borderRadius: 200,
         borderWidth: 1,
-        color: '#107382',
+        color: '#4ECB71',
         width: 40,
         alignItems: 'center',
         textAlign: 'center',
@@ -64,10 +66,11 @@ const styles = StyleSheet.create({
         display: 'flex'
     },
     answer: {
-        paddingLeft: 0,
+        paddingVertical: 10,
+        paddingLeft: 3,
         color: '#000022',
         shadowOpacity: 0.7,
-        fontSize: 12,
+        fontSize: 14,
         lineHeight: 16
     },
 });

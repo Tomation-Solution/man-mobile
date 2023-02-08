@@ -3,37 +3,28 @@ import { View, StyleSheet, Text, TextInput } from 'react-native';
 
 const FormInput = (props) => {
   const {
-    field,
-    customstyles,
-    form,
+    field: { name, onBlur, onChange, value },
+    form: { errors, touched, setFieldTouched },
     ...inputProps
-  } = props;
+  } = props
 
-  const hasError = form && form.errors[field.name] && form.touched[field.name];
+  const hasError = errors[name] && touched[name]
+
 
   return (
     <>
+
       <TextInput
-        style={[customstyles, styles.textInput, hasError && styles.errorInput]}
-        value={field ? field.value : inputProps.value}
-        onChangeText={(text) => {
-          if (field) {
-            field.onChange(text);
-          } else {
-            inputProps.onChange(text);
-          }
-        }}
+        style={[styles.textInput, hasError && styles.errorInput]}
+        value={value}
+        onChangeText={(text) => onChange(name)(text)}
         onBlur={() => {
-          if (field) {
-            form.setFieldTouched(field.name);
-            field.onBlur(field.name);
-          } else {
-            inputProps.onBlur();
-          }
+          setFieldTouched(name)
+          onBlur(name)
         }}
         {...inputProps}
       />
-      {hasError && <Text style={styles.errorText}>{form.errors[field.name]}</Text>}
+      {hasError && <Text style={styles.errorText}>{errors[name]}</Text>}
     </>
   );
 };

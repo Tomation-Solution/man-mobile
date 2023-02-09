@@ -10,38 +10,86 @@ const Election = ({ navigation }: any) => {
     {
       id: 1,
       position: " President ",
+      name: 'mr Kunle',
+      title: " Election",
+
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+
     },
     {
       id: 2,
       position: " Secretary ",
+      name: 'mr Kunle',
+      title: " Election",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+
     },
     {
       id: 3,
       position: " manager",
+      name: 'mr Kunle',
+      title: " Election",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+
     },
     {
       id: 4,
       position: " President ",
+      name: 'mr Kunle',
+      title: " Election",
+
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+
     },
     {
       id: 5,
       position: " President ",
+      name: 'mr Kunle',
+      title: " Election",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+
     },
     {
       id: 6,
       position: " President ",
+      name: 'mr Kunle',
+      title: " Election",
+
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+
     },
     {
       id: 7,
       position: " President ",
+      name: 'mr Kunle',
+      title: " Election",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+
     },
     {
       id: 8,
       position: " President ",
+      name: 'mr Kunle',
+      title: " Election",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+
+
     },
     {
       id: 9,
       position: " President ",
+      title: " Election",
+      name: 'mr Kunle',
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
     }
 
   ]
@@ -59,6 +107,7 @@ const Election = ({ navigation }: any) => {
           key={data.id}
           id={data.id}
           position={data.position}
+          onPress={() => navigation.navigate("ElectionDetails", { data })}
         />
 
       ))}

@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import {
   VerifyUser, Registration, Login, ForgotPassword, ChangePassword, VerifyCode,
   OnAccountSuccess, OnSuccessScreen, OnPasswordSuccess, PaymentDetails, FagList,
-  Notification
+  Notification, Election
 } from '../screens'
 
 const navigationScreenOptions = { headerShown: false }
@@ -13,9 +13,10 @@ const WalletNavigation = () => {
   return (
     <WalletStack.Navigator screenOptions={navigationScreenOptions}>
 
-      <WalletStack.Screen name="PaymentDetails" component={PaymentDetails} />
+      <WalletStack.Screen name="Election" component={Election} />
+      {/* <WalletStack.Screen name="PaymentDetails" component={PaymentDetails} />
       <WalletStack.Screen name='Notification' component={Notification} />
-      <WalletStack.Screen name="FagList" component={FagList} />
+      <WalletStack.Screen name="FagList" component={FagList} /> */}
 
       {/* <WalletStack.Screen name="Registration" component={Registration} /> */}
       {/* <WalletStack.Screen name="Login" component={Login} /> */}
@@ -26,6 +27,7 @@ const WalletNavigation = () => {
       {/* <WalletStack.Screen name="OnAccountSuccess" component={OnAccountSuccess} /> */}
       {/* <WalletStack.Screen name="onSucess" component={OnSuccessScreen} /> */}
       {/* <WalletStack.Screen name="PasswordChanged" component={OnPasswordSuccess} /> */}
+
     </WalletStack.Navigator>
   );
 }

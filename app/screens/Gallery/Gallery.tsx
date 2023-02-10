@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import { Container, HomeHeader, SearchBar } from "../../components";
+import { Container } from "../../components";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./Home";
 import Details from "./Details";

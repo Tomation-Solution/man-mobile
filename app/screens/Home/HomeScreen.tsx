@@ -1,4 +1,4 @@
-import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import React from "react";
 import {
   Container,
@@ -16,8 +16,8 @@ const HomeScreen = ({ navigation }: any) => {
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <SearchBar />
         <LatestUpdatesNav />
-        <FeedsNav />
-        <NewsNav />
+        <FeedsNav navigation={navigation} />
+        <NewsNav navigation={navigation} />
       </ScrollView>
     </Container>
   );

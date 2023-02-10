@@ -40,7 +40,7 @@ const DrawerContent = ({ navigation, state, index }: any) => {
       />
       <DrawerLabel
         focused={state?.index === 0}
-        title="Home"
+        title="Homescreen"
         icon={<Ionicons name="home" size={20} color={COLORS.primary} />}
         navigation={navigation}
       />

@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useState } from "react";
 import { Container, HomeHeader, ElectionsCard } from "../../components";
+import { images } from "../../assets/dummyData";
 
 
 const Election = ({ navigation }: any) => {
@@ -12,7 +13,7 @@ const Election = ({ navigation }: any) => {
       position: " President ",
       name: 'mr Kunle',
       title: " Election",
-
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
 
@@ -24,6 +25,7 @@ const Election = ({ navigation }: any) => {
       title: " Election",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
 
     },
     {
@@ -33,6 +35,7 @@ const Election = ({ navigation }: any) => {
       title: " Election",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
 
     },
     {
@@ -40,6 +43,7 @@ const Election = ({ navigation }: any) => {
       position: " President ",
       name: 'mr Kunle',
       title: " Election",
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
 
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
@@ -52,6 +56,7 @@ const Election = ({ navigation }: any) => {
       title: " Election",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
 
     },
     {
@@ -62,6 +67,7 @@ const Election = ({ navigation }: any) => {
 
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
 
     },
     {
@@ -71,6 +77,7 @@ const Election = ({ navigation }: any) => {
       title: " Election",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
 
     },
     {
@@ -81,6 +88,7 @@ const Election = ({ navigation }: any) => {
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
 
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
 
     },
     {
@@ -88,32 +96,58 @@ const Election = ({ navigation }: any) => {
       position: " President ",
       title: " Election",
       name: 'mr Kunle',
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
+
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
-    }
+    },
+    {
+      id: 10,
+      position: " President ",
+      title: " Election",
+      name: 'mr Kunle',
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
+
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+    },
+
+    {
+      id: 11,
+      position: " President ",
+      title: " Election",
+      name: 'mr Kunle',
+      images: [images.meeting_1, images.meeting_2, images.meeting_3],
+
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
+    },
 
   ]
 
 
   return (
+
     <Container>
       <HomeHeader
         title="Elections"
         navigation={navigation}
         back={navigation.goBack}
       />
+
       {data.map((data) => (
         <ElectionsCard
           key={data.id}
           id={data.id}
           position={data.position}
-          onPress={() => navigation.navigate("ElectionDetails", { data })}
+          onPress={() => navigation.navigate("ProfileDetails")}
         />
 
       ))}
 
-
     </Container>
+
+
   );
 };
 

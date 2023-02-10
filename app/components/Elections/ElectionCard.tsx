@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import React from 'react'
 import Container from '../Container'
 import { horizontalScale, verticalScale } from "../../constants/metric";
@@ -12,26 +12,26 @@ interface ElectionsCardProps {
 
 const ElectionCard = ({ id, position, onPress }: ElectionsCardProps) => {
     return (
-        <View style={styles.containerflex}>
+        <ScrollView>
+            <View style={styles.containerflex}>
+                <View style={styles.contianer}>
+                    <View style={{ flex: 0.5, flexDirection: 'row' }}>
+                        <Text> Position: {id}</Text>
+                        <Text> {position}</Text>
+                    </View>
 
-            <View style={styles.contianer}>
-                <View style={{ flex: 0.5, flexDirection: 'row' }}>
-                    <Text> Position: {id}</Text>
-                    <Text> {position}</Text>
-                </View>
+                    <View style={styles.rowSection} >
+                        <TouchableOpacity onPress={onPress} style={styles.asipirantbtn}>
+                            <Text style={[styles.btnText, styles.color]}> See Asipirants</Text>
+                        </TouchableOpacity>
 
-                <View style={styles.rowSection} >
-                    <TouchableOpacity onPress={onPress} style={styles.asipirantbtn}>
-                        <Text style={[styles.btnText, styles.color]}> See Asipirants</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.votingbtn}>
-                        <Text style={styles.btnText}> See Voting Stat</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity style={styles.votingbtn}>
+                            <Text style={styles.btnText}> See Voting Stat</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
-
-        </View>
+        </ScrollView>
     )
 }
 
@@ -39,7 +39,7 @@ export default ElectionCard
 
 const styles = StyleSheet.create({
     containerflex: {
-        flex: 0.1
+        flex: 1
     },
     contianer: {
         flex: 1,

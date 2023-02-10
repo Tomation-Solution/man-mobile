@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import {
   VerifyUser, Registration, Login, ForgotPassword, ChangePassword, VerifyCode,
   OnAccountSuccess, OnSuccessScreen, OnPasswordSuccess, PaymentDetails, FagList,
-  Notification, Election,ElectionDetails
+  Notification, Election, ElectionDetails, ProfileDetails
 } from '../screens'
 
 const navigationScreenOptions = { headerShown: false }
@@ -12,9 +12,9 @@ const WalletNavigation = () => {
   const WalletStack = createNativeStackNavigator()
   return (
     <WalletStack.Navigator screenOptions={navigationScreenOptions}>
-
       <WalletStack.Screen name="Election" component={Election} />
-      <WalletStack.Screen name='ElectionDetails' component={ElectionDetails}/>
+      <WalletStack.Screen name='ProfileDetails' component={ProfileDetails} />
+      <WalletStack.Screen name='ElectionDetails' component={ElectionDetails} />
       {/* <WalletStack.Screen name="PaymentDetails" component={PaymentDetails} />
       <WalletStack.Screen name='Notification' component={Notification} />
       <WalletStack.Screen name="FagList" component={FagList} /> */}

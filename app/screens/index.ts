@@ -21,6 +21,8 @@ export {default as PendingPayment} from './PaymentDetails/Tabs/PendingPayment';
 export {default as FagList} from './FAQ/FAQList';
 export {default as Notification} from './Notification/Notification';
 export {default as ElectionDetails} from './Election/ElectionDetail';
+export {default as ProfileDetails} from './Election/ProfileDetails';
+
 
 
 

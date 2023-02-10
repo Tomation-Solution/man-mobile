@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, } from 'react-native'
+import { useEffect, useState } from 'react'
 import { Container, HomeHeader } from '../../components';
+import * as Progress from 'react-native-progress';
+
 
 
 interface ElectionDetailsProps {
@@ -9,7 +11,15 @@ interface ElectionDetailsProps {
 }
 
 const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
-    const profile = route.params.data;
+    const profile = route.params.profile;
+    // const [votesReceived, setVotesReceived] = useState(0);
+    // const [totalVotes, setTotalVotes] = useState(0);
+    const [progress, setProgress] = useState(0);
+
+    // useEffect(() => {
+    // setProgress((votesReceived / totalVotes) * 100);
+    // }, [votesReceived, totalVotes]);
+
 
 
     return (
@@ -28,12 +38,26 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
                                 style={styles.electionimg}
                                 source={profile.images[2]}
                             />
-                            <View style={[styles.electionrow2, styles.votesection]}>
+                            <View style={styles.electionrow2}>
                                 <TouchableOpacity style={styles.votingbtn}>
                                     <Text style={styles.btnText}> Vote</Text>
                                 </TouchableOpacity>
-                            </View>
 
+                                <View style={{ marginLeft: 10 }} >
+                                    <Progress.Bar
+                                        width={80}
+                                        height={12}
+                                        progress={progress}
+                                        color={'#5cb85c'}
+                                        borderRadius={5}
+                                        borderColor={'#5cb85c'}
+                                    />
+                                    <Text style={styles.text}>{`${(progress * 100).toFixed(0)}% of 100% (200 Votes)`}</Text>
+
+
+                                </View>
+
+                            </View>
                         </View>
 
                         <View style={styles.electionrow}>
@@ -52,15 +76,17 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
                         <Text style={styles.sectiontitle} > Manifesto</Text>
                         <Text>{profile.description} </Text>
                         <TouchableOpacity>
-                            <Text style={{ fontSize: 15, lineHeight: 18, color: '#2b3513', marginVertical: 3, fontWeight: '500', textAlign: 'left' }}> Download full Manifesto</Text>
+                            <Text style={{ fontSize: 15, lineHeight: 18, color: '#2b3513', marginVertical: 5, fontWeight: '600', textAlign: 'left' }}> Download full Manifesto</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View style={styles.vidsection}>
-                        <View style={{ backgroundColor: '#D9D9D9', paddingHorizontal: 77, height: 103, borderRadius: 10 }}>
+                        <View>
+                            <Image source={profile.images[2]} style={{ flex: 0.5, width: 150, height: 103, borderRadius: 10 }} />
                             <Text> </Text>
                         </View>
-                        <View style={{ backgroundColor: '#D9D9D9', paddingHorizontal: 77, height: 103, borderRadius: 10, marginHorizontal: 10 }}>
+                        <View >
+                            <Image source={profile.images[1]} style={{ flex: 0.5, width: 150, height: 103, borderRadius: 10 }} />
                             <Text> </Text>
                         </View>
                     </View>
@@ -84,7 +110,11 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         marginTop: 30,
-
+    },
+    text: {
+        fontSize: 10,
+        marginTop: 10,
+        fontWeight: '700'
     },
     Electioncolumn: {
         flexDirection: 'column',
@@ -96,6 +126,9 @@ const styles = StyleSheet.create({
     },
     electionrow2: {
         flexDirection: 'row',
+        marginVertical: 10,
+        flex: 0.5
+
     },
     electionimg: {
         width: 160,
@@ -122,7 +155,6 @@ const styles = StyleSheet.create({
         fontWeight: '500'
     },
     votesection: {
-        marginVertical: 10
     },
     Bio: {
         fontWeight: '400',
@@ -148,8 +180,9 @@ const styles = StyleSheet.create({
     },
     vidsection: {
         flexDirection: 'row',
-        flex: 0.9,
-        justifyContent: 'space-between'
+        flex: 1,
+        justifyContent: 'space-between',
+        marginVertical: 20,
     },
     detailssection: {
 

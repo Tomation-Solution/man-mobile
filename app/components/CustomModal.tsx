@@ -1,18 +1,5 @@
-
 import { StyleSheet, Text, TouchableOpacity, View, Modal } from "react-native";
 import React, { useState } from "react";
-
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Modal,
-  Dimensions,
-} from "react-native";
-import React from "react";
-
-
 
 const CustomModal = ({ children, visible, onRequestClose }: any) => {
   return (
@@ -29,7 +16,6 @@ const CustomModal = ({ children, visible, onRequestClose }: any) => {
           backgroundColor: " rgba(0, 0 , 0, 0.7) ",
           alignItems: "center",
           justifyContent: "center",
-
         }}
       >
         {children}

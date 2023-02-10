@@ -51,10 +51,13 @@ const HomeHeader = ({ navigation, title, back, isTitleComponent }: Props) => {
           </TouchableOpacity>
         </>
       )}
-      <View style={styles.notificationContainer}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Notification")}
+        style={styles.notificationContainer}
+      >
         <FontAwesome name="bell" color={COLORS.primary} size={20} />
         <View style={styles.redDot} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

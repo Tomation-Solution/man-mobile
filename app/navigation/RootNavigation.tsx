@@ -2,9 +2,7 @@ import { StyleSheet, View } from "react-native";
 
 import { useReducer, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import WalletNavigation from "./walletNavigation";
-import LoginForm from "../screens/Account/component/lockedWithPayment";
-import {OnSuccess}from '../components'
+import DrawerNav from "./DrawerNav";
 
 const RootNavigation = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,7 +14,7 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        <WalletNavigation/>
+        <DrawerNav />
       </View>
     </NavigationContainer>
   );

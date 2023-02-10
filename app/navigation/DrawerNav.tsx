@@ -6,7 +6,14 @@ import { COLORS } from "../constants/color";
 import News from "../screens/News/News";
 import Events from "../screens/Events/Events";
 import DrawerContent from "./components/DrawerContent";
-import { Election, Gallery, Resources, Services, Support } from "../screens";
+import {
+  Election,
+  Gallery,
+  Notification,
+  Resources,
+  Services,
+  Support,
+} from "../screens";
 import Meetings from "../screens/Meetings/Meetings";
 import Profile from "../screens/Profile/Profile";
 import Publications from "../screens/Publications/Publications";
@@ -42,6 +49,7 @@ const DrawerNav = () => {
         <Drawer.Screen name="Services" component={Services} />
         <Drawer.Screen name="Meetings" component={Meetings} />
         <Drawer.Screen name="Publications" component={Publications} />
+        <Drawer.Screen name="Notification" component={Notification} />
       </Drawer.Navigator>
     </>
   );

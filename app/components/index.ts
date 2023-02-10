@@ -14,16 +14,8 @@ export { default as KeyboardAvoidingViewWrapper } from "./form/KeyboardAvoidngwr
 export { default as FormContainer } from "../screens/Account/FormContainer";
 export { default as ConfirmationInput } from "./form/ComfirmationInput";
 export { default as FormInput } from "./Input/FormInput";
-export {default as CustomModal} from './CustomModal'
-export {default as EventsCard} from './Notification/EventsCard'
-export {default as MessaginCard} from './Notification/MessagingCard'
-export {default as  NotificationModal} from './Notification/NotificationModal'
-export {default as  ElectionsCard} from './Elections/ElectionCard'
-
-
-
-export { default as NewsCard } from "./News/NewsCard";
-export { default as MeetingCard } from "./Meetings/MeetingCard";
 export { default as CustomModal } from "./CustomModal";
-export { default as EventCard } from "./Events/EventCard";
-
+export { default as EventsCard } from "./Notification/EventsCard";
+export { default as MessaginCard } from "./Notification/MessagingCard";
+export { default as NotificationModal } from "./Notification/NotificationModal";
+export { default as ElectionsCard } from "./Elections/ElectionCard";

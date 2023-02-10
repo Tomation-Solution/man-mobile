@@ -1,6 +1,10 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import React, { useEffect } from "react";
+import {
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { FontAwesome } from "@expo/vector-icons";
 import { COLORS } from "../../../../../constants/color";
@@ -12,23 +16,71 @@ interface DetailsProps {
   navigation?: any;
 }
 
-const Details = ({ route, navigation }: DetailsProps) => {
+const Details = ({ route, navigation, setShowTabBar }: any) => {
   const altRoute = useRoute();
-  const data = route?.params?.news || altRoute?.params || {};
+  const data = route?.params?.message || altRoute?.params || {};
 
-  const [showAll, setShowAll] = React.useState(3);
+  console.log("data", data);
 
-  const handlePress = () => {
-    setShowAll(showAll === 3 ? data.comments.length : 3);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    setShowTabBar(false);
+    return () => {
+      setShowTabBar(true);
+    };
+  }, [isFocused]);
+
+  const SenderInfo = ({ name, image }: { name: string; image: string }) => {
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <Image
+          source={{ uri: image }}
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: 25,
+            marginRight: 10,
+          }}
+        />
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: "bold",
+            color: COLORS.primary,
+          }}
+        >
+          {name}
+        </Text>
+      </View>
+    );
   };
 
   return (
     <>
+      <View
+        style={{
+          paddingHorizontal: 10,
+        }}
+      >
+        <HomeHeader
+          navigation={navigation}
+          isTitleComponent={
+            <SenderInfo name={data.sender} image={data.sender_image} />
+          }
+          back={() => navigation.goBack()}
+        />
+      </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{
           flex: 1,
-          marginBottom: 20,
+          backgroundColor: COLORS.icon,
         }}
       ></ScrollView>
     </>

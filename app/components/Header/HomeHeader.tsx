@@ -8,11 +8,12 @@ import { SPACING } from "../../globals/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface Props {
-  navigation: any;
+  navigation?: any;
   title?: any;
   back?: any;
+  isTitleComponent?: any;
 }
-const HomeHeader = ({ navigation, title, back }: Props) => {
+const HomeHeader = ({ navigation, title, back, isTitleComponent }: Props) => {
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity
@@ -28,7 +29,9 @@ const HomeHeader = ({ navigation, title, back }: Props) => {
         />
       </TouchableOpacity>
 
-      {title ? (
+      {isTitleComponent ? (
+        isTitleComponent
+      ) : title ? (
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>{title}</Text>
       ) : (
         <>

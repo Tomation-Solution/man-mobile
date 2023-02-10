@@ -5,16 +5,13 @@ import General from "./Tabs/General";
 import { COLORS } from "../../../constants/color";
 import { HomeHeader } from "../../../components";
 import Private from "./Tabs/Private/Private";
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import PrivateChat from "./PrivateChat";
 
 const Top = createMaterialTopTabNavigator();
 
 const Chat = ({ navigation }: any) => {
-  // const getTabBarVisibility = (route:any) => {
-  //   const routeName = getFocusedRouteNameFromRoute<any>(route);
-  //   const hideOnScreens = ["@react-navigation/native"]; // put here name of screen where you want to hide tabBar
-  //   return hideOnScreens.indexOf(routeName) <= -1;
-  // };
+  const [showTabBar, setShowTabBar] = React.useState(true);
+  const [title, setTitle] = React.useState("Chat");
 
   return (
     <View style={styles.container}>
@@ -23,11 +20,7 @@ const Chat = ({ navigation }: any) => {
           paddingHorizontal: 10,
         }}
       >
-        <HomeHeader
-          title="Chat"
-          navigation={navigation}
-          back={navigation.goBack}
-        />
+        {/* <HomeHeader title={title} navigation={navigation} nestedBack /> */}
       </View>
       <Top.Navigator
         screenOptions={{
@@ -38,7 +31,20 @@ const Chat = ({ navigation }: any) => {
         }}
       >
         <Top.Screen name="General Chats" component={General} />
-        <Top.Screen name="Private Chats" component={Private} />
+        <Top.Screen
+          name="Private Chats"
+          options={{
+            tabBarStyle: { display: showTabBar ? "flex" : "none" },
+          }}
+        >
+          {(props) => (
+            <Private
+              {...props}
+              showTabBar={showTabBar}
+              setShowTabBar={setShowTabBar}
+            />
+          )}
+        </Top.Screen>
       </Top.Navigator>
     </View>
   );

@@ -7,6 +7,7 @@ import { HomeScreen } from "../screens";
 import Chat from "../screens/Home/Chat/Chat";
 import { Account } from "../screens/Home";
 import Memebers from "../screens/Home/Members/Memebers";
+import PrivateChat from "../screens/Home/Chat/PrivateChat";
 
 const Tab = createBottomTabNavigator();
 

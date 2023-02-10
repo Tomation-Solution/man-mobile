@@ -1,11 +1,12 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { privateMessages } from "../../../../../assets/dummyData/privateMessages";
 import { SearchBar } from "../../../../../components";
 import PrivateChatCard from "../../../../../components/Chats/PrivateChatCard";
 import { COLORS } from "../../../../../constants/color";
+import { useIsFocused } from "@react-navigation/native";
 
-const Home = ({ navigation }: any) => {
+const Home = ({ navigation, setShowTabBar }: any) => {
   return (
     <View style={{}}>
       <View

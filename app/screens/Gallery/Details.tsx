@@ -125,4 +125,6 @@ const Details = ({ route, navigation }: DetailsProps) => {
 
 export default Details;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+
+});

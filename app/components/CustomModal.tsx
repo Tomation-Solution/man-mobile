@@ -1,3 +1,7 @@
+
+import { StyleSheet, Text, TouchableOpacity, View, Modal } from "react-native";
+import React, { useState } from "react";
+
 import {
   StyleSheet,
   Text,
@@ -8,7 +12,7 @@ import {
 } from "react-native";
 import React from "react";
 
-const { width } = Dimensions.get("window");
+
 
 const CustomModal = ({ children, visible, onRequestClose }: any) => {
   return (
@@ -21,11 +25,11 @@ const CustomModal = ({ children, visible, onRequestClose }: any) => {
       <View
         style={{
           flex: 1,
-          // padding: 20,
+          padding: 20,
           backgroundColor: " rgba(0, 0 , 0, 0.7) ",
           alignItems: "center",
           justifyContent: "center",
-          width: width,
+
         }}
       >
         {children}

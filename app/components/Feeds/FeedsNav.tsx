@@ -24,6 +24,10 @@ const data = [
     icon: <FontAwesome5 name="calendar-check" size={45} color={COLORS.icon} />,
   },
   {
+    name: "Publications",
+    icon: <FontAwesome name="picture-o" size={45} color={COLORS.icon} />,
+  },
+  {
     name: "Gallery",
     icon: <FontAwesome name="picture-o" size={45} color={COLORS.icon} />,
   },
@@ -39,16 +43,28 @@ const data = [
   },
 ];
 
-const FeedNavButton = ({ icon, name }: { icon: any; name: string }) => {
+const FeedNavButton = ({
+  icon,
+  name,
+  onPress,
+}: {
+  icon: any;
+  name: string;
+  onPress: any;
+}) => {
   return (
-    <TouchableOpacity activeOpacity={0.5} style={styles.feedNavButton}>
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.5}
+      style={styles.feedNavButton}
+    >
       <View>{icon}</View>
       <Text style={{ fontSize: 14 }}>{name}</Text>
     </TouchableOpacity>
   );
 };
 
-const FeedsNav = () => {
+const FeedsNav = ({ navigation }: any) => {
   return (
     <View style={[Globalstyles.section]}>
       <Text style={[Globalstyles.sectionHeaderText, { marginBottom: 20 }]}>
@@ -56,7 +72,12 @@ const FeedsNav = () => {
       </Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {data.map((item, index) => (
-          <FeedNavButton key={index} icon={item.icon} name={item.name} />
+          <FeedNavButton
+            key={index}
+            icon={item.icon}
+            name={item.name}
+            onPress={() => navigation.navigate(item.name)}
+          />
         ))}
       </ScrollView>
     </View>

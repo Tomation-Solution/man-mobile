@@ -1,25 +1,57 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { appImages } from "../../assets/app/images";
 
 interface GalleryCardProps {
   title: string;
-  description: string;
+  description: string[];
   images: string[];
   onPress: () => void;
 }
 
+const { width } = Dimensions.get("window");
+
 const GalleryCard = ({ title, images, onPress }: GalleryCardProps) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        width: width / 2 - 30,
+        marginBottom: 20,
+      }}
+    >
+      <View
+        style={{
+          borderTopEndRadius: 20,
+          borderTopStartRadius: 20,
+          overflow: "hidden",
+        }}
+      >
         <Image
           source={images[0] ? images[0] : appImages.logo}
-          style={{ width: 100, height: 100 }}
+          style={{ width: "100%", height: 100 }}
+          resizeMode="cover"
         />
       </View>
-      <Text>{title}</Text>
+      <View
+        style={{
+          borderBottomEndRadius: 20,
+          borderBottomStartRadius: 20,
+          backgroundColor: "white",
+          paddingVertical: 5,
+          paddingHorizontal: 10,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 13,
+            color: "gray",
+          }}
+        >
+          {title}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };

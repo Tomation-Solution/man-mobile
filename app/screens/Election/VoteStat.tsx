@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
-import { Container, HomeHeader, ElectionsCard } from "../../components";
+import { Container, HomeHeader, VotingStatCard,} from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 
 const Election = ({ navigation }: any) => {
@@ -90,13 +90,12 @@ const Election = ({ navigation }: any) => {
         back={navigation.goBack}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-        {data.map((data) => (
-          <ElectionsCard
-            key={data.id}
-            id={data.id}
-            position={data.position}
-            navigation={navigation}
-            onPress={() => navigation.navigate("ProfileDetails", { data })}
+        {data.map((profile) => (
+          <VotingStatCard
+            key={profile.id}
+            id={profile.id}
+            position={profile.position}
+            onPress={() => navigation.navigate("ElectionDetails", { profile })}
           />
         ))}
       </ScrollView>

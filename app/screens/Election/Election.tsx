@@ -95,7 +95,7 @@ const Election = ({ navigation }: any) => {
             key={data.id}
             id={data.id}
             position={data.position}
-            onPress={() => navigation.navigate("ElectionDetails", { data })}
+            onPress={() => navigation.navigate("ProfileDetails", { data })}
           />
         ))}
       </ScrollView>

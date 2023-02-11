@@ -15,6 +15,7 @@ import {
   Notification,
   Election,
   ElectionDetails,
+  ProfileDetails
 } from "../screens";
 
 const navigationScreenOptions = { headerShown: false };
@@ -23,10 +24,13 @@ const WalletNavigation = () => {
   const WalletStack = createNativeStackNavigator();
   return (
     <WalletStack.Navigator screenOptions={navigationScreenOptions}>
-      <WalletStack.Screen name="PaymentDetails" component={PaymentDetails} />
-      <WalletStack.Screen name="Notification" component={Notification} />
-      <WalletStack.Screen name="FagList" component={FagList} />
-      {/* 
+      <WalletStack.Screen name='ProfileDetails' component={ProfileDetails} />
+      <WalletStack.Screen name="Election" component={Election} />
+      <WalletStack.Screen name='ElectionDetails' component={ElectionDetails} />
+      {/* <WalletStack.Screen name="PaymentDetails" component={PaymentDetails} /> */}
+      {/* <WalletStack.Screen name="Notification" component={Notification} /> */}
+      {/* <WalletStack.Screen name="FagList" component={FagList} /> */}
+      {/*
       <WalletStack.Screen name="Registration" component={Registration} />
       <WalletStack.Screen name="Login" component={Login} />
       <WalletStack.Screen name="ForgotPassword" component={ForgotPassword} />

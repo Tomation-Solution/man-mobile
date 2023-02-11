@@ -1,5 +1,4 @@
 
-import { StyleSheet, Text, TouchableOpacity, View, Modal } from "react-native";
 import React, { useState } from "react";
 
 import {
@@ -10,7 +9,6 @@ import {
   Modal,
   Dimensions,
 } from "react-native";
-import React from "react";
 
 
 

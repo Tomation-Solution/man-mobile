@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { ProfileViewCard, HomeHeader, Container } from '../../components';
 import { images } from "../../assets/dummyData";
@@ -128,7 +128,6 @@ const ProfileDetails = ({ navigation, route }: ProfileDetailsProps) => {
             title: " Election",
             name: 'mr Kunle',
             images: [images.meeting_1, images.meeting_2, images.meeting_3],
-
             description:
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, autem quaerat culpa numquam sapiente officia saepe possimus corrupti voluptatem facilis perferendis ut maiores, itaque dignissimos veritatis vel delectus obcaecati nesciunt ipsam hic fugit, expedita blanditiis. Sapiente voluptas deleniti repellendus natus quidem tenetur sed reiciendis! Odit, molestiae repellendus et ipsam eos quis iusto asperiores eius eum facilis optio culpa. Laudantium sequi ullam dignissimos enim eius mollitia vel autem esse expli",
         },
@@ -138,9 +137,9 @@ const ProfileDetails = ({ navigation, route }: ProfileDetailsProps) => {
     return (
         <Container>
             <HomeHeader navigation={navigation} title={"Election"} />
-            <ScrollView>
-                {/* <Text>ProfileDetails</Text> */}
+            <Text style={styles.electionTitle}> mr kunle an Aspirant for the position of  President .Man</Text>
 
+            <ScrollView>
                 {data.map((profile) => (
                     <ProfileViewCard
                         key={profile.id}
@@ -151,6 +150,14 @@ const ProfileDetails = ({ navigation, route }: ProfileDetailsProps) => {
         </Container>
     )
 }
+const styles = StyleSheet.create({
+    electionTitle: {
+        textAlign: 'center',
+        fontSize: 14,
+        fontWeight: '400',
+        lineHeight: 18,
+    },
+})
 
 export default ProfileDetails
 

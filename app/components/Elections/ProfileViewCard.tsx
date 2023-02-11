@@ -12,32 +12,35 @@ const { width } = Dimensions.get("window");
 
 const ProfileViewCard = ({ item, onPress }: profileCardProps) => {
     return (
+        <TouchableOpacity activeOpacity={0.5} onPress={onPress} >
 
-        <View style={styles.newsCabinet}>
-            <View style={styles.newsImageActionContainer}>
-                <View style={styles.newsImageContainer}>
-                    <Image
-                        source={item.images[1]}
-                        resizeMode="cover"
-                        style={{ width: "100%", height: 200 }}
-                    />
+            <View style={styles.newsCabinet}>
+
+                <View style={styles.newsImageActionContainer}>
+                    <View style={styles.newsImageContainer}>
+                        <Image
+                            source={item.images[1]}
+                            resizeMode="cover"
+                            style={{ width: "100%", height: 200 }}
+                        />
+                    </View>
+
+
                 </View>
 
+                <View style={{ padding: 10 }}>
 
+                    <Text style={{ textAlign: "justify", color: COLORS.primary }}>
+                        {item?.description.substring(0, 150)} ...
+                        <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+                            <Text style={{ color: COLORS.primary, fontWeight: "700", textAlign: 'center' }}>
+                                Continue
+                            </Text>
+                        </TouchableOpacity>
+                    </Text>
+                </View>
             </View>
-
-            <View style={{ padding: 10 }}>
-
-                <Text style={{ textAlign: "justify", color: COLORS.primary }}>
-                    {item?.description.substring(0, 150)} ...
-                    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-                        <Text style={{ color: COLORS.primary, fontWeight: "700", textAlign: 'center' }}>
-                            Continue
-                        </Text>
-                    </TouchableOpacity>
-                </Text>
-            </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 

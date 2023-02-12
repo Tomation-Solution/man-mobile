@@ -34,12 +34,13 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
 
 
 
-<View>
+<View style={{display:'flex',flexDirection:'row'}}>
 <Text
         style={{
           marginVertical: 15,
           textAlign: "center",
-          fontSize: 16,
+          fontSize: 17,
+          fontWeight:'900'
         }}
       >
         Note:
@@ -56,7 +57,8 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
 </View>
 
 
-      <TouchableOpacity
+<View style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
+<TouchableOpacity
       onPress={onPress}
         style={{
           backgroundColor: COLORS.primary,
@@ -104,6 +106,7 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
         No
         </Text>
       </TouchableOpacity>
+</View>
     </View>
   );
 };

@@ -1,16 +1,18 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import {useState} from "react";
 import Container from "../Container";
 import { horizontalScale, verticalScale } from "../../constants/metric";
+import * as Progress from 'react-native-progress';
 
 interface ElectionsCardProps {
   id: number;
   position: string;
   onPress: () => void;
-  navigation:any
 }
 
-const ElectionCard = ({ id, position, onPress,navigation }: ElectionsCardProps) => {
+const ElectionCard = ({ id, position, onPress, }: ElectionsCardProps) => {
+    const [progress, setProgress] = useState(1);
+
   return (
     <View style={styles.containerflex}>
       <View style={styles.contianer}>
@@ -39,12 +41,20 @@ const ElectionCard = ({ id, position, onPress,navigation }: ElectionsCardProps) 
         </View>
 
         <View style={styles.rowSection}>
-          <TouchableOpacity   onPress={() => navigation.navigate('Votingstat')} style={styles.votingbtn}>
-            <Text style={styles.btnText}> See Voting Stat</Text>
+
+                                       <Progress.Bar
+                                        width={100}
+                                        height={12}
+                                        progress={progress}
+                                        color={'#5cb85c'}
+                                        borderRadius={5}
+                                        borderColor={'#0a0c0a'}
+                                    />
+
+          <TouchableOpacity   onPress={onPress}style={styles.votingbtn}>
+            <Text style={styles.btnText}> See more</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={onPress} style={styles.asipirantbtn}>
-            <Text style={[styles.btnText, styles.color]}> See Asipirants</Text>
-          </TouchableOpacity>
+        
         </View>
       </View>
     </View>
@@ -68,10 +78,10 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-around'
   },
   rowSection: {
-    alignSelf: "flex-end",
-
+    
     flexDirection: "row",
     alignItems: "center",
+    justifyContent:'space-around'
   },
   asipirantbtn: {
     backgroundColor: "#2b3513",

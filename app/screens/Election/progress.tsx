@@ -14,7 +14,7 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
     const profile = route.params.profile;
     // const [votesReceived, setVotesReceived] = useState(0);
     // const [totalVotes, setTotalVotes] = useState(0);
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(30);
 
     // useEffect(() => {
     // setProgress((votesReceived / totalVotes) * 100);

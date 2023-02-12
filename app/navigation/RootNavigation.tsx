@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 
 import { useReducer, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import DrawerNav from "./DrawerNav";
+import DrawerNav from "./walletNavigation";
 
 const RootNavigation = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

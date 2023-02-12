@@ -19,3 +19,6 @@ export { default as EventsCard } from "./Notification/EventsCard";
 export { default as MessaginCard } from "./Notification/MessagingCard";
 export { default as NotificationModal } from "./Notification/NotificationModal";
 export { default as ElectionsCard } from "./Elections/ElectionCard";
+export {default as ProfileViewCard} from  './Elections/ProfileViewCard'
+export {default as VotingStatCard} from  './Elections/VotingStateCard'
+

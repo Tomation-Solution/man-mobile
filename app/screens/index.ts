@@ -8,6 +8,8 @@ export { default as Events } from "./Events/Events";
 export {default as Registration} from './Account/Registration/registration'
 export {default as Election} from './Election/Election'
 export {default as AdminSupport} from './Support/AdminSupport/Home'
+export {default as TechnicalSupport} from './Support/TechnicalSupport/Home'
+
 
 
 

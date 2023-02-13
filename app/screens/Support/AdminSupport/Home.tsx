@@ -3,13 +3,16 @@ import { View, Text, TouchableOpacity, StyleSheet,TextInput } from 'react-native
 import { Feather } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Container,Formbtn ,HomeHeader} from '../../../components';
+import { Container,Formbtn ,HomeHeader,Dropdown} from '../../../components';
 
 const AdminSupport = ({navigation}:any) => {
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
 
   return (
     <Container>
+
+
+
       <HomeHeader
       navigation={navigation}
       back={navigation.goBack}
@@ -20,6 +23,7 @@ const AdminSupport = ({navigation}:any) => {
       <TouchableOpacity  style={styles.messagebtn}  onPress={() => setDropdownVisibility(!isDropdownVisible)}>
         <Feather name="message-square" size={30} color="#fff" />
       </TouchableOpacity>
+
       {isDropdownVisible && (
         <Formik
           initialValues={{ email: '', message: '' }}
@@ -37,6 +41,8 @@ const AdminSupport = ({navigation}:any) => {
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <View style={styles.dropdownContainer}>
               {/* <Text style={styles.label}>Email:</Text> */}
+              <Dropdown
+              />
               <TextInput
                 style={styles.input}
                 onChangeText={handleChange('email')}
@@ -85,8 +91,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E8F6F8',
     paddingHorizontal: 9,
-    paddingVertical: 15,
-    marginVertical: 30,
+    paddingVertical: 13,
+    marginVertical: 21,
     backgroundColor:'#E8F6F8',
     borderRadius:9
   },

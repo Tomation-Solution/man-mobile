@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, StyleSheet,TextInput } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Picker from '@react-native-picker/picker';
+import { Container,Formbtn ,HomeHeader,Dropdown} from '../../../components';
 
-const TechnicalSupport = () => {
+const AdminSupport = ({navigation}:any) => {
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
-  const [selectedValue, setSelectedValue] = useState('Email');
-
-  const data = [
-    { label: 'Email', value: 'Email' },
-    { label: 'Message', value: 'Message' },
-  ];
 
   return (
+    <Container>
+
+
+
+      <HomeHeader
+      navigation={navigation}
+      back={navigation.goBack}
+      title='Technical Support'
+      />
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setDropdownVisibility(!isDropdownVisible)}>
-        <Ionicons name="ios-mail" size={24} color="#000" />
+      <Text style={{ fontSize:13,lineHeight:18,textAlign:'center', fontWeight:'400', }}>  We are to help Please let us know {'\n'} your challenge</Text>
+      <TouchableOpacity  style={styles.messagebtn}  onPress={() => setDropdownVisibility(!isDropdownVisible)}>
+        <Feather name="message-square" size={30} color="#fff" />
       </TouchableOpacity>
+
       {isDropdownVisible && (
         <Formik
           initialValues={{ email: '', message: '' }}
@@ -35,91 +40,66 @@ const TechnicalSupport = () => {
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <View style={styles.dropdownContainer}>
-              <TouchableOpacity onPress={() => setDropdownVisibility(false)}>
-                {/* <Picker
-                  selectedValue={selectedValue}
-                  style={styles.picker}
-                  onValueChange={(value) => setSelectedValue(value)}
-                >
-                  {data.map((item) => (
-                    <Picker.Item label={item.label} value={item.value} key={item.value} />
-                  ))}
-                </Picker> */}
-              </TouchableOpacity>
-              {(values.email !== '' || values.message !== '') && (
-                <View>
-                  <Text style={styles.label}>Email:</Text>
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    value={values.email}
-                  />
-                  {errors.email && touched.email ? <Text>{errors.email}</Text> : null}
-                  <Text style={styles.label}>Message:</Text>
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={handleChange('message')}
-                    onBlur={handleBlur('message')}
-                    value={values.message}
-                    multiline={true}
-                    numberOfLines={4}
-                  />
-                  {errors.message && touched.message ? <Text>{errors.message}</Text> : null}
-<TouchableOpacity style={styles.button} >
-  <Text style={styles.buttonText}>Submit</Text>
-</TouchableOpacity>
-</View>
-)}
-</View>
-)}
-</Formik>
-)}
-</View>
-);
-};
+              {/* <Text style={styles.label}>Email:</Text> */}
 
-export default  TechnicalSupport
+              <TextInput
+                style={styles.input}
+                onChangeText={handleChange('message')}
+                onBlur={handleBlur('message')}
+                value={values.message}
+                multiline={true}
+                numberOfLines={7}
+                placeholder='Enter your message '
+              />
+              {errors.message && touched.message ? <Text style={styles.error}>{errors.message}</Text> : null}
+                                                            <Formbtn  title='Get Support'/>
+            </View>
+          )}
+        </Formik>
+      )}
+    </View>
+    </Container>
+
+  );
+};
+export default AdminSupport;
 
 
 const styles = StyleSheet.create({
-container: {
-alignItems: 'center',
-justifyContent: 'center',
-},
-dropdownContainer: {
-position: 'absolute',
-top: 40,
-left: 20,
-right: 20,
-backgroundColor: '#fff',
-borderWidth: 1,
-borderColor: '#ccc',
-padding: 10,
-},
-picker: {
-height: 50,
-},
-label: {
-marginTop: 10,
-fontWeight: 'bold',
-},
-input: {
-height: 40,
-borderColor: 'gray',
-borderWidth: 1,
-marginTop: 5,
-padding: 5,
-},
-button: {
-backgroundColor: 'blue',
-padding: 10,
-marginTop: 10,
-alignItems: 'center',
-},
-buttonText: {
-color: '#fff',
-fontWeight: 'bold',
-},
-});
+  container: {
+    display:'flex',
+  },
+  dropdownContainer: {
+    marginVertical:15,
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  label: {
+    fontWeight: 'bold',
+    marginTop: 16,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#E8F6F8',
+    paddingHorizontal: 9,
+    paddingVertical: 13,
+    marginVertical: 21,
+    backgroundColor:'#E8F6F8',
+    borderRadius:9
+  },
+  error:{
+    color:'red'
+  },
+  messagebtn:{
+ backgroundColor:'#2B3513',
+ borderRadius:100,
+ width:70,
+ height:70,
+  alignItems: 'center',
+  justifyContent:'center',
+  position:'absolute',
+  top:450,
+  marginHorizontal:250
+  },
 
+})

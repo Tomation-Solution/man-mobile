@@ -22,4 +22,6 @@ export { default as NotificationModal } from "./Notification/NotificationModal";
 export { default as ElectionsCard } from "./Elections/ElectionCard";
 export {default as ProfileViewCard} from  './Elections/ProfileViewCard'
 export {default as VotingStatCard} from  './Elections/VotingStateCard'
+export {default as Dropdown} from  './dropdown/dropdown'
+
 

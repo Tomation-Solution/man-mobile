@@ -1,16 +1,14 @@
-import { Text, View,TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import { COLORS } from "../../../constants/color";
 import { Globalstyles } from "../../../globals/styles";
 import { Formbtn } from "../../../components";
 
-
-
-interface RescheduleProps {
+interface LockedProps {
   onPress: any;
 }
 
-const Reschedule = ({ onPress }: RescheduleProps) => {
+const Locked = ({ onPress }: LockedProps) => {
   return (
     <View style={Globalstyles.modalContainer}>
       <Text
@@ -28,11 +26,11 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
           fontSize: 16,
         }}
       >
-        Pay outstanding fee to gain access to  account
+        Pay outstanding fee to gain access to account
       </Text>
 
       <TouchableOpacity
-      onPress={onPress}
+        onPress={onPress}
         style={{
           backgroundColor: COLORS.primary,
           padding: 10,
@@ -41,9 +39,7 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
           alignItems: "center",
         }}
       >
-
         <Text
-
           style={{
             color: "white",
             fontWeight: "500",
@@ -52,11 +48,11 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
             textAlign: "center",
           }}
         >
-        pay
+          pay
         </Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default Reschedule;
+export default Locked;

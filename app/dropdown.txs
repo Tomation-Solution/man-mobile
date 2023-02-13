@@ -1,0 +1,46 @@
+import React, { useCallback} from 'react';
+import SelectDropdown from 'react-native-select-dropdown';
+import { FontAwesome } from './icons';
+
+export default function Dropdown({
+    data,
+    defaultButtonText,
+    buttonStyle,
+    buttonTextStyle,
+    setSelectedItem,
+    dropdownIconPosition = "left",
+    dropdownIconColor = "rgba(30, 30, 30, 0.41)",
+    dropdownIconSize = 25,
+    defaultValue,
+}) {
+  const onSelect = useCallback(
+    (item, i) => setSelectedItem(item),
+    [setSelectedItem]
+  ); 
+  return (
+    <SelectDropdown 
+       data={data}
+       onSelect={onSelect}
+       defaultButtonText={defaultButtonText}
+       buttonStyle={{
+        backgroundColor: "#FDFDFD",
+        borderColor: "#000000",
+        borderWidth: 1,
+        width: 250,
+        height: 47,
+        borderRadius: 10,
+        marginTop: 10,
+        ...buttonStyle,
+       }}
+       defaultValue={defaultValue}
+       renderDropdownIcon={() => (
+          <FontAwesome 
+            name={"caret-down"}
+            size={dropdownIconSize}
+            color={dropdownIconColor}
+          />
+       )}
+       dropdownIconPosition={dropdownIconPosition}
+    />
+  );
+}

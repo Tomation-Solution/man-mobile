@@ -13,6 +13,7 @@ import {
   Resources,
   Services,
   Support,
+  AdminSupport
 } from "../screens";
 import Meetings from "../screens/Meetings/Meetings";
 import Profile from "../screens/Profile/Profile";
@@ -26,7 +27,9 @@ const DrawerNav = () => {
   return (
     <>
       <Drawer.Navigator
+
         initialRouteName="Home"
+
         screenOptions={{
           headerShown: false,
           drawerStyle: {
@@ -43,13 +46,18 @@ const DrawerNav = () => {
         <Drawer.Screen name="Election" component={Election} />
         <Drawer.Screen name="Resources" component={Resources} />
         <Drawer.Screen name="Support" component={Support} />
+        <Drawer.Screen name="Admin Support" component={AdminSupport} />
+
+
         {/* soupport screens  */}
+
         <Drawer.Screen name="Gallery" component={Gallery} />
         <Drawer.Screen name="Profile" component={Profile} />
         <Drawer.Screen name="Services" component={Services} />
         <Drawer.Screen name="Meetings" component={Meetings} />
         <Drawer.Screen name="Publications" component={Publications} />
         <Drawer.Screen name="Notification" component={Notification} />
+
       </Drawer.Navigator>
     </>
   );

@@ -123,7 +123,7 @@ const DrawerContent = ({ navigation, state, index }: any) => {
           },
           {
             id: 2,
-            title: "Admin Suport",
+            title: "Admin Support",
             icon: <Ionicons name="people" size={20} color={COLORS.primary} />,
           },
           {

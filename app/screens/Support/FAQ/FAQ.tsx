@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Formik, Field } from 'formik'
-import { COLORS } from "../../constants/color";
+import { COLORS } from "../../../constants/color";
 
 
 interface FAQProps {
     question: any;
     answer: any;
+    navigation:any;
 }
 
 
-const FAQ = ({ question, answer }: FAQProps) => {
+const FAQ = ({ question, answer,navigation }: FAQProps) => {
     const [expanded, setExpanded] = useState(false);
 
     return (
-
-
         <View style={styles.container}>
-
             <TouchableOpacity onPress={() => setExpanded(!expanded)} style={styles.questionContainer}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderBottomWidth: StyleSheet.hairlineWidth, }}>
                     <Text style={[styles.question, expanded && styles.activeQuestion]}>{question}</Text>
@@ -34,7 +32,6 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         display: 'flex',
         alignItems: 'center',
-
     },
     questionContainer: {
         flexDirection: 'row',

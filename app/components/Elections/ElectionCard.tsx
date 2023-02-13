@@ -39,7 +39,7 @@ const ElectionCard = ({ id, position, onPress,navigation }: ElectionsCardProps) 
         </View>
 
         <View style={styles.rowSection}>
-          <TouchableOpacity   onPress={() => navigation.navigate('Votingstat')} style={styles.votingbtn}>
+          <TouchableOpacity   onPress={() => navigation.navigate('VoteStat')} style={styles.votingbtn}>
             <Text style={styles.btnText}> See Voting Stat</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={onPress} style={styles.asipirantbtn}>

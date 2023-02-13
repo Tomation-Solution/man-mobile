@@ -1,16 +1,10 @@
 import React from 'react';
-import FAQ from './ FAQ';
+import FAQ from './FAQ';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput } from 'react-native';
-import { Container, HomeHeader, FormInput, Formbtn } from '../../components';
+import { Container, HomeHeader, FormInput, Formbtn } from '../../../components';
 import { Formik, Field } from 'formik'
 import ContactForm from './ContactForm';
 
-// import { NavigationStackProp } from '@react-navigation/native';
-
-
-// type Props = {
-//     navigation: NavigationStackProp<any>;
-// };
 
 
 const FAQList = ({ navigation }: any) => {
@@ -43,7 +37,7 @@ const FAQList = ({ navigation }: any) => {
 
     return (
         <ScrollView>
-            <Container>
+            {/* <Container> */}
                 <HomeHeader
                     title=' Frequently asked question '
                     navigation={navigation}
@@ -56,7 +50,7 @@ const FAQList = ({ navigation }: any) => {
                 <View style={{ flex: 0.4 }} >
                     <ContactForm />
                 </View>
-            </Container>
+            {/* </Container> */}
         </ScrollView>
     );
 };

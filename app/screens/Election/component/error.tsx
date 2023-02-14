@@ -6,11 +6,11 @@ import { Formbtn } from "../../../components";
 
 
 
-interface RescheduleProps {
+interface ErrorProps {
   onPress: any;
 }
 
-const Reschedule = ({ onPress }: RescheduleProps) => {
+const Error = ({ onPress }: ErrorProps) => {
   return (
     <View style={Globalstyles.modalContainer}>
       <Text
@@ -60,4 +60,4 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
   );
 };
 
-export default Reschedule;
+export default Error;

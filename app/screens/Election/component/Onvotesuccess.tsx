@@ -6,11 +6,11 @@ import { Formbtn } from "../../../components";
 
 
 
-interface RescheduleProps {
+interface OnVoteSucessProps {
   onPress: any;
 }
 
-const Reschedule = ({ onPress }: RescheduleProps) => {
+const OnVoteSucess = ({ onPress }: OnVoteSucessProps) => {
   return (
     <View style={Globalstyles.modalContainer}>
       <Text
@@ -61,4 +61,4 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
   );
 };
 
-export default Reschedule;
+export default OnVoteSucess;

@@ -5,11 +5,11 @@ import { Globalstyles } from "../../../globals/styles";
 import { FormInput } from "../../../components";
 import { Formik, Field } from 'formik'
 
-interface RescheduleProps {
+interface LockedWithInput {
   onPress: any;
 }
 
-const Reschedule = ({ onPress }: RescheduleProps) => {
+const LockedWithInput = ({ onPress }: LockedWithInput) => {
 
   return (
     <>
@@ -69,4 +69,4 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
   );
 };
 
-export default Reschedule;
+export default LockedWithInput;

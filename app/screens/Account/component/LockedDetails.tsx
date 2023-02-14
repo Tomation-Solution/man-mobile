@@ -4,11 +4,11 @@ import { COLORS } from "../../../constants/color";
 import { Globalstyles } from "../../../globals/styles";
 
 
-interface RescheduleProps {
+interface LockedDetailsProps {
   onPress: any;
 }
 
-const Reschedule = ({ onPress }: RescheduleProps) => {
+const LockedDetails = ({ onPress }: LockedDetailsProps) => {
   return (
     <>
     <View style={Globalstyles.modalContainer}>
@@ -55,4 +55,4 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
   );
 };
 
-export default Reschedule;
+export default LockedDetails;

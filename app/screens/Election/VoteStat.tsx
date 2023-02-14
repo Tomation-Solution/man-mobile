@@ -7,7 +7,7 @@ import { images } from "../../assets/dummyData";
 
 
 
-const Election = ({ navigation }: any) => {
+const  = ({ navigation }: any) => {
 
 
 

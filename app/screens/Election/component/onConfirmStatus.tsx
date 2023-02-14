@@ -7,11 +7,11 @@ import {Feather} from '@expo/vector-icons'
 
 
 
-interface RescheduleProps {
+interface OnConfirmStatusProps {
   onPress: any;
 }
 
-const Reschedule = ({ onPress }: RescheduleProps) => {
+const OnConfirmStatus = ({ onPress }: OnConfirmStatusProps) => {
   return (
     <View style={Globalstyles.modalContainer}>
 <View>
@@ -90,4 +90,4 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
   );
 };
 
-export default Reschedule;
+export default OnConfirmStatus;

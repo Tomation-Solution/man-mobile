@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { AccountHeader, FormContainer, FormInput, Formbtn, KeyboardAvoidingViewWrapper, CustomModal } from '../../../components';
-import Locked from '../component/LockedWithPay'
+import Locked from '../component/LockedDetails'
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 

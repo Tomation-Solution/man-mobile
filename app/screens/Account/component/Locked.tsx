@@ -6,11 +6,11 @@ import { Formbtn } from "../../../components";
 
 
 
-interface RescheduleProps {
+interface LockedProps {
   onPress: any;
 }
 
-const Reschedule = ({ onPress }: RescheduleProps) => {
+const LockedAlet = ({ onPress }: LockedProps) => {
   return (
     <View style={Globalstyles.modalContainer}>
       <Text
@@ -59,4 +59,4 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
   );
 };
 
-export default Reschedule;
+export default LockedAlet;

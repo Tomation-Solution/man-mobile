@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'reac
 import { AccountHeader, FormContainer, FormInput, Formbtn, KeyboardAvoidingViewWrapper, CustomModal } from '../../../components';
 import Locked from '../component/LockedDetails'
 import { Formik, Field } from 'formik'
-import * as yup from 'yup'
+import { signUpValidationSchema } from '../../../utils/validation';
 
 const Registration = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(true);
@@ -31,6 +31,7 @@ const Registration = ({ navigation }: any) => {
         <FormContainer>
           <View style={[styles.card, styles.shawdowProp]}>
             <Formik
+            validationSchema={signUpValidationSchema}
               initialValues={{
                 fulname: '',
                 email: '',
@@ -40,9 +41,6 @@ const Registration = ({ navigation }: any) => {
                 department: '',
                 graduationyear: '',
                 chapter: ''
-
-
-
               }}
               onSubmit={values => console.log(values)}>
 

@@ -3,8 +3,7 @@ import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'reac
 import { Container, AccountHeader, Formbtn, KeyboardAvoidingViewWrapper, FormContainer, FormInput, CustomModal } from '../../../components';
 import { Formik, Field } from 'formik'
 import Locked from '../component/LockedWithInput'
-import * as yup from 'yup'
-
+import { loginValidationSchema } from '../../../utils/validation';
 
 const LoginForm = ({ navigation }: any) => {
 
@@ -43,13 +42,14 @@ const LoginForm = ({ navigation }: any) => {
 
             <View style={[styles.card, styles.shawdowProp]}>
               <Formik
+              validationSchema={loginValidationSchema}
                 initialValues={{
                   email: '',
                   password: '',
                 }}
                 onSubmit={values => console.log(values)}>
 
-                {({ handleSubmit, isValid }) => (
+                {({ handleSubmit, isValid}) => (
                   <>
 
                     <Field component={FormInput} name="email" placeholder="email" />

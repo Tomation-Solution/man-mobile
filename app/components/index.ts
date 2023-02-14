@@ -12,7 +12,6 @@ export { default as ComfirmationInput } from "./form/ComfirmationInput";
 export { default as OnSuccess } from "./FormOnSuccess/OnSuccessCard";
 export { default as Formbtn } from "./form/FormBtn";
 export { default as KeyboardAvoidingViewWrapper } from "./form/KeyboardAvoidngwrapper";
-export { default as FormContainer } from "../screens/Account/FormContainer";
 export { default as ConfirmationInput } from "./form/ComfirmationInput";
 export { default as FormInput } from "./Input/FormInput";
 export { default as CustomModal } from "./CustomModal";

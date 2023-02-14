@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Events from './Tabs/Events'
 import Messaging from './Tabs/Messaging'
 import { COLORS } from "../../constants/color";
-import { Container, NotificationHeader } from '../../components';
+import { Container, NotificationHeader,CustomModal,NotificationModal } from '../../components';
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 
@@ -15,11 +15,20 @@ const Top = createMaterialTopTabNavigator();
 
 
 const NotificationScreen = ({ navigation }: NotificationProps) => {
+    const [modalVisible, setModalVisible] = useState(true);
+    const onModalPress = () => { setModalVisible(!modalVisible); };
 
 
     return (
         <>
             <Container>
+
+<CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
+    <NotificationModal onPress={onModalPress} />
+</CustomModal>
+
+
+
                 <NotificationHeader
                     title=' Notification'
                     back={navigation.goBack}

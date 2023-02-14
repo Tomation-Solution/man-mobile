@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Container, HomeHeader, ElectionsCard } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 
-const Election = ({ navigation }: any) => {
+const ElectionHome = ({ navigation }: any) => {
   const data = [
     {
       id: 1,
@@ -104,6 +104,6 @@ const Election = ({ navigation }: any) => {
   );
 };
 
-export default Election;
+export default ElectionHome;
 
 const styles = StyleSheet.create({});

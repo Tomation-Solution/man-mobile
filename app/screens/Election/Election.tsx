@@ -11,7 +11,7 @@ import VoteStat from "./VoteStat";
 
 const Stack = createNativeStackNavigator();
 
-const News = ({ navigation }: any) => {
+const Election = ({ navigation }: any) => {
   return (
       <Stack.Navigator
         screenOptions={{
@@ -35,6 +35,6 @@ const News = ({ navigation }: any) => {
   );
 };
 
-export default News;
+export default Election;
 
 const styles = StyleSheet.create({});

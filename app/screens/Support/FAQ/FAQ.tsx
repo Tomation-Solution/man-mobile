@@ -7,11 +7,10 @@ import { COLORS } from "../../../constants/color";
 interface FAQProps {
     question: any;
     answer: any;
-    navigation:any;
 }
 
 
-const FAQ = ({ question, answer,navigation }: FAQProps) => {
+const FAQ = ({ question, answer, }: FAQProps) => {
     const [expanded, setExpanded] = useState(false);
 
     return (

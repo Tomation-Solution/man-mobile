@@ -89,9 +89,10 @@ const styles = StyleSheet.create({
 
   },
   btn: {
-    marginTop: 28,
-    width: 267,
-    marginLeft: 4
+    marginVertical: 30,
+    width: '100%',
+  alignContent:'center',
+justifyContent:'center'
   },
   forgotPassword: {
     color: 'rgba(0,0,34,0.6)'

@@ -122,14 +122,16 @@ const styles = StyleSheet.create({
 
   },
   btn: {
-    marginTop: 28,
-    width: 274,
-    marginLeft: 6
+    marginVertical: 30,
+    width: '100%',
+  alignContent:'center',
+justifyContent:'center'
   },
   forgotPassword: {
     color: 'rgba(0,0,34,0.6)',
-    paddingVertical: 15,
+    paddingVertical: 5,
     fontWeight: '300',
+    textAlign:'right'
 
   },
   register: {

@@ -9,7 +9,7 @@ export { default as GalleryCard } from "./Gallery/GalleryCard";
 export { default as NewsCard } from "./News/NewsCard";
 
 export { default as ComfirmationInput } from "./form/ComfirmationInput";
-export { default as OnSuccess } from "./OnSuccess/OnSuccess";
+export { default as OnSuccess } from "./FormOnSuccess/OnSuccessCard";
 export { default as Formbtn } from "./form/FormBtn";
 export { default as KeyboardAvoidingViewWrapper } from "./form/KeyboardAvoidngwrapper";
 export { default as FormContainer } from "../screens/Account/FormContainer";
@@ -22,6 +22,6 @@ export { default as NotificationModal } from "./Notification/NotificationModal";
 export { default as ElectionsCard } from "./Elections/ElectionCard";
 export {default as ProfileViewCard} from  './Elections/ProfileViewCard'
 export {default as VotingStatCard} from  './Elections/VotingStateCard'
-export {default as Dropdown} from  './dropdown/dropdown'
+export {default as Dropdown} from  './Dropdown/dropdown'
 
 

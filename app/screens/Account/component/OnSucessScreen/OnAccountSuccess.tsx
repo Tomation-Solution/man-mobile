@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
-import { OnSuccess, Container, Formbtn, } from '../../../components'
+import { OnSuccess, Container, Formbtn, } from '../../../../components'
 
 const OnAccountSuccess = ({ navigation }: any) => {
 

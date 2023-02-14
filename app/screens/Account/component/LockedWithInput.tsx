@@ -5,11 +5,11 @@ import { Globalstyles } from "../../../globals/styles";
 import { FormInput } from "../../../components";
 import { Formik, Field } from 'formik'
 
-interface LockedWithInput {
+interface LockedWithInputProps {
   onPress: any;
 }
 
-const LockedWithInput = ({ onPress }: LockedWithInput) => {
+const LockedWithInput = ({ onPress }: LockedWithInputProps) => {
 
   return (
     <>

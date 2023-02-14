@@ -1,19 +1,19 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
-import { OnSuccess, Container, Formbtn } from '../../../components'
+import { OnSuccess, Container, Formbtn } from '../../../../components'
 import { TouchableOpacity } from 'react-native';
-import { images } from './../../../assets/dummyData/index';
 
 const OnSuccessScreen = ({ navigation }: any) => {
   return (
     <Container>
       <View style={styles.container}>
         <OnSuccess
-          images={{ uri: 'https://i.ibb.co/qsPy90K/Acct-Success.png' }}
-          text={`Account successfully created`}
+          images={{ uri: 'https://i.ibb.co/NsCffmB/checker.png' }}
+          text={`Password successfully changed`}
           title='Continue'
-          onPress={() => navigation.navigate('PasswordChanged')}
+          onPress={() => navigation.navigate('Login')}
           imageStyles={[styles.image]}
+
         />
 
         {/* <TouchableOpacity>
@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center'
   },
-  image: {
-    width: 300,
-    height: 200
-  }
 
+  image: {
+    width: 320,
+    height: 300
+  }
 })
 
 

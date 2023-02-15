@@ -7,7 +7,7 @@ import { images } from "../../assets/dummyData";
 
 
 
-const Election = ({ navigation }: any) => {
+const VoteStat  = ({ navigation }: any) => {
 
 
 
@@ -153,6 +153,6 @@ const Election = ({ navigation }: any) => {
   );
 };
 
-export default Election;
+export default VoteStat;
 
 const styles = StyleSheet.create({});

@@ -26,7 +26,8 @@ const VerifyUser = ({ navigation }: any) => {
 
             <ComfirmationInput />
 
-            <Formbtn title='Continue' onPress={() => navigation.navigate('ChangePassword')} />
+            <Formbtn  style={[styles.btn]}
+              title='Continue' onPress={() => navigation.navigate('ChangePassword')} />
           </View>
         </View>
       </Container>
@@ -70,9 +71,13 @@ const styles = StyleSheet.create({
     color: 'rgba(0,0,34,0.41)',
 
   },
-  add: {
-    marginTop: 12
+  btn: {
+    marginVertical: 30,
+    width: '100%',
+  alignContent:'center',
+   justifyContent:'center'
   },
+
   forgotPassword: {
     color: 'rgba(0,0,34,0.6)'
   },

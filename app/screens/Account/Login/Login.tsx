@@ -1,5 +1,16 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+=======
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+>>>>>>> AllSupport
 import {
   AccountHeader,
   Formbtn,
@@ -10,12 +21,22 @@ import {
 } from "../../../components";
 import { Formik, Field } from "formik";
 import Locked from "../components/LockedWithPayment";
+<<<<<<< HEAD
 import { login } from "../../../store/slices/auth/loginSlice";
 import { useAppDispatch } from "../../../store/hooks";
 
 const LoginForm = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useAppDispatch();
+=======
+import { loginValidationSchema } from '../../../utils/validation';
+
+
+
+
+const LoginForm = ({ navigation }: any) => {
+  const [modalVisible, setModalVisible] = useState(false);
+>>>>>>> AllSupport
 
   const onModalPress = () => {
     setModalVisible(!modalVisible);
@@ -44,13 +65,18 @@ const LoginForm = ({ navigation }: any) => {
           <FormContainer>
             <View style={[styles.card, styles.shawdowProp]}>
               <Formik
+                validationSchema={loginValidationSchema}
                 initialValues={{
                   email: "",
                   password: "",
                 }}
+<<<<<<< HEAD
                 onSubmit={(values) => {
                   dispatch(login(values));
                 }}
+=======
+                onSubmit={(values) => console.log(values)}
+>>>>>>> AllSupport
               >
                 {({ handleSubmit, isValid }) => (
                   <>
@@ -68,7 +94,13 @@ const LoginForm = ({ navigation }: any) => {
 
                     <Formbtn
                       style={[styles.btn]}
+<<<<<<< HEAD
                       onPress={handleSubmit}
+=======
+                      onPress={() => {
+                        onModalPress();
+                      }}
+>>>>>>> AllSupport
                       title="Login"
                     />
                   </>

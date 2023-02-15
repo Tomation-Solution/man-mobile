@@ -1,17 +1,16 @@
-import { Text, View,TouchableOpacity } from "react-native";
+import { Text, View } from "react-native";
 import React from "react";
 import { COLORS } from "../../../constants/color";
 import { Globalstyles } from "../../../globals/styles";
-import { Formbtn } from "../../../components";
 
 
-
-interface RescheduleProps {
+interface LockedDetailsProps {
   onPress: any;
 }
 
-const Reschedule = ({ onPress }: RescheduleProps) => {
+const LockedDetails = ({ onPress }: LockedDetailsProps) => {
   return (
+    <>
     <View style={Globalstyles.modalContainer}>
       <Text
         style={{
@@ -19,21 +18,17 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
           fontWeight: "500",
         }}
       >
-        Error
+        Acount Locked!
       </Text>
-      <Text
-        style={{
-          marginVertical: 15,
-          textAlign: "center",
-          fontSize: 16,
-        }}
-      >
-        Sorry, kindly update your due
-        payment to be eligible to vote
-      </Text>
+<View style={{display:'flex', flexDirection:'column',justifyContent:'space-between'}}>
+<View style={{display:'flex', flexDirection:'row',justifyContent:'space-around'}}>
+  <Text  > TOTAL OUTSTANDING </Text>
+  <Text style={{fontWeight:'700',}}>  25,000,00 </Text>
+</View>
+<Text style={{ fontSize:12,fontWeight:'400',lineHeight:20}} > pay partial amount of Total outstanding</Text>
+</View>
 
-      <TouchableOpacity
-      onPress={onPress}
+      <View
         style={{
           backgroundColor: COLORS.primary,
           padding: 10,
@@ -42,9 +37,8 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
           alignItems: "center",
         }}
       >
-
         <Text
-
+          onPress={onPress}
           style={{
             color: "white",
             fontWeight: "500",
@@ -53,11 +47,12 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
             textAlign: "center",
           }}
         >
-        Proceed
+        pay
         </Text>
-      </TouchableOpacity>
+      </View>
     </View>
+    </>
   );
 };
 
-export default Reschedule;
+export default LockedDetails;

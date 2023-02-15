@@ -3,63 +3,36 @@ import React from "react";
 import { COLORS } from "../../../constants/color";
 import { Globalstyles } from "../../../globals/styles";
 import { Formbtn } from "../../../components";
-import {Feather} from '@expo/vector-icons'
 
 
 
-interface RescheduleProps {
+interface OnVoteSucessProps {
   onPress: any;
 }
 
-const Reschedule = ({ onPress }: RescheduleProps) => {
+const OnVoteSucess = ({ onPress }: OnVoteSucessProps) => {
   return (
     <View style={Globalstyles.modalContainer}>
-<View>
-<Text
+      <Text
         style={{
           fontSize: 20,
           fontWeight: "500",
         }}
       >
-     Confirm Status
+        Success
       </Text>
       <Text
-        style={{
-          fontSize: 20,fontWeight: "500", }}
-      >
-            (Voter Accreditation)
-
-      </Text>
-</View>
-
-
-
-<View>
-<Text
         style={{
           marginVertical: 15,
           textAlign: "center",
           fontSize: 16,
         }}
       >
-        Please confirm that you are a financial member by uploading
-        your latest due payment reciept to be eligble to vote
+        you have successfully voted
+        Mr. Kunle Kennny for the Position
+        of president of man
       </Text>
-       <Feather
-       style={{ justifyContent:'center',
-                  alignItems:'center',
-                  marginHorizontal:80,
-                  marginVertical: 15,
-                  borderStyle:'dashed',
-                  borderWidth:1,
-                  paddingHorizontal:32
 
-      }}
-        name="upload"
-         size={24}
-         color='black'
-         />
-</View>
       <TouchableOpacity
       onPress={onPress}
         style={{
@@ -81,13 +54,11 @@ const Reschedule = ({ onPress }: RescheduleProps) => {
             textAlign: "center",
           }}
         >
-        Upload
+        Continue Voting
         </Text>
       </TouchableOpacity>
-
-      <Text> Download Reciept</Text>
     </View>
   );
 };
 
-export default Reschedule;
+export default OnVoteSucess;

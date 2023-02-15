@@ -17,9 +17,13 @@ export { default as OnPasswordSuccess } from "./Account/OnSucessScreen/OnPasswor
 export { default as PaymentDetails } from "./PaymentDetails/PaymentDetails";
 export { default as CompletedPayment } from "./PaymentDetails/Tabs/CompletedPaymen";
 export { default as PendingPayment } from "./PaymentDetails/Tabs/PendingPayment";
-export { default as FagList } from "./FAQ/FAQList";
+
+export { default as FagList } from "./Support/FAQ/Home";
+
 export { default as Notification } from "./Notification/Notification";
 export { default as Election } from "./Election/Election";
 export { default as ElectionDetails } from "./Election/ElectionDetail";
 export { default as ProfileDetails } from "./Election/ProfileDetails";
 export { default as Votingstat } from "./Election/VoteStat";
+export { default as AdminSupport } from "./Support/AdminSupport/Home";
+export { default as TechnicalSupport } from "./Support/TechnicalSupport/Home";

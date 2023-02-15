@@ -17,7 +17,8 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        {isLoggedIn ? <DrawerNav /> : <Login />}
+        {/* {isLoggedIn ? <DrawerNav /> : <Login />} */}
+        <DrawerNav/>
       </View>
     </NavigationContainer>
   );

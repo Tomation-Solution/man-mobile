@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import {
   AccountHeader,
   Formbtn,
@@ -17,9 +10,12 @@ import {
 } from "../../../components";
 import { Formik, Field } from "formik";
 import Locked from "../components/LockedWithPayment";
+import { login } from "../../../store/slices/auth/loginSlice";
+import { useAppDispatch } from "../../../store/hooks";
 
 const LoginForm = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useAppDispatch();
 
   const onModalPress = () => {
     setModalVisible(!modalVisible);
@@ -52,7 +48,9 @@ const LoginForm = ({ navigation }: any) => {
                   email: "",
                   password: "",
                 }}
-                onSubmit={(values) => console.log(values)}
+                onSubmit={(values) => {
+                  dispatch(login(values));
+                }}
               >
                 {({ handleSubmit, isValid }) => (
                   <>
@@ -70,9 +68,7 @@ const LoginForm = ({ navigation }: any) => {
 
                     <Formbtn
                       style={[styles.btn]}
-                      onPress={() => {
-                        onModalPress();
-                      }}
+                      onPress={handleSubmit}
                       title="Login"
                     />
                   </>

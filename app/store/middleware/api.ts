@@ -29,7 +29,7 @@ const api =
         data,
         headers: {
           "content-type": "application/json",
-          Authorization: "Bearer " + extraheaders,
+          Authorization: extraheaders,
         },
       });
 

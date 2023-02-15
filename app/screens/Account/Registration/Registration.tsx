@@ -174,10 +174,12 @@ const styles = StyleSheet.create({
     color: "rgba(0,0,34,0.41)",
   },
   btn: {
-    marginTop: 20,
-    width: 274,
-    marginLeft: 6,
+    marginVertical: 15,
+    width: '100%',
+    alignContent: 'center',
+    justifyContent: 'center',
   },
+
   register: {
     paddingHorizontal: 30,
     marginTop: 10,
@@ -195,3 +197,4 @@ const styles = StyleSheet.create({
 });
 
 export default Registration;
+

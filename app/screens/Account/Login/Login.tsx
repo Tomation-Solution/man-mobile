@@ -135,9 +135,12 @@ const styles = StyleSheet.create({
     color: "rgba(0,0,34,0.41)",
   },
   btn: {
-    marginTop: 28,
-    width: 274,
-    marginLeft: 6,
+    btn: {
+      marginVertical: 30,
+      width: '100%',
+      alignContent: 'center',
+      justifyContent: 'center'
+    },
   },
   forgotPassword: {
     color: "rgba(0,0,34,0.6)",

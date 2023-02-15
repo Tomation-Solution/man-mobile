@@ -11,10 +11,10 @@ export { default as VerifyUser } from "./Account/OTP/VerifyUser";
 export { default as VerifyCode } from "./Account/OTP/VerifyCode";
 export { default as ForgotPassword } from "./Account/ForgotPassword/ForgotPassword";
 export { default as ChangePassword } from "./Account/ChangePassword/ChangePassword";
-export { default as OnAccountSuccess } from "./Account/OnSucessScreen/OnAccountSuccess";
-export { default as OnSuccessScreen } from "./Account/OnSucessScreen/onSucess";
-export { default as OnPasswordSuccess } from "./Account/OnSucessScreen/OnPasswordSuccess";
-export { default as PaymentDetails } from "./PaymentDetails/PaymentDetails";
+export { default as OnAccountSuccess } from "./Account/components/OnSucessScreen/OnAccountSuccess";
+export { default as OnSuccessScreen } from "./Account/components/OnSucessScreen/OnSucess";
+export { default as OnPasswordSuccess } from "./Account/components/OnSucessScreen/OnPasswordSuccess";
+export { default as PaymentDetails } from "./PaymentDetails/PaymenScreen";
 export { default as CompletedPayment } from "./PaymentDetails/Tabs/CompletedPaymen";
 export { default as PendingPayment } from "./PaymentDetails/Tabs/PendingPayment";
 

@@ -1,4 +1,4 @@
-import { signUpValidationSchema } from '../../../utils/validation';
+import { signUpValidationSchema } from "../../../utils/validation";
 import React, { useState } from "react";
 import {
   View,
@@ -177,9 +177,9 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginVertical: 15,
-    width: '100%',
-    alignContent: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    alignContent: "center",
+    justifyContent: "center",
   },
 
   register: {
@@ -199,4 +199,3 @@ const styles = StyleSheet.create({
 });
 
 export default Registration;
-

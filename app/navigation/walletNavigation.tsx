@@ -16,7 +16,7 @@ import {
   Election,
   ElectionDetails,
   ProfileDetails,
-  Votingstat
+  Votingstat,
 } from "../screens";
 
 const navigationScreenOptions = { headerShown: false };
@@ -33,19 +33,21 @@ const WalletNavigation = () => {
       {/* <WalletStack.Screen name="Notification" component={Notification} /> */}
       {/* <WalletStack.Screen name="FagList" component={FagList} /> */}
 
-    
       <WalletStack.Screen name="Registration" component={Registration} />
       <WalletStack.Screen name="Login" component={Login} />
       <WalletStack.Screen name="ForgotPassword" component={ForgotPassword} />
       <WalletStack.Screen name="ChangePassword" component={ChangePassword} />
       <WalletStack.Screen name="VerifyUser" component={VerifyUser} />
       <WalletStack.Screen name="VerifyCode" component={VerifyCode} />
-      <WalletStack.Screen name="OnAccountSuccess" component={OnAccountSuccess}/>
+      <WalletStack.Screen
+        name="OnAccountSuccess"
+        component={OnAccountSuccess}
+      />
       <WalletStack.Screen name="onSucess" component={OnSuccessScreen} />
       <WalletStack.Screen
         name="PasswordChanged"
         component={OnPasswordSuccess}
-      /> 
+      />
     </WalletStack.Navigator>
   );
 };

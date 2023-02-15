@@ -17,6 +17,10 @@ import {
 } from "../../../components";
 import { Formik, Field } from "formik";
 import Locked from "../components/LockedWithPayment";
+import { loginValidationSchema } from '../../../utils/validation';
+
+
+
 
 const LoginForm = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -48,6 +52,7 @@ const LoginForm = ({ navigation }: any) => {
           <FormContainer>
             <View style={[styles.card, styles.shawdowProp]}>
               <Formik
+                validationSchema={loginValidationSchema}
                 initialValues={{
                   email: "",
                   password: "",

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./reducer";
+import reducer from "./rootReducer";
 import logger from "./middleware/logger";
 import api from "./middleware/api";
 

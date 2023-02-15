@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { HomeHeader, NewsCard, SearchBar } from "../../components";
+import { HomeHeader, SearchBar } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 import { news } from "../../assets/dummyData/news";
+import NewsCard from "../../components/News/NewsCard";
 
 const Home = ({ navigation }: any) => {
   return (

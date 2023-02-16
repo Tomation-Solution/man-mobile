@@ -56,6 +56,9 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
         </View>
 
         <View style={styles.rowSection}>
+
+        <Text style={styles.voteProgress}> {`${(progress * 2).toFixed(0)}% of 100% (200 Votes)`} </Text>
+
           <TouchableOpacity
             // onPress={() => navigation.navigate('VoteStat')}
              style={styles.votingbtn}
@@ -63,7 +66,6 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
             <Text style={styles.voteText}>  Vote</Text>
           </TouchableOpacity>
 
-            <Text style={styles.voteProgress}> {`${(progress * 2).toFixed(0)}% of 100% (200 Votes)`} </Text>
         </View>
       </View>
 
@@ -73,7 +75,7 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
                         <View style={styles.electionrow}>
                             <View>
                                 <Text style={styles.Bio}> Bio</Text>
-                                <Text style={styles.biotext}> {profile.name} an Aspirant for the position of {profile.position}.Man
+                                <Text style={[styles.biotext,styles.color]}> {profile.name} an Aspirant for the position of {profile.position}.Man
                                 {profile.description}
                                  </Text>
                             </View>
@@ -82,9 +84,9 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
 
                     <View style={styles.detailssection}>
                         <Text style={styles.sectiontitle} > Manifesto</Text>
-                        <Text style>{profile.description} </Text>
+                        <Text style={styles.destailsText}>{profile.description} </Text>
                         <TouchableOpacity>
-                            <Text style={{ fontSize: 15, lineHeight: 18, color: '#2b3513', marginVertical: 5, fontWeight: '600', textAlign: 'left' }}> Download full Manifesto</Text>
+                            <Text style={{ fontSize: 14, lineHeight: 14, color: '#2b3513', marginVertical: 18, fontWeight: '500', paddingBottom:10,textDecorationLine:'underline' }}> Download full Manifesto</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -98,6 +100,12 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
 export default ElectionDetail
 
 const styles = StyleSheet.create({
+    electionTitle: {
+        textAlign: 'center',
+        fontSize: 14,
+        fontWeight: '400',
+        lineHeight: 18,
+    },
     newsCabinet: {
         marginVertical: 15,
         shadowColor: "black",
@@ -117,86 +125,7 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         position: "relative",
     },
-    electionTitle: {
-        textAlign: 'center',
-        fontSize: 14,
-        fontWeight: '400',
-        lineHeight: 18,
-    },
-    ElectionBody: {
-        flex: 1,
-        flexDirection: 'column',
-        marginTop: 30,
-    },
-    text: {
-        fontSize: 9,
-        marginTop: 10,
-        fontWeight: '700',
-        lineHeight:10,
-    },
-    Electioncolumn: {
-        flexDirection: 'column',
-        flex: 0.6
-    },
-    electionrow: {
-        flexDirection: 'column',
-        flex: 0.5,
-        backgroundColor:COLORS.primary,
-        color:'#fff',
-        borderRadius:10
 
-    },
-    electionrow2: {
-        flexDirection: 'row',
-        marginVertical: 10,
-        flex: 0.5
-    },
-    electionimg: {
-        width: 160,
-        height: 191,
-        borderRadius: 6,
-        shadowColor: '#171717',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
-        elevation: 3
-    },
-
-    btnText: {
-        fontSize: 11,
-        textAlign: 'center',
-        fontWeight: '500'
-    },
-    votesection: {
-    },
-    Bio: {
-        fontWeight: '400',
-        fontSize: 20,
-        color:'#fff',
-        textAlign:'center'
-
-    },
-    biotext: {
-        fontSize: 11,
-        textAlign: 'center',
-        lineHeight:19,
-        color:'#fff',
-        padding:5,
-
-    },
-    sectiontitle: {
-        fontSize: 20,
-        fontWeight: '400',
-        textAlign: 'center',
-        marginVertical: 10
-
-    },
-    sectiontxt: {
-        fontSize: 14,
-        fontWeight: '400',
-        textAlign: 'center',
-        lineHeight: 20,
-    },
     containerflex: {
         borderRadius: 4,
         padding: 10,
@@ -204,40 +133,92 @@ const styles = StyleSheet.create({
       },
       contianer: {},
       rowSection: {
-        alignSelf: "flex-end",
-        flexDirection:'row-reverse',
-        alignItems: "center",
-      },
-      asipirantbtn: {
-        backgroundColor: "#2b3513",
-        borderRadius: 4,
-        borderColor: "#2b3513",
-        borderWidth: 1,
-        padding: 5,
-        marginLeft: 10,
+        // alignSelf: "flex-start",
+        flexDirection:'column',
+        alignItems: 'flex-start',
       },
       votingbtn: {
         marginVertical:10,
         borderColor: "#2b3513",
         borderRadius: 4,
         borderWidth: 1,
-        paddingHorizontal:30,
-        paddingVertical:3,
+        paddingHorizontal:39,
+        paddingVertical:8,
         marginLeft:10,
+        backgroundColor:COLORS.primary,
+        alignItems: 'flex-end',
+        alignSelf:'flex-end',
+        justifyContent:'flex-end',
+      
+
       },
+            
       voteText:{
-        color: "#2b3513",
+        color: "#fff",
         fontSize: 12,
         textAlign: "center",
         fontWeight: "500",
+        alignItems:'center'
             },
             voteProgress:{
+                marginVertical:10,
 
+// textAlign:'right'
             },
+            electionrow: {
+                flexDirection: 'column',
+                flex: 0.5,
+                backgroundColor:COLORS.primary,
+                borderRadius:10,
+                justifyContent:'flex-start',
+                alignItems:'flex-start',
 
-      color: {
-        color: "white",
-      },
+        
+            },
+            Bio: {
+                fontWeight: '400',
+                fontSize: 20,
+                color:'#fff',
+                textAlign:'justify'
+        
+            },
+            biotext: {
+                fontSize: 12,
+                textAlign: 'justify',
+                lineHeight:19,
+                color:'#fff',
+                padding:5,
+        
+            },
+            sectiontitle: {
+                fontSize: 20,
+                fontWeight: '400',
+                textAlign: 'center',
+                marginVertical: 10
+        
+            },
+            sectiontxt: {
+                fontSize: 14,
+                fontWeight: '400',
+                textAlign: 'center',
+                lineHeight: 20,
+            },
+            detailssection:{
+           justifyContent:'center',
+           alignItems:'flex-start',
+           marginVertical:15
+            },      
+            color: {
+                color: "white",
+              },
+              destailsText:{
+                fontSize: 13 ,
+                textAlign: 'justify',
+                lineHeight:19,
+                padding:4,
+              },
+
+
 
 
 

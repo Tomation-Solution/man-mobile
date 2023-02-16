@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
   },
   rowSection: {
     alignSelf: "flex-end",
-
     flexDirection: "row",
     alignItems: "center",
   },

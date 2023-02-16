@@ -3,7 +3,7 @@ import React from "react";
 import { COLORS } from "../../../constants/color";
 import { Globalstyles } from "../../../globals/styles";
 import { Formbtn } from "../../../components";
-import {Feather} from '@expo/vector-icons'
+import {Octicons} from '@expo/vector-icons'
 
 
 
@@ -19,6 +19,7 @@ const OnConfirmStatus = ({ onPress }: OnConfirmStatusProps) => {
         style={{
           fontSize: 20,
           fontWeight: "500",
+          textAlign:"center"
         }}
       >
      Confirm Status
@@ -38,17 +39,17 @@ const OnConfirmStatus = ({ onPress }: OnConfirmStatusProps) => {
 <Text
         style={{
           marginVertical: 15,
-          textAlign: "center",
-          fontSize: 16,
+          textAlign: "justify",
+          fontSize: 15,
         }}
       >
         Please confirm that you are a financial member by uploading
         your latest due payment reciept to be eligble to vote
       </Text>
-       <Feather
-       style={{ justifyContent:'center',
-                  alignItems:'center',
-                  marginHorizontal:80,
+       <Octicons
+       style={{
+                  marginHorizontal:60,
+                  textAlign:'center',
                   marginVertical: 15,
                   borderStyle:'dashed',
                   borderWidth:1,
@@ -56,7 +57,7 @@ const OnConfirmStatus = ({ onPress }: OnConfirmStatusProps) => {
 
       }}
         name="upload"
-         size={24}
+         size={30}
          color='black'
          />
 </View>
@@ -76,7 +77,6 @@ const OnConfirmStatus = ({ onPress }: OnConfirmStatusProps) => {
           style={{
             color: "white",
             fontWeight: "500",
-
             width: "100%",
             textAlign: "center",
           }}
@@ -85,7 +85,7 @@ const OnConfirmStatus = ({ onPress }: OnConfirmStatusProps) => {
         </Text>
       </TouchableOpacity>
 
-      <Text> Download Reciept</Text>
+      <Text style={{}}> Download Reciept</Text>
     </View>
   );
 };

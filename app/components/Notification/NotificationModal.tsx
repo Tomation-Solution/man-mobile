@@ -32,14 +32,7 @@ const NotificationModal = ({ onPress }: NotificationProps) => {
 
             <TouchableOpacity
                 onPress={onPress}
-                style={{
-                    backgroundColor: COLORS.primary,
-                    padding: 10,
-                    borderRadius: 10,
-                    width: "50%",
-                    alignItems: "center",
-                }}
-            >
+                style={{backgroundColor: COLORS.primary,padding: 10,  borderRadius: 10,width: "50%",alignItems: "center",}}>
 
                 <Text
 

@@ -60,7 +60,7 @@ const NotificationHeader = ({ navigation, title, back }: Props) => {
                 </>
             )}
             <View style={styles.notificationContainer}>
-                <TouchableOpacity onPress={() => { onModalPress() }} >
+                <TouchableOpacity onPress={() => onModalPress() } >
                     <Text style={{ color: '#4d4d4d84', fontWeight: '500', fontSize: 15 }}> Clear </Text>
                 </TouchableOpacity>
             </View>

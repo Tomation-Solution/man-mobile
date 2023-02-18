@@ -17,10 +17,10 @@ const Gallery = ({ navigation }: any) => {
         initialRouteName="Home"
       >
         <Stack.Screen name="Home">
-          {/* {(props) => <Home {...props} />} */}
+          {(props) => <Home {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Details">
-          {/* {(props) => <Details {...props} />} */}
+          {(props) => <Details {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </Container>

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Container } from "../../components";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./Home.";
+import Home from "./Home";
 import Details from "./Details";
 
 const Stack = createNativeStackNavigator();

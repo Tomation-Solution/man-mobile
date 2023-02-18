@@ -38,17 +38,12 @@ const Home = ({ navigation }: any) => {
   const { userData, loading } = useAppSelector(
     (state) => state.profileReducers.getProfileSlice
   );
-  const [profileData, setProfileData] = useState<any>(null);
   const dispatch = useAppDispatch();
 
-  const getProfileData = () => {
-    if (isLoggedIn) {
-    }
-  };
-
   useEffect(() => {
-    // getProfileData();
-    dispatch(getProfile());
+    if (isLoggedIn) {
+      dispatch(getProfile());
+    }
   }, []);
 
   return (
@@ -118,46 +113,97 @@ const Home = ({ navigation }: any) => {
             {loading ? (
               <Text>Loading...</Text>
             ) : (
-              userData?.data[0]?.more_info.map((item: any) => {
-                return (
-                  <View key={item.id} style={styles.fieldContainer}>
-                    <View style={styles.fieldContainer}>
-                      <Text style={styles.label}>
-                        {item.name.toUpperCase()}
+              <>
+                {userData?.data[0]?.member_info.map((item: any) => {
+                  return (
+                    <View key={item.id} style={styles.fieldContainer}>
+                      <View style={styles.fieldContainer}>
+                        <Text style={styles.label}>
+                          {item.name.toUpperCase()}
+                        </Text>
+                        <Text style={styles.text}>
+                          {item.value === null ? "No data" : item.value}
+                        </Text>
+                      </View>
+                    </View>
+                  );
+                })}
+                <View
+                  style={{
+                    marginTop: 20,
+                  }}
+                >
+                  <View style={styles.fieldContainer}>
+                    <Text
+                      style={[
+                        styles.label,
+                        {
+                          borderBottomColor: COLORS.primary,
+                          borderBottomWidth: 1,
+                          paddingVertical: 6,
+                          fontWeight: "bold",
+                        },
+                      ]}
+                    >
+                      EDUCATION
+                      <Text
+                        style={{
+                          fontStyle: "italic",
+                        }}
+                      >
+                        (include all college or university degrees)
                       </Text>
-                      <Text style={styles.text}>
-                        {item.value === null ? "No data" : item.value}
-                      </Text>
+                    </Text>
+                  </View>
+                  <View style={styles.fieldContainer}>
+                    <Text style={styles.label}>
+                      NAME AND LOCATION OF INSTITUTION
+                    </Text>
+                    <Text style={styles.text}>lorem school</Text>
+                  </View>
+                  <View style={styles.outerContainer}>
+                    <View style={[styles.fieldContainer, { flex: 1 }]}>
+                      <Text style={styles.label}>Major</Text>
+                      <Text style={styles.text}>lorem</Text>
+                    </View>
+                    <View
+                      style={[
+                        styles.fieldContainer,
+                        { flex: 1, marginLeft: 30 },
+                      ]}
+                    >
+                      <Text style={styles.label}>Degree</Text>
+                      <Text style={styles.text}>lorem</Text>
                     </View>
                   </View>
-                );
-              })
-            )}
+                </View>
 
-            <View>
-              <Text style={styles.label}>PICTURES</Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 20,
-                  flexWrap: "wrap",
-                }}
-              >
-                {pictures.slice(0, slice + 1).map(({ id, img }) => (
-                  <Picture
-                    key={id}
-                    id={id}
-                    image={img}
-                    slice={slice}
-                    total={pictures.length}
-                    setSlice={setSlice}
-                    setShowModal={() => setShowModal(!modal)}
-                    setImageIndex={setImageIndex}
-                  />
-                ))}
-              </View>
-            </View>
+                <View>
+                  <Text style={styles.label}>PICTURES</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 20,
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    {pictures.slice(0, slice + 1).map(({ id, img }) => (
+                      <Picture
+                        key={id}
+                        id={id}
+                        image={img}
+                        slice={slice}
+                        total={pictures.length}
+                        setSlice={setSlice}
+                        setShowModal={() => setShowModal(!modal)}
+                        setImageIndex={setImageIndex}
+                      />
+                    ))}
+                  </View>
+                </View>
+              </>
+            )}
           </View>
         </ScrollView>
       </Container>
@@ -173,7 +219,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   fieldContainer: {
-    marginVertical: 12,
+    marginVertical: 2,
   },
   label: {
     fontSize: 14,

@@ -18,7 +18,7 @@ const PublicationsCard = ({ item, onPress }: PublicationCardProps) => {
       <View style={styles.publicationsImageActionContainer}>
         <View style={styles.publicationsImageContainer}>
           <Image
-            source={images?.meeting_1}
+            source={{ uri: item?.image ? item.image.toString() : undefined }}
             resizeMode="cover"
             style={{ width: "100%", height: 200 }}
           />
@@ -27,13 +27,13 @@ const PublicationsCard = ({ item, onPress }: PublicationCardProps) => {
           <TouchableOpacity activeOpacity={0.6} style={styles.reaction}>
             <AntDesign name="message1" size={20} color="white" />
             <Text style={{ marginLeft: 5, color: "white", fontSize: 11 }}>
-              5
+              0
             </Text>
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.6} style={styles.reaction}>
             <AntDesign name="heart" size={20} color="crimson" />
             <Text style={{ marginLeft: 5, color: "white", fontSize: 11 }}>
-              5ss
+              {item?.likes === null ? 0 : item?.likes}
             </Text>
           </TouchableOpacity>
         </View>
@@ -48,10 +48,10 @@ const PublicationsCard = ({ item, onPress }: PublicationCardProps) => {
             color: COLORS.primary,
           }}
         >
-          {item.title}
+          {item.name}
         </Text>
         <Text style={{ textAlign: "justify", color: COLORS.primary }}>
-          {item?.description.substring(0, 150)} ...
+          {item?.body?.substring(0, 150)} ...
           <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
             <Text style={{ color: COLORS.primary, fontWeight: "700" }}>
               Read More
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     shadowOffset: { width: 0, height: 3 },
     elevation: 4,
+    width: "100%",
   },
   publicationsImageActionContainer: {
     position: "relative",

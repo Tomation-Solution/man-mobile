@@ -17,28 +17,36 @@ const { width } = Dimensions.get("window");
 const data = [
   {
     name: "Events",
-    icon: <FontAwesome5 name="calendar-check" size={45} color={COLORS.icon} />,
+    icon: (
+      <FontAwesome5 name="calendar-check" size={25} color={COLORS.primary} />
+    ),
   },
   {
     name: "Meetings",
-    icon: <FontAwesome5 name="calendar-check" size={45} color={COLORS.icon} />,
+    icon: (
+      <FontAwesome5 name="calendar-check" size={25} color={COLORS.primary} />
+    ),
   },
   {
     name: "Publications",
-    icon: <FontAwesome name="picture-o" size={45} color={COLORS.icon} />,
+    icon: <FontAwesome name="picture-o" size={25} color={COLORS.primary} />,
   },
   {
     name: "Gallery",
-    icon: <FontAwesome name="picture-o" size={45} color={COLORS.icon} />,
+    icon: <FontAwesome name="picture-o" size={25} color={COLORS.primary} />,
   },
   {
     name: "Fund A Project",
-    icon: <FontAwesome5 name="gift" size={45} color={COLORS.icon} />,
+    icon: <FontAwesome5 name="gift" size={25} color={COLORS.primary} />,
   },
   {
     name: "Service Request",
     icon: (
-      <MaterialIcons name="home-repair-service" size={45} color={COLORS.icon} />
+      <MaterialIcons
+        name="home-repair-service"
+        size={25}
+        color={COLORS.primary}
+      />
     ),
   },
 ];
@@ -68,7 +76,7 @@ const FeedsNav = ({ navigation }: any) => {
   return (
     <View style={[Globalstyles.section]}>
       <Text style={[Globalstyles.sectionHeaderText, { marginBottom: 20 }]}>
-        Feeds
+        Quick Navigations
       </Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {data.map((item, index) => (

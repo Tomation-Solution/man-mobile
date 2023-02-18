@@ -2,10 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "../../apiActions";
 import { AppDispatch } from "../../configureStore";
 import { PRE_URL } from "../../../utils/ENV/envs";
-import {
-  retrieveUserDetails,
-  storeUserDetails,
-} from "../../../utils/helperFunctions/userDataHandlers";
+import { retrieveUserDetails } from "../../../utils/helperFunctions/userDataHandlers";
 
 const initialState: {
   userData: { data: any } | null;
@@ -44,10 +41,9 @@ export const getProfile = () => async (dispatch: AppDispatch) => {
     const getToken: any = await retrieveUserDetails();
     if (getToken && getToken.token) {
       const token = getToken.token;
-      console.log("token", token);
       dispatch(
         apiCallBegan({
-          url: PRE_URL + "user/profile/",
+          url: PRE_URL + "user/memberlist-info/my_profile/",
           extraheaders: "Token " + token,
           method: "get",
           onStart: getProfileRequested.type,

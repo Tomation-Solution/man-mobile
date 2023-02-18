@@ -3,20 +3,19 @@ import React, { useEffect } from "react";
 import { COLORS } from "../../constants/color";
 import { Globalstyles } from "../../globals/styles";
 import { ScrollView } from "react-native-gesture-handler";
-import NewsCard from "./NewsCard";
+import PublicationsCard from "./PubicationsCard";
 import { news } from "../../assets/dummyData/news";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getNews } from "../../store/slices/news_publication/newsSlice";
-import LoadingIndicator from "../../utils/LoadingIndicator";
+import { getPublication } from "../../store/slices/news_publication/publicationSlice";
 
-const NewsNav = ({ navigation }: any) => {
+const PublicationsNav = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
-  const { news, loading } = useAppSelector(
-    (state) => state.newsPublication.news
+  const { publication, loading } = useAppSelector(
+    (state) => state.newsPublication.publication
   );
 
   useEffect(() => {
-    dispatch(getNews());
+    dispatch(getPublication());
   }, []);
 
   return (
@@ -29,18 +28,18 @@ const NewsNav = ({ navigation }: any) => {
           <Text style={{ color: "white", fontSize: 16 }}>See All</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      {/* <ScrollView showsVerticalScrollIndicator={false}>
         {loading ? (
-          <LoadingIndicator />
+          <Text>Loading...</Text>
         ) : (
           <>
-            {news?.data?.map((item: any) => {
+            {news.map((item) => {
               return (
-                <NewsCard
+                <PublicationsCard
                   key={item.id}
                   item={item}
                   onPress={() =>
-                    navigation.navigate("News", {
+                    navigation.navigate("Publication", {
                       screen: "Details",
                       params: item,
                     })
@@ -50,17 +49,18 @@ const NewsNav = ({ navigation }: any) => {
             })}
           </>
         )}
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 };
 
-export default NewsNav;
+export default PublicationsNav;
 
 const styles = StyleSheet.create({
   newsNavHeader: {
     backgroundColor: COLORS.primary,
-    paddingHorizontal: 20,
+    padding: 20,
+    borderRadius: 10,
     flexDirection: "row",
     justifyContent: "space-between",
   },

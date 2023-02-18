@@ -1,9 +1,14 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
+import { COLORS } from "../constants/color";
 
 export const Globalstyles = StyleSheet.create({
   sectionHeaderText: {
     fontWeight: "700",
-    fontSize: 25,
+    fontSize: 18,
+    textTransform: "uppercase",
+    textAlign: "center",
+    backgroundColor: COLORS.primary,
+    color: "white",
   },
   section: {
     marginVertical: 15,

@@ -2,10 +2,7 @@ import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLORS } from "../../constants/color";
-import { Globalstyles } from "../../globals/styles";
-import { images } from "../../assets/dummyData";
 import { AntDesign } from "@expo/vector-icons";
-import { ScrollView } from "react-native-gesture-handler";
 
 interface NewsCardProps {
   item: any;
@@ -20,22 +17,26 @@ const NewsCard = ({ item, onPress }: NewsCardProps) => {
       <View style={styles.newsImageActionContainer}>
         <View style={styles.newsImageContainer}>
           <Image
-            source={images?.meeting_1}
+            source={{ uri: item?.image ? item.image.toString() : undefined }}
             resizeMode="cover"
             style={{ width: "100%", height: 200 }}
           />
         </View>
         <View style={styles.reactionContainer}>
           <TouchableOpacity activeOpacity={0.6} style={styles.reaction}>
-            <AntDesign name="message1" size={20} color="white" />
+            <AntDesign name="message1" size={20} color="black" />
             <Text style={{ marginLeft: 5, color: "white", fontSize: 11 }}>
               5
             </Text>
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.6} style={styles.reaction}>
-            <AntDesign name="heart" size={20} color="crimson" />
+            {item.has_reacted ? (
+              <AntDesign name="heart" size={20} color={"crimson"} />
+            ) : (
+              <AntDesign name="hearto" size={20} color={"black"} />
+            )}
             <Text style={{ marginLeft: 5, color: "white", fontSize: 11 }}>
-              5
+              {item.likes}
             </Text>
           </TouchableOpacity>
         </View>
@@ -50,10 +51,10 @@ const NewsCard = ({ item, onPress }: NewsCardProps) => {
             color: COLORS.primary,
           }}
         >
-          {item.title}
+          {item?.name}
         </Text>
         <Text style={{ textAlign: "justify", color: COLORS.primary }}>
-          {item?.description.substring(0, 150)} ...
+          {item?.body?.substring(0, 150)} ...
           <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
             <Text style={{ color: COLORS.primary, fontWeight: "700" }}>
               Read More
@@ -68,6 +69,7 @@ export default NewsCard;
 
 const styles = StyleSheet.create({
   newsCabinet: {
+    width: "100%",
     marginVertical: 15,
     shadowColor: "black",
     backgroundColor: "white",

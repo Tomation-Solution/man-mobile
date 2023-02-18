@@ -1,11 +1,13 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { HomeHeader } from "../../components";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { FontAwesome } from "@expo/vector-icons";
 import { COLORS } from "../../constants/color";
 import { images } from "../../assets/dummyData";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getComments } from "../../store/slices/news_publication/newsSlice";
 
 interface DetailsProps {
   route?: any;
@@ -127,20 +129,28 @@ const Comment = () => {
 };
 
 const Details = ({ route, navigation }: DetailsProps) => {
+  const [showAll, setShowAll] = React.useState(3);
   const altRoute = useRoute();
   const data = route?.params?.news || altRoute?.params || {};
+  const dispatch = useAppDispatch();
 
-  const [showAll, setShowAll] = React.useState(3);
+  const { comments, commenstLoading } = useAppSelector(
+    (state) => state.newsPublication.news
+  );
 
   const handlePress = () => {
-    setShowAll(showAll === 3 ? data.comments.length : 3);
+    setShowAll(showAll === 3 ? comments?.data?.length : 3);
   };
+
+  useEffect(() => {
+    dispatch(getComments(data.id));
+  }, []);
 
   return (
     <>
       <HomeHeader
         navigation={navigation}
-        title={data.title || "Details " + data.id}
+        title={data.name || "Details " + data.id}
         back={() => navigation.goBack("News")}
       />
       <ScrollView
@@ -159,7 +169,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
             }}
           >
             <Image
-              source={data.images}
+              source={{ uri: data?.image ? data.image.toString() : undefined }}
               style={{ width: "100%", height: 300 }}
             />
           </View>
@@ -182,7 +192,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
                 fontWeight: "700",
               }}
             >
-              {data.title}
+              {data.name}
             </Text>
             <View>
               <Text
@@ -203,7 +213,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
                 fontWeight: "700",
               }}
             >
-              5 Likes
+              {data?.likes} Likes
             </Text>
 
             <View
@@ -226,7 +236,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
                 marginTop: 20,
               }}
             >
-              {data?.comments.slice(0, showAll)?.map((item: any) => (
+              {comments?.data?.slice(0, showAll)?.map((item: any) => (
                 <CommentCard
                   key={item.id}
                   img={item.img}
@@ -248,7 +258,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
             >
               <Text style={{ color: COLORS.primary, fontWeight: "700" }}>
                 {showAll === 3
-                  ? `View ${data.comments.length - showAll} more comments`
+                  ? `View ${comments?.data?.length - showAll} more comments`
                   : "Hide comments"}
               </Text>
             </TouchableOpacity>

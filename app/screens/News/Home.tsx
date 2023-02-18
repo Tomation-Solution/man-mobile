@@ -2,24 +2,24 @@ import { StyleSheet, View } from "react-native";
 import React, { useEffect } from "react";
 import { HomeHeader, SearchBar } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
-import PublicationsCard from "../../components/Publications/PubicationsCard";
+import NewsCard from "../../components/News/NewsCard";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getPublication } from "../../store/slices/news_publication/publicationSlice";
+import { getNews } from "../../store/slices/news_publication/newsSlice";
 import LoadingIndicator from "../../utils/LoadingIndicator";
 
 const Home = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
-  const { publications, loading } = useAppSelector(
-    (state) => state.newsPublication.publication
+  const { news, loading } = useAppSelector(
+    (state) => state.newsPublication.news
   );
 
   useEffect(() => {
-    dispatch(getPublication());
+    dispatch(getNews());
   }, []);
 
   return (
     <View>
-      <HomeHeader navigation={navigation} title={"Publications"} />
+      <HomeHeader navigation={navigation} title={"News"} />
 
       <SearchBar hasFilter />
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -37,13 +37,11 @@ const Home = ({ navigation }: any) => {
             <LoadingIndicator />
           ) : (
             <>
-              {publications?.data?.map((publication: any, index: number) => (
-                <PublicationsCard
-                  key={index}
-                  item={publication}
-                  onPress={() =>
-                    navigation.navigate("Details", { publication })
-                  }
+              {news?.data?.map((news: any) => (
+                <NewsCard
+                  key={news?.id}
+                  item={news}
+                  onPress={() => navigation.navigate("Details", { news })}
                 />
               ))}
             </>

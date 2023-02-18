@@ -128,7 +128,7 @@ const Comment = () => {
 
 const Details = ({ route, navigation }: DetailsProps) => {
   const altRoute = useRoute();
-  const data = route?.params?.publications || altRoute?.params || {};
+  const data = route?.params?.publication || altRoute?.params || {};
 
   const [showAll, setShowAll] = React.useState(3);
 
@@ -140,7 +140,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
     <>
       <HomeHeader
         navigation={navigation}
-        title={data.title || "Details " + data.id}
+        title={data?.name || "Details " + data.id}
         back={() => navigation.goBack("Publications")}
       />
       <ScrollView
@@ -159,7 +159,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
             }}
           >
             <Image
-              source={data.images}
+              source={{ uri: data?.image ? data.image.toString() : undefined }}
               style={{ width: "100%", height: 300 }}
             />
           </View>
@@ -182,7 +182,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
                 fontWeight: "700",
               }}
             >
-              {data.title}
+              {data.name}
             </Text>
             <View>
               <Text
@@ -192,9 +192,45 @@ const Details = ({ route, navigation }: DetailsProps) => {
                   textAlign: "justify",
                 }}
               >
-                {data.description}
+                {data.body}
               </Text>
             </View>
+
+            <View
+              style={{
+                marginVertical: 10,
+              }}
+            >
+              {data.paragraphs.map((item: any) => (
+                <View
+                  style={{
+                    marginVertical: 10,
+                  }}
+                  key={item.id}
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      color: COLORS.primary,
+                      textAlign: "justify",
+                      fontWeight: "700",
+                    }}
+                  >
+                    {item.heading}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      color: "gray",
+                      textAlign: "justify",
+                    }}
+                  >
+                    {item.paragragh}
+                  </Text>
+                </View>
+              ))}
+            </View>
+
             <Text
               style={{
                 marginTop: 5,
@@ -203,7 +239,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
                 fontWeight: "700",
               }}
             >
-              5 Likes
+              {data?.likes === null ? 0 : data.likes} likes
             </Text>
 
             <View
@@ -221,12 +257,14 @@ const Details = ({ route, navigation }: DetailsProps) => {
               <Like />
               <CommentIcon />
             </View>
+
+            {/* Comment section */}
             <View
               style={{
                 marginTop: 20,
               }}
             >
-              {data?.comments.slice(0, showAll)?.map((item: any) => (
+              {data?.comments?.slice(0, showAll)?.map((item: any) => (
                 <CommentCard
                   key={item.id}
                   img={item.img}
@@ -248,7 +286,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
             >
               <Text style={{ color: COLORS.primary, fontWeight: "700" }}>
                 {showAll === 3
-                  ? `View ${data.comments.length - showAll} more comments`
+                  ? `View ${data.comments?.length - showAll} more comments`
                   : "Hide comments"}
               </Text>
             </TouchableOpacity>

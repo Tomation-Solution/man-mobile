@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { HomeHeader, SearchBar } from "../../components";
+import { HomeHeader, MeetingCard, SearchBar } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 import { meetings } from "../../assets/dummyData/meetings";
-import MeetingCard from "../../components/Meetings/MeetingCard";
 
 const Home = ({ navigation }: any) => {
   return (

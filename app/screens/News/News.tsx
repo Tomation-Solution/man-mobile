@@ -2,12 +2,12 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Container } from "../../components";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./Home";
+import Home from "./Home.";
 import Details from "./Details";
 
 const Stack = createNativeStackNavigator();
 
-const News = ({ environment }: any) => {
+const News = ({ navigation }: any) => {
   return (
     <Container>
       <Stack.Navigator
@@ -17,7 +17,7 @@ const News = ({ environment }: any) => {
         initialRouteName="Home"
       >
         <Stack.Screen name="Home">
-          {(props) => <Home environment={environment} {...props} />}
+          {(props) => <Home {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Details">
           {(props) => <Details {...props} />}

@@ -3,21 +3,18 @@ import { StyleSheet, View } from "react-native";
 import { useReducer, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNav from "./DrawerNav";
-import { Login } from "../screens";
-import { useSelector } from "react-redux";
-import { useAppSelector } from "../store/hooks";
 
 const RootNavigation = () => {
-  const isLoggedIn = useAppSelector(
-    (state) => state.authReducers.login.isLoggedIn
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  console.log("isLoggedIn", isLoggedIn);
+  const initialState = {
+    isAuthenticated: false,
+  };
 
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        {isLoggedIn ? <DrawerNav /> : <Login />}
+        <DrawerNav />
       </View>
     </NavigationContainer>
   );

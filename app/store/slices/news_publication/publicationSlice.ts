@@ -35,37 +35,32 @@ const { publicationRequested, publicationReceived, publicationRequestFailed } =
 
 export default publicationSlice.reducer;
 
-export const getPublication =
-  (environment?: string, id?: number) => async (dispatch: AppDispatch) => {
-    try {
-      const getToken: any = await retrieveUserDetails();
+export const getPublication = () => async (dispatch: AppDispatch) => {
+  try {
+    const getToken: any = await retrieveUserDetails();
 
-      if (getToken && getToken.token) {
-        const token = getToken.token;
+    if (getToken && getToken.token) {
+      const token = getToken.token;
 
-        dispatch(
-          apiCallBegan({
-            url:
-              environment && id
-                ? PRE_URL +
-                  `publication/getyourpublication/?not_council=True&not_commitee=True&not_chapters=True${environment}=${id}`
-                : PRE_URL +
-                  "publication/getyourpublication/?not_council=True&not_commitee=True&not_chapters=True",
-
-            extraheaders: "Token " + token,
-            method: "get",
-            onStart: publicationRequested.type,
-            onSuccess: publicationReceived.type,
-            onError: publicationRequestFailed.type,
-          })
-        );
-      } else {
-        const error = new Error("Unable to retrieve user token");
-        console.error(error);
-        dispatch(publicationRequestFailed(error.message));
-      }
-    } catch (error: any) {
-      console.error("An error occured getting publication", error);
+      dispatch(
+        apiCallBegan({
+          url:
+            PRE_URL +
+            "publication/getyourpublication/?for_members=True&is_for_all_grade=True",
+          extraheaders: "Token " + token,
+          method: "get",
+          onStart: publicationRequested.type,
+          onSuccess: publicationReceived.type,
+          onError: publicationRequestFailed.type,
+        })
+      );
+    } else {
+      const error = new Error("Unable to retrieve user token");
+      console.error(error);
       dispatch(publicationRequestFailed(error.message));
     }
-  };
+  } catch (error: any) {
+    console.error("An error occured getting publication", error);
+    dispatch(publicationRequestFailed(error.message));
+  }
+};

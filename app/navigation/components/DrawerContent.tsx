@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { appImages } from "../../assets/app/images";
 import DrawerLabel from "./DrawerLabel";
 import {
@@ -10,27 +10,8 @@ import {
 import { COLORS } from "../../constants/color";
 import { appData } from "../../assets/app/data";
 import { ScrollView } from "react-native-gesture-handler";
-import { retrieveUserDetails } from "../../utils/helperFunctions/userDataHandlers";
-import { useAppSelector } from "../../store/hooks";
 
-const DrawerContent = ({
-  environment,
-  setEnvironment,
-  navigation,
-  state,
-}: any) => {
-  const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
-  const [userData, setUserData] = useState<any>(null);
-  const [menuOn, setMenuOn] = React.useState();
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      retrieveUserDetails().then((data: any) => {
-        setUserData(data);
-      });
-    }
-  }, [isLoggedIn]);
-
+const DrawerContent = ({ navigation, state, index }: any) => {
   return (
     <ScrollView showsHorizontalScrollIndicator={false} style={styles.container}>
       <View style={styles.header}>
@@ -38,37 +19,25 @@ const DrawerContent = ({
         <Text style={styles.title}>{appData.orgnizationName}</Text>
       </View>
 
-      {userData?.council && (
-        <DrawerLabel
-          focused={state?.index === null} // keep this as null for switches
-          title="Other Environment"
-          icon={<FontAwesome name="group" size={20} color={COLORS.primary} />}
-          hasSwitch
-          hasSwitchMenu={userData?.council}
-          menuOn={menuOn}
-          setMenuOn={setMenuOn}
-          name="council"
-          environment={environment}
-          setEnvironment={setEnvironment}
-          hasChapter={userData?.chapter}
-        />
-      )}
+      <DrawerLabel
+        focused={state?.index === null} // keep this as null for switches
+        title="Members Environment"
+        icon={<FontAwesome name="group" size={20} color={COLORS.primary} />}
+        hasSwitch
+      />
+      <DrawerLabel
+        focused={state?.index === null} // keep this as null for switches
+        title="Exco Environment"
+        icon={<Ionicons name="person" size={20} color={COLORS.primary} />}
+        hasSwitch
+      />
 
-      {userData?.commitee && (
-        <DrawerLabel
-          focused={state?.index === null} // keep this as null for switches
-          title="Committee Environment"
-          icon={<Ionicons name="people" size={20} color={COLORS.primary} />}
-          hasSwitch
-          hasSwitchMenu={userData?.commitee}
-          menuOn={menuOn}
-          setMenuOn={setMenuOn}
-          name="commitee"
-          environment={environment}
-          setEnvironment={setEnvironment}
-        />
-      )}
-
+      <DrawerLabel
+        focused={state?.index === null} // keep this as null for switches
+        title="Committee Environment"
+        icon={<Ionicons name="people" size={20} color={COLORS.primary} />}
+        hasSwitch
+      />
       <DrawerLabel
         focused={state?.index === 0}
         title="Homescreen"
@@ -87,23 +56,10 @@ const DrawerContent = ({
         icon={<Ionicons name="calendar" size={20} color={COLORS.primary} />}
         navigation={navigation}
       />
-
       <DrawerLabel
-        focused={state?.index === 5}
-        title="Gallery"
-        icon={<Ionicons name="images" size={20} color={COLORS.primary} />}
-        navigation={navigation}
-      />
-      <DrawerLabel
-        focused={state?.index === 6}
-        title="Services"
-        icon={
-          <MaterialCommunityIcons
-            name="toolbox"
-            size={20}
-            color={COLORS.primary}
-          />
-        }
+        focused={state?.index === 3}
+        title="Election"
+        icon={<Ionicons name="flag" size={20} color={COLORS.primary} />}
         navigation={navigation}
       />
       <DrawerLabel
@@ -136,9 +92,21 @@ const DrawerContent = ({
         ]}
       />
       <DrawerLabel
-        focused={state?.index === 3}
-        title="Election"
-        icon={<Ionicons name="flag" size={20} color={COLORS.primary} />}
+        focused={state?.index === 5}
+        title="Gallery"
+        icon={<Ionicons name="images" size={20} color={COLORS.primary} />}
+        navigation={navigation}
+      />
+      <DrawerLabel
+        focused={state?.index === 6}
+        title="Services"
+        icon={
+          <MaterialCommunityIcons
+            name="toolbox"
+            size={20}
+            color={COLORS.primary}
+          />
+        }
         navigation={navigation}
       />
       <DrawerLabel

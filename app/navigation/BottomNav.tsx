@@ -14,7 +14,7 @@ import Donation from "../screens/Donation/Donation";
 
 const Tab = createBottomTabNavigator();
 
-const BottomNav = ({ environment }: any) => {
+const BottomNav = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -40,9 +40,8 @@ const BottomNav = ({ environment }: any) => {
           ),
         }}
         name="HomeScreen"
-      >
-        {(props) => <HomeScreen environment={environment} {...props} />}
-      </Tab.Screen>
+        component={HomeScreen}
+      />
       <Tab.Screen
         options={{
           tabBarStyle: { display: "none" },

@@ -23,6 +23,7 @@ const HomeHeader = ({ navigation, title, back, isTitleComponent }: Props) => {
     if (isLoggedIn) {
       retrieveUserDetails().then((data: any) => {
         setUserData(data);
+        console.log(data);
       });
     }
   }, [isLoggedIn]);

@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { HomeHeader, SearchBar } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 import NewsCard from "../../components/News/NewsCard";
@@ -7,31 +7,22 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getNews } from "../../store/slices/news_publication/newsSlice";
 import LoadingIndicator from "../../utils/LoadingIndicator";
 
-const Home = ({ navigation, environment }: any) => {
+const Home = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
   const { news, loading } = useAppSelector(
     (state) => state.newsPublication.news
   );
 
   useEffect(() => {
-    if (environment.environment && environment.id) {
-      dispatch(getNews(environment.environment, environment.id));
-    } else {
-      dispatch(getNews());
-    }
-  }, [environment]);
+    dispatch(getNews());
+  }, []);
 
   return (
     <View>
       <HomeHeader navigation={navigation} title={"News"} />
 
       <SearchBar hasFilter />
-      <ScrollView
-        style={{
-          marginBottom: 150,
-        }}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
             marginTop: 20,

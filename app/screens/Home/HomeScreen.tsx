@@ -9,7 +9,7 @@ import {
 } from "../../components";
 import NewsNav from "../../components/News/NewsNav";
 
-const HomeScreen = ({ navigation, environment }: any) => {
+const HomeScreen = ({ navigation }: any) => {
   return (
     <Container>
       <HomeHeader navigation={navigation} />
@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation, environment }: any) => {
         <SearchBar />
         <LatestUpdatesNav />
         <FeedsNav navigation={navigation} />
-        <NewsNav environment={environment} navigation={navigation} />
+        <NewsNav navigation={navigation} />
       </ScrollView>
     </Container>
   );

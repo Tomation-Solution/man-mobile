@@ -49,7 +49,10 @@ const Details = ({ route, navigation }: any) => {
             overflow: "hidden",
           }}
         >
-          <Image source={data.image} style={{ width: "100%", height: 300 }} />
+          <Image
+            source={{ uri: data?.image ? data.image.toString() : undefined }}
+            style={{ width: "100%", height: 300 }}
+          />
         </View>
 
         <Text
@@ -147,7 +150,9 @@ const Details = ({ route, navigation }: any) => {
                 }}
               >
                 <Image
-                  source={data.organizer.image}
+                  source={{
+                    uri: data?.image ? data.image.toString() : undefined,
+                  }}
                   style={{ width: 70, height: 70, borderRadius: 100 }}
                 />
 

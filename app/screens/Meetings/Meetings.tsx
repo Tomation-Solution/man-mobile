@@ -7,7 +7,7 @@ import Home from "./Home";
 
 const Stack = createNativeStackNavigator();
 
-const News = ({ navigation }: any) => {
+const News = ({ navigation, environment }: any) => {
   return (
     <Container>
       <Stack.Navigator
@@ -17,7 +17,7 @@ const News = ({ navigation }: any) => {
         initialRouteName="Home"
       >
         <Stack.Screen name="Home">
-          {(props) => <Home {...props} />}
+          {(props) => <Home environment={environment} {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Details">
           {(props) => <Details {...props} />}

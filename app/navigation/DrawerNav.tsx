@@ -75,10 +75,14 @@ const DrawerNav = () => {
 
         {/* soupport screens  */}
 
-        <Drawer.Screen name="Gallery" component={Gallery} />
+        <Drawer.Screen name="Gallery">
+          {(props) => <Gallery environment={environment} {...props} />}
+        </Drawer.Screen>
         <Drawer.Screen name="Profile" component={Profile} />
         <Drawer.Screen name="Services" component={Services} />
-        <Drawer.Screen name="Meetings" component={Meetings} />
+        <Drawer.Screen name="Meetings">
+          {(props) => <Meetings environment={environment} {...props} />}
+        </Drawer.Screen>
         <Drawer.Screen name="Notification" component={Notification} />
       </Drawer.Navigator>
     </EnvironmentContext.Provider>

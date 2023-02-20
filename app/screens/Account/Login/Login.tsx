@@ -19,7 +19,7 @@ import { Formik, Field } from "formik";
 import Locked from "../components/LockedWithPayment";
 
 import { login } from "../../../store/slices/auth/loginSlice";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { loginValidationSchema } from "../../../utils/validation";
 
 const LoginForm = ({ navigation }: any) => {
@@ -29,6 +29,8 @@ const LoginForm = ({ navigation }: any) => {
   const onModalPress = () => {
     setModalVisible(!modalVisible);
   };
+
+  const { loading } = useAppSelector((state) => state.authReducers.login);
 
   return (
     <>
@@ -59,7 +61,7 @@ const LoginForm = ({ navigation }: any) => {
                   password: "",
                 }}
                 onSubmit={(values) => {
-                  dispatch(login(values));
+                  if (loading === false) dispatch(login(values));
                 }}
               >
                 {({ handleSubmit, isValid }) => (
@@ -79,7 +81,7 @@ const LoginForm = ({ navigation }: any) => {
                     <Formbtn
                       style={[styles.btn]}
                       onPress={handleSubmit}
-                      title="Login"
+                      title={loading ? "Loading..." : "Login"}
                     />
                   </>
                 )}

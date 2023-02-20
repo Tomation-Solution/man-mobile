@@ -7,7 +7,7 @@ import Details from "./Details";
 
 const Stack = createNativeStackNavigator();
 
-const Gallery = ({ navigation }: any) => {
+const Gallery = ({ navigation, environment }: any) => {
   return (
     <Container>
       <Stack.Navigator
@@ -17,7 +17,7 @@ const Gallery = ({ navigation }: any) => {
         initialRouteName="Home"
       >
         <Stack.Screen name="Home">
-          {(props) => <Home {...props} />}
+          {(props) => <Home environment={environment} {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Details">
           {(props) => <Details {...props} />}

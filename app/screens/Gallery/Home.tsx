@@ -5,13 +5,17 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { loadGallery } from "../../store/slices/gallery/gallerySlice";
 
-const Home = ({ navigation }: any) => {
+const Home = ({ navigation, environment }: any) => {
   const dispatch = useAppDispatch();
   const { loading, galleryData } = useAppSelector((state) => state.gallery);
 
   useEffect(() => {
-    dispatch(loadGallery());
-  }, []);
+    if (environment.environment === "chapters" && environment.id) {
+      dispatch(loadGallery(environment.environment, environment.id));
+    } else {
+      dispatch(loadGallery());
+    }
+  }, [environment]);
 
   return (
     <View>

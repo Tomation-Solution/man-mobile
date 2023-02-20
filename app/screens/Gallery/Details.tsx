@@ -1,16 +1,7 @@
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { CustomModal, HomeHeader } from "../../components";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { HomeHeader } from "../../components";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
-import GalleryPicture from "../../components/Gallery/GalleryPicture";
-import GalleryPicturePreview from "../../components/Gallery/GalleryPicturePreview";
 
 const { width } = Dimensions.get("window");
 
@@ -19,37 +10,58 @@ interface DetailsProps {
   navigation: any;
 }
 
-const DetailsImage = ({
-  images,
-  slice,
-  setSlice,
-  setShowModal,
-  modal,
-  setImageIndex,
-}: any) => {
+const DetailsImage = ({ images }: any) => {
+  const [active, setActive] = React.useState(0);
+  const change = ({ nativeEvent }: any) => {
+    const slide = Math.ceil(
+      nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width
+    );
+    if (slide !== active) {
+      setActive(slide);
+    }
+  };
+
   return (
     <View
       style={{
-        marginTop: 20,
-        flex: 1,
-        flexDirection: "row",
-        flexWrap: "wrap",
-        alignItems: "flex-start",
-        justifyContent: "space-between",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      {images.slice(0, slice + 1)?.map((item: any, index: any) => (
-        <GalleryPicture
-          key={index}
-          id={index}
-          image={item.image}
-          slice={slice}
-          total={images.length}
-          setSlice={setSlice}
-          setShowModal={() => setShowModal(!modal)}
-          setImageIndex={setImageIndex}
-        />
-      ))}
+      <FlatList
+        data={images}
+        pagingEnabled
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        onScroll={change}
+        renderItem={({ item }) => (
+          <Image
+            source={item}
+            style={{ width: width, height: 300 }}
+            resizeMode="cover"
+          />
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
+      <View
+        style={{
+          flexDirection: "row",
+        }}
+      >
+        {images.map((image: any, index: number) => (
+          <View
+            key={index}
+            style={{
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+              backgroundColor: index === active ? "#000" : "#fff",
+              margin: 5,
+            }}
+          />
+        ))}
+      </View>
     </View>
   );
 };
@@ -57,63 +69,55 @@ const DetailsImage = ({
 const Details = ({ route, navigation }: DetailsProps) => {
   const data = route.params.gallery;
 
-  const [slice, setSlice] = useState(3);
-  const [modal, setShowModal] = useState(false);
-  const [imageIndex, setImageIndex] = useState(0);
-
   return (
     <>
-      {modal && (
-        <CustomModal>
-          <View
-            style={{
-              flexDirection: "row",
-              width: width * 0.9,
-              flex: 1,
-            }}
-          >
-            <GalleryPicturePreview
-              image={data?.images[imageIndex].image}
-              setShowModal={setShowModal}
-              setImageIndex={setImageIndex}
-              imageIndex={imageIndex}
-              length={data?.images.length}
-            />
-          </View>
-        </CustomModal>
-      )}
       <HomeHeader
         navigation={navigation}
-        title={data?.name.slice(0, 20) + "..." || "Details " + data.id}
+        title={data.title || "Details " + data.id}
         back={navigation.goBack}
       />
+      <DetailsImage images={data.images} />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            backgroundColor: "#000",
-            padding: 10,
-            borderRadius: 5,
-          }}
-        >
-          <Text
+        <View style={{ marginTop: 20 }}>
+          <View
             style={{
-              color: "#fff",
-              fontSize: 20,
-              fontWeight: "bold",
+              backgroundColor: "#000",
+              padding: 10,
+              borderRadius: 5,
             }}
           >
-            {data?.name}
-          </Text>
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: 20,
+                fontWeight: "bold",
+              }}
+            >
+              {data.title.toUpperCase()}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              padding: 10,
+              marginTop: 10,
+            }}
+          >
+            {data.description.map((desc: any, index: number) => (
+              <Text
+                key={index}
+                style={{
+                  fontSize: 18,
+                  color: "gray",
+                  textAlign: "justify",
+                  marginVertical: 10,
+                }}
+              >
+                {desc}
+              </Text>
+            ))}
+          </View>
         </View>
-        <DetailsImage
-          modal={modal}
-          setShowModal={setShowModal}
-          imageIndex={imageIndex}
-          setImageIndex={setImageIndex}
-          slice={slice}
-          setSlice={setSlice}
-          images={data.images}
-        />
       </ScrollView>
     </>
   );

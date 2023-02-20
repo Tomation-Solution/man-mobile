@@ -58,6 +58,7 @@ const LatestUpdatesNav = () => {
   return (
     <View style={[styles.container, section]}>
       <Text style={[sectionHeaderText]}>Latest Updates</Text>
+      {/* Todo: fix scrolling  */}
       <ScrollView
         pagingEnabled
         horizontal={true}

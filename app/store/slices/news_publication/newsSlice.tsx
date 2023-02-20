@@ -58,35 +58,39 @@ const {
 
 export default newsSlice.reducer;
 
-export const getNews = () => async (dispatch: AppDispatch) => {
-  try {
-    const getToken: any = await retrieveUserDetails();
+export const getNews =
+  (environment?: string, id?: number) => async (dispatch: AppDispatch) => {
+    try {
+      const getToken: any = await retrieveUserDetails();
 
-    if (getToken && getToken.token) {
-      const token = getToken.token;
+      if (getToken && getToken.token) {
+        const token = getToken.token;
 
-      dispatch(
-        apiCallBegan({
-          url:
-            PRE_URL +
-            "news/newsview/get_news/?for_members=True&is_for_all_grade=True",
-          extraheaders: "Token " + token,
-          method: "get",
-          onStart: newsRequested.type,
-          onSuccess: newsReceived.type,
-          onError: newsRequestFailed.type,
-        })
-      );
-    } else {
-      const error = new Error("Unable to retrieve user token");
-      console.error(error);
+        dispatch(
+          apiCallBegan({
+            url:
+              environment && id
+                ? PRE_URL +
+                  `news/newsview/get_news/?not_council=True&not_commitee=True&not_chapters=True&${environment}=${id}`
+                : PRE_URL +
+                  `news/newsview/get_news/?not_council=True&not_commitee=True&not_chapters=True`,
+            extraheaders: "Token " + token,
+            method: "get",
+            onStart: newsRequested.type,
+            onSuccess: newsReceived.type,
+            onError: newsRequestFailed.type,
+          })
+        );
+      } else {
+        const error = new Error("Unable to retrieve user token");
+        console.error(error);
+        dispatch(newsRequestFailed(error.message));
+      }
+    } catch (error: any) {
+      console.error("An error occured getting news", error);
       dispatch(newsRequestFailed(error.message));
     }
-  } catch (error: any) {
-    console.error("An error occured getting news", error);
-    dispatch(newsRequestFailed(error.message));
-  }
-};
+  };
 
 export const getComments =
   (newsId: string) => async (dispatch: AppDispatch) => {

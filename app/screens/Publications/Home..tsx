@@ -7,22 +7,31 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getPublication } from "../../store/slices/news_publication/publicationSlice";
 import LoadingIndicator from "../../utils/LoadingIndicator";
 
-const Home = ({ navigation }: any) => {
+const Home = ({ navigation, environment }: any) => {
   const dispatch = useAppDispatch();
   const { publications, loading } = useAppSelector(
     (state) => state.newsPublication.publication
   );
 
   useEffect(() => {
-    dispatch(getPublication());
-  }, []);
+    if (environment?.environment && environment?.id) {
+      dispatch(getPublication(environment.environment, environment.id));
+    } else {
+      dispatch(getPublication());
+    }
+  }, [environment]);
 
   return (
     <View>
       <HomeHeader navigation={navigation} title={"Publications"} />
 
       <SearchBar hasFilter />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={{
+          marginBottom: 150,
+        }}
+        showsVerticalScrollIndicator={false}
+      >
         <View
           style={{
             marginTop: 20,

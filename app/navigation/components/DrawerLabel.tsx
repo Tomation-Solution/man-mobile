@@ -3,6 +3,7 @@ import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLORS } from "../../constants/color";
+import { EnvironmentContext } from "../DrawerNav";
 
 interface DrawerLabelProps {
   focused: boolean;
@@ -13,6 +14,13 @@ interface DrawerLabelProps {
   subMenus?: any;
   navigation?: any;
   isAnAction?: any;
+  hasSwitchMenu?: any;
+  menuOn?: string;
+  setMenuOn?: any;
+  name?: string;
+  environment?: any;
+  setEnvironment?: any;
+  hasChapter?: boolean;
 }
 
 const DrawerLabel = ({
@@ -24,24 +32,93 @@ const DrawerLabel = ({
   navigation,
   subMenus,
   isAnAction,
+  hasSwitchMenu,
+  menuOn,
+  setMenuOn,
+  name,
+  environment,
+  setEnvironment,
+  hasChapter,
 }: DrawerLabelProps) => {
   const [showSubMenus, setShowSubMenus] = React.useState(false);
-  const [on, setOn] = React.useState(false);
+  const [switchMenuActive, setSwitchMenuActive] = React.useState<
+    number | string
+  >();
+  const [switchMenu, setSwitchMenu] = React.useState<any>(false);
+
+  const handleSwitchMenu = (
+    id: number,
+    environment?: string,
+    specialCase?: boolean
+  ) => {
+    if (specialCase) {
+      if (switchMenuActive === id - 1) {
+        setSwitchMenuActive("");
+        setEnvironment(() => {
+          return { environment: "", id: "" };
+        });
+      } else {
+        setSwitchMenuActive(id - 1);
+        setEnvironment(() => {
+          return { environment: environment, id: id };
+        });
+      }
+    } else {
+      if (switchMenuActive === id) {
+        setSwitchMenuActive("");
+        setEnvironment(() => {
+          return { environment: "", id: "" };
+        });
+      } else {
+        setSwitchMenuActive(id);
+        setEnvironment(() => {
+          return { environment: name, id: id };
+        });
+      }
+    }
+  };
+
+  const handleOnPress = () => {
+    // if (!hasSwitchMenu) return;
+    if (hasSwitch) {
+      if (menuOn === title) {
+        setMenuOn("");
+        setSwitchMenuActive("");
+      } else {
+        setMenuOn(title);
+        setSwitchMenuActive("");
+      }
+    } else if (hasSubMenus) {
+      setShowSubMenus(!showSubMenus);
+    } else if (isAnAction) {
+      isAnAction();
+    } else {
+      navigation.navigate(title);
+    }
+  };
+
+  const envnSwtichHandler = (id: number) => {
+    setSwitchMenu(!switchMenu);
+    console.log(environment);
+    if (switchMenu) {
+      setMenuOn("");
+      setSwitchMenuActive("");
+      setEnvironment(() => {
+        return { environment: "", id: "" };
+      });
+    } else {
+      setMenuOn(title);
+      setEnvironment(() => {
+        return { environment: name, id: id };
+      });
+    }
+  };
+
   return (
     <>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => {
-          if (hasSwitch) {
-            setOn(!on);
-          } else if (hasSubMenus) {
-            setShowSubMenus(!showSubMenus);
-          } else if (isAnAction) {
-            isAnAction();
-          } else {
-            navigation.navigate(title);
-          }
-        }}
+        onPress={handleOnPress}
         style={{ flexDirection: "row" }}
       >
         <View
@@ -74,14 +151,29 @@ const DrawerLabel = ({
             </Text>
           </View>
 
-          {hasSwitch && (
-            <TouchableOpacity onPress={() => setOn(!on)}>
+          {hasSwitch && hasSwitchMenu && (
+            <TouchableOpacity onPress={() => setSwitchMenu(!switchMenu)}>
               <MaterialCommunityIcons
-                name={on ? "toggle-switch-off" : "toggle-switch"}
-                size={30}
-                color={on ? "gray" : COLORS.primary}
+                name={showSubMenus ? "chevron-up" : "chevron-down"}
+                size={20}
+                color={COLORS.primary}
               />
             </TouchableOpacity>
+          )}
+
+          {/* here is the code for the switch menu  */}
+          {hasSwitch && !hasSwitchMenu && (
+            <View style={{}}>
+              <TouchableOpacity onPress={() => envnSwtichHandler(1)}>
+                <MaterialCommunityIcons
+                  name={
+                    menuOn === title ? "toggle-switch" : "toggle-switch-off"
+                  }
+                  size={30}
+                  color={menuOn === title ? COLORS.primary : "gray"}
+                />
+              </TouchableOpacity>
+            </View>
           )}
 
           {hasSubMenus && (
@@ -135,6 +227,87 @@ const DrawerLabel = ({
             );
           })}
         </View>
+      )}
+
+      {menuOn === title && hasSwitchMenu && (
+        <>
+          {hasChapter && (
+            <TouchableOpacity
+              onPress={() => handleSwitchMenu(1, "chapter", true)}
+              activeOpacity={0.7}
+              style={{
+                marginVertical: 6,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                paddingHorizontal: 15,
+                paddingVertical: 10,
+                paddingLeft: 35,
+                width: "100%",
+                marginBottom: 10,
+              }}
+            >
+              <Text
+                style={{
+                  color: COLORS.primary,
+                  fontWeight: switchMenuActive === 0 ? "bold" : "normal",
+                  fontSize: 18,
+                  marginLeft: 10,
+                }}
+              >
+                Chapter Environment
+              </Text>
+              <MaterialCommunityIcons
+                name={
+                  switchMenuActive === 0 ? "toggle-switch" : "toggle-switch-off"
+                }
+                size={30}
+                color={switchMenuActive === 0 ? COLORS.primary : "gray"}
+              />
+            </TouchableOpacity>
+          )}
+          {hasSwitchMenu.map((item: any) => {
+            return (
+              <TouchableOpacity
+                onPress={() => handleSwitchMenu(item.id)}
+                activeOpacity={0.7}
+                key={item.id}
+                style={{
+                  marginVertical: 6,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  paddingHorizontal: 15,
+                  paddingVertical: 10,
+                  paddingLeft: 35,
+                  width: "100%",
+                  marginBottom: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    color: COLORS.primary,
+                    fontWeight:
+                      switchMenuActive === item.id ? "bold" : "normal",
+                    fontSize: 18,
+                    marginLeft: 10,
+                  }}
+                >
+                  {item.name}
+                </Text>
+                <MaterialCommunityIcons
+                  name={
+                    switchMenuActive === item.id
+                      ? "toggle-switch"
+                      : "toggle-switch-off"
+                  }
+                  size={30}
+                  color={switchMenuActive === item.id ? COLORS.primary : "gray"}
+                />
+              </TouchableOpacity>
+            );
+          })}
+        </>
       )}
     </>
   );

@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { GalleryCard, HomeHeader, SearchBar } from "../../components";
-import { images } from "../../assets/dummyData";
 import { ScrollView } from "react-native-gesture-handler";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { loadGallery } from "../../store/slices/gallery/gallerySlice";
@@ -36,6 +35,7 @@ const Home = ({ navigation }: any) => {
             <>
               {galleryData?.data?.data?.map((gallery: any, index: any) => (
                 <GalleryCard
+                  key={index}
                   image={gallery.images[0].image}
                   name={gallery.name}
                   onPress={() => navigation.navigate("Details", { gallery })}

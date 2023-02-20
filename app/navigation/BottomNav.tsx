@@ -11,7 +11,7 @@ import PrivateChat from "../screens/Home/Chat/PrivateChat";
 
 const Tab = createBottomTabNavigator();
 
-const BottomNav = () => {
+const BottomNav = ({ environment }: any) => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -37,8 +37,9 @@ const BottomNav = () => {
           ),
         }}
         name="HomeScreen"
-        component={HomeScreen}
-      />
+      >
+        {(props) => <HomeScreen environment={environment} {...props} />}
+      </Tab.Screen>
       <Tab.Screen
         options={{
           tabBarStyle: { display: "none" },

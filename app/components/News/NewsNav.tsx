@@ -4,20 +4,23 @@ import { COLORS } from "../../constants/color";
 import { Globalstyles } from "../../globals/styles";
 import { ScrollView } from "react-native-gesture-handler";
 import NewsCard from "./NewsCard";
-import { news } from "../../assets/dummyData/news";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getNews } from "../../store/slices/news_publication/newsSlice";
 import LoadingIndicator from "../../utils/LoadingIndicator";
 
-const NewsNav = ({ navigation }: any) => {
+const NewsNav = ({ navigation, environment }: any) => {
   const dispatch = useAppDispatch();
   const { news, loading } = useAppSelector(
     (state) => state.newsPublication.news
   );
 
   useEffect(() => {
-    dispatch(getNews());
-  }, []);
+    if (environment.environment && environment.id) {
+      dispatch(getNews(environment.environment, environment.id));
+    } else {
+      dispatch(getNews());
+    }
+  }, [environment]);
 
   return (
     <View style={Globalstyles.section}>

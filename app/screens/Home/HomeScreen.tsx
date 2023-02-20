@@ -1,4 +1,4 @@
-import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import React from "react";
 import {
   Container,
@@ -9,7 +9,7 @@ import {
 } from "../../components";
 import NewsNav from "../../components/News/NewsNav";
 
-const HomeScreen = ({ navigation }: any) => {
+const HomeScreen = ({ navigation, environment }: any) => {
   return (
     <Container>
       <HomeHeader navigation={navigation} />
@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }: any) => {
         <SearchBar />
         <LatestUpdatesNav />
         <FeedsNav navigation={navigation} />
-        <NewsNav navigation={navigation} />
+        <NewsNav environment={environment} navigation={navigation} />
       </ScrollView>
     </Container>
   );

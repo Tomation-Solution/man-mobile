@@ -6,13 +6,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { HomeScreen } from "../screens";
 import Chat from "../screens/Home/Chat/Chat";
 import { Account } from "../screens/Home";
+import Memebers from "../screens/Home/Members/Memebers";
+import PrivateChat from "../screens/Home/Chat/PrivateChat";
 import Members from "../screens/Home/Members/Members";
 import Excos from "../screens/Excos/Excos";
 import Donation from "../screens/Donation/Donation";
 
 const Tab = createBottomTabNavigator();
 
-const BottomNav = () => {
+const BottomNav = ({ environment }: any) => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -38,10 +40,13 @@ const BottomNav = () => {
           ),
         }}
         name="HomeScreen"
-        component={HomeScreen}
-      />
+      >
+        {(props) => <HomeScreen environment={environment} {...props} />}
+      </Tab.Screen>
       <Tab.Screen
         options={{
+          tabBarStyle: { display: "none" },
+
           tabBarIcon: ({ color }) => (
             <Ionicons name="chatbox" color={color} size={28} />
           ),

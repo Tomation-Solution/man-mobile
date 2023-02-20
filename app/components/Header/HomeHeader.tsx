@@ -1,16 +1,32 @@
 import { View, Text, StyleSheet, Image } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { images } from "../../assets/dummyData";
 import { horizontalScale, verticalScale } from "../../constants/metric";
 import { COLORS } from "../../constants/color";
 import { SPACING } from "../../globals/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { retrieveUserDetails } from "../../utils/helperFunctions/userDataHandlers";
+import { useAppSelector } from "../../store/hooks";
 
 interface Props {
-  navigation: any;
-  title?: string;
+  navigation?: any;
+  title?: any;
   back?: any;
+  isTitleComponent?: any;
+}
+const HomeHeader = ({ navigation, title, back, isTitleComponent }: Props) => {
+  const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
+  const [userData, setUserData] = useState<{ userName: string } | null>(null);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      retrieveUserDetails().then((data: any) => {
+        setUserData(data);
+      });
+    }
+  }, [isLoggedIn]);
+
   titleColor?: string;
 }
 const HomeHeader = ({ navigation, title, back, titleColor }: Props) => {
@@ -29,16 +45,21 @@ const HomeHeader = ({ navigation, title, back, titleColor }: Props) => {
         />
       </TouchableOpacity>
 
+      {isTitleComponent ? (
+        isTitleComponent
+      ) : title ? (
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>{title}</Text>
       {title ? (
         <Text style={{ fontSize: 20, fontWeight: "bold", color: titleColor }}>
           {title}
         </Text>
       ) : (
         <>
-          <Text style={{ fontSize: 16, fontWeight: "500" }}>
-            Welcome, Tomiwa Ayandele
-          </Text>
           <View>
+            <Text style={{ fontSize: 13, fontWeight: "500" }}>Welcome,</Text>
+            <Text>{isLoggedIn && userData?.userName}</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
             <View style={styles.imageContainer}>
               <Image
                 source={images.man}
@@ -48,13 +69,16 @@ const HomeHeader = ({ navigation, title, back, titleColor }: Props) => {
                 }}
               />
             </View>
-          </View>
+          </TouchableOpacity>
         </>
       )}
-      <View style={styles.notificationContainer}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Notification")}
+        style={styles.notificationContainer}
+      >
         <FontAwesome name="bell" color={COLORS.primary} size={20} />
         <View style={styles.redDot} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

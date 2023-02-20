@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { events } from "../../../assets/dummyData/event";
-import { EventCard } from "../../../components";
+import EventCard from "../../../components/Events/EventCard";
 
 const Staff = ({ navigation }: any) => {
   return (

@@ -27,12 +27,15 @@ const HomeHeader = ({ navigation, title, back, isTitleComponent }: Props) => {
     }
   }, [isLoggedIn]);
 
+  titleColor?: string;
+}
+const HomeHeader = ({ navigation, title, back, titleColor }: Props) => {
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
-          back ? back() : navigation.openDrawer();
+          back ? navigation.goBack() : navigation.openDrawer();
         }}
       >
         <Ionicons
@@ -46,6 +49,10 @@ const HomeHeader = ({ navigation, title, back, isTitleComponent }: Props) => {
         isTitleComponent
       ) : title ? (
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>{title}</Text>
+      {title ? (
+        <Text style={{ fontSize: 20, fontWeight: "bold", color: titleColor }}>
+          {title}
+        </Text>
       ) : (
         <>
           <View>

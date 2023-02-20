@@ -39,6 +39,7 @@ const newsSlice = createSlice({
     commentReceived: (state, action) => {
       state.commenstLoading = false;
       state.comments = action.payload;
+      console.log("action.payload", action.payload);
     },
 
     commentRequestFailed: (state, action) => {
@@ -105,6 +106,66 @@ export const getComments =
             url: PRE_URL + `news/newsview__comment/?news_id=${newsId}`,
             extraheaders: "Token " + token,
             method: "get",
+            onStart: commentRequested.type,
+            onSuccess: commentReceived.type,
+            onError: commentRequestFailed.type,
+          })
+        );
+      } else {
+        const error = new Error("Unable to retrieve user token");
+        console.error(error);
+        dispatch(commentRequestFailed(error.message));
+      }
+    } catch (error: any) {
+      console.error("An error occured getting comments", error);
+      dispatch(commentRequestFailed(error.message));
+    }
+  };
+
+export const createComment =
+  (newsId: string, comment: string) => async (dispatch: AppDispatch) => {
+    try {
+      const getToken: any = await retrieveUserDetails();
+
+      if (getToken && getToken.token) {
+        const token = getToken.token;
+        dispatch(
+          apiCallBegan({
+            url: PRE_URL + `news/newsview__comment/`,
+            extraheaders: "Token " + token,
+            method: "post",
+            data: {
+              news: newsId,
+              comment: comment,
+            },
+            onStart: commentRequested.type,
+            onSuccess: commentReceived.type,
+            onError: commentRequestFailed.type,
+          })
+        );
+      } else {
+        const error = new Error("Unable to retrieve user token");
+        console.error(error);
+        dispatch(commentRequestFailed(error.message));
+      }
+    } catch (error: any) {
+      console.error("An error occured getting comments", error);
+      dispatch(commentRequestFailed(error.message));
+    }
+  };
+
+export const deleteComment =
+  (commentId: string) => async (dispatch: AppDispatch) => {
+    try {
+      const getToken: any = await retrieveUserDetails();
+
+      if (getToken && getToken.token) {
+        const token = getToken.token;
+        dispatch(
+          apiCallBegan({
+            url: PRE_URL + `news/newsview__comment/${commentId}/`,
+            extraheaders: "Token " + token,
+            method: "delete",
             onStart: commentRequested.type,
             onSuccess: commentReceived.type,
             onError: commentRequestFailed.type,

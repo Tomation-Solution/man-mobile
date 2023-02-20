@@ -101,7 +101,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
 
   const [userComment, setUserComment] = React.useState("");
 
-  const { comments, commenstLoading } = useAppSelector(
+  const { comments, commenstLoading, news } = useAppSelector(
     (state) => state.newsPublication.news
   );
 
@@ -129,7 +129,8 @@ const Details = ({ route, navigation }: DetailsProps) => {
 
   useEffect(() => {
     dispatch(getComments(data.id));
-  }, []);
+    console.log(data.id);
+  }, [navigation, data.id, dispatch]);
 
   return (
     <>

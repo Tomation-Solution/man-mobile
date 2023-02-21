@@ -20,7 +20,7 @@ const NewsNav = ({ navigation, environment }: any) => {
     } else {
       dispatch(getNews());
     }
-  }, [environment]);
+  }, [environment, navigation]);
 
   return (
     <View style={Globalstyles.section}>

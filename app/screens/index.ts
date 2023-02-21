@@ -15,8 +15,8 @@ export { default as OnAccountSuccess } from "./Account/components/OnSucessScreen
 export { default as OnSuccessScreen } from "./Account/components/OnSucessScreen/OnSucess";
 export { default as OnPasswordSuccess } from "./Account/components/OnSucessScreen/OnPasswordSuccess";
 export { default as PaymentDetails } from "./PaymentDetails/PaymenScreen";
-export { default as CompletedPayment } from "./PaymentDetails/Tabs/CompletedPaymen";
-export { default as PendingPayment } from "./PaymentDetails/Tabs/PendingPayment";
+// export { default as CompletedPayment } from "./PaymentDetails/Tabs/CompletedPaymen";
+// export { default as PendingPayment } from "./PaymentDetails/Tabs/PendingPayment";
 
 export { default as FagList } from "./Support/FAQ/Home";
 

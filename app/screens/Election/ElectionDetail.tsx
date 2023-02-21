@@ -1,7 +1,10 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, } from 'react-native'
 import { useEffect, useState } from 'react'
-import { Container, HomeHeader } from '../../components';
+import { Container, HomeHeader,CustomModal } from '../../components';
 import * as Progress from 'react-native-progress';
+import { COLORS } from "../../constants/color";
+import { horizontalScale, verticalScale } from "../../constants/metric";
+import Error from './component/OnConfirmStatus';
 
 
 
@@ -11,86 +14,82 @@ interface ElectionDetailsProps {
 }
 
 const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const onModalPress = () => { setModalVisible(!modalVisible); };
+
     const profile = route.params.profile;
-    // const [votesReceived, setVotesReceived] = useState(0);
-    // const [totalVotes, setTotalVotes] = useState(0);
     const [progress, setProgress] = useState(1);
-
-    // useEffect(() => {
-    // setProgress((votesReceived / totalVotes) * 100);
-    // }, [votesReceived, totalVotes]);
-
 
 
     return (
         <ScrollView>
             <Container>
-                <HomeHeader
+            <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
+              {/* <NotificationModal onPress={onModalPress} /> */}
+             <Error    onPress={modalVisible}/>
+            </CustomModal>
+            <HomeHeader
                     navigation={navigation}
                     title={profile.title || "Details " + profile.id}
                     back={navigation.goBack}
                 />
-                <Text style={styles.electionTitle}> {profile.name} an Aspirant for the position of {profile.position}.Man</Text>
-                <View style={{ flex: 1, flexDirection: 'column' }}>
-                    <View style={styles.ElectionBody}>
-                        <View style={styles.Electioncolumn} >
-                            <Image
-                                style={styles.electionimg}
-                                source={profile.images[2]}
-                            />
-                            <View style={styles.electionrow2}>
-                                <TouchableOpacity style={styles.votingbtn}>
-                                    <Text style={styles.btnText}> Vote</Text>
-                                </TouchableOpacity>
 
-                                <View style={{ marginLeft: 10 }} >
-                                    <Progress.Bar
-                                        width={86}
-                                        height={12}
+                        <Text style={styles.electionTitle}> {profile.name} an Aspirant for the position of {profile.position}.Man</Text>
+                        <View style={styles.newsCabinet}>
+                    <View style={styles.newsImageActionContainer}>
+                    <View style={styles.newsImageContainer}>
+                            <Image
+                                source={profile.images[1]}
+                                resizeMode="cover"
+                                style={ styles.electionImage}
+                            />
+                        </View>
+                        </View>
+                        </View>
+
+
+                <View style={styles.containerflex}>
+              <View style={styles.contianer}>
+                                              <Progress.Bar
+                                        width={300}
+                                        height={20}
                                         progress={progress}
                                         color={'#5cb85c'}
                                         borderRadius={5}
                                         borderColor={'#5cb85c'}
                                     />
-                                    <Text style={styles.text}>{`${(progress * 2).toFixed(0)}% of 100% (200 Votes)`}</Text>
+              </View>
 
+        <View style={styles.rowSection}>
 
-                                </View>
+        <Text style={styles.voteProgress}> {`${(progress * 2).toFixed(0)}% of 100% (200 Votes)`} </Text>
 
-                            </View>
-                        </View>
+          <TouchableOpacity
+            onPress={() => onModalPress() }
+             style={styles.votingbtn}
+            >
+            <Text style={styles.voteText}>Vote</Text>
+          </TouchableOpacity>
 
-                        <View style={styles.electionrow}>
+                </View>
+            </View>
+                                <View style={styles.electionrow}>
                             <View>
-                                <Text style={styles.Bio}> Bio</Text>
-                                <Text style={styles.biotext}> {profile.name} an Aspirant for the position of {profile.position}.Man </Text>
-                                <Text style={styles.biotext}> {profile.name} an Aspirant for the position of {profile.position}.Man </Text>
-                                <Text style={styles.biotext}> {profile.name} an Aspirant for the position of {profile.position}.Man </Text>
-                                <Text style={styles.biotext}> {profile.name} an Aspirant for the position of {profile.position}.Man </Text>
-                                <Text style={styles.biotext}> {profile.name} an Aspirant for the position of {profile.position}.Man </Text>
+                                <Text style={styles.Bio}> Bio </Text>
+                                <Text style={[styles.biotext]}>{profile.name} an Aspirant for the position of {profile.position}.Man
+                                {profile.description}
+                                 </Text>
                             </View>
                         </View>
-                    </View>
 
                     <View style={styles.detailssection}>
                         <Text style={styles.sectiontitle} > Manifesto</Text>
-                        <Text>{profile.description} </Text>
+                        <Text style={styles.destailsText}>{profile.description} </Text>
                         <TouchableOpacity>
-                            <Text style={{ fontSize: 15, lineHeight: 18, color: '#2b3513', marginVertical: 5, fontWeight: '600', textAlign: 'left' }}> Download full Manifesto</Text>
+                            <Text style={{ fontSize: 14, lineHeight: 14, color: '#2b3513', marginVertical: 18, fontWeight: '500', paddingBottom:10,textDecorationLine:'underline' }}> Download full Manifesto</Text>
                         </TouchableOpacity>
                     </View>
-
-                    <View style={styles.vidsection}>
-                        <View>
-                            <Image source={profile.images[2]} style={{ flex: 0.5, width: 150, height: 103, borderRadius: 10 }} />
-                            <Text> </Text>
-                        </View>
-                        <View >
-                            <Image source={profile.images[1]} style={{ flex: 0.5, width: 150, height: 103, borderRadius: 10 }} />
-                            <Text> </Text>
-                        </View>
-                    </View>
-                </View>
             </Container>
         </ScrollView>
 
@@ -106,89 +105,114 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         lineHeight: 18,
     },
-    ElectionBody: {
-        flex: 1,
-        flexDirection: 'row',
-        marginTop: 30,
-    },
-    text: {
-        fontSize: 9,
-        marginTop: 10,
-        fontWeight: '700',
-        lineHeight:10,
-    },
-    Electioncolumn: {
-        flexDirection: 'column',
-        flex: 0.6
-    },
-    electionrow: {
-        flexDirection: 'row',
-        flex: 0.5
-    },
-    electionrow2: {
-        flexDirection: 'row',
-        marginVertical: 10,
-        flex: 0.5
+    newsCabinet: {
+        marginVertical: 15,
 
     },
-    electionimg: {
-        width: 160,
-        height: 191,
-        borderRadius: 6,
-        shadowColor: '#171717',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
-        elevation: 3
+    newsImageActionContainer: {
+        position: "relative",
     },
-    votingbtn: {
-        // width: 96,
-        // height: 34,
-        paddingVertical: 11,
-        borderColor: '#2b3513',
+    newsImageContainer: {
+        borderTopStartRadius: 10,
+        borderTopEndRadius: 10,
+        overflow: "hidden",
+        position: "relative",
+    },
+    electionImage:{
+        width: "94%",
+        elevation: 4,
+        height: 200,
+        justifyContent:'center',
+        alignSelf:"center",
+        shadowColor: "black",
+        borderRadius: 10,
+        shadowOpacity: 0.5,
+        shadowRadius: 20,
+        shadowOffset: { width: 0, height: 3 },
+    },
+
+    containerflex: {
         borderRadius: 4,
-        borderWidth: 1,
-        paddingHorizontal: 20,
-    },
-    btnText: {
-        fontSize: 11,
-        textAlign: 'center',
-        fontWeight: '500'
-    },
-    votesection: {
-    },
-    Bio: {
-        fontWeight: '400',
-        fontSize: 20
-    },
-    biotext: {
-        fontSize: 11,
-        textAlign: 'center',
-        lineHeight:19,
+        padding: 10,
+        marginVertical: 0,
+      },
+      contianer: {},
 
-    },
-    sectiontitle: {
-        fontSize: 20,
-        fontWeight: '400',
-        textAlign: 'left',
-        marginVertical: 10
+      rowSection: {
+        flexDirection:'column',
+        alignItems: 'flex-start',
+        borderRadius:100,
+        marginBottom:10
+      },
+      votingbtn: {
+        marginVertical:0,
+        borderColor: "#2b3513",
+        borderRadius: 4,
+        borderWidth: 2,
+        paddingHorizontal:39,
+        paddingVertical:8,
+        alignItems: 'flex-end',
+        alignSelf:'flex-end',
+        justifyContent:'flex-end',
+      },
 
-    },
-    sectiontxt: {
-        fontSize: 14,
-        fontWeight: '400',
-        textAlign: 'center',
-        lineHeight: 20,
+      voteText:{
+        fontSize: 13,
+        textAlign: "center",
+        fontWeight: "500",
+        alignItems:'center',
+        color:'#2b3513',
+            },
+            voteProgress:{
+                marginVertical:10,
+                fontSize:14,
+                fontWeight:'400'
 
-    },
-    vidsection: {
-        flexDirection: 'row',
-        flex: 1,
-        justifyContent: 'space-between',
-        marginVertical: 20,
-    },
-    detailssection: {
+            },
+            electionrow: {
+                flexDirection: 'column',
+                flex: 0.5,
+                borderRadius:6,
+                justifyContent:'flex-start',
+                alignItems:'flex-start',
+                backgroundColor:COLORS.primary,
+            },
+            Bio: {
+                fontWeight: '400',
+                fontSize: 19,
+                textAlign:'justify',
+                color:"#fff"
+            },
+            biotext: {
+                fontSize: 14,
+                textAlign: 'justify',
+                lineHeight:19,
+                padding:5,
+                marginVertical: 5,
+                color:"#fff"
+            },
+            sectiontitle: {
+                fontSize: 19,
+                fontWeight: '400',
+                textAlign: 'center',
+                marginVertical: 5
 
-    },
-
+            },
+            sectiontxt: {
+                fontSize: 14,
+                fontWeight: '400',
+                textAlign: 'center',
+                lineHeight: 20,
+            },
+            detailssection:{
+           justifyContent:'center',
+           alignItems:'flex-start',
+           marginVertical:15
+            },
+              destailsText:{
+                fontSize: 14 ,
+                textAlign: 'justify',
+                lineHeight:19,
+                padding:5,
+              },
 });

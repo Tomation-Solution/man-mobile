@@ -13,10 +13,12 @@ interface VoteProps {
 const Vote = ({ onPress }: VoteProps) => {
   return (
     <View style={Globalstyles.modalContainer}>
+      <View style={{display:'flex'}}>
       <Text
         style={{
           fontSize: 20,
           fontWeight: "500",
+
         }}
       >
         Vote
@@ -24,8 +26,10 @@ const Vote = ({ onPress }: VoteProps) => {
       <Text
         style={{
           marginVertical: 15,
-          textAlign: "center",
-          fontSize: 16,
+          textAlign: "justify",
+          fontSize: 15,
+          paddingVertical:6
+
         }}
       >
         Please confirm that you are willing vote for Mr. kunle
@@ -34,22 +38,25 @@ const Vote = ({ onPress }: VoteProps) => {
 
 
 
-<View style={{display:'flex',flexDirection:'row'}}>
+<View style={{display:'flex',flexDirection:'row', }}>
 <Text
         style={{
-          marginVertical: 15,
-          textAlign: "center",
-          fontSize: 17,
-          fontWeight:'900'
+          textAlign: "justify",
+          fontSize: 16,
+          fontWeight:'900',
+          paddingVertical:6,
+          marginVertical:1
+
         }}
       >
         Note:
       </Text>
       <Text
         style={{
-          marginVertical: 15,
-          textAlign: "center",
-          fontSize: 16,
+          // marginVertical: 13,
+          textAlign: "justify",
+          fontSize: 13,
+          marginLeft:5
         }}
       >
         you can only vote once for this position
@@ -57,14 +64,15 @@ const Vote = ({ onPress }: VoteProps) => {
 </View>
 
 
-<View style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
+<View style={{display:'flex',flexDirection:'row',justifyContent:'space-around', paddingVertical:10
+}}>
 <TouchableOpacity
       onPress={onPress}
         style={{
           backgroundColor: COLORS.primary,
           padding: 10,
           borderRadius: 10,
-          width: "50%",
+          width: "40%",
           alignItems: "center",
         }}
       >
@@ -74,7 +82,6 @@ const Vote = ({ onPress }: VoteProps) => {
           style={{
             color: "white",
             fontWeight: "500",
-
             width: "100%",
             textAlign: "center",
           }}
@@ -85,20 +92,20 @@ const Vote = ({ onPress }: VoteProps) => {
             <TouchableOpacity
       onPress={onPress}
         style={{
-          backgroundColor: COLORS.primary,
+          // backgroundColor: COLORS.primary,
           padding: 10,
           borderRadius: 10,
-          width: "50%",
+          width: "40%",
           alignItems: "center",
+          borderColor: COLORS.primary,
+          borderWidth:2
         }}
       >
 
         <Text
 
           style={{
-            color: "white",
             fontWeight: "500",
-
             width: "100%",
             textAlign: "center",
           }}
@@ -107,8 +114,9 @@ const Vote = ({ onPress }: VoteProps) => {
         </Text>
       </TouchableOpacity>
 </View>
+</View>
     </View>
   );
 };
 
-export default VoteProps;
+export default Vote;

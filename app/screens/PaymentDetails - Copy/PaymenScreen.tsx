@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from "react-native";
-import { Container, HomeHeader } from "../../../components";
+import { Container, HomeHeader } from "../../components";
+import CompletedPayment from "./Tabs/CompletedPaymen";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { COLORS } from "../../../constants/color";
-import {CompletedPayment, PendingPayment} from './Tabs';
+import PendingPayment from "./Tabs/PendingPayment";
+import { COLORS } from "../../constants/color";
 
 
 

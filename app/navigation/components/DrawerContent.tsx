@@ -171,7 +171,7 @@ const DrawerContent = ({
         focused={state?.index === null} // keep this as null for switches
         title="Logout"
         icon={<Ionicons name="log-out" size={20} color={COLORS.primary} />}
-        navigation={navigation}
+        // navigation={navigation}
       />
     </ScrollView>
   );

@@ -4,6 +4,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLORS } from "../../constants/color";
 import { EnvironmentContext } from "../DrawerNav";
+import { useAppDispatch } from "../../store/hooks";
+import { logout } from "../../store/slices/auth/loginSlice";
 
 interface DrawerLabelProps {
   focused: boolean;
@@ -45,6 +47,8 @@ const DrawerLabel = ({
     number | string
   >();
   const [switchMenu, setSwitchMenu] = React.useState<any>(false);
+
+  const dispatch = useAppDispatch();
 
   const handleSwitchMenu = (
     id: number,
@@ -93,7 +97,9 @@ const DrawerLabel = ({
     } else if (isAnAction) {
       isAnAction();
     } else {
-      navigation.navigate(title);
+      if (title === "Logout") {
+        dispatch(logout());
+      } else navigation.navigate(title);
     }
   };
 

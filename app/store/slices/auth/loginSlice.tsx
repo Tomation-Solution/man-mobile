@@ -33,10 +33,15 @@ const loginSlice = createSlice({
       state.loading = false;
       console.log("loginRequestFailed", action.payload);
     },
+    logUserOut: (state) => {
+      state.loading = false;
+      state.isLoggedIn = false;
+      state.userData = "";
+    },
   },
 });
 
-export const { loginRequested, loginReceived, loginRequestFailed } =
+const { loginRequested, loginReceived, loginRequestFailed, logUserOut } =
   loginSlice.actions;
 
 export default loginSlice.reducer;
@@ -56,17 +61,7 @@ export const login = (loginDetails: any) => (dispatch: AppDispatch) => {
 };
 
 export const logout = () => (dispatch: AppDispatch, getState: any) => {
-  if (getState().login.loading === true) return;
-
-  dispatch(
-    apiCallBegan({
-      url: PRE_URL + "/auth/logout",
-      method: "post",
-      onStart: loginRequested.type,
-      onSuccess: loginReceived.type,
-      onError: loginRequestFailed.type,
-    })
-  );
+  dispatch(logUserOut());
 };
 
 export const checkLogin = () => async (dispatch: AppDispatch) => {

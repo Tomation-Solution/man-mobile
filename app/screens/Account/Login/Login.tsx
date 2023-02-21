@@ -86,7 +86,7 @@ const LoginForm = ({ navigation }: any) => {
                         loading ? (
                           <ActivityIndicator size="small" color="white" />
                         ) : (
-                          "Register"
+                          "Login"
                         )
                       }
                     />

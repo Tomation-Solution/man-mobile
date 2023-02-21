@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, View } from "react-native";
 import React, { useEffect } from "react";
-import { Container, HomeHeader, SearchBar } from "../../components";
+import { HomeHeader, SearchBar } from "../../components";
 import EventCard from "../../components/Events/EventCard";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getEvents } from "../../store/slices/events/eventsSlice";
@@ -16,7 +16,7 @@ const Home = ({ navigation, environment }: any) => {
     } else {
       dispatch(getEvents());
     }
-  }, [environment]);
+  }, [environment, navigation]);
 
   return (
     <View style={styles.container}>

@@ -7,9 +7,13 @@ import { PRE_URL } from "../../../utils/ENV/envs";
 const initialState: {
   events: any;
   loading: boolean;
+  eventRescheduled: boolean;
+  eventNotRescheduled: boolean;
 } = {
   events: [],
   loading: false,
+  eventRescheduled: false,
+  eventNotRescheduled: false,
 };
 
 const eventsSlice = createSlice({
@@ -26,11 +30,30 @@ const eventsSlice = createSlice({
     eventRequestFailed: (state, action) => {
       state.loading = false;
     },
+    eventRescheduled: (state, action) => {
+      state.loading = false;
+      state.eventRescheduled = true;
+    },
+    eventNotRescheduled: (state, action) => {
+      state.loading = false;
+      state.eventNotRescheduled = true;
+    },
+    clearConfig: (state) => {
+      state.loading = false;
+      state.eventRescheduled = false;
+      state.eventNotRescheduled = false;
+    },
   },
 });
 
-const { eventsRequested, eventsReceived, eventRequestFailed } =
-  eventsSlice.actions;
+export const {
+  eventsRequested,
+  eventsReceived,
+  eventRequestFailed,
+  eventRescheduled,
+  eventNotRescheduled,
+  clearConfig,
+} = eventsSlice.actions;
 
 export default eventsSlice.reducer;
 
@@ -103,8 +126,6 @@ export const requestReschedule =
   (data: any) => async (dispatch: AppDispatch) => {
     try {
       const getToken: any = await retrieveUserDetails();
-      const form = new FormData();
-      form.append("event_id", data.event_id.toString());
 
       if (getToken && getToken.token) {
         const token = getToken.token;
@@ -113,12 +134,11 @@ export const requestReschedule =
           apiCallBegan({
             url: PRE_URL + `event/request-reschedule/`,
             extraheaders: "Token " + token,
-            form,
             data,
             method: "post",
             onStart: eventsRequested.type,
-            onSuccess: eventRequestFailed.type,
-            onError: eventRequestFailed.type,
+            onSuccess: eventRescheduled.type,
+            onError: eventNotRescheduled.type,
           })
         );
       } else {

@@ -29,10 +29,6 @@ const Details = ({ route, navigation }: any) => {
   const { loading } = useAppSelector((state) => state.events);
   const dispatch = useAppDispatch();
 
-  const handleReschedule = (data: any) => {
-    dispatch(requestReschedule(data));
-  };
-
   const onPress = () => {
     dispatch(registerEvents(data.id));
   };
@@ -40,7 +36,10 @@ const Details = ({ route, navigation }: any) => {
   return (
     <Container>
       <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
-        <Reschedule onPress={() => setModalVisible(!modalVisible)} />
+        <Reschedule
+          event_id={data.id}
+          onPress={() => setModalVisible(!modalVisible)}
+        />
       </CustomModal>
       <HomeHeader
         navigation={navigation}
@@ -310,7 +309,7 @@ const Details = ({ route, navigation }: any) => {
               marginTop: 10,
             }}
             activeOpacity={0.8}
-            onPress={() => setModalVisible(!modalVisible)}
+            onPress={onPress}
           >
             <Text
               style={{

@@ -103,6 +103,8 @@ export const requestReschedule =
   (data: any) => async (dispatch: AppDispatch) => {
     try {
       const getToken: any = await retrieveUserDetails();
+      const form = new FormData();
+      form.append("event_id", data.event_id.toString());
 
       if (getToken && getToken.token) {
         const token = getToken.token;
@@ -111,6 +113,7 @@ export const requestReschedule =
           apiCallBegan({
             url: PRE_URL + `event/request-reschedule/`,
             extraheaders: "Token " + token,
+            form,
             data,
             method: "post",
             onStart: eventsRequested.type,

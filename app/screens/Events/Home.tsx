@@ -4,6 +4,7 @@ import { Container, HomeHeader, SearchBar } from "../../components";
 import EventCard from "../../components/Events/EventCard";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getEvents } from "../../store/slices/events/eventsSlice";
+import LoadingIndicator from "../../utils/LoadingIndicator";
 
 const Home = ({ navigation, environment }: any) => {
   const dispatch = useAppDispatch();
@@ -36,16 +37,22 @@ const Home = ({ navigation, environment }: any) => {
           marginBottom: 100,
         }}
       >
-        {events?.data?.map((event: any, index: number) => (
-          <EventCard
-            key={index}
-            title={event.name}
-            date={event.startDate}
-            time={event.startTime}
-            image={event.image}
-            onPress={() => navigation.navigate("Details", { event })}
-          />
-        ))}
+        {loading ? (
+          <LoadingIndicator />
+        ) : (
+          <>
+            {events?.data?.map((event: any, index: number) => (
+              <EventCard
+                key={index}
+                title={event.name}
+                date={event.startDate}
+                time={event.startTime}
+                image={event.image}
+                onPress={() => navigation.navigate("Details", { event })}
+              />
+            ))}
+          </>
+        )}
       </ScrollView>
     </View>
   );

@@ -40,7 +40,7 @@ const Details = ({ route, navigation }: any) => {
   return (
     <Container>
       <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
-        <Reschedule onPress={onPress} />
+        <Reschedule onPress={() => setModalVisible(!modalVisible)} />
       </CustomModal>
       <HomeHeader
         navigation={navigation}
@@ -323,7 +323,7 @@ const Details = ({ route, navigation }: any) => {
               {loading ? (
                 <ActivityIndicator size="small" color="white" />
               ) : (
-                "res"
+                "Register"
               )}
             </Text>
           </TouchableOpacity>

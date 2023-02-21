@@ -31,7 +31,7 @@ const EventCard = ({ title, image, date, time, onPress }: EventCardProps) => {
         }}
       >
         <Image
-          source={image ? image : appImages.logo}
+          source={{ uri: image ? image.toString() : undefined }}
           style={{ width: "100%", height: 160 }}
           resizeMode="cover"
         />

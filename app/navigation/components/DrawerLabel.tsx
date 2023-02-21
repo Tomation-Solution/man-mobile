@@ -233,7 +233,7 @@ const DrawerLabel = ({
         <>
           {hasChapter && (
             <TouchableOpacity
-              onPress={() => handleSwitchMenu(1, "chapter", true)}
+              onPress={() => handleSwitchMenu(1, "chapters", true)}
               activeOpacity={0.7}
               style={{
                 marginVertical: 6,

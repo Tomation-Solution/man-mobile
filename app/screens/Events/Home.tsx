@@ -1,47 +1,22 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
+import React, { useEffect } from "react";
 import { Container, HomeHeader, SearchBar } from "../../components";
-import { COLORS } from "../../constants/color";
-import CompanyWide from "./EventTypes/CompanyWide";
-import Team from "./EventTypes/Team";
-import Staff from "./EventTypes/Staff";
+import EventCard from "../../components/Events/EventCard";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getEvents } from "../../store/slices/events/eventsSlice";
 
-const NavButton = ({
-  name,
-  active,
-  setActive,
-}: {
-  name: string;
-  active: string;
-  setActive: (name: string) => void;
-}) => {
-  const isActive = active === name;
-  return (
-    <TouchableOpacity
-      onPress={() => setActive(name)}
-      style={{
-        borderBottomColor: isActive ? COLORS.primary : "gray",
-        borderBottomWidth: 2,
-        paddingVertical: 6,
-        flex: 1,
-      }}
-    >
-      <Text
-        style={{
-          color: isActive ? COLORS.primary : "gray",
-          fontSize: 18,
-          fontWeight: "bold",
-          textAlign: "center",
-        }}
-      >
-        {name}
-      </Text>
-    </TouchableOpacity>
-  );
-};
+const Home = ({ navigation, environment }: any) => {
+  const dispatch = useAppDispatch();
+  const { events, loading } = useAppSelector((state) => state.events);
 
-const Home = ({ navigation }: any) => {
-  const [active, setActive] = React.useState("Company Wide");
+  useEffect(() => {
+    if (environment.environment && environment.id) {
+      dispatch(getEvents(environment.environment, environment.id));
+    } else {
+      dispatch(getEvents());
+    }
+  }, [environment]);
+
   return (
     <View style={styles.container}>
       <View
@@ -49,25 +24,29 @@ const Home = ({ navigation }: any) => {
           paddingHorizontal: 20,
         }}
       >
-        <HomeHeader title={`${active} Events`} navigation={navigation} />
+        <HomeHeader title={` Events`} navigation={navigation} />
         <SearchBar hasFilter />
       </View>
-      <View
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
         style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
+          paddingHorizontal: 20,
+          marginTop: 20,
+          marginBottom: 100,
         }}
       >
-        <NavButton name="Company Wide" active={active} setActive={setActive} />
-        <NavButton name="Team" active={active} setActive={setActive} />
-
-        <NavButton name="Staff" active={active} setActive={setActive} />
-      </View>
-      <View>
-        {active === "Company Wide" && <CompanyWide navigation={navigation} />}
-        {active === "Team" && <Team navigation={navigation} />}
-        {active === "Staff" && <Staff navigation={navigation} />}
-      </View>
+        {events?.data?.map((event: any, index: number) => (
+          <EventCard
+            key={index}
+            title={event.name}
+            date={event.startDate}
+            time={event.startTime}
+            image={event.image}
+            onPress={() => navigation.navigate("Details", { event })}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 };

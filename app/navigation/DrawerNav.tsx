@@ -66,7 +66,9 @@ const DrawerNav = () => {
         <Drawer.Screen name="Publications">
           {(props) => <Publications environment={environment} {...props} />}
         </Drawer.Screen>
-        <Drawer.Screen name="Events" component={Events} />
+        <Drawer.Screen name="Events">
+          {(props) => <Events environment={environment} {...props} />}
+        </Drawer.Screen>
         <Drawer.Screen name="Election" component={Election} />
         <Drawer.Screen name="Resources" component={Resources} />
         <Drawer.Screen name="Support" component={Support} />

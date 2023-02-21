@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Button,
   Image,
   StyleSheet,
@@ -13,20 +14,33 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../constants/color";
 import { ScrollView } from "react-native-gesture-handler";
 import Register from "./components/Register/Register";
+import { openExternalLink } from "../../utils/helperFunctions/openExternalLink";
+import {
+  registerEvents,
+  requestReschedule,
+} from "../../store/slices/events/eventsSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import Reschedule from "./components/Reschedule";
 
 const Details = ({ route, navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const altRoute = useRoute();
   const data = route?.params?.event || altRoute?.params || {};
+  const { loading } = useAppSelector((state) => state.events);
+  const dispatch = useAppDispatch();
+
+  const handleReschedule = (data: any) => {
+    dispatch(requestReschedule(data));
+  };
 
   const onPress = () => {
-    setModalVisible(!modalVisible);
+    dispatch(registerEvents(data.id));
   };
 
   return (
     <Container>
       <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
-        <Register onPress={onPress} />
+        <Reschedule onPress={onPress} />
       </CustomModal>
       <HomeHeader
         navigation={navigation}
@@ -48,7 +62,10 @@ const Details = ({ route, navigation }: any) => {
             overflow: "hidden",
           }}
         >
-          <Image source={data.image} style={{ width: "100%", height: 300 }} />
+          <Image
+            source={{ uri: data.image ? data.image : undefined }}
+            style={{ width: "100%", height: 300 }}
+          />
         </View>
 
         <Text
@@ -92,11 +109,9 @@ const Details = ({ route, navigation }: any) => {
                     fontWeight: "300",
                   }}
                 >
-                  {data.date}
+                  {data.startDate}
                 </Text>
-                <Text>
-                  {data.startTime} to {data.endTime}
-                </Text>
+                <Text>{data.startTime}</Text>
               </View>
             </View>
 
@@ -115,7 +130,17 @@ const Details = ({ route, navigation }: any) => {
                   alignContent: "flex-start",
                 }}
               >
-                {data.location}
+                {data.event_access.has_paid ? (
+                  <TouchableOpacity
+                    onPress={() => openExternalLink(data.event_access.link)}
+                  >
+                    <Text style={{ color: COLORS.primary }}>
+                      {data.event_access.link}
+                    </Text>
+                  </TouchableOpacity>
+                ) : (
+                  "Please pay to view"
+                )}
               </Text>
             </View>
           </View>
@@ -146,7 +171,11 @@ const Details = ({ route, navigation }: any) => {
                 }}
               >
                 <Image
-                  source={data.organizer.image}
+                  source={{
+                    uri: data?.organiserImage
+                      ? data?.organiserImage
+                      : undefined,
+                  }}
                   style={{ width: 70, height: 70, borderRadius: 100 }}
                 />
 
@@ -161,7 +190,7 @@ const Details = ({ route, navigation }: any) => {
                       fontSize: 16,
                     }}
                   >
-                    {data.organizer.name}
+                    {data.organiser_name}
                   </Text>
                   <Text
                     style={{
@@ -169,7 +198,7 @@ const Details = ({ route, navigation }: any) => {
                       fontSize: 16,
                     }}
                   >
-                    {data.organizer.position}
+                    {}
                   </Text>
                   <Text
                     style={{
@@ -177,7 +206,7 @@ const Details = ({ route, navigation }: any) => {
                       fontSize: 16,
                     }}
                   >
-                    {data.organizer.major}
+                    {data.organiser_extra_info}
                   </Text>
                 </View>
               </View>
@@ -217,7 +246,7 @@ const Details = ({ route, navigation }: any) => {
                     textAlign: "justify",
                   }}
                 >
-                  {data.organizer.details}
+                  {data.event_extra_details}
                 </Text>
               </View>
             </View>
@@ -248,7 +277,7 @@ const Details = ({ route, navigation }: any) => {
                 fontSize: 16,
               }}
             >
-              Free
+              #{data.amount.split(".")[0]}
             </Text>
           </View>
         </View>
@@ -281,7 +310,7 @@ const Details = ({ route, navigation }: any) => {
               marginTop: 10,
             }}
             activeOpacity={0.8}
-            onPress={onPress}
+            onPress={() => setModalVisible(!modalVisible)}
           >
             <Text
               style={{
@@ -291,7 +320,11 @@ const Details = ({ route, navigation }: any) => {
                 textAlign: "center",
               }}
             >
-              Register
+              {loading ? (
+                <ActivityIndicator size="small" color="white" />
+              ) : (
+                "res"
+              )}
             </Text>
           </TouchableOpacity>
         </View>

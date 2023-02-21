@@ -6,6 +6,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import {
   AccountHeader,
@@ -81,7 +82,13 @@ const LoginForm = ({ navigation }: any) => {
                     <Formbtn
                       style={[styles.btn]}
                       onPress={handleSubmit}
-                      title={loading ? "Loading..." : "Login"}
+                      title={
+                        loading ? (
+                          <ActivityIndicator size="small" color="white" />
+                        ) : (
+                          "Register"
+                        )
+                      }
                     />
                   </>
                 )}

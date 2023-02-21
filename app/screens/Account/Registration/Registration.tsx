@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   Image,
+  ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
 import {
@@ -17,10 +18,17 @@ import {
 } from "../../../components";
 import Locked from "../components/LockedWithPay";
 import { Formik, Field } from "formik";
-import * as yup from "yup";
+import { register } from "../../../store/slices/auth/registerationSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+
+
+
 
 const Registration = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(true);
+  const dispatch = useAppDispatch();
+
+  const { loading } = useAppSelector((state) => state.authReducers.login);
 
   const onModalPress = () => {
     setModalVisible(!modalVisible);
@@ -57,7 +65,10 @@ const Registration = ({ navigation }: any) => {
                 graduationyear: "",
                 chapter: "",
               }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => {
+                if (loading === false) dispatch(register(values));
+
+              }}
             >
               {({ handleSubmit, isValid }) => (
                 <>
@@ -65,21 +76,25 @@ const Registration = ({ navigation }: any) => {
                     component={FormInput}
                     name="fullname"
                     placeholder="Full name"
+                    type="text"
                   />
                   <Field
                     component={FormInput}
                     name="email"
                     placeholder="Email address"
+                    type="email"
                   />
                   <Field
                     component={FormInput}
                     name="username"
                     placeholder="Username"
+                    type="text"
                   />
                   <Field
                     component={FormInput}
                     name="password"
                     placeholder="Password"
+                    type="password"
                   />
                   <View
                     style={{
@@ -100,30 +115,38 @@ const Registration = ({ navigation }: any) => {
                         component={FormInput}
                         name="phonenumber"
                         placeholder="Phone number"
+                        type="tel"
                       />
                       <Field
                         component={FormInput}
                         name="department"
                         placeholder="Department"
+                        type="text"
                       />
                     </View>
                     <View style={{ width: "50%", marginLeft: 15 }}>
                       <Field
                         component={FormInput}
                         name="graduationyear"
+                        type="number"
                         placeholder="Graduation year"
                       />
                       <Field
                         component={FormInput}
                         name="chapter"
                         placeholder="Chaper"
+                        type="number"
                       />
                     </View>
                   </View>
 
                   <Formbtn
                     style={[styles.btn]}
-                    title="Register"
+                    title={ loading? (
+                      <ActivityIndicator size="small" color="white" />
+                    ): (
+                      "Login"
+                     )}
                     onPress={() => navigation.navigate("VerifyUser")}
                   />
                 </>

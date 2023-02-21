@@ -6,6 +6,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { images } from "../../assets/dummyData";
 
 const data = [
+
   {
     id: 1,
     title: "Lorem ipsum dolor sit amet.",
@@ -59,6 +60,7 @@ const data = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et lacus lacus, proin proin egestas. Augue scelerisque pellentesque nullam montes, pretium. Nisl, in netus Et lacus lacus, proin proin egestas. Augue scelerisque pellentesque nullam montes, pretium. Nisl, in netus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et lacus lacus, proin proin egestas. Augue scelerisque pellentesque nullam montes, pretium. Nisl, in netus Et lacus lacus, proin proin egestas. Augue scelerisque pellentesque nullam montes, pretium. Nisl, in netus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et lacus lacus, proin proin egestas. Augue scelerisque pellentesque nullam montes, pretium. Nisl, in netus Et lacus lacus, proin proin egestas. Augue scelerisque pellentesque nullam montes, pretium. Nisl, in netus",
     ],
   },
+
 ];
 
 const Home = ({ navigation }: any) => {
@@ -73,11 +75,12 @@ const Home = ({ navigation }: any) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         {data.map((item) => {
           return (
+
             <DonationCard
               key={item.id}
               item={item}
-              onPress={() => navigation.navigate("Details1", { item })}
-            />
+              onPress={() => navigation.navigate("Details1", { item })} />
+
           );
         })}
       </ScrollView>

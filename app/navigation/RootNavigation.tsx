@@ -12,7 +12,7 @@ const RootNavigation = () => {
   };
 
   return (
-    <NavigationContainer>
+    <NavigationContainer >
       <View style={styles.container}>
         <DrawerNav />
       </View>

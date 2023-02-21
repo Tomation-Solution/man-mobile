@@ -15,8 +15,7 @@ const Donation = ({ navigation }: any) => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="Home"
-      >
+        initialRouteName="Home">
         <Stack.Screen name="Home">
           {(props) => <Home {...props} />}
         </Stack.Screen>

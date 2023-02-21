@@ -3,8 +3,10 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import BottomNav from "./BottomNav";
 import { COLORS } from "../constants/color";
-import News from "../screens/News/News";
-import Events from "../screens/Events/Events";
+
+import News from "../screens/Donation/Donation";
+import Events from "../screens/Services/Services";
+
 import DrawerContent from "./components/DrawerContent";
 import { Election, Gallery, Resources, Services, Support } from "../screens";
 import Meetings from "../screens/Meetings/Meetings";

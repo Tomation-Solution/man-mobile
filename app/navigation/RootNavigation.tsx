@@ -8,16 +8,19 @@ import { useSelector } from "react-redux";
 import { useAppSelector } from "../store/hooks";
 
 const RootNavigation = () => {
-  const isLoggedIn = useAppSelector(
-    (state) => state.authReducers.login.isLoggedIn
-  );
+  // const isLoggedIn = useAppSelector(
+  //   (state) => state.authReducers.login.isLoggedIn
+  // );
+
+  const isLoggedIn = true;
 
   console.log("isLoggedIn", isLoggedIn);
 
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        {isLoggedIn ? <DrawerNav /> : <Login />}
+        {/* {isLoggedIn ? <DrawerNav /> : <Login />} */}
+        <DrawerNav />
       </View>
     </NavigationContainer>
   );

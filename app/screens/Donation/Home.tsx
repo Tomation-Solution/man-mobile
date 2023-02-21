@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { Container, HomeHeader, SearchBar } from "../../components";
+import { Container, HomeHeader } from "../../components";
 import DonationCard from "./DonationCard";
 import { ScrollView } from "react-native-gesture-handler";
 import { images } from "../../assets/dummyData";
@@ -69,7 +69,6 @@ const Home = ({ navigation }: any) => {
         title={"Fund a Project"}
         back={"back"}
       />
-      <SearchBar hasFilter />
       <ScrollView showsVerticalScrollIndicator={false}>
         {data.map((item) => {
           return (

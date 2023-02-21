@@ -1,11 +1,13 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import { Container, HomeHeader } from "../../components";
+import { Container, HomeHeader, Dropdown } from "../../components";
 import {
   horizontalScale,
   moderateScale,
   verticalScale,
 } from "../../constants/metric";
+import { Formik } from "formik";
+import * as Yup from "yup";
 import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import { COLORS } from "../../constants/color";
@@ -20,25 +22,48 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
     <Container style={styles.container}>
       <HomeHeader title="Fund a Project" navigation={navigation} back="back" />
       <View style={styles.inputContainer}>
-        <Text style={styles.headText}>Support in Kind</Text>
-        <View style={styles.supportContainer}>
-          <Text style={styles.text}>Support Type</Text>
-          <Ionicons name="chevron-down-outline" size={20} />
-        </View>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Note"
-          multiline={true}
-          numberOfLines={10}
-        />
-        <View style={{ alignItems: "center" }}>
-          <TouchableOpacity
-            style={styles.button}
-            // onPress={}
-          >
-            <Text style={{ color: "white" }}>Support in Kind</Text>
-          </TouchableOpacity>
-        </View>
+        <Formik
+          initialValues={{ message: "" }}
+          validationSchema={Yup.object({
+            message: Yup.string().required(),
+          })}
+        >
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+          }) => (
+            <View>
+              <Text style={styles.headText}>Support in Kind</Text>
+              <View style={styles.supportContainer}>
+                <Dropdown defaultButtonText={"Support Type"} />
+              </View>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Note"
+                multiline={true}
+                numberOfLines={10}
+                onChangeText={handleChange("message")}
+                onBlur={handleBlur("message")}
+                value={values.message}
+              />
+              {errors.message && touched.message ? (
+                <Text style={styles.error}>{errors.message}</Text>
+              ) : null}
+              <View style={{ alignItems: "center" }}>
+                <TouchableOpacity
+                  style={styles.button}
+                  // onPress={}
+                >
+                  <Text style={{ color: "white" }}>Support in Kind</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+        </Formik>
       </View>
     </Container>
   );
@@ -61,11 +86,10 @@ const styles = StyleSheet.create({
   supportContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#EAEBE7",
+    backgroundColor: "#E8F6F8",
     borderRadius: moderateScale(8),
-    paddingVertical: verticalScale(15),
-    paddingHorizontal: horizontalScale(24),
-    marginTop: horizontalScale(63),
+
+    marginTop: horizontalScale(40),
   },
   text: {
     fontWeight: "400",
@@ -75,7 +99,7 @@ const styles = StyleSheet.create({
   textInput: {
     alignContent: "center",
     alignItems: "flex-start",
-    backgroundColor: "#EAEBE7",
+    backgroundColor: "#E8F6F8",
     marginTop: verticalScale(30),
   },
   button: {
@@ -85,5 +109,8 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(16),
     marginTop: verticalScale(40),
     marginHorizontal: "auto",
+  },
+  error: {
+    color: "red",
   },
 });

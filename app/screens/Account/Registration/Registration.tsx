@@ -21,14 +21,45 @@ import { Formik, Field } from "formik";
 import { register } from "../../../store/slices/auth/registerationSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
+import {signUpValidationSchema} from '../../../utils/validation'
 
 
+interface RegistrationValues {
+  fulname: string;
+  email: string;
+  username: string;
+  password: string,
+  phonenumbers: number;
+  department: string;
+  graduationyear: string,
+  chapter: string,
+}
 
 const Registration = ({ navigation }: any) => {
+
+const initialValues: RegistrationValues = {
+  fulname: '',
+  email: '',
+  username: '',
+  password: '',
+  phonenumbers: 0,
+  department: '',
+  graduationyear: '',
+  chapter: '',
+}
   const [modalVisible, setModalVisible] = useState(true);
   const dispatch = useAppDispatch();
 
   const { loading } = useAppSelector((state) => state.authReducers.login);
+
+  const handleSubmit = async (values: RegistrationValues, { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void, resetForm: () => void }) => {
+    const { firstName, lastName, email, password } = values;
+    await dispatch(register({ data: { firstName, lastName, email, password } }));
+    console.log(values);
+    setSubmitting(false);
+    resetForm();
+  };
+
 
   const onModalPress = () => {
     setModalVisible(!modalVisible);
@@ -55,22 +86,11 @@ const Registration = ({ navigation }: any) => {
         <FormContainer>
           <View style={[styles.card, styles.shawdowProp]}>
             <Formik
-              initialValues={{
-                fulname: "",
-                email: "",
-                username: "",
-                password: "",
-                phonenumbers: "",
-                department: "",
-                graduationyear: "",
-                chapter: "",
-              }}
-              onSubmit={(values) => {
-                if (loading === false) dispatch(register(values));
+            initialValues={initialValues}
+              validationSchema={signUpValidationSchema}
+              onSubmit={handleSubmit}>
 
-              }}
-            >
-              {({ handleSubmit, isValid }) => (
+              {({ isSubmitting}) => (
                 <>
                   <Field
                     component={FormInput}
@@ -147,7 +167,7 @@ const Registration = ({ navigation }: any) => {
                     ): (
                       "Login"
                      )}
-                    onPress={() => navigation.navigate("VerifyUser")}
+                     disabled={isSubmitting}
                   />
                 </>
               )}

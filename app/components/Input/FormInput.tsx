@@ -10,10 +10,8 @@ const FormInput = (props) => {
 
     const hasError = errors[name] && touched[name]
 
-
     return (
         <>
-
             <TextInput
                 style={[styles.textInput, hasError && styles.errorInput]}
                 value={value}
@@ -25,7 +23,6 @@ const FormInput = (props) => {
                 {...inputProps}
             />
             {hasError && <Text style={styles.errorText}>{errors[name]}</Text>}
-
         </>
     );
 };
@@ -39,7 +36,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         fontSize: 15,
         paddingLeft: 6,
-
     },
     textInput: {
         height: 55,
@@ -50,9 +46,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 10,
         paddingTop: 15,
-
-
-
     },
     errorText: {
         fontSize: 10,

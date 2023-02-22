@@ -25,26 +25,26 @@ import {signUpValidationSchema} from '../../../utils/validation'
 
 
 interface RegistrationValues {
-  fulname: string;
+  fullName: string;
   email: string;
-  username: string;
+  userName: string;
   password: string,
-  phonenumbers: number;
+  phoneNumbers: number;
   department: string;
-  graduationyear: string,
+  graduationYear: string,
   chapter: string,
 }
 
 const Registration = ({ navigation }: any) => {
 
 const initialValues: RegistrationValues = {
-  fulname: '',
+  fullName: '',
   email: '',
-  username: '',
+  userName: '',
   password: '',
-  phonenumbers: 0,
+  phoneNumbers: 0,
   department: '',
-  graduationyear: '',
+  graduationYear: '',
   chapter: '',
 }
   const [modalVisible, setModalVisible] = useState(true);
@@ -53,8 +53,8 @@ const initialValues: RegistrationValues = {
   const { loading } = useAppSelector((state) => state.authReducers.login);
 
   const handleSubmit = async (values: RegistrationValues, { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void, resetForm: () => void }) => {
-    const { firstName, lastName, email, password } = values;
-    await dispatch(register({ data: { firstName, lastName, email, password } }));
+    const { fullName, userName, password, phoneNumbers, department, graduationYear, chapter } = values;
+    await dispatch(register({ data: { fullName, userName, password, phoneNumbers, department, graduationYear, chapter }}));
     console.log(values);
     setSubmitting(false);
     resetForm();
@@ -94,7 +94,7 @@ const initialValues: RegistrationValues = {
                 <>
                   <Field
                     component={FormInput}
-                    name="fullname"
+                    name="fullName"
                     placeholder="Full name"
                     type="text"
                   />
@@ -106,7 +106,7 @@ const initialValues: RegistrationValues = {
                   />
                   <Field
                     component={FormInput}
-                    name="username"
+                    name="userName"
                     placeholder="Username"
                     type="text"
                   />
@@ -133,7 +133,7 @@ const initialValues: RegistrationValues = {
                     >
                       <Field
                         component={FormInput}
-                        name="phonenumber"
+                        name="phoneNumber"
                         placeholder="Phone number"
                         type="tel"
                       />
@@ -147,7 +147,7 @@ const initialValues: RegistrationValues = {
                     <View style={{ width: "50%", marginLeft: 15 }}>
                       <Field
                         component={FormInput}
-                        name="graduationyear"
+                        name="graduationYear"
                         type="number"
                         placeholder="Graduation year"
                       />

@@ -12,7 +12,7 @@ const PrivateChatCard = ({ item, onPress }: any) => {
       }}
     >
       <Image
-        source={{ uri: item.sender_image }}
+        source={{ uri: item?.photo.toString() || undefined }}
         style={{ width: 50, height: 50, borderRadius: 25 }}
       />
       <TouchableOpacity
@@ -38,7 +38,7 @@ const PrivateChatCard = ({ item, onPress }: any) => {
               alignItems: "center",
             }}
           >
-            <Text>{item.sender}</Text>
+            <Text>{item?.full_name}</Text>
             {item.read !== true && (
               <Text
                 style={{
@@ -59,10 +59,10 @@ const PrivateChatCard = ({ item, onPress }: any) => {
               right: 0,
             }}
           >
-            {item.time.split(":")[0]} : {item.time.split(":")[1]}
+            {/* {item?.time?.split(":")[0]} : {item.time.split(":")[1]} */}
           </Text>
         </View>
-        <Text>{item.message.slice(0, 45)}...</Text>
+        <Text>{item?.message?.slice(0, 45)}...</Text>
       </TouchableOpacity>
     </View>
   );

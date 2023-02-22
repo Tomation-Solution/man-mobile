@@ -46,7 +46,7 @@ const General = () => {
         </View>
       </ScrollView>
 
-      <SendBox />
+      <SendBox disabled />
     </View>
   );
 };

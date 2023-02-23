@@ -11,6 +11,8 @@ const initialState = {
   userData: "",
   loading: false,
   isLoggedIn: false,
+  message: "",
+  error: "",
 };
 
 const loginSlice = createSlice({
@@ -38,11 +40,36 @@ const loginSlice = createSlice({
       state.isLoggedIn = false;
       state.userData = "";
     },
+
+    registrationRequested: (state, action) => {
+      state.loading = true;
+      console.log("registrationRequested", "looading");
+    },
+    registrationReceived: (state, action) => {
+      state.loading = false;
+      state.isLoggedIn = true;
+      console.log("registrationReceived", action.payload);
+      storeUserDetails(JSON.stringify(action.payload));
+      state.userData = JSON.stringify(action.payload);
+    },
+    registrationRequestFailed: (state, action) => {
+      state.loading = false;
+      console.log("registrationRequestFailed", action.payload);
+      state.error = action.payload.response.data.message.error;
+      console.log("state.error", state.error);
+    },
   },
 });
 
-const { loginRequested, loginReceived, loginRequestFailed, logUserOut } =
-  loginSlice.actions;
+const {
+  loginRequested,
+  loginReceived,
+  loginRequestFailed,
+  logUserOut,
+  registrationRequested,
+  registrationReceived,
+  registrationRequestFailed,
+} = loginSlice.actions;
 
 export default loginSlice.reducer;
 
@@ -75,3 +102,17 @@ export const getUserDetails = () => async (dispatch: AppDispatch) => {
   const userDetails = await retrieveUserDetails();
   return userDetails;
 };
+
+export const createMember =
+  (registrationDetails: any) => (dispatch: AppDispatch) => {
+    dispatch(
+      apiCallBegan({
+        url: PRE_URL + "auth/ManageMemberValidation/create_member/",
+        method: "post",
+        data: registrationDetails,
+        onStart: registrationRequested.type,
+        onSuccess: registrationReceived.type,
+        onError: registrationRequestFailed.type,
+      })
+    );
+  };

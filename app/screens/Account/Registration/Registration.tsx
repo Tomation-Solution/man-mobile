@@ -18,9 +18,14 @@ import {
 import Locked from "../components/LockedWithPay";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
+import { createMember } from "../../../store/slices/auth/loginSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
-const Registration = ({ navigation }: any) => {
+const Registration = ({ route, navigation }: any) => {
+  const dispatch = useAppDispatch();
   const [modalVisible, setModalVisible] = useState(true);
+
+  const data = route?.params?.data;
 
   const onModalPress = () => {
     setModalVisible(!modalVisible);
@@ -28,6 +33,15 @@ const Registration = ({ navigation }: any) => {
   <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
     <Locked onPress={onModalPress} />
   </CustomModal>;
+
+  const handleRegister = (values: any) => {
+    console.log(values);
+    dispatch(createMember(values));
+  };
+
+  const { loading, error, message } = useAppSelector(
+    (state) => state.authReducers.login
+  );
 
   return (
     <KeyboardAvoidingViewWrapper>
@@ -39,48 +53,78 @@ const Registration = ({ navigation }: any) => {
           }}
         >
           <AccountHeader
-            title="  Registration"
-            text=" Input details to register as alumnus"
+            title="Registration"
+            text="Input details to register as alumnus"
           />
+          {error && (
+            <Text
+              style={{
+                color: "red",
+                fontSize: 15,
+              }}
+            >
+              {error}
+            </Text>
+          )}
         </View>
 
         <FormContainer>
           <View style={[styles.card, styles.shawdowProp]}>
             <Formik
+              validationSchema={yup.object().shape({
+                name: yup.string().required().label("Name"),
+                EMAIL: yup.string().required().email().label("Email"),
+                password: yup.string().required().min(6).label("Password"),
+                GSM: yup.string().required().min(11).label("Phone number"),
+                TITLE: yup.string().required().label("Title"),
+                alumni_year: yup.string().required().label("Alumni year"),
+                MEMBERSHIP_NO: yup
+                  .string()
+                  .required()
+                  .label("Membership number"),
+                "POSITION HELD": yup.string().required().label("Position held"),
+              })}
               initialValues={{
-                fulname: "",
-                email: "",
-                username: "",
+                name: "",
+                EMAIL: "",
                 password: "",
-                phonenumbers: "",
-                department: "",
-                graduationyear: "",
-                chapter: "",
+                GSM: "",
+                TITLE: "",
+                alumni_year: "",
+                MEMBERSHIP_NO: data,
+                "POSITION HELD": "",
+                rel8Email: "",
               }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => handleRegister(values)}
             >
               {({ handleSubmit, isValid }) => (
                 <>
                   <Field
                     component={FormInput}
-                    name="fullname"
+                    name="name"
                     placeholder="Full name"
                   />
                   <Field
                     component={FormInput}
-                    name="email"
+                    name="GSM"
+                    placeholder="Phone number"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="EMAIL"
                     placeholder="Email address"
                   />
                   <Field
                     component={FormInput}
-                    name="username"
-                    placeholder="Username"
+                    name="rel8Email"
+                    placeholder="rel8Email address"
                   />
                   <Field
                     component={FormInput}
                     name="password"
                     placeholder="Password"
                   />
+
                   <View
                     style={{
                       display: "flex",
@@ -98,33 +142,34 @@ const Registration = ({ navigation }: any) => {
                     >
                       <Field
                         component={FormInput}
-                        name="phonenumber"
-                        placeholder="Phone number"
+                        name="TITLE"
+                        placeholder="Title"
                       />
                       <Field
                         component={FormInput}
-                        name="department"
-                        placeholder="Department"
+                        name="MEMBERSHIP_NO"
+                        placeholder="Membership number"
                       />
                     </View>
                     <View style={{ width: "50%", marginLeft: 15 }}>
                       <Field
                         component={FormInput}
-                        name="graduationyear"
-                        placeholder="Graduation year"
+                        name="alumni_year"
+                        placeholder="Alumni year"
                       />
                       <Field
                         component={FormInput}
-                        name="chapter"
-                        placeholder="Chaper"
+                        name="POSITION HELD"
+                        placeholder="Position held"
                       />
                     </View>
                   </View>
 
                   <Formbtn
+                    disabeld={loading}
                     style={[styles.btn]}
                     title="Register"
-                    onPress={() => navigation.navigate("VerifyUser")}
+                    onPress={handleSubmit}
                   />
                 </>
               )}
@@ -175,9 +220,9 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginVertical: 15,
-    width: '100%',
-    alignContent: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    alignContent: "center",
+    justifyContent: "center",
   },
 
   register: {
@@ -197,4 +242,3 @@ const styles = StyleSheet.create({
 });
 
 export default Registration;
-

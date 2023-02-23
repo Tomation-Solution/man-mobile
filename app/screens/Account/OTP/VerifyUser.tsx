@@ -1,41 +1,64 @@
-import Container from './../../../components/Container';
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
-import { ComfirmationInput, Formbtn, AccountHeader } from '../../../components'
-
+import Container from "./../../../components/Container";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import { ComfirmationInput, Formbtn, AccountHeader } from "../../../components";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { validateUser } from "../../../store/slices/auth/validateUserSlice";
 
 const VerifyUser = ({ navigation }: any) => {
-  const [userInfo, setUserInfo] = useState({
-    email: '',
-    password: '',
-  });
+  const { loading, validation } = useAppSelector(
+    (state) => state.authReducers.validateUser
+  );
 
-  const [error, setError] = useState('');
+  const [input, setInput] = useState<string>();
+  const [newInput, setNewInput] = useState<string>(input!);
+  const dispatch = useAppDispatch();
 
+  const onVerify = () => {
+    setNewInput(input!);
+    setInput("");
+    dispatch(validateUser({ MEMBERSHIP_NO: input }));
+  };
+
+  useEffect(() => {
+    if (validation.message === "Success") {
+      navigation.navigate("Registration", { data: newInput });
+    }
+  }, [validation, loading]);
 
   return (
     <>
       <Container>
         <View style={{ paddingVertical: 100 }}>
-          <View style={{
-            paddingHorizontal: 3, paddingVertical: 10,
-          }} >
+          <View
+            style={{
+              paddingVertical: 10,
+            }}
+          >
             <AccountHeader
-              title=' Code  '
-              text={` A code was sent to your email kindly \n input the code recieved`}
-
+              title=" Membership Verification  "
+              text={` Enter your membeship number to proceed`}
             />
-
           </View>
+
           <View style={[styles.card, styles.shawdowProp]}>
-            <ComfirmationInput />
+            <View>
+              <TextInput
+                onChangeText={(text: string) => setInput(text)}
+                value={input}
+                style={styles.input}
+                placeholder="Membership Number"
+              />
+            </View>
 
-            <Formbtn
-            style={[styles.btn]}
-              title='Verify'
-              onPress={() => navigation.navigate('ForgotPassword')}
-
-            />
+            <Formbtn style={[styles.btn]} title="Verify" onPress={onVerify} />
           </View>
         </View>
       </Container>
@@ -44,63 +67,36 @@ const VerifyUser = ({ navigation }: any) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 100,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   card: {
-
-    backgroundColor: '#ffff',
+    backgroundColor: "#ffff",
     borderRadius: 8,
     paddingVertical: 38,
     paddingHorizontal: 25,
-    width: '100%',
+    width: "100%",
     marginVertical: 10,
   },
   shawdowProp: {
-    shadowColor: '#171717',
+    shadowColor: "#171717",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-    elevation: 3
+    elevation: 3,
   },
-  Loginheading: {
-    fontSize: 24,
-    fontWeight: "700",
-    lineHeight: 32.78,
-    color: "#2B3513"
+  input: {
+    width: "100%",
+    height: 50,
+    backgroundColor: "#f2f2f2",
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    marginBottom: 20,
+  },
 
-  },
-  heading: {
-    fontSize: 14,
-    fontWeight: '700',
-    lineHeight: 21.86,
-    color: 'rgba(0,0,34,0.41)',
-
-  },
   btn: {
     marginVertical: 30,
-    width: '100%',
-  alignContent:'center',
-   justifyContent:'center'
-  },
-  forgotPassword: {
-    color: 'rgba(0,0,34,0.6)'
-  },
-  register: {
-    paddingHorizontal: 30,
-    marginTop: 10,
-    color: 'rgba(0,0,34,0.6)'
-  },
-  registerText: {
-    position: 'relative',
-    right: 31,
-    top: 10,
-    fontWeight: '700',
-    color: '#2b3513'
+    width: "100%",
+    alignContent: "center",
+    justifyContent: "center",
   },
 });
 
 export default VerifyUser;
-

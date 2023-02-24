@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import { Container, HomeHeader, Dropdown } from "../../components";
+import { Container, HomeHeader, Dropdown, Formbtn } from "../../components";
 import {
   horizontalScale,
   moderateScale,
@@ -20,27 +20,27 @@ interface DetailsProps {
   navigation?: any;
 }
 interface MessageValues {
-  message: string;
+  heading: string;
 }
 
 
 const Details2 = ({ route, navigation }: DetailsProps) => {
+  const data = route?.params?.data|| {};
+// console.log(' inside details oh ' + data?.image)
 
   const initialValues: MessageValues = {
-    message: "",
+    heading: "",
   };
 
   const dispatch = useAppDispatch();
 
   const handleSubmit = async (values: MessageValues, { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }) => {
-       
-    //   const {  } = values;
-    // await dispatch(kindFunding(values));
-    //   setSubmitting(false);
-    //   resetForm();
-    console.log(values)
-  };
 
+      const { heading } = values;
+    await dispatch(kindFunding( data?.id, heading));
+      setSubmitting(false);
+      resetForm();
+  };
 
   const {loading} = useAppSelector(
     (state:any) => state.fundProjectReducers.fundProjectSlice
@@ -53,43 +53,39 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
 
 
         <Formik
-          initialValues={initialValues}
+          initialValues={{ heading: '' }}
           validationSchema={Yup.object({
-            message: Yup.string().required(),})}
-            onSubmit={handleSubmit} >
+           heading: Yup.string().required(),})}
+            onSubmit={handleSubmit}
+            >
           {({
             handleChange,
             handleBlur,
             values,
             errors,
             touched,
-            isSubmitting,
+            handleSubmit,
           }) => (
             <View>
               <Text style={styles.headText}>Support in Kind</Text>
               <View style={styles.supportContainer}>
                 <Dropdown defaultButtonText={"Support Type"} />
               </View>
+
               <TextInput
-                style={styles.textInput}
-                placeholder="Note"
+                style={styles.input}
+                onChangeText={handleChange('heading')}
+                onBlur={handleBlur('heading')}
+                value={values.heading}
                 multiline={true}
-                numberOfLines={10}
-                onChangeText={handleChange("message")}
-                onBlur={handleBlur("message")}
-                value={values.message}
+                numberOfLines={7}
+                placeholder='Enter your message '
               />
-              {errors.message && touched.message ? (
-                <Text style={styles.error}>{errors.message}</Text>
-              ) : null}
-              <View style={{ alignItems: "center" }}>
-                <TouchableOpacity
-                  style={styles.button}
-                 disabled={isSubmitting}
-                >
-                  <Text style={{ color: "white" }}>Support in Kind</Text>
-                </TouchableOpacity>
-              </View>
+              {errors.message && touched.heading ? <Text style={styles.error}>{errors.message}</Text> : null}
+                        <Formbtn
+                        onPress={handleSubmit}
+                        title='Get Support'/>
+
             </View>
           )}
         </Formik>
@@ -142,4 +138,14 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
   },
+  input: {
+    borderWidth: 1,
+    borderColor: '#E8F6F8',
+    paddingHorizontal: 9,
+    paddingVertical: 13,
+    marginVertical: 21,
+    backgroundColor:'#E8F6F8',
+    borderRadius:9
+  },
+
 });

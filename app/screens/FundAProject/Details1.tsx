@@ -19,7 +19,6 @@ const Details = ({ route, navigation }: DetailsProps) => {
   const altRoute = useRoute();
   const altNavigation = useNavigation();
   const data = route?.params?.item || altRoute?.params || {};
-  console.log(data);
   return (
     <Container style={styles.container}>
       <HomeHeader
@@ -43,7 +42,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button1}
-              onPress={() => navigation.navigate("Details2")}
+              onPress={() => navigation.navigate("Details2", {data} )}
             >
               <Text style={{ color: "white" }}>Support in Kind</Text>
             </TouchableOpacity>

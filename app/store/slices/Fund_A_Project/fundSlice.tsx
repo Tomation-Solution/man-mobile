@@ -26,11 +26,9 @@ const fundProjectSlice = createSlice({
     fundProjectReceived: (state, action) => {
       state.loading = false;
       state.userData = action.payload;
-      console.log(state.userData )
     },
     fundProjectRequestFailed: (state, action) => {
       state.loading = false;
-      console.log("fundProjectRequestFailed", action.payload);
     },
       kindFundingRequested: (state, action) => {
       state.loading = true;
@@ -48,6 +46,8 @@ const fundProjectSlice = createSlice({
       state.success = false;
       state.error = action.payload;
   },
+
+  }
 
 });
 
@@ -89,12 +89,16 @@ export const fundProject = () => async (dispatch: AppDispatch) => {
   }
 };
 
-export const kindFunding = (userData: any) => (dispatch: AppDispatch) => {
+export const kindFunding = (projectId: number, heading: string) => (dispatch: AppDispatch) => {
+  console.log('inside payinkind'+ " " +projectId + ' ' +  heading )
   dispatch(
     apiCallBegan({
         url: PRE_URL + "extras/member_support_project/support_in_kind",
         method: "post",
-      data: userData,
+      data: {
+      //  project:projectId,
+       heading:heading
+      },
       onStart: kindFundingRequested.type,
       onSuccess: kindFundingSuccess.type,
       onError: kindFundingFailed.type,

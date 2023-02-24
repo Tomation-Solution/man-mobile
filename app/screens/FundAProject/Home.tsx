@@ -13,7 +13,6 @@ const Home = ({ navigation }: any) => {
   const { userData,loading} = useAppSelector(
   (state) => state.fundProjectReducers.fundProjectSlice
 );
-console.log('hey '+ userData)
 
 const dispatch = useAppDispatch();
 
@@ -25,7 +24,7 @@ useEffect(()=> {
 
 
   return (
-    <Container style={styles.container}>
+    <Container>
       <HomeHeader
         navigation={navigation}
         title={"Fund a Project"}
@@ -33,12 +32,11 @@ useEffect(()=> {
       />
       <ScrollView showsVerticalScrollIndicator={false}>
      {userData?.data.map((item:any) => {
-          console.log('hello' + item.id)
           return (
             <DonationCard
               key={item.id}
               item={item}
-              onPress={() => navigation.navigate("Details1", { item })}
+              onPress={() => navigation.navigate("Details1", { item } )}
             />
           );
         })}

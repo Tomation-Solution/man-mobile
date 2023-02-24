@@ -19,13 +19,13 @@ const loginSlice = createSlice({
   reducers: {
     loginRequested: (state, action) => {
       state.loading = true;
-      console.log("loginRequested", "looading");
+      // console.log("loginRequested", "looading");
     },
 
     loginReceived: (state, action) => {
       state.loading = false;
       state.isLoggedIn = true;
-      console.log("loginReceived", action.payload);
+      // console.log("loginReceived", action.payload);
       storeUserDetails(JSON.stringify(action.payload));
       state.userData = JSON.stringify(action.payload);
     },

@@ -28,7 +28,6 @@ const meetingsSlice = createSlice({
     meetingsReceived: (state, action) => {
       state.loading = false;
       state.meetings = action.payload;
-      console.log("meetings", action.payload);
     },
     meetingsRequestFailed: (state, action) => {
       state.loading = false;

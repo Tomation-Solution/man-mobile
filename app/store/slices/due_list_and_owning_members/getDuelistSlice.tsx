@@ -12,51 +12,55 @@ const initialState: {
   loading: false,
 };
 
-const getProfileSlice = createSlice({
-  name: "getProfile",
+const getDuelistSlice = createSlice({
+  name: "getDuelist",
   initialState,
   reducers: {
-    getProfileRequested: (state, action) => {
+    getDuelistRequested: (state, action) => {
       state.loading = true;
+
     },
-    getProfileReceived: (state, action) => {
+    getDuelistReceived: (state, action) => {
       state.loading = false;
       state.userData = action.payload;
     },
-    getProfileRequestFailed: (state, action) => {
+    getDuelistRequestFailed: (state, action) => {
       state.loading = false;
-      console.log("getProfileRequestFailed", action.payload);
+      console.log("getDuelistRequestFailed", action.payload);
     },
   },
 });
 
-const { getProfileRequested, getProfileReceived, getProfileRequestFailed } =
-  getProfileSlice.actions;
+const { getDuelistRequested, getDuelistReceived, getDuelistRequestFailed } =
+  getDuelistSlice.actions;
 
-export default getProfileSlice.reducer;
+export default getDuelistSlice.reducer;
 
-export const getProfile = () => async (dispatch: AppDispatch) => {
+export const getDuelist = () => async (dispatch: AppDispatch) => {
   try {
     const getToken: any = await retrieveUserDetails();
     if (getToken && getToken.token) {
       const token = getToken.token;
+
+
+
       dispatch(
         apiCallBegan({
-          url: PRE_URL + "user/memberlist-info/my_profile/",
+          url: PRE_URL + "dues/memberdue/",
           extraheaders: "Token " + token,
           method: "get",
-          onStart: getProfileRequested.type,
-          onSuccess: getProfileReceived.type,
-          onError: getProfileRequestFailed.type,
+          onStart: getDuelistRequested.type,
+          onSuccess: getDuelistReceived.type,
+          onError: getDuelistRequestFailed.type,
         })
       );
     } else {
       const error = new Error("Unable to retrieve user token");
       console.error(error);
-      dispatch(getProfileRequestFailed(error.message));
+      dispatch(getDuelistRequestFailed(error.message));
     }
   } catch (error: any) {
-    console.error("An error occurred while fetching user profile:", error);
-    dispatch(getProfileRequestFailed(error.message));
+    console.error("An error occurred while fetching duelist:", error);
+    dispatch(getDuelistRequestFailed(error.message));
   }
 };

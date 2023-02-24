@@ -1,64 +1,76 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from "react-native"
 import { Container, AccountHeader } from "../../../../components";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { getDuelist } from "../../../../store/slices/due_list_and_owning_members/getDuelistSlice";
 
 
 const CompletedPayment = () => {
-    const [tableData, setTableData] = useState([
-        ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["registration levy", "$800", "02/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["registration levy", "$800", "02/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["Anniversary levy", "$1000", "01/01/2020", "Completed"],
-        ["registration levy", "$800", "02/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-        ["registration levy", "$500", "03/01/2020", "Completed"],
-    ]);
+    const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
+    const { userData,loading} = useAppSelector(
+    (state) => state.duelistReducers.getDuelistSlice
+);
+
+// console.log('dues is equal to ' + userData?.data[0])
+
+
+
+const dispatch = useAppDispatch();
+
+useEffect(()=> {
+    if (isLoggedIn) {
+        dispatch(getDuelist())
+    }
+},[dispatch])
     const tableHead = ["Reason", "Amount", "Date", "Action"];
 
     const onButtonClick = () => {
         Alert.alert('Pay your bills');
     };
 
-    const buttonElement = () => (
+    const ButtonElement = ({ispaid}:any) => (
+
         <TouchableOpacity onPress={onButtonClick}>
             <View style={styles.btn}>
-                <Text style={styles.btnText}>Receipt</Text>
+            <Text style={styles.btnText}> {ispaid ? "Show Receipt" : "Pay"} </Text>
             </View>
         </TouchableOpacity>
     );
     return (
         <View style={styles.container}>
-            {/* <TableComponent
-                    tableHead={tableHead}
-                    tableData={tableData}
-                    backgroundColor={"#555D42"}
-                /> */}
+    
+                {loading ? ( 
+                    <Text> Loading...</Text>
+                ) : ( 
+                 <>
             <Table borderStyle={{ borderColor: 'transparent' }}>
                 <Row data={tableHead} flexArr={[1, 1, 1, 1]} style={styles.head} textStyle={styles.text} />
                 <ScrollView>
-                    {
-                        tableData.map((rowData, index) => (
-                            <TableWrapper key={index} style={styles.row}>
-                                {
-                                    rowData.map((cellData, cellIndex) => (
-                                        <Cell key={cellIndex} data={cellIndex === 3 ? buttonElement() : cellData} textStyle={styles.text} />
-                                    ))
-                                }
-                            </TableWrapper>
-                        ))
-                    }
+                     {
+                        userData?.data?.map((rowData:any, index:any) => {  
+                            const { due__startDate, due__Name, amount,is_paid  } = rowData;
+                     return(
+                    <TableWrapper key={index} style={styles.row}>
+                      {
+                    <>  
+                  <Cell data={due__Name} textStyle={styles.text} />
+                  <Cell data={amount} textStyle={styles.text} />
+                  <Cell data={due__startDate} textStyle={styles.text} />
+              
+                  <View> 
+                   <ButtonElement ispaid={is_paid} />         
+                  </View>      
+
+
+                 </>
+                  }
+                 </TableWrapper>
+                    )})} 
                 </ScrollView>
             </Table>
+            </>
+                )}
         </View >
     )
 }
@@ -108,6 +120,7 @@ const styles = StyleSheet.create({
     row: { flexDirection: 'row' },
     btn: { width: 60, backgroundColor: '#555D42', borderRadius: 10, marginLeft: 14 },
     btnText: { textAlign: 'center', color: '#fff', fontSize: 13, }
+
 });
 
 export default CompletedPayment

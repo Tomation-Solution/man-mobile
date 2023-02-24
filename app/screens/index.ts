@@ -25,3 +25,4 @@ export { default as ProfileDetails } from "./Election/ProfileDetails";
 export { default as Votingstat } from "./Election/VoteStat";
 export { default as AdminSupport } from "./Support/AdminSupport/Home";
 export { default as TechnicalSupport } from "./Support/TechnicalSupport/Home";
+export { default as FundAProject } from "./FundAProject/FundAProject";

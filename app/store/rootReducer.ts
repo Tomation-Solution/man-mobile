@@ -6,6 +6,7 @@ import gallery from "./slices/gallery/gallerySlice";
 import meetings from "./slices/meetings/meetingsSlice";
 import events from "./slices/events/eventsSlice";
 import duelistReducers from "./slices/due_list_and_owning_members/duelist";
+import fundProjectReducers from "./slices/Fund_A_Project/fund_a_project";
 
 export default combineReducers({
   authReducers,
@@ -15,4 +16,6 @@ export default combineReducers({
   gallery,
   meetings,
   events,
+  fundProjectReducers,
+
 });

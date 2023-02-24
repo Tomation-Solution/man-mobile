@@ -20,7 +20,6 @@ import Locked from "../components/LockedWithPay";
 import { Formik, Field } from "formik";
 import { register } from "../../../store/slices/auth/registerationSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-
 import {signUpValidationSchema} from '../../../utils/validation'
 
 

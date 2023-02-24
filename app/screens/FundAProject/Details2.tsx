@@ -50,8 +50,6 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
     <Container>
       <HomeHeader title="Fund a Project" navigation={navigation} back="back" />
       <View style={styles.inputContainer}>
-
-
         <Formik
           initialValues={{ heading: '' }}
           validationSchema={Yup.object({
@@ -71,7 +69,6 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
               <View style={styles.supportContainer}>
                 <Dropdown defaultButtonText={"Support Type"} />
               </View>
-
               <TextInput
                 style={styles.input}
                 onChangeText={handleChange('heading')}
@@ -81,7 +78,7 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
                 numberOfLines={7}
                 placeholder='Enter your message '
               />
-              {errors.message && touched.heading ? <Text style={styles.error}>{errors.message}</Text> : null}
+              {errors.heading && touched.heading ? <Text style={styles.error}>{errors.heading}</Text> : null}
                         <Formbtn
                         onPress={handleSubmit}
                         title='Get Support'/>

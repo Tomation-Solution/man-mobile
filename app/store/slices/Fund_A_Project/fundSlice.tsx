@@ -38,7 +38,6 @@ const fundProjectSlice = createSlice({
   kindFundingSuccess: (state, action) => {
       state.loading = false;
       state.success = true;
-      console.log( state.success)
       state.error = null;
     },
   kindFundingFailed: (state, action) => {
@@ -46,10 +45,8 @@ const fundProjectSlice = createSlice({
       state.success = false;
       state.error = action.payload;
   },
-
   }
-
-});
+})
 
 export const {
   kindFundingRequested,
@@ -67,7 +64,6 @@ export const fundProject = () => async (dispatch: AppDispatch) => {
     const getToken: any = await retrieveUserDetails();
     if (getToken && getToken.token) {
       const token = getToken.token;
-
       dispatch(
         apiCallBegan({
           url: PRE_URL + "extras/member_support_project/",
@@ -89,19 +85,33 @@ export const fundProject = () => async (dispatch: AppDispatch) => {
   }
 };
 
-export const kindFunding = (projectId: number, heading: string) => (dispatch: AppDispatch) => {
+export const kindFunding = (projectId: number, heading: string) => async(dispatch: AppDispatch) => {
   console.log('inside payinkind'+ " " +projectId + ' ' +  heading )
+  try {
+    const getToken: any = await retrieveUserDetails();
+    if (getToken && getToken.token) {
+      const token = getToken.token;
   dispatch(
     apiCallBegan({
-        url: PRE_URL + "extras/member_support_project/support_in_kind",
+        url: PRE_URL + "extras/member_support_project/support_in_kind/",
+        extraheaders: "Token " + token,
         method: "post",
       data: {
-      //  project:projectId,
+       project:projectId,
        heading:heading
       },
       onStart: kindFundingRequested.type,
       onSuccess: kindFundingSuccess.type,
       onError: kindFundingFailed.type,
-    })
-  );
+    }));
+  } else {
+    const error = new Error("Unable to retrieve user token");
+    console.error(error);
+    dispatch(kindFundingFailed(error.message));
+  }
+} catch (error: any) {
+  console.error("An error occurred while fetching duelist:", error);
+  dispatch(kindFundingFailed(error.message));
+}
+
 };

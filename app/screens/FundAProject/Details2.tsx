@@ -12,41 +12,51 @@ import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import { COLORS } from "../../constants/color";
 import { kindFunding } from "../../store/slices/Fund_A_Project/fundSlice";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 
 interface DetailsProps {
   route?: any;
   navigation?: any;
 }
+interface MessageValues {
+  message: string;
+}
+
 
 const Details2 = ({ route, navigation }: DetailsProps) => {
+
+  const initialValues: MessageValues = {
+    message: "",
+  };
+
   const dispatch = useAppDispatch();
 
-  const handleSubmit = async (values { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void, resetForm: () => void }) => {
-    const { heading } = values;
-    await dispatch(register({ data: { fullName, userName, password, phoneNumbers, department, graduationYear, chapter }}));
-    console.log(values);
-    setSubmitting(false);
-    resetForm();
+  const handleSubmit = async (values: MessageValues, { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }) => {
+       
+    //   const {  } = values;
+    // await dispatch(kindFunding(values));
+    //   setSubmitting(false);
+    //   resetForm();
+    console.log(values)
   };
+
 
   const {loading} = useAppSelector(
     (state:any) => state.fundProjectReducers.fundProjectSlice
   );
 
   return (
-    <Container style={styles.container}>
+    <Container>
       <HomeHeader title="Fund a Project" navigation={navigation} back="back" />
       <View style={styles.inputContainer}>
+
+
         <Formik
-          initialValues={{ message: "" }}
+          initialValues={initialValues}
           validationSchema={Yup.object({
-            message: Yup.string().required(),
-            onsubmit={handleSubmit }
-          })}
-        >
+            message: Yup.string().required(),})}
+            onSubmit={handleSubmit} >
           {({
             handleChange,
             handleBlur,
@@ -61,7 +71,6 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
                 <Dropdown defaultButtonText={"Support Type"} />
               </View>
               <TextInput
-                 name='heading'
                 style={styles.textInput}
                 placeholder="Note"
                 multiline={true}

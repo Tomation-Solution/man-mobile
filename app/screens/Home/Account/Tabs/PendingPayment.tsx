@@ -33,40 +33,40 @@ const PendingPayment = () => {
 
         <TouchableOpacity onPress={onButtonClick}>
             <View style={styles.btn}>
-            <Text style={styles.btnText}> {ispaid ? "Show Receipt" : "Pay"} </Text>
+            <Text style={styles.btnText}> {ispaid ? "Pay" : "Show Receipt"} </Text>
             </View>
         </TouchableOpacity>
     );
     return (
         <View style={styles.container}>
-    
-                {loading ? ( 
+
+                {loading ? (
                     <Text> Loading...</Text>
-                ) : ( 
+                ) : (
                  <>
             <Table borderStyle={{ borderColor: 'transparent' }}>
                 <Row data={tableHead} flexArr={[1, 1, 1, 1]} style={styles.head} textStyle={styles.text} />
                 <ScrollView>
                      {
-                        userData?.data?.map((rowData:any, index:any) => {  
+                        userData?.data?.map((rowData:any, index:any) => {
                             const { due__startDate, due__Name, amount,is_paid  } = rowData;
                      return(
                     <TableWrapper key={index} style={styles.row}>
                       {
-                    <>  
+                    <>
                   <Cell data={due__Name} textStyle={styles.text} />
                   <Cell data={amount} textStyle={styles.text} />
                   <Cell data={due__startDate} textStyle={styles.text} />
-              
-                  <View style={styles.tableButton}> 
-                   <ButtonElement ispaid={is_paid} />         
-                  </View>      
+
+                  <View style={styles.  dueWrapper}>
+                   <ButtonElement ispaid={is_paid} />
+                  </View>
 
 
                  </>
                   }
                  </TableWrapper>
-                    )})} 
+                    )})}
                 </ScrollView>
             </Table>
             </>
@@ -115,10 +115,11 @@ const styles = StyleSheet.create({
         elevation: 3
     },
     text: { margin: 6, textAlign: 'center', width: '100%', fontWeight: '600', fontSize: 11 },
-    dataWrapper: { marginTop: -8, },
+    dataWrapper: {  },
     row: { flexDirection: 'row' },
-    btn: { width: 60, backgroundColor: '#555D42', borderRadius: 10, marginLeft: 14 },
-    btnText: { textAlign: 'center', color: '#fff', fontSize: 13, }
+    btn: { width :80,paddingVertical:11, backgroundColor: '#555D42', borderRadius: 10, marginLeft: 14 },
+    btnText: { textAlign: 'center', color: '#fff', fontSize: 12,padding:2 },
+    dueWrapper:{ marginVertical:10}
 });
 
 export default PendingPayment

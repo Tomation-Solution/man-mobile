@@ -39,34 +39,34 @@ useEffect(()=> {
     );
     return (
         <View style={styles.container}>
-    
-                {loading ? ( 
+
+                {loading ? (
                     <Text> Loading...</Text>
-                ) : ( 
+                ) : (
                  <>
             <Table borderStyle={{ borderColor: 'transparent' }}>
                 <Row data={tableHead} flexArr={[1, 1, 1, 1]} style={styles.head} textStyle={styles.text} />
                 <ScrollView>
                      {
-                        userData?.data?.map((rowData:any, index:any) => {  
+                        userData?.data?.map((rowData:any, index:any) => {
                             const { due__startDate, due__Name, amount,is_paid  } = rowData;
                      return(
                     <TableWrapper key={index} style={styles.row}>
                       {
-                    <>  
+                    <>
                   <Cell data={due__Name} textStyle={styles.text} />
                   <Cell data={amount} textStyle={styles.text} />
                   <Cell data={due__startDate} textStyle={styles.text} />
-              
-                  <View> 
-                   <ButtonElement ispaid={is_paid} />         
-                  </View>      
+
+                  <View style={styles.dueWrapper}>
+                   <ButtonElement ispaid={is_paid} />
+                  </View>
 
 
                  </>
                   }
                  </TableWrapper>
-                    )})} 
+                    )})}
                 </ScrollView>
             </Table>
             </>
@@ -118,9 +118,9 @@ const styles = StyleSheet.create({
     text: { margin: 6, textAlign: 'center', width: '100%', fontWeight: '600', fontSize: 11 },
     dataWrapper: { marginTop: -8, },
     row: { flexDirection: 'row' },
-    btn: { width: 60, backgroundColor: '#555D42', borderRadius: 10, marginLeft: 14 },
-    btnText: { textAlign: 'center', color: '#fff', fontSize: 13, }
-
+    btn: { width :80,paddingVertical:12, backgroundColor: '#555D42', borderRadius: 10, marginLeft: 14 },
+    btnText: { textAlign: 'center', color: '#fff', fontSize: 12, },
+    dueWrapper:{ marginVertical:10}
 });
 
 export default CompletedPayment

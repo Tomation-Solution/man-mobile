@@ -33,7 +33,7 @@ const PendingPayment = () => {
 
         <TouchableOpacity onPress={onButtonClick}>
             <View style={styles.btn}>
-            <Text style={styles.btnText}> {ispaid ? "Pay" : "Show Receipt"} </Text>
+            <Text style={styles.btnText}> {ispaid ? "Show Receipt" : "Pay"} </Text>
             </View>
         </TouchableOpacity>
     );

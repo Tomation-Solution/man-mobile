@@ -13,7 +13,7 @@ import { images } from "../../assets/dummyData";
 import { COLORS } from "../../constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import PicturePreview from "../../components/Profile/PicturePreview";
-import Picture from "../../components/Profile/Picture";
+// import Picture from "../../components/Profile/Picture";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getProfile } from "../../store/slices/profile/getProfileSlice";
 
@@ -161,24 +161,9 @@ const Home = ({ navigation }: any) => {
                     </Text>
                     <Text style={styles.text}>lorem school</Text>
                   </View>
-                  <View style={styles.outerContainer}>
-                    <View style={[styles.fieldContainer, { flex: 1 }]}>
-                      <Text style={styles.label}>Major</Text>
-                      <Text style={styles.text}>lorem</Text>
-                    </View>
-                    <View
-                      style={[
-                        styles.fieldContainer,
-                        { flex: 1, marginLeft: 30 },
-                      ]}
-                    >
-                      <Text style={styles.label}>Degree</Text>
-                      <Text style={styles.text}>lorem</Text>
-                    </View>
-                  </View>
                 </View>
 
-                <View>
+                {/* <View>
                   <Text style={styles.label}>PICTURES</Text>
                   <View
                     style={{
@@ -201,7 +186,7 @@ const Home = ({ navigation }: any) => {
                       />
                     ))}
                   </View>
-                </View>
+                </View> */}
               </>
             )}
           </View>

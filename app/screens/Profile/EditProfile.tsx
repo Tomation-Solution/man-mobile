@@ -7,40 +7,137 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useReducer } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../constants/color";
 import { Container } from "../../components";
-import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
-import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { Picker } from "@react-native-picker/picker";
-import { ScrollView } from "react-native-gesture-handler";
 
-const { width } = Dimensions.get("window");
+import { ScrollView } from "react-native-gesture-handler";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { editProfile } from "../../store/slices/profile/getProfileSlice";
 
 const EditProfile = ({ navigation }: any) => {
-  const [date, setDate] = useState<Date>(new Date());
-  const [mode, setMode] = useState<any>("date");
-  const [show, setShow] = useState(false);
-  const [major, setMajor] = useState();
-  const [degree, setDegree] = useState();
-  const [nationality, setNationality] = useState();
-  const [selectedGender, setSelectedGender] = useState();
+  const { userData } = useAppSelector(
+    (state) => state.profileReducers.getProfileSlice
+  );
 
-  const onChange = (event: DateTimePickerEvent, selectedDate: any) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
-    setDate(currentDate);
+  const memberEducation = userData?.data[0]?.member_education;
+  const memberEmploymentHistory = userData?.data[0]?.member_employment_history;
+  // const languageProficiency = userData?.data[0]?.language_proficiency;
+
+  const initialFormState = {
+    membereducation: [
+      ...memberEducation.map((education: any) => {
+        return {
+          name_of_institution: education.name_of_institution || "",
+          degree: education.degree || "",
+          major: education.major || "",
+          year: education.year || "",
+          is_delete: education.is_delete || false,
+        };
+      }),
+    ],
+    memberemploymenthistory: [
+      ...memberEmploymentHistory.map((employment: any) => {
+        return {
+          postion_title: employment.postion_title || "",
+          employer_name_and_addresse:
+            employment.employer_name_and_addresse || "",
+          start_date: employment.start_date || "",
+          end_date: employment.end_date || "",
+          is_delete: employment.is_delete || false,
+        };
+      }),
+    ],
   };
 
-  const showMode = ({ currentMode }: any) => {
-    setShow(true);
-    setMode(currentMode);
+  const formReducer = (state: any, action: any) => {
+    switch (action.type) {
+      case "ADD_EDUCATION":
+        return {
+          ...state,
+          membereducation: [
+            ...state.membereducation,
+            {
+              name_of_institution: "",
+              degree: "",
+              major: "",
+              year: "",
+              is_delete: false,
+            },
+          ],
+        };
+      case "REMOVE_EDUCATION":
+        return {
+          ...state,
+          membereducation: state.membereducation.slice(0, -1),
+        };
+      case "UPDATE_EDUCATION":
+        return {
+          ...state,
+          membereducation: state.membereducation.map(
+            (education: any, index: number) =>
+              index === action.payload.index
+                ? { ...education, [action.payload.field]: action.payload.value }
+                : education
+          ),
+        };
+      case "ADD_EMPLOYMENT":
+        return {
+          ...state,
+          memberemploymenthistory: [
+            ...state.memberemploymenthistory,
+            {
+              company: "",
+              position: "",
+              startYear: "",
+              endYear: "",
+              is_delete: false,
+            },
+          ],
+        };
+      case "REMOVE_EMPLOYMENT":
+        return {
+          ...state,
+          memberemploymenthistory: state.memberemploymenthistory.slice(0, -1),
+        };
+      case "UPDATE_EMPLOYMENT":
+        return {
+          ...state,
+          memberemploymenthistory: state.memberemploymenthistory.map(
+            (employment: any, index: number) =>
+              index === action.payload.index
+                ? {
+                    ...employment,
+                    [action.payload.field]: action.payload.value,
+                  }
+                : employment
+          ),
+        };
+      default:
+        return state;
+    }
   };
 
-  const showDatepicker = () => {
-    showMode("date");
+  const appDispatch = useAppDispatch();
+
+  const [formState, dispatch] = useReducer(formReducer, initialFormState);
+
+  const handleAddEducation = () => dispatch({ type: "ADD_EDUCATION" });
+  // const handleRemoveEducation = () => dispatch({ type: "REMOVE_EDUCATION" });
+  const handleEducationChange = (index: number, field: any, value: any) =>
+    dispatch({ type: "UPDATE_EDUCATION", payload: { index, field, value } });
+
+  const handleAddEmployment = () => dispatch({ type: "ADD_EMPLOYMENT" });
+  // const handleRemoveEmployment = () => dispatch({ type: "REMOVE_EMPLOYMENT" });
+  const handleEmploymentChange = (index: number, field: any, value: any) =>
+    dispatch({ type: "UPDATE_EMPLOYMENT", payload: { index, field, value } });
+
+  const submitForm = () => {
+    appDispatch(editProfile(formState, userData?.data[0]?.id));
   };
+
+  console.log("formState", formState);
 
   return (
     <Container>
@@ -62,10 +159,14 @@ const EditProfile = ({ navigation }: any) => {
           <Ionicons name={"chevron-back"} color={COLORS.primary} size={30} />
         </TouchableOpacity>
 
+        <TouchableOpacity activeOpacity={0.8} onPress={submitForm}>
+          <Text style={{ color: COLORS.primary }}>Submit</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => {
-            navigation.navigate("EditProfile");
+            navigation.goBack();
           }}
         >
           <Text style={{ color: COLORS.primary }}>Cancel</Text>
@@ -73,106 +174,21 @@ const EditProfile = ({ navigation }: any) => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View>
-          <View style={styles.feidlContainer}>
-            <TextInput placeholder="NAME" style={styles.inputField} />
-          </View>
-
-          <View style={styles.feidlContainer}>
-            <TextInput
-              keyboardType="phone-pad"
-              placeholder="PHONE NUMBER"
-              style={styles.inputField}
-            />
-          </View>
-
-          <View style={styles.feidlContainer}>
-            <TextInput placeholder="Email" style={styles.inputField} />
-          </View>
-
-          <View style={styles.feidlContainer}>
-            <TextInput placeholder="ADDRESS" style={styles.inputField} />
-          </View>
-
-          <View style={styles.feidlContainer}>
-            <Text style={styles.label}>Date of Birth</Text>
-
-            <TouchableOpacity
-              onPress={showDatepicker}
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                paddingVertical: 10,
-                borderBottomColor: COLORS.primary,
-                borderBottomWidth: 1,
-              }}
-            >
-              <Text>{date.toLocaleDateString()}</Text>
-              <Ionicons name="chevron-down" size={20} color={COLORS.primary} />
-            </TouchableOpacity>
-
-            {show && (
-              <RNDateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                mode={mode}
-                is24Hour={true}
-                display="default"
-                onChange={onChange}
-              />
-            )}
-          </View>
-        </View>
-
-        <View style={styles.outerContainer}>
-          <View style={[styles.feidlContainer, { flex: 1 }]}>
-            <Text style={styles.label}>Citizenship</Text>
-            <View
-              style={{
-                borderBottomColor: COLORS.primary,
-                borderBottomWidth: 1,
-              }}
-            >
-              <Picker
-                selectedValue={nationality}
-                onValueChange={(itemValue, itemIndex) =>
-                  setNationality(itemValue)
-                }
-              >
-                <Picker.Item label="Nigerian" value="Nigerian" />
-                <Picker.Item label="Others" value="Others" />
-              </Picker>
-            </View>
-          </View>
-          <View style={[styles.feidlContainer, { flex: 1, marginLeft: 30 }]}>
-            <Text style={styles.label}>Gender</Text>
-
-            <View
-              style={{
-                borderBottomColor: COLORS.primary,
-                borderBottomWidth: 1,
-              }}
-            >
-              <Picker
-                selectedValue={selectedGender}
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedGender(itemValue)
-                }
-              >
-                <Picker.Item label="Male" value="Male" />
-                <Picker.Item label="Female" value="Female" />
-              </Picker>
-            </View>
-          </View>
-        </View>
-
         <View
           style={{
             marginTop: 20,
           }}
         >
-          <View style={styles.feidlContainer}>
+          <View
+            style={[
+              styles.feidlContainer,
+              {
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
+              },
+            ]}
+          >
             <Text
               style={[
                 styles.label,
@@ -181,6 +197,8 @@ const EditProfile = ({ navigation }: any) => {
                   borderBottomWidth: 1,
                   paddingVertical: 6,
                   fontWeight: "bold",
+                  flex: 1,
+                  fontSize: 18,
                 },
               ]}
             >
@@ -193,60 +211,227 @@ const EditProfile = ({ navigation }: any) => {
                 (include all college or university degrees)
               </Text>
             </Text>
+            <TouchableOpacity activeOpacity={0.8} onPress={handleAddEducation}>
+              <Ionicons name={"add"} color={COLORS.primary} size={30} />
+            </TouchableOpacity>
           </View>
 
-          <View style={styles.feidlContainer}>
-            <TextInput
-              style={styles.inputField}
-              placeholder="INSTITUTION NAME"
-            />
-          </View>
-          <View style={styles.feidlContainer}>
-            <TextInput
-              style={styles.inputField}
-              placeholder="INSTITUTION LOCATION"
-            />
-          </View>
+          {formState.membereducation.map((education: any, index: number) => (
+            <View key={index}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <Text
+                  style={{
+                    color: COLORS.primary,
+                    fontWeight: "bold",
+                    fontSize: 16,
+                    marginTop: 10,
+                    textDecorationColor: "crimson",
+                    textDecorationLine: education.is_delete
+                      ? "line-through"
+                      : "none",
+                  }}
+                >
+                  Education {index + 1}
+                </Text>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => {
+                    handleEducationChange(index, "is_delete", true);
+                    console.log("formastae", formState);
+                  }}
+                >
+                  <Ionicons name={"remove"} color={COLORS.primary} size={30} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.feidlContainer}>
+                <Text style={styles.label}>Institution Name</Text>
 
-          <View style={styles.outerContainer}>
-            <View style={[styles.feidlContainer, { flex: 1 }]}>
-              <Text style={styles.label}>Major</Text>
-              <View
-                style={{
-                  borderBottomColor: COLORS.primary,
-                  borderBottomWidth: 1,
-                }}
-              >
-                <Picker
-                  selectedValue={major}
-                  onValueChange={(itemValue, itemIndex) => setMajor(itemValue)}
+                <TextInput
+                  value={education.name_of_institution}
+                  editable={education.is_delete ? false : true}
+                  onChangeText={(value) =>
+                    handleEducationChange(index, "name_of_institution", value)
+                  }
+                  style={styles.inputField}
+                  placeholder="Enter INSTITUTION NAME"
+                />
+              </View>
+              <View style={styles.feidlContainer}>
+                <Text style={styles.label}>Degree</Text>
+
+                <TextInput
+                  editable={education.is_delete ? false : true}
+                  value={education.degree}
+                  style={styles.inputField}
+                  onChangeText={(value) =>
+                    handleEducationChange(index, "degree", value)
+                  }
+                  placeholder="Enter Degree"
+                />
+              </View>
+
+              <View style={styles.outerContainer}>
+                <View style={[styles.feidlContainer, { flex: 1 }]}>
+                  <Text style={styles.label}>Major</Text>
+                  <TextInput
+                    editable={education.is_delete ? false : true}
+                    value={education.major}
+                    style={styles.inputField}
+                    onChangeText={(value) =>
+                      handleEducationChange(index, "major", value)
+                    }
+                    placeholder="Enter Major"
+                  />
+                </View>
+                <View
+                  style={[styles.feidlContainer, { flex: 1, marginLeft: 20 }]}
                 >
-                  <Picker.Item label="BS.c" value="bsc" />
-                  <Picker.Item label="Others" value="Others" />
-                </Picker>
+                  <Text style={styles.label}>Year</Text>
+                  <TextInput
+                    editable={education.is_delete ? false : true}
+                    value={education.year}
+                    style={styles.inputField}
+                    onChangeText={(value) =>
+                      handleEducationChange(index, "year", value)
+                    }
+                    placeholder="Enter Year"
+                  />
+                </View>
               </View>
             </View>
-            <View style={[styles.feidlContainer, { flex: 1, marginLeft: 30 }]}>
-              <Text style={styles.label}>Degree</Text>
-              <View
-                style={{
-                  borderBottomColor: COLORS.primary,
-                  borderBottomWidth: 1,
-                }}
-              >
-                <Picker
-                  selectedValue={degree}
-                  onValueChange={(itemValue, itemIndex) => setDegree(itemValue)}
-                >
-                  <Picker.Item label="Some major" value="bsc" />
-                  <Picker.Item label="Others" value="Others" />
-                </Picker>
-              </View>
-            </View>
-          </View>
+          ))}
         </View>
 
         <View
+          style={[
+            styles.feidlContainer,
+            { marginTop: 40, flexDirection: "row" },
+          ]}
+        >
+          <Text
+            style={[
+              styles.label,
+              {
+                borderBottomColor: COLORS.primary,
+                borderBottomWidth: 1,
+                paddingVertical: 6,
+                fontWeight: "bold",
+                flex: 1,
+                fontSize: 18,
+              },
+            ]}
+          >
+            EMPLOYMENT HISTORY
+          </Text>
+          <TouchableOpacity activeOpacity={0.8} onPress={handleAddEmployment}>
+            <Ionicons name={"add"} color={COLORS.primary} size={30} />
+          </TouchableOpacity>
+        </View>
+
+        {formState.memberemploymenthistory.map(
+          (employment: any, index: number) => (
+            <View key={index}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <Text
+                  style={{
+                    color: COLORS.primary,
+                    fontWeight: "bold",
+                    fontSize: 16,
+                    marginTop: 10,
+                    textDecorationColor: "crimson",
+                    textDecorationLine: employment.is_delete
+                      ? "line-through"
+                      : "none",
+                  }}
+                >
+                  Employment History {index + 1}
+                </Text>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => {
+                    handleEmploymentChange(index, "is_delete", true);
+                    console.log("formastae", formState);
+                  }}
+                >
+                  <Ionicons name={"remove"} color={COLORS.primary} size={30} />
+                </TouchableOpacity>
+              </View>
+              <View style={[styles.feidlContainer, { flex: 1 }]}>
+                <Text style={styles.label}>Company Name and Address</Text>
+                <TextInput
+                  editable={employment.is_delete ? false : true}
+                  value={employment.employer_name_and_addresse}
+                  style={styles.inputField}
+                  onChangeText={(value) =>
+                    handleEmploymentChange(
+                      index,
+                      "employer_name_and_addresse",
+                      value
+                    )
+                  }
+                  placeholder="Enter Comapny Name"
+                />
+              </View>
+              <View style={[styles.feidlContainer, { flex: 1 }]}>
+                <Text style={styles.label}>Job Title</Text>
+                <TextInput
+                  editable={employment.is_delete ? false : true}
+                  value={employment.postion_title}
+                  style={styles.inputField}
+                  onChangeText={(value) =>
+                    handleEmploymentChange(index, "postion_title", value)
+                  }
+                  placeholder="Enter Job Title"
+                />
+              </View>
+
+              <View style={styles.outerContainer}>
+                <View style={[styles.feidlContainer, { flex: 1 }]}>
+                  <Text style={styles.label}>Start Date</Text>
+                  <TextInput
+                    editable={employment.is_delete ? false : true}
+                    value={employment.start_date}
+                    style={styles.inputField}
+                    onChangeText={(value) =>
+                      handleEducationChange(index, "start_date", value)
+                    }
+                    placeholder="Enter Start Date"
+                  />
+                </View>
+                <View
+                  style={[styles.feidlContainer, { flex: 1, marginLeft: 20 }]}
+                >
+                  <Text style={styles.label}>End Date</Text>
+                  <TextInput
+                    editable={employment.is_delete ? false : true}
+                    value={employment.end_date}
+                    style={styles.inputField}
+                    onChangeText={(value) =>
+                      handleEducationChange(index, "end_date", value)
+                    }
+                    placeholder="Enter End Date"
+                  />
+                </View>
+              </View>
+            </View>
+          )
+        )}
+
+        {/* <View
           style={{
             marginTop: 20,
           }}
@@ -281,82 +466,7 @@ const EditProfile = ({ navigation }: any) => {
               <Text style={styles.text}>lorem</Text>
             </View>
           </View>
-        </View>
-
-        <View
-          style={{
-            marginTop: 20,
-          }}
-        >
-          <View style={styles.feidlContainer}>
-            <Text
-              style={[
-                styles.label,
-                {
-                  borderBottomColor: COLORS.primary,
-                  borderBottomWidth: 1,
-                  paddingVertical: 6,
-                  fontWeight: "bold",
-                },
-              ]}
-            >
-              EMPLOYMENT HISTORY
-            </Text>
-          </View>
-          <View style={styles.feidlContainer}>
-            <Text style={styles.label}>POSITION TITLE</Text>
-            <Text style={styles.text}>lorem school</Text>
-          </View>
-
-          <View style={styles.feidlContainer}>
-            <Text style={styles.label}>EMPLOYER' S NAME AND ADDRESS</Text>
-            <Text style={styles.text}>lorem school</Text>
-          </View>
-
-          <View style={styles.outerContainer}>
-            <View style={[styles.feidlContainer, { flex: 1 }]}>
-              <Text style={styles.label}>from</Text>
-              <Text style={styles.text}>lorem</Text>
-            </View>
-            <View style={[styles.feidlContainer, { flex: 1, marginLeft: 30 }]}>
-              <Text style={styles.label}>to</Text>
-              <Text style={styles.text}>lorem</Text>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.outerContainer}>
-          <View style={[styles.feidlContainer, { flex: 1 }]}>
-            <Text style={styles.label}>Role</Text>
-            <Text style={styles.text}>Accountant</Text>
-          </View>
-          <View style={[styles.feidlContainer, { flex: 1, marginLeft: 30 }]}>
-            <Text style={styles.label}>Year Employed</Text>
-            <Text style={styles.text}>2005</Text>
-          </View>
-        </View>
-
-        <View style={styles.outerContainer}>
-          <View style={[styles.feidlContainer, { flex: 1 }]}>
-            <Text style={styles.label}>Employment type</Text>
-            <Text style={styles.text}>Full Time</Text>
-          </View>
-          <View style={[styles.feidlContainer, { flex: 1, marginLeft: 30 }]}>
-            <Text style={styles.label}>Phone Number</Text>
-            <Text style={styles.text}>+234 816 453 7857</Text>
-          </View>
-        </View>
-        <View style={styles.feidlContainer}>
-          <Text style={styles.label}>BIO</Text>
-          <Text style={styles.text}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis
-            est fugiat ducimus quasi cupiditate rem voluptatum quibusdam beatae
-            dicta, nihil libero quidem, sapiente mollitia provident natus id
-            maxime dolore magni asperiores earum. Deserunt dicta culpa, ut quam
-            aliquid soluta eos animi dolor qui vero nesciunt maxime asperiores
-            consectetur expedita quaerat!
-          </Text>
-        </View>
+        </View> */}
       </ScrollView>
     </Container>
   );

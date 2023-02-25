@@ -10,11 +10,11 @@ import {
 } from "react-native";
 import { ComfirmationInput, Formbtn, AccountHeader } from "../../../components";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { validateUser } from "../../../store/slices/auth/validateUserSlice";
+import { validateUser } from "../../../store/slices/auth/loginSlice";
 
 const VerifyUser = ({ navigation }: any) => {
-  const { loading, validation } = useAppSelector(
-    (state) => state.authReducers.validateUser
+  const { loading, isUserValidated, message } = useAppSelector(
+    (state) => state.authReducers.login
   );
 
   const [input, setInput] = useState<string>();
@@ -28,10 +28,10 @@ const VerifyUser = ({ navigation }: any) => {
   };
 
   useEffect(() => {
-    if (validation.message === "Success") {
+    if (isUserValidated) {
       navigation.navigate("Registration", { data: newInput });
     }
-  }, [validation, loading]);
+  }, [isUserValidated, loading]);
 
   return (
     <>
@@ -47,7 +47,7 @@ const VerifyUser = ({ navigation }: any) => {
               text={` Enter your membeship number to proceed`}
             />
           </View>
-
+          {message && <Text>{message}</Text>}
           <View style={[styles.card, styles.shawdowProp]}>
             <View>
               <TextInput
@@ -58,7 +58,12 @@ const VerifyUser = ({ navigation }: any) => {
               />
             </View>
 
-            <Formbtn style={[styles.btn]} title="Verify" onPress={onVerify} />
+            <Formbtn
+              style={[styles.btn]}
+              title="Verify"
+              onPress={onVerify}
+              loading={loading}
+            />
           </View>
         </View>
       </Container>

@@ -7,12 +7,24 @@ import {
   storeUserDetails,
 } from "../../../utils/helperFunctions/userDataHandlers";
 
-const initialState = {
+const initialState: {
+  userData: string;
+  validationData: any;
+  loading: boolean;
+  isLoggedIn: boolean;
+  message: string;
+  error: string;
+  isUserValidated: boolean;
+  registrationStatus: boolean;
+} = {
   userData: "",
+  validationData: "",
   loading: false,
   isLoggedIn: false,
   message: "",
   error: "",
+  isUserValidated: false,
+  registrationStatus: false,
 };
 
 const loginSlice = createSlice({
@@ -41,16 +53,35 @@ const loginSlice = createSlice({
       state.userData = "";
     },
 
+    validationRequested: (state, action) => {
+      state.loading = true;
+      state.message = "";
+      console.log("validationRequested", "looading");
+    },
+
+    validationReceived: (state, action) => {
+      state.loading = false;
+      state.isUserValidated = true;
+      state.validationData = action.payload;
+      console.log("validationReceived", action.payload);
+      console.log("state.userData", state.validationData);
+      console.log(state.loading);
+    },
+
+    validationRequestFailed: (state, action) => {
+      state.loading = false;
+      state.message = "Validation Failed or Invalid Token";
+      console.log("validationRequestFailed", action.payload);
+    },
+
     registrationRequested: (state, action) => {
       state.loading = true;
       console.log("registrationRequested", "looading");
     },
     registrationReceived: (state, action) => {
       state.loading = false;
-      state.isLoggedIn = true;
+      state.registrationStatus = true;
       console.log("registrationReceived", action.payload);
-      storeUserDetails(JSON.stringify(action.payload));
-      state.userData = JSON.stringify(action.payload);
     },
     registrationRequestFailed: (state, action) => {
       state.loading = false;
@@ -69,6 +100,9 @@ const {
   registrationRequested,
   registrationReceived,
   registrationRequestFailed,
+  validationRequested,
+  validationReceived,
+  validationRequestFailed,
 } = loginSlice.actions;
 
 export default loginSlice.reducer;
@@ -116,3 +150,16 @@ export const createMember =
       })
     );
   };
+
+export const validateUser = (data: any) => (dispatch: AppDispatch) => {
+  dispatch(
+    apiCallBegan({
+      url: `${PRE_URL}auth/ManageMemberValidation/`,
+      method: "post",
+      data,
+      onStart: validationRequested.type,
+      onSuccess: validationReceived.type,
+      onError: validationRequestFailed.type,
+    })
+  );
+};

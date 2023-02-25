@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -39,9 +39,17 @@ const Registration = ({ route, navigation }: any) => {
     dispatch(createMember(values));
   };
 
-  const { loading, error, message } = useAppSelector(
+  const { loading, error, validationData, registrationStatus } = useAppSelector(
     (state) => state.authReducers.login
   );
+
+  const user_data = validationData?.data[0]?.user;
+
+  useEffect(() => {
+    if (registrationStatus) {
+      navigation.navigate("Login");
+    }
+  }, [registrationStatus]);
 
   return (
     <KeyboardAvoidingViewWrapper>
@@ -85,15 +93,15 @@ const Registration = ({ route, navigation }: any) => {
                 "POSITION HELD": yup.string().required().label("Position held"),
               })}
               initialValues={{
-                name: "",
-                EMAIL: "",
+                name: user_data?.name || "",
+                EMAIL: user_data?.EMAIL || "",
                 password: "",
-                GSM: "",
-                TITLE: "",
-                alumni_year: "",
-                MEMBERSHIP_NO: data,
-                "POSITION HELD": "",
                 rel8Email: "",
+                GSM: user_data?.GSM || "",
+                TITLE: user_data?.TITLE || "",
+                alumni_year: user_data?.alumni_year || "",
+                MEMBERSHIP_NO: data,
+                "POSITION HELD": user_data?.["POSITION HELD"] || "",
               }}
               onSubmit={(values) => handleRegister(values)}
             >
@@ -103,22 +111,26 @@ const Registration = ({ route, navigation }: any) => {
                     component={FormInput}
                     name="name"
                     placeholder="Full name"
+                    editable={false}
                   />
                   <Field
                     component={FormInput}
                     name="GSM"
                     placeholder="Phone number"
+                    editable={false}
                   />
                   <Field
                     component={FormInput}
                     name="EMAIL"
                     placeholder="Email address"
                   />
+
                   <Field
                     component={FormInput}
                     name="rel8Email"
                     placeholder="rel8Email address"
                   />
+
                   <Field
                     component={FormInput}
                     name="password"

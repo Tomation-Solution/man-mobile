@@ -47,8 +47,14 @@ const getProfileSlice = createSlice({
   },
 });
 
-const { getProfileRequested, getProfileReceived, getProfileRequestFailed } =
-  getProfileSlice.actions;
+const {
+  getProfileRequested,
+  getProfileReceived,
+  getProfileRequestFailed,
+  editProfileReceived,
+  editProfileRequestFailed,
+  editProfileRequested,
+} = getProfileSlice.actions;
 
 export default getProfileSlice.reducer;
 
@@ -90,9 +96,9 @@ export const editProfile =
             extraheaders: "Token " + token,
             method: "put",
             data,
-            onStart: getProfileRequested.type,
-            onSuccess: getProfileReceived.type,
-            onError: getProfileRequestFailed.type,
+            onStart: editProfileRequested.type,
+            onSuccess: editProfileReceived.type,
+            onError: editProfileRequestFailed.type,
           })
         );
       } else {

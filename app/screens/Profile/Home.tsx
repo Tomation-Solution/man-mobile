@@ -128,7 +128,7 @@ const Home = ({ navigation }: any) => {
                     </View>
                   );
                 })}
-                <View
+                {/* <View
                   style={{
                     marginTop: 20,
                   }}
@@ -161,7 +161,7 @@ const Home = ({ navigation }: any) => {
                     </Text>
                     <Text style={styles.text}>lorem school</Text>
                   </View>
-                </View>
+                </View> */}
 
                 {/* <View>
                   <Text style={styles.label}>PICTURES</Text>

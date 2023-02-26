@@ -23,7 +23,7 @@ const General = () => {
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.container}>
+        {/* <View style={styles.container}>
           {messages.map((message) => (
             <GeneralChatCard
               key={message.id}
@@ -43,7 +43,7 @@ const General = () => {
               time={message.date}
             />
           ))}
-        </View>
+        </View> */}
       </ScrollView>
 
       <SendBox disabled />

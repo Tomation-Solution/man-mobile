@@ -33,7 +33,6 @@ const EditProfile = ({ navigation }: any) => {
           degree: education.degree || "",
           major: education.major || "",
           year: education.year || "",
-          is_delete: education.is_delete || false,
         };
       }),
     ],
@@ -45,7 +44,6 @@ const EditProfile = ({ navigation }: any) => {
             employment.employer_name_and_addresse || "",
           start_date: employment.start_date || "",
           end_date: employment.end_date || "",
-          is_delete: employment.is_delete || false,
         };
       }),
     ],
@@ -63,7 +61,6 @@ const EditProfile = ({ navigation }: any) => {
               degree: "",
               major: "",
               year: "",
-              is_delete: false,
             },
           ],
         };
@@ -92,7 +89,6 @@ const EditProfile = ({ navigation }: any) => {
               position: "",
               startYear: "",
               endYear: "",
-              is_delete: false,
             },
           ],
         };

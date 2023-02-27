@@ -26,7 +26,6 @@ const getProfileSlice = createSlice({
     getProfileReceived: (state, action) => {
       state.loading = false;
       state.userData = action.payload;
-      console.log("getProfileReceived", action.payload);
     },
     getProfileRequestFailed: (state, action) => {
       state.loading = false;

@@ -39,7 +39,6 @@ const newsSlice = createSlice({
     commentReceived: (state, action) => {
       state.commenstLoading = false;
       state.comments = action.payload;
-      console.log("action.payload", action.payload);
     },
 
     commentRequestFailed: (state, action) => {

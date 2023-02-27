@@ -22,7 +22,6 @@ const slice = createSlice({
     galleryReceived: (state, action) => {
       state.loading = false;
       state.galleryData = action.payload;
-      console.log("galleryData", state.galleryData);
     },
     galleryNotReceived: (state, action) => {
       state.loading = false;

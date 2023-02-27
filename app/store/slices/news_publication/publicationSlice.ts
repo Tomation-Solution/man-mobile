@@ -26,7 +26,6 @@ const publicationSlice = createSlice({
     publicationReceived: (state, action) => {
       state.publications = action.payload;
       state.loading = false;
-      console.log("publicationReceived", state.publications);
     },
     publicationRequestFailed: (state, action) => {
       state.loading = false;
@@ -38,7 +37,6 @@ const publicationSlice = createSlice({
     commentReceived: (state, action) => {
       state.commenstLoading = false;
       state.comments = action.payload;
-      console.log("action.payload", action.payload);
     },
 
     commentRequestFailed: (state, action) => {

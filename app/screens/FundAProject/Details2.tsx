@@ -51,11 +51,11 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
       <HomeHeader title="Fund a Project" navigation={navigation} back="back" />
       <View style={styles.inputContainer}>
         <Formik
-          initialValues={{ heading: '' }}
+          initialValues={{ heading: ' ' }}
           validationSchema={Yup.object({
-           heading: Yup.string().required(),})}
-            onSubmit={handleSubmit}
-            >
+          heading: Yup.string().required(),})}
+          onSubmit={handleSubmit}>
+
           {({
             handleChange,
             handleBlur,
@@ -63,7 +63,7 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
             errors,
             touched,
             handleSubmit,
-          }) => (
+          })     =>  (
             <View>
               <Text style={styles.headText}>Support in Kind</Text>
               <View style={styles.supportContainer}>
@@ -82,8 +82,7 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
                         <Formbtn
                         onPress={handleSubmit}
                         title='Get Support'/>
-
-            </View>
+                       </View>
           )}
         </Formik>
       </View>

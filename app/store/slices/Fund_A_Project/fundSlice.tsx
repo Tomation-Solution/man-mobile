@@ -86,7 +86,7 @@ export const fundProject = () => async (dispatch: AppDispatch) => {
 };
 
 export const kindFunding = (projectId: number, heading: string) => async(dispatch: AppDispatch) => {
-  console.log('inside payinkind'+ " " +projectId + ' ' +  heading )
+  // console.log('inside payinkind'+ " " +projectId + ' ' +  heading )
   try {
     const getToken: any = await retrieveUserDetails();
     if (getToken && getToken.token) {

@@ -1,4 +1,3 @@
-import { signUpValidationSchema } from '../../../utils/validation';
 import React, { useState } from "react";
 import {
   View,
@@ -48,7 +47,6 @@ const Registration = ({ navigation }: any) => {
         <FormContainer>
           <View style={[styles.card, styles.shawdowProp]}>
             <Formik
-              validationSchema={signUpValidationSchema}
               initialValues={{
                 fulname: "",
                 email: "",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -18,47 +18,10 @@ import {
 } from "../../../components";
 import Locked from "../components/LockedWithPay";
 import { Formik, Field } from "formik";
-import { register } from "../../../store/slices/auth/registerationSlice";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import {signUpValidationSchema} from '../../../utils/validation'
-
-
-interface RegistrationValues {
-  fullName: string;
-  email: string;
-  userName: string;
-  password: string,
-  phoneNumbers: number;
-  department: string;
-  graduationYear: string,
-  chapter: string,
-}
+import * as yup from "yup";
 
 const Registration = ({ navigation }: any) => {
-
-const initialValues: RegistrationValues = {
-  fullName: '',
-  email: '',
-  userName: '',
-  password: '',
-  phoneNumbers: 0,
-  department: '',
-  graduationYear: '',
-  chapter: '',
-}
   const [modalVisible, setModalVisible] = useState(true);
-  const dispatch = useAppDispatch();
-
-  const { loading } = useAppSelector((state) => state.authReducers.login);
-
-  const handleSubmit = async (values: RegistrationValues, { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void, resetForm: () => void }) => {
-    const { fullName, userName, password, phoneNumbers, department, graduationYear, chapter } = values;
-    await dispatch(register({ data: { fullName, userName, password, phoneNumbers, department, graduationYear, chapter }}));
-    console.log(values);
-    setSubmitting(false);
-    resetForm();
-  };
-
 
   const onModalPress = () => {
     setModalVisible(!modalVisible);
@@ -66,6 +29,23 @@ const initialValues: RegistrationValues = {
   <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
     <Locked onPress={onModalPress} />
   </CustomModal>;
+
+  const handleRegister = (values: any) => {
+    console.log(values);
+    dispatch(createMember(values));
+  };
+
+  const { loading, error, validationData, registrationStatus } = useAppSelector(
+    (state) => state.authReducers.login
+  );
+
+  const user_data = validationData?.data[0]?.user;
+
+  useEffect(() => {
+    if (registrationStatus) {
+      navigation.navigate("Login");
+    }
+  }, [registrationStatus]);
 
   return (
     <KeyboardAvoidingViewWrapper>
@@ -77,44 +57,63 @@ const initialValues: RegistrationValues = {
           }}
         >
           <AccountHeader
-            title="  Registration"
-            text=" Input details to register as alumnus"
+            title="Registration"
+            text="Input details to register as alumnus"
           />
+          {error && (
+            <Text
+              style={{
+                color: "red",
+                fontSize: 15,
+              }}
+            >
+              {error}
+            </Text>
+          )}
         </View>
 
         <FormContainer>
           <View style={[styles.card, styles.shawdowProp]}>
             <Formik
-            initialValues={initialValues}
-              validationSchema={signUpValidationSchema}
-              onSubmit={handleSubmit}>
-
-              {({ isSubmitting}) => (
+              initialValues={{
+                fulname: "",
+                email: "",
+                username: "",
+                password: "",
+                phonenumbers: "",
+                department: "",
+                graduationyear: "",
+                chapter: "",
+              }}
+              onSubmit={(values) => console.log(values)}
+            >
+              {({ handleSubmit, isValid }) => (
                 <>
                   <Field
                     component={FormInput}
-                    name="fullName"
+                    name="fullname"
                     placeholder="Full name"
-                    type="text"
                   />
                   <Field
                     component={FormInput}
-                    name="email"
+                    name="EMAIL"
                     placeholder="Email address"
                     type="email"
                   />
+
                   <Field
                     component={FormInput}
-                    name="userName"
+                    name="username"
                     placeholder="Username"
-                    type="text"
                   />
+
                   <Field
                     component={FormInput}
                     name="password"
                     placeholder="Password"
                     type="password"
                   />
+
                   <View
                     style={{
                       display: "flex",
@@ -132,41 +131,34 @@ const initialValues: RegistrationValues = {
                     >
                       <Field
                         component={FormInput}
-                        name="phoneNumber"
+                        name="phonenumber"
                         placeholder="Phone number"
-                        type="tel"
                       />
                       <Field
                         component={FormInput}
                         name="department"
                         placeholder="Department"
-                        type="text"
                       />
                     </View>
                     <View style={{ width: "50%", marginLeft: 15 }}>
                       <Field
                         component={FormInput}
-                        name="graduationYear"
-                        type="number"
+                        name="graduationyear"
                         placeholder="Graduation year"
                       />
                       <Field
                         component={FormInput}
                         name="chapter"
                         placeholder="Chaper"
-                        type="number"
                       />
                     </View>
                   </View>
 
                   <Formbtn
+                    disabeld={loading}
                     style={[styles.btn]}
-                    title={ loading? (
-                      <ActivityIndicator size="small" color="white" />
-                    ): (
-                      "Login"
-                     )}
-                     disabled={isSubmitting}
+                    title="Register"
+                    onPress={() => navigation.navigate("VerifyUser")}
                   />
                 </>
               )}
@@ -217,9 +209,9 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginVertical: 15,
-    width: '100%',
-    alignContent: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    alignContent: "center",
+    justifyContent: "center",
   },
 
   register: {
@@ -239,4 +231,3 @@ const styles = StyleSheet.create({
 });
 
 export default Registration;
-

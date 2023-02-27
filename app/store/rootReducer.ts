@@ -7,6 +7,8 @@ import meetings from "./slices/meetings/meetingsSlice";
 import events from "./slices/events/eventsSlice";
 import duelistReducers from "./slices/due_list_and_owning_members/duelist";
 import fundProjectReducers from "./slices/Fund_A_Project/fund_a_project";
+import chat from "./slices/chat/chat";
+import extras from "./slices/extras/extras";
 
 export default combineReducers({
   authReducers,
@@ -18,4 +20,6 @@ export default combineReducers({
   events,
   fundProjectReducers,
 
+  chat,
+  extras,
 });

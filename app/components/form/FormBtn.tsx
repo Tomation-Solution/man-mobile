@@ -7,15 +7,24 @@ const FormSubmitButton = ({
   onPress,
   style,
   textStyles,
+  loading,
 }: any) => {
   const backgroundColor = submitting ? "#182005" : "#2B3513";
 
   return (
     <TouchableOpacity
-      onPress={!submitting ? onPress : null}
-      style={[styles.container, style, { backgroundColor }]}
+      disabled={loading}
+      onPress={!loading ? onPress : null}
+      style={[
+        styles.container,
+        style,
+        { backgroundColor },
+        { opacity: loading ? 0.5 : 1 },
+      ]}
     >
-      <Text style={[styles.formbtn, textStyles]}>{title}</Text>
+      <Text style={[styles.formbtn, textStyles]}>
+        {loading ? "Submitting..." : title}
+      </Text>
     </TouchableOpacity>
   );
 };

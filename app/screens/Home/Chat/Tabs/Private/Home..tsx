@@ -1,12 +1,25 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
-import { privateMessages } from "../../../../../assets/dummyData/privateMessages";
+
 import { SearchBar } from "../../../../../components";
 import PrivateChatCard from "../../../../../components/Chats/PrivateChatCard";
 import { COLORS } from "../../../../../constants/color";
-import { useIsFocused } from "@react-navigation/native";
+import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
+import { getMembers } from "../../../../../store/slices/extras/members";
+import LoadingIndicator from "../../../../../utils/LoadingIndicator";
+import { retrieveUserDetails } from "../../../../../utils/helperFunctions/userDataHandlers";
+import { clearChat } from "../../../../../store/slices/chat/chat";
 
-const Home = ({ navigation, setShowTabBar }: any) => {
+const Home = ({ navigation, setShowTabBar, userData }: any) => {
+  const dispatch = useAppDispatch();
+  const { membersList, loading } = useAppSelector(
+    (state) => state.extras.members
+  );
+
+  useEffect(() => {
+    dispatch(getMembers());
+  }, []);
+
   return (
     <View style={{}}>
       <View
@@ -22,20 +35,30 @@ const Home = ({ navigation, setShowTabBar }: any) => {
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View
-          style={{
-            flex: 1,
-            height: "100%",
-          }}
-        >
-          {privateMessages.map((message) => (
-            <PrivateChatCard
-              key={message.id}
-              item={message}
-              onPress={() => navigation.navigate("Details", { message })}
-            />
-          ))}
-        </View>
+        {loading ? (
+          <LoadingIndicator />
+        ) : (
+          <View
+            style={{
+              flex: 1,
+              height: "100%",
+            }}
+          >
+            {userData &&
+              membersList?.data
+                ?.filter((user: any) => user.user !== userData.user_id)
+                .map((message: any) => (
+                  <PrivateChatCard
+                    key={message.id}
+                    item={message}
+                    onPress={() => {
+                      dispatch(clearChat());
+                      navigation.navigate("Details", { message });
+                    }}
+                  />
+                ))}
+          </View>
+        )}
       </ScrollView>
     </View>
   );

@@ -8,10 +8,12 @@ const initialState: {
   userData: any;
   loading: boolean;
   error: any;
+  profileEditted: boolean;
 } = {
   userData: null,
   loading: false,
   error: null,
+  profileEditted: false,
 };
 
 const getProfileSlice = createSlice({
@@ -36,7 +38,7 @@ const getProfileSlice = createSlice({
     },
     editProfileReceived: (state, action) => {
       state.loading = false;
-      state.userData = action.payload;
+      state.profileEditted = true;
       console.log("editProfileReceived", action.payload);
     },
     editProfileRequestFailed: (state, action) => {

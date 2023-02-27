@@ -128,65 +128,25 @@ const Home = ({ navigation }: any) => {
                     </View>
                   );
                 })}
-                {/* <View
-                  style={{
-                    marginTop: 20,
-                  }}
-                >
-                  <View style={styles.fieldContainer}>
-                    <Text
-                      style={[
-                        styles.label,
-                        {
-                          borderBottomColor: COLORS.primary,
-                          borderBottomWidth: 1,
-                          paddingVertical: 6,
-                          fontWeight: "bold",
-                        },
-                      ]}
-                    >
-                      EDUCATION
-                      <Text
-                        style={{
-                          fontStyle: "italic",
-                        }}
-                      >
-                        (include all college or university degrees)
-                      </Text>
-                    </Text>
-                  </View>
-                  <View style={styles.fieldContainer}>
-                    <Text style={styles.label}>
-                      NAME AND LOCATION OF INSTITUTION
-                    </Text>
-                    <Text style={styles.text}>lorem school</Text>
-                  </View>
-                </View> */}
 
-                {/* <View>
-                  <Text style={styles.label}>PICTURES</Text>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      marginTop: 20,
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    {pictures.slice(0, slice + 1).map(({ id, img }) => (
-                      <Picture
-                        key={id}
-                        id={id}
-                        image={img}
-                        slice={slice}
-                        total={pictures.length}
-                        setSlice={setSlice}
-                        setShowModal={() => setShowModal(!modal)}
-                        setImageIndex={setImageIndex}
-                      />
-                    ))}
-                  </View>
-                </View> */}
+                <View>
+                  {userData?.data[0]?.member_employment_history.map(
+                    (item: any) => {
+                      return (
+                        <View key={item.id} style={styles.fieldContainer}>
+                          <View style={styles.fieldContainer}>
+                            <Text style={styles.label}>
+                              {item?.employer_name_and_addresse}
+                            </Text>
+                            <Text style={styles.text}>
+                              {item?.postion_title}
+                            </Text>
+                          </View>
+                        </View>
+                      );
+                    }
+                  )}
+                </View>
               </>
             )}
           </View>

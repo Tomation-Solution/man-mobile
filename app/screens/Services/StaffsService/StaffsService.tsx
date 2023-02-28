@@ -4,10 +4,10 @@ import {
   horizontalScale,
   moderateScale,
   verticalScale,
-} from "../../constants/metric";
-import { Container, CustomModal, HomeHeader } from "../../components";
-import LetterSubmission from "./components/CertificateRequest/components/LetterSubmission";
-import { appImages } from "../../assets/app/images";
+} from "../../../constants/metric";
+import { Container, CustomModal, HomeHeader } from "../../../components";
+//import LetterSubmission from "../components/CertificateRequest/components/LetterSubmission";
+import { appImages } from "../../../assets/app/images";
 import { FlatList } from "react-native-gesture-handler";
 interface DetailsProps {
   route?: any;
@@ -34,11 +34,10 @@ const Item = ({ item, index }: any) => {
   };
   return (
     <Container style={styles.rowContainer} key={index}>
-      <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
-        {key === 2 && (
-          <LetterSubmission onPress={onPress} fileName="Admission List" />
-        )}
-      </CustomModal>
+      <CustomModal
+        visible={modalVisible}
+        onRequestClose={setModalVisible}
+      ></CustomModal>
       <TouchableOpacity style={styles.imageContainer} onPress={onPress}>
         <Image source={item.image} style={styles.image} resizeMode="cover" />
         <Text style={styles.text}>{item.name}</Text>

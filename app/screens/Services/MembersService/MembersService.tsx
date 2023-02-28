@@ -4,11 +4,10 @@ import {
   horizontalScale,
   moderateScale,
   verticalScale,
-} from "../../constants/metric";
-import { HomeHeader, CustomModal } from "../../components";
-import Item from "./components/Item";
-import { appImages } from "../../assets/app/images";
+} from "../../../constants/metric";
+import { HomeHeader, CustomModal } from "../../../components";
 import { FlatList } from "react-native-gesture-handler";
+import Item from "./components/Item";
 
 interface DetailsProps {
   route?: any;
@@ -16,36 +15,45 @@ interface DetailsProps {
 }
 
 const data = [
-  { name: "Certificate Request", image: appImages.certificate, link: "#" },
-  { name: "Chat with the DG", image: appImages.profile_1, link: "#" },
-  { name: "MembershipAdmission", image: appImages.certificate, link: "#" },
-  { name: "Change of Name", image: appImages.certificate, link: "#" },
-  { name: "Merge Companies", image: appImages.certificate, link: "#" },
+  { name: "Membership admission", image: "laptop", link: "#" },
   {
-    name: "Deactivation of Membership",
-    image: appImages.certificate,
+    name: "Reissuance of certificate",
+    image: "laptop",
+    link: "ReissuanceOfCertificate",
+  },
+  { name: "Loss of certificate", image: "laptop", link: "#" },
+  { name: "Change of Name", image: "people", link: "#" },
+  { name: "Merger of member companies", image: "laptop", link: "#" },
+  {
+    name: "Deactivation/Suspension of membership",
+    image: "laptop",
     link: "#",
   },
-  { name: "Activation of Membership", image: appImages.certificate, link: "#" },
-  { name: "Update on products", image: appImages.certificate, link: "#" },
-  { name: "Update on Factory", image: appImages.certificate, link: "#" },
+  {
+    name: "Activation of deactivated/suspended member",
+    image: "laptop",
+    link: "#",
+  },
+  { name: "Update on product(s) manufactured", image: "shop", link: "#" },
+  { name: "Update on factory location(s)", image: "laptop", link: "#" },
 ];
 
 const MembersService = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
-      <HomeHeader
-        title="Members Services"
-        navigation={navigation}
-        back="back"
-      />
+      <HomeHeader title="Services" navigation={navigation} back="back" />
 
       <FlatList
         data={data}
-        numColumns={2}
-        initialNumToRender={1}
-        renderItem={({ item, index }) => <Item item={item} index={index} />}
         showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <Item
+            name={item.name}
+            image={item.image}
+            link={item.link}
+            navigation={navigation}
+          />
+        )}
       />
     </View>
   );

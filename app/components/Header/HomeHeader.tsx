@@ -8,19 +8,12 @@ import { SPACING } from "../../globals/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface Props {
-  navigation: any;
-  title?: string;
+  navigation?: any;
+  title?: any;
   back?: any;
   isTitleComponent?: any;
-  titleColor?: string;
 }
-const HomeHeader = ({
-  navigation,
-  title,
-  back,
-  isTitleComponent,
-  titleColor,
-}: Props) => {
+const HomeHeader = ({ navigation, title, back, isTitleComponent }: Props) => {
   // const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
   // const [userData, setUserData] = useState<{ userName: string } | null>(null);
 
@@ -50,9 +43,7 @@ const HomeHeader = ({
       {isTitleComponent ? (
         isTitleComponent
       ) : title ? (
-        <Text style={{ fontSize: 20, fontWeight: "bold", color: titleColor }}>
-          {title}
-        </Text>
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>{title}</Text>
       ) : (
         <>
           <Text style={{ fontSize: 16, fontWeight: "500" }}>

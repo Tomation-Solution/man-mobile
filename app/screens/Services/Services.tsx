@@ -3,9 +3,9 @@ import React from "react";
 import { Container } from "../../components";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./Home";
-import MembersService from "./MembersService";
-import StaffsService from "./StaffsService";
+import MembersService from "./MembersService/MembersService";
+import StaffsService from "./StaffsService/StaffsService";
+import ReissuanceOfCertificate from "./MembersService/pages/ReissuanceOfCertificate";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,16 +16,16 @@ const Services = ({ navigation }: any) => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="Home"
+        initialRouteName="MembersService"
       >
-        <Stack.Screen name="Home">
-          {(props) => <Home {...props} />}
-        </Stack.Screen>
         <Stack.Screen name="MembersService">
           {(props) => <MembersService {...props} />}
         </Stack.Screen>
         <Stack.Screen name="StaffsService">
           {(props) => <StaffsService {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="ReissuanceOfCertificate">
+          {(props) => <ReissuanceOfCertificate {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </Container>

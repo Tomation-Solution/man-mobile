@@ -56,10 +56,11 @@ const DrawerNav = () => {
 
         <Drawer.Screen name="Gallery" component={Gallery} />
         <Drawer.Screen name="Profile" component={Profile} />
-        <Drawer.Screen name="Services" component={Services} />
+        <Drawer.Screen name="Service Request" component={Services} />
         <Drawer.Screen name="Meetings" component={Meetings} />
         <Drawer.Screen name="Publications" component={Publications} />
         <Drawer.Screen name="Notification" component={Notification} />
+
 
       </Drawer.Navigator>
     </>

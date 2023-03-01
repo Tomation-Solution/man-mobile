@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-=======
 import {
   View,
   StyleSheet,
@@ -9,8 +6,8 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
->>>>>>> AllSupport
 import {
   AccountHeader,
   Formbtn,
@@ -21,26 +18,20 @@ import {
 } from "../../../components";
 import { Formik, Field } from "formik";
 import Locked from "../components/LockedWithPayment";
-<<<<<<< HEAD
+
 import { login } from "../../../store/slices/auth/loginSlice";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { loginValidationSchema } from "../../../utils/validation";
 
 const LoginForm = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useAppDispatch();
-=======
-import { loginValidationSchema } from '../../../utils/validation';
-
-
-
-
-const LoginForm = ({ navigation }: any) => {
-  const [modalVisible, setModalVisible] = useState(false);
->>>>>>> AllSupport
 
   const onModalPress = () => {
     setModalVisible(!modalVisible);
   };
+
+  const { loading } = useAppSelector((state) => state.authReducers.login);
 
   return (
     <>
@@ -65,18 +56,14 @@ const LoginForm = ({ navigation }: any) => {
           <FormContainer>
             <View style={[styles.card, styles.shawdowProp]}>
               <Formik
-                validationSchema={loginValidationSchema}
+                // validationSchema={loginValidationSchema}
                 initialValues={{
                   email: "",
                   password: "",
                 }}
-<<<<<<< HEAD
                 onSubmit={(values) => {
-                  dispatch(login(values));
+                  if (loading === false) dispatch(login(values));
                 }}
-=======
-                onSubmit={(values) => console.log(values)}
->>>>>>> AllSupport
               >
                 {({ handleSubmit, isValid }) => (
                   <>
@@ -94,14 +81,14 @@ const LoginForm = ({ navigation }: any) => {
 
                     <Formbtn
                       style={[styles.btn]}
-<<<<<<< HEAD
                       onPress={handleSubmit}
-=======
-                      onPress={() => {
-                        onModalPress();
-                      }}
->>>>>>> AllSupport
-                      title="Login"
+                      title={
+                        loading ? (
+                          <ActivityIndicator size="small" color="white" />
+                        ) : (
+                          "Login"
+                        )
+                      }
                     />
                   </>
                 )}
@@ -114,7 +101,7 @@ const LoginForm = ({ navigation }: any) => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => navigation.navigate("Registration")}
+                onPress={() => navigation.navigate("VerifyUser")}
                 style={{ display: "flex", flexDirection: "row" }}
               >
                 <Text style={styles.register}> Don't have an account? </Text>
@@ -163,13 +150,12 @@ const styles = StyleSheet.create({
     color: "rgba(0,0,34,0.41)",
   },
   btn: {
-    btn: {
-      marginVertical: 30,
-      width: '100%',
-      alignContent: 'center',
-      justifyContent: 'center'
-    },
+    marginVertical: 30,
+    width: "100%",
+    alignContent: "center",
+    justifyContent: "center",
   },
+
   forgotPassword: {
     color: "rgba(0,0,34,0.6)",
     paddingVertical: 15,

@@ -13,6 +13,7 @@ const initialState = {
   isLoggedIn: false,
 };
 
+
 const ServiceRequestSlice = createSlice({
   name: "ServiceRequest",
   initialState,
@@ -70,8 +71,36 @@ try {
 };
 
 
-export const logout = () => (dispatch: AppDispatch, getState: any) => {
-
+export const Change_Of_Name = (Reissuance_Certificate: any) =>async (dispatch: AppDispatch) => {
+  console.log("hey i'm  ServiceRequestDetails", Reissuance_Certificate)
+try {
+  const getToken: any = await retrieveUserDetails();
+  if (getToken && getToken.token) {
+    const token = getToken.token;
+    dispatch(
+      apiCallBegan({
+        url: PRE_URL + "services_request/reissuance_of_certificate/",
+        extraheaders: "Token " + token,
+        method: "post",
+        data:{
+          attach_membership_reciept:[
+            Reissuance_Certificate
+          ]
+        },
+        onStart: ServiceRequestRequested.type,
+      onSuccess: ServiceRequestReceived.type,
+      onError: ServiceRequestRequestFailed.type,
+      })
+    );
+  } else {
+    const error = new Error("Unable to retrieve user token");
+    console.error(error);
+    dispatch(ServiceRequestRequestFailed(error.message));
+  }
+} catch (error: any) {
+  console.error("An error occurred while fetching user profile:", error);
+  dispatch(ServiceRequestRequestFailed(error.message));
+}
 };
 
 export const checkServiceRequest = () => async (dispatch: AppDispatch) => {

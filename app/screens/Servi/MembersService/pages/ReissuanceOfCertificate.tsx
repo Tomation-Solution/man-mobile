@@ -36,14 +36,9 @@ interface DetailsProps {
         message: "",
       },
       onSubmit: async (values:any) => {
+      const  {uri}= values.file
         try {
-          // const payload = {
-        console.log(values)
-          //       uri: values.file.uri,
-          //       // type: "application/pdf",
-          //       // name: values.file.name,
-          // };
-          await dispatch(Reissuance_Certificate(values));
+          await dispatch(Reissuance_Certificate(uri));
           resetForm(); // Reset the form after submission
         } catch (error) {
           console.error(error);

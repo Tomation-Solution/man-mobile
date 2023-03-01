@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { HomeHeader } from "../../../../components";
 import {
@@ -17,19 +17,10 @@ interface DetailsProps {
   navigation?: any;
 }
 
-const ReissuanceOfCertificate = ({ navigation }: any) => {
-  const {
-    values,
-    errors,
-    setFieldValue,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    touched,
-  } = useFormik({
+const MergerOfCompanies = ({ navigation }: any) => {
+  const { values, errors, setFieldValue, handleSubmit } = useFormik({
     initialValues: {
-      files: Array(3).fill({ uri: null, name: "" }),
-      message: "",
+      files: Array(4).fill({ uri: null, name: "" }),
     },
     onSubmit: (values) => {
       console.log(values);
@@ -50,13 +41,13 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <HomeHeader
-        title={"Reissuance of certificate"}
+        title={"Merger of Companies"}
         back="back"
         navigation={navigation}
       />
       <View style={{ marginTop: verticalScale(30) }}>
         <Text style={styles.text}>
-          Attach requirement for reissuance of certificate
+          Attach requirement for Merger of Companies
         </Text>
         <View style={styles.documentPickerContainer}>
           {errors.files && <Text style={styles.error}>{errors.files}</Text>}
@@ -64,21 +55,33 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
             <Text>Selected file 1: {values.files[0].name}</Text>
           ) : null}
           <CustomPicker
-            title="Attach Membership Receipt"
+            title="Upload request letter"
             onPress={() => pickDocument(0)}
           />
-          <TextInput
-            style={styles.input}
-            onChangeText={handleChange("message")}
-            onBlur={handleBlur("message")}
-            value={values.message}
-            multiline={true}
-            numberOfLines={10}
-            placeholder="Enter your message "
-          />
-          {errors.message && touched.message ? (
-            <Text style={styles.error}>{errors.message}</Text>
+          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {values.files[1].name ? (
+            <Text>Selected file 1: {values.files[0].name}</Text>
           ) : null}
+          <CustomPicker
+            title="Submit most recent financial statement  "
+            onPress={() => pickDocument(1)}
+          />
+          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {values.files[2].name ? (
+            <Text>Selected file 1: {values.files[2].name}</Text>
+          ) : null}
+          <CustomPicker
+            title="Upload dues reciept"
+            onPress={() => pickDocument(2)}
+          />
+          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {values.files[3].name ? (
+            <Text>Selected file 1: {values.files[3].name}</Text>
+          ) : null}
+          <CustomPicker
+            title="Upload membership cert for both companies"
+            onPress={() => pickDocument(3)}
+          />
         </View>
         <View style={{ marginTop: verticalScale(40) }}>
           <Formbtn title="Request" onPress={handleSubmit} />
@@ -88,7 +91,8 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
   );
 };
 
-export default ReissuanceOfCertificate;
+export default MergerOfCompanies;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
@@ -102,25 +106,5 @@ const styles = StyleSheet.create({
   },
   documentPickerContainer: {
     marginTop: verticalScale(50),
-  },
-  documentPicker: {
-    flexDirection: "row",
-    backgroundColor: "#EAEBE7",
-    borderRadius: 8,
-    justifyContent: "space-between",
-    paddingHorizontal: horizontalScale(24),
-    paddingVertical: verticalScale(15),
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#E8F6F8",
-    paddingHorizontal: 9,
-    paddingVertical: 13,
-    marginVertical: 21,
-    backgroundColor: "#EAEBE7",
-    borderRadius: 9,
-  },
-  error: {
-    color: "red",
   },
 });

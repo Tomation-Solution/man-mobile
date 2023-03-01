@@ -13,7 +13,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const Home = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
-      <HomeHeader title="Services" navigation={navigation} back="back" />
+      <HomeHeader title="Services" navigation={navigation} back={"back"} />
       <View>
         <TouchableOpacity
           style={{

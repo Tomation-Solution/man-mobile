@@ -17,7 +17,7 @@ interface DetailsProps {
   navigation?: any;
 }
 
-const ReissuanceOfCertificate = ({ navigation }: any) => {
+const FactoryLocationUpdate = ({ navigation }: any) => {
   const {
     values,
     errors,
@@ -28,8 +28,8 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
     touched,
   } = useFormik({
     initialValues: {
-      files: Array(3).fill({ uri: null, name: "" }),
-      message: "",
+      files: Array(4).fill({ uri: null, name: "" }),
+      profile: "",
     },
     onSubmit: (values) => {
       console.log(values);
@@ -50,35 +50,49 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <HomeHeader
-        title={"Reissuance of certificate"}
+        title={"Factory Location Update"}
         back="back"
         navigation={navigation}
       />
       <View style={{ marginTop: verticalScale(30) }}>
         <Text style={styles.text}>
-          Attach requirement for reissuance of certificate
+          Fulfill the below to get your request updated
         </Text>
         <View style={styles.documentPickerContainer}>
+          <TextInput
+            style={styles.input}
+            onChangeText={handleChange("profile")}
+            onBlur={handleBlur("profile")}
+            value={values.profile}
+            placeholder="Proceed to update your profile"
+          />
+          {errors.profile && touched.profile ? (
+            <Text style={styles.error}>{errors.profile}</Text>
+          ) : null}
           {errors.files && <Text style={styles.error}>{errors.files}</Text>}
           {values.files[0].name ? (
             <Text>Selected file 1: {values.files[0].name}</Text>
           ) : null}
           <CustomPicker
-            title="Attach Membership Receipt"
+            title="Submit most recent financial statement"
             onPress={() => pickDocument(0)}
           />
-          <TextInput
-            style={styles.input}
-            onChangeText={handleChange("message")}
-            onBlur={handleBlur("message")}
-            value={values.message}
-            multiline={true}
-            numberOfLines={10}
-            placeholder="Enter your message "
-          />
-          {errors.message && touched.message ? (
-            <Text style={styles.error}>{errors.message}</Text>
+          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {values.files[1].name ? (
+            <Text>Selected file 1: {values.files[0].name}</Text>
           ) : null}
+          <CustomPicker
+            title="Upload dues reciept"
+            onPress={() => pickDocument(1)}
+          />
+          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {values.files[2].name ? (
+            <Text>Selected file 1: {values.files[2].name}</Text>
+          ) : null}
+          <CustomPicker
+            title="Upload factory inspection report "
+            onPress={() => pickDocument(2)}
+          />
         </View>
         <View style={{ marginTop: verticalScale(40) }}>
           <Formbtn title="Request" onPress={handleSubmit} />
@@ -88,7 +102,8 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
   );
 };
 
-export default ReissuanceOfCertificate;
+export default FactoryLocationUpdate;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
@@ -103,20 +118,12 @@ const styles = StyleSheet.create({
   documentPickerContainer: {
     marginTop: verticalScale(50),
   },
-  documentPicker: {
-    flexDirection: "row",
-    backgroundColor: "#EAEBE7",
-    borderRadius: 8,
-    justifyContent: "space-between",
-    paddingHorizontal: horizontalScale(24),
-    paddingVertical: verticalScale(15),
-  },
   input: {
     borderWidth: 1,
     borderColor: "#E8F6F8",
-    paddingHorizontal: 9,
+    paddingHorizontal: 20,
     paddingVertical: 13,
-    marginVertical: 21,
+    marginTop: 21,
     backgroundColor: "#EAEBE7",
     borderRadius: 9,
   },

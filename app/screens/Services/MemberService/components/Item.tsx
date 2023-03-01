@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Divider } from "@react-native-material/core";
 import {
   horizontalScale,
   moderateScale,
@@ -11,7 +10,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Item = ({ image, name, link, navigation }: any) => {
   return (
-    <View>
+    <View style={{ borderBottomWidth: moderateScale(1) }}>
       <TouchableOpacity
         style={styles.container}
         onPress={() => navigation.navigate(link)}
@@ -19,9 +18,6 @@ const Item = ({ image, name, link, navigation }: any) => {
         <MaterialIcons name={image} size={20} style={styles.icon} />
         <Text style={styles.text}>{name}</Text>
       </TouchableOpacity>
-      <Divider
-        style={{ borderWidth: horizontalScale(0.175), borderColor: "#2B3513" }}
-      />
     </View>
   );
 };

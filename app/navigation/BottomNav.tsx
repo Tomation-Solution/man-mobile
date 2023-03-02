@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from "../constants/color";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { HomeScreen } from "../screens";
 import Chat from "../screens/Home/Chat/Chat";
 import { Account } from "../screens/Home";
@@ -54,7 +54,7 @@ const BottomNav = ({ environment }: any) => {
       <Tab.Screen
         options={{
           tabBarIcon: ({ color }) => (
-            <Ionicons name="wallet" color={color} size={28} />
+            <MaterialCommunityIcons name="account" color={color} size={28} />
           ),
         }}
         name="Account"

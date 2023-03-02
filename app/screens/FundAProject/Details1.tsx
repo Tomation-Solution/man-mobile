@@ -46,7 +46,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate("Details2", { data })}
+              // onPress={() => navigation.navigate("Details2", { data })}
             >
               <Text style={{ color: "white", fontSize: normalize(18) }}>
                 In Kind
@@ -54,7 +54,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate("Details2", { data })}
+              // onPress={() => navigation.navigate("Details2", { data })}
             >
               <Text style={{ color: "white", fontSize: normalize(18) }}>
                 In Cash

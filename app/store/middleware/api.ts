@@ -28,7 +28,7 @@ const api =
         params: params,
         data,
         headers: {
-          "content-type": "application/json",
+          // "content-type": "application/json",
           Authorization: extraheaders,
         },
       });

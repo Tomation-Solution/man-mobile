@@ -22,17 +22,32 @@ const ChangeOfName = ({ navigation }: any) => {
 
   const { values, errors, setFieldValue,resetForm, handleSubmit } = useFormik({
     initialValues: {
-      files: Array(5).fill({ uri: null, name: "" }),
+      files: Array(4).fill({ uri: null, name: "" }),
     },
-    onSubmit: async (values:any) => {
-        try {
-          await dispatch(Change_Of_Name());
-          resetForm(); // Reset the form after submission
-        } catch (error) {
-          console.error(error);
-        }
+    onSubmit: async (values: any) => {
+      try {
+        const formData = new FormData();
+
+        values.files.forEach((file, index) => {
+          const fileKey = ['attach_membership_certificate', 'membership_due_receipt', 'upload_financial_statement', 'upload_incorporation_certificate'][index];
+          formData.append(fileKey, JSON.stringify(file) || "No file was submitted.");
+
+        });
+
+
+
+
+
+        // console.log('HELLO THIS IS A FORMDATA',formData)
+        await dispatch(Change_Of_Name(formData));
+        resetForm(); // Reset the form after submission
+      } catch (error) {
+        console.error(error);
       }
-    });
+    },
+  });
+
+
 
 
 

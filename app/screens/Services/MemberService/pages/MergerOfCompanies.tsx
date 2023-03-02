@@ -7,25 +7,48 @@ import {
   verticalScale,
 } from "../../../../constants/metric";
 import CustomPicker from "../components/CustomPicker";
-
+import { useAppDispatch } from './../../../../store/hooks';
 import { Formbtn } from "../../../../components";
 import { useFormik } from "formik";
 import * as DocumentPicker from "expo-document-picker";
-
+import { Change_Of_Name } from "../../../../store/slices/ServiceRequest/serviceSlice";
 interface DetailsProps {
   route?: any;
   navigation?: any;
 }
 
 const MergerOfCompanies = ({ navigation }: any) => {
-  const { values, errors, setFieldValue, handleSubmit } = useFormik({
+  const dispatch = useAppDispatch();
+
+  const { values, errors, setFieldValue,resetForm, handleSubmit } = useFormik({
     initialValues: {
       files: Array(4).fill({ uri: null, name: "" }),
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values: any) => {
+      try {
+        const formData = new FormData();
+
+        values.files.forEach((file, index) => {
+          const fileKey = ['upload_request_letter', 'submit_most_recent_financial_statement', 'upload_dues_reciept', 'upload_membership_cert_for_both_companies'][index];
+          formData.append(fileKey, file || "No file was submitted.");
+        });
+
+
+
+
+
+        // console.log('HELLO THIS IS A FORMDATA',formData)
+        await dispatch(Change_Of_Name(formData));
+        resetForm(); // Reset the form after submission
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
+
+
+
+
 
   const pickDocument = async ({ index }: any) => {
     let result = await DocumentPicker.getDocumentAsync({
@@ -39,50 +62,54 @@ const MergerOfCompanies = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <HomeHeader
-        title={"Merger of Companies"}
+        title={"Change of Name"}
         back="back"
         navigation={navigation}
       />
       <View style={{ marginTop: verticalScale(30) }}>
-        <Text style={styles.text}>
-          Attach requirement for Merger of Companies
-        </Text>
+        <Text style={styles.text}> Attach requirement for Merger of Companies</Text>
         <View style={styles.documentPickerContainer}>
-          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+
           {values.files[0].name ? (
             <Text>Selected file 1: {values.files[0].name}</Text>
           ) : null}
+
           <CustomPicker
             title="Upload request letter"
-            onPress={() => pickDocument(0)}
+            onPress={() => pickDocument({index: 0})}
           />
-          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+
           {values.files[1].name ? (
-            <Text>Selected file 1: {values.files[0].name}</Text>
+            <Text>Selected file 2: {values.files[1].name}</Text>
           ) : null}
+
           <CustomPicker
-            title="Submit most recent financial statement  "
-            onPress={() => pickDocument(1)}
+            title="Submit most recent financial statement "
+            onPress={() => pickDocument({index: 1})}
           />
-          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+
           {values.files[2].name ? (
-            <Text>Selected file 1: {values.files[2].name}</Text>
+            <Text>Selected file 3: {values.files[2].name}</Text>
           ) : null}
+
           <CustomPicker
             title="Upload dues reciept"
-            onPress={() => pickDocument(2)}
+            onPress={() => pickDocument({index: 2})}
           />
-          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+
           {values.files[3].name ? (
-            <Text>Selected file 1: {values.files[3].name}</Text>
+            <Text>Selected file 4: {values.files[3].name}</Text>
           ) : null}
+
           <CustomPicker
             title="Upload membership cert for both companies"
-            onPress={() => pickDocument(3)}
+            onPress={() => pickDocument({index: 3})}
           />
+
         </View>
+
         <View style={{ marginTop: verticalScale(40) }}>
           <Formbtn title="Request" onPress={handleSubmit} />
         </View>
@@ -94,10 +121,6 @@ const MergerOfCompanies = ({ navigation }: any) => {
 export default MergerOfCompanies;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "white",
-    flex: 1,
-  },
   text: {
     fontSize: moderateScale(14),
     fontWeight: "400",

@@ -71,23 +71,21 @@ try {
 };
 
 
-export const Change_Of_Name = (Reissuance_Certificate: any) =>async (dispatch: AppDispatch) => {
-  console.log("hey i'm  ServiceRequestDetails", Reissuance_Certificate)
+export const Change_Of_Name = (formData: any) =>async (dispatch: AppDispatch) => {
+  console.log("hey i'm  ServiceRequestDetails", formData)
 try {
   const getToken: any = await retrieveUserDetails();
   if (getToken && getToken.token) {
     const token = getToken.token;
     dispatch(
       apiCallBegan({
-        url: PRE_URL + "services_request/reissuance_of_certificate/",
+        url: PRE_URL + "services_request/Change_of_name/",
         extraheaders: "Token " + token,
         method: "post",
         data:{
-          attach_membership_reciept:[
-            Reissuance_Certificate
-          ]
+          formData
         },
-        onStart: ServiceRequestRequested.type,
+      onStart: ServiceRequestRequested.type,
       onSuccess: ServiceRequestReceived.type,
       onError: ServiceRequestRequestFailed.type,
       })
@@ -103,10 +101,4 @@ try {
 }
 };
 
-export const checkServiceRequest = () => async (dispatch: AppDispatch) => {
 
-};
-
-export const getUserDetails = () => async (dispatch: AppDispatch) => {
-
-};

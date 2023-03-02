@@ -1,0 +1,31 @@
+          {errors.profile && touched.profile ? (
+            <Text style={styles.error}>{errors.profile}</Text>
+          ) : null}
+          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {values.files[0].name ? (
+            <Text>Selected file 1: {values.files[0].name}</Text>
+          ) : null}
+          <CustomPicker
+            title="Submit most recent financial statement"
+            onPress={() => pickDocument(0)}
+          />
+          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {values.files[1].name ? (
+            <Text>Selected file 1: {values.files[0].name}</Text>
+          ) : null}
+          <CustomPicker
+            title="Upload dues reciept"
+            onPress={() => pickDocument(1)}
+          />
+          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {values.files[2].name ? (
+            <Text>Selected file 1: {values.files[2].name}</Text>
+          ) : null}
+          <CustomPicker
+            title="Upload factory inspection report "
+            onPress={() => pickDocument(2)}
+          />
+
+
+
+

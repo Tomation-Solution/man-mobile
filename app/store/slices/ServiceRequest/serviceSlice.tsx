@@ -30,11 +30,30 @@ const ServiceRequestSlice = createSlice({
       state.loading = false;
       console.log("ServiceRequestRequestFailed", action.payload);
     },
+    ChangeNameRequested: (state, action) => {
+      state.loading = true;
+    },
+
+    ChangeNameReceived: (state, action) => {
+      state.loading = false;
+      state.isLoggedIn = true;
+    },
+    ChangeNameRequestFailed: (state, action) => {
+      state.loading = false;
+      console.log("ServiceRequestRequestFailed", action.payload);
+    },
   },
 });
 
-export const { ServiceRequestRequested, ServiceRequestReceived, ServiceRequestRequestFailed } =
-  ServiceRequestSlice.actions;
+export const {
+  ServiceRequestRequested,
+   ServiceRequestReceived,
+   ServiceRequestRequestFailed ,
+   ChangeNameRequested,
+   ChangeNameReceived,
+   ChangeNameRequestFailed
+  }
+   =ServiceRequestSlice.actions;
 
 export default ServiceRequestSlice.reducer;
 
@@ -85,9 +104,9 @@ try {
         data:{
           formData
         },
-      onStart: ServiceRequestRequested.type,
-      onSuccess: ServiceRequestReceived.type,
-      onError: ServiceRequestRequestFailed.type,
+      onStart: ChangeNameRequested.type,
+      onSuccess: ChangeNameReceived.type,
+      onError: ChangeNameRequestFailed.type,
       })
     );
   } else {

@@ -5,7 +5,7 @@ export { default as News } from "./News/News";
 export { default as Support } from "./Support/Support";
 export { default as Gallery } from "./Gallery/Gallery";
 export { default as Events } from "./Events/Events";
-export { default as Registration } from "./Account/Registration/Registration";
+export { default as Registration } from "./Account/Registration/registration";
 export { default as Login } from "./Account/Login/Login";
 export { default as VerifyUser } from "./Account/OTP/VerifyUser";
 export { default as VerifyCode } from "./Account/OTP/VerifyCode";

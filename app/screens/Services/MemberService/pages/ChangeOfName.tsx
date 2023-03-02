@@ -25,27 +25,25 @@ const ChangeOfName = ({ navigation }: any) => {
       files: Array(4).fill({ uri: null, name: "" }),
     },
     onSubmit: async (values: any) => {
-      try {
-        const formData = new FormData();
 
-        values.files.forEach((file, index) => {
-          const fileKey = ['attach_membership_certificate', 'membership_due_receipt', 'upload_financial_statement', 'upload_incorporation_certificate'][index];
-          formData.append(fileKey, JSON.stringify(file) || "No file was submitted.");
+         const formData = new FormData();
+        // Create an object that matches the required data structure
 
-        });
+        formData.append("id", "4");
+        formData.append("attach_membership_certificate", values.files[0]);
+        formData.append("membership_due_receipt", values.files[1]);
+        formData.append("upload_financial_statement", values.files[2]);
+        formData.append("upload_incorporation_certificate", values.files[3]);
+        formData.append("member", "2");
 
-
-
-
-
-        // console.log('HELLO THIS IS A FORMDATA',formData)
-        await dispatch(Change_Of_Name(formData));
+        console.log("HELLO THIS IS A FORMDATA", formData);
+        // await dispatch(Change_Of_Name(requestData));
         resetForm(); // Reset the form after submission
-      } catch (error) {
-        console.error(error);
       }
+
     },
-  });
+);
+
 
 
 

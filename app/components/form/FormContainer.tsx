@@ -1,29 +1,24 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   StyleSheet,
   Dimensions,
   KeyboardAvoidingView,
   Platform,
-} from 'react-native';
+} from "react-native";
 
-const FormContainer = ({ children }) => {
+const FormContainer = ({ children }: any) => {
   return (
-    <KeyboardAvoidingView
-      enabled
-      behavior={Platform.OS === 'ios' ? 'padding' : null}
-      style={styles.container}
+    <View
+      style={{
+        flexDirection: "row",
+      }}
     >
       {children}
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    width: Dimensions.get('window').width,
-    paddingHorizontal: 20,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default FormContainer;

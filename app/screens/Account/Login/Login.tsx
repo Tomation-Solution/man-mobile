@@ -15,6 +15,7 @@ import {
   FormContainer,
   FormInput,
   CustomModal,
+  Container,
 } from "../../../components";
 import { Formik, Field } from "formik";
 import Locked from "../components/LockedWithPayment";
@@ -22,10 +23,12 @@ import Locked from "../components/LockedWithPayment";
 import { login } from "../../../store/slices/auth/loginSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { loginValidationSchema } from "../../../utils/validation";
+import { normalize } from "../../../constants/metric";
 
 const LoginForm = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useAppDispatch();
+  const [hidePassword, setHidePassword] = useState(true);
 
   const onModalPress = () => {
     setModalVisible(!modalVisible);
@@ -39,12 +42,20 @@ const LoginForm = ({ navigation }: any) => {
         <Locked onPress={onModalPress} />
       </CustomModal>
 
-      <KeyboardAvoidingViewWrapper>
-        <View style={{ paddingVertical: 90 }}>
+      <Container>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <View
             style={{
-              paddingHorizontal: 25,
-              paddingVertical: 10,
+              width: "100%",
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
             }}
           >
             <AccountHeader
@@ -75,6 +86,12 @@ const LoginForm = ({ navigation }: any) => {
 
                     <Field
                       component={FormInput}
+                      isSecureEntry={true}
+                      hidePassword={hidePassword}
+                      handlePasswordVisibility={() => {
+                        console.log("clicked");
+                        setHidePassword(() => !hidePassword);
+                      }}
                       name="password"
                       placeholder="password"
                     />
@@ -104,31 +121,28 @@ const LoginForm = ({ navigation }: any) => {
                 onPress={() => navigation.navigate("VerifyUser")}
                 style={{ display: "flex", flexDirection: "row" }}
               >
-                <Text style={styles.register}> Don't have an account? </Text>
-                <Text style={styles.registerText}> Register</Text>
+                <Text style={{}}>
+                  {" "}
+                  Don't have an account? <Text style={{}}> Register</Text>
+                </Text>
               </TouchableOpacity>
             </View>
           </FormContainer>
         </View>
-      </KeyboardAvoidingViewWrapper>
+      </Container>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 100,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   card: {
     backgroundColor: "#ffff",
     borderRadius: 8,
     paddingVertical: 38,
     paddingHorizontal: 20,
-    width: "100%",
     marginVertical: 10,
     paddingBottom: 25,
+    flex: 1,
   },
   shawdowProp: {
     shadowColor: "#171717",
@@ -138,13 +152,13 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   Loginheading: {
-    fontSize: 24,
+    fontSize: normalize(24),
     fontWeight: "700",
     lineHeight: 32.78,
     color: "#2B3513",
   },
   heading: {
-    fontSize: 14,
+    fontSize: normalize(14),
     fontWeight: "700",
     lineHeight: 21.86,
     color: "rgba(0,0,34,0.41)",
@@ -165,13 +179,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     marginTop: 10,
     color: "rgba(0,0,34,0.6)",
-  },
-  registerText: {
-    position: "relative",
-    right: 31,
-    top: 10,
-    fontWeight: "700",
-    color: "#2b3513",
   },
 });
 

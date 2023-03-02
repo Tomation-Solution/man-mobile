@@ -81,7 +81,6 @@ const Registration = ({ route, navigation }: any) => {
             <Formik
               validationSchema={yup.object().shape({
                 name: yup.string().required().label("Name"),
-                EMAIL: yup.string().required().email().label("Email"),
                 password: yup.string().required().min(6).label("Password"),
                 GSM: yup.string().required().min(11).label("Phone number"),
                 TITLE: yup.string().required().label("Title"),
@@ -94,7 +93,6 @@ const Registration = ({ route, navigation }: any) => {
               })}
               initialValues={{
                 name: user_data?.name || "",
-                EMAIL: user_data?.EMAIL || "",
                 password: "",
                 rel8Email: "",
                 GSM: user_data?.GSM || "",
@@ -119,16 +117,11 @@ const Registration = ({ route, navigation }: any) => {
                     placeholder="Phone number"
                     editable={false}
                   />
-                  <Field
-                    component={FormInput}
-                    name="EMAIL"
-                    placeholder="Email address"
-                  />
 
                   <Field
                     component={FormInput}
                     name="rel8Email"
-                    placeholder="rel8Email address"
+                    placeholder="Email address"
                   />
 
                   <Field

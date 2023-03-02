@@ -1,27 +1,28 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../constants/color";
+import { moderateScale, normalize, verticalScale } from "../constants/metric";
 
 export const Globalstyles = StyleSheet.create({
   sectionHeaderText: {
     fontWeight: "700",
-    fontSize: 18,
+    fontSize: normalize(18),
     textTransform: "uppercase",
     textAlign: "center",
     backgroundColor: COLORS.primary,
     color: "white",
   },
   section: {
-    marginVertical: 15,
+    marginVertical: verticalScale(15),
   },
   modalContainer: {
     backgroundColor: "white",
-    borderRadius: 20,
-    padding: 20,
+    borderRadius: moderateScale(20),
+    padding: moderateScale(20),
     width: "80%",
     alignItems: "center",
   },
 });
 
 export const SPACING = {
-  sectionPadding: 15,
+  sectionPadding: moderateScale(15),
 };

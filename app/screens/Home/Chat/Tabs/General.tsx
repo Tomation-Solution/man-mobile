@@ -23,6 +23,13 @@ const General = () => {
         }}
         showsVerticalScrollIndicator={false}
       >
+        <Text
+          style={{
+            color: COLORS.primary,
+          }}
+        >
+          Coming Soon!
+        </Text>
         {/* <View style={styles.container}>
           {messages.map((message) => (
             <GeneralChatCard

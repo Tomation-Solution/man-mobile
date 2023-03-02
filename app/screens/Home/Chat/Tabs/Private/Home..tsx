@@ -27,7 +27,7 @@ const Home = ({ navigation, setShowTabBar, userData }: any) => {
           paddingHorizontal: 20,
         }}
       >
-        <SearchBar />
+        {/* <SearchBar /> */}
       </View>
       <ScrollView
         style={{

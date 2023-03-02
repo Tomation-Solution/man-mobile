@@ -28,7 +28,13 @@ const Chat = ({ navigation }: any) => {
           tabBarStyle: { backgroundColor: "white" },
         }}
       >
-        <Top.Screen name="General Chats" component={General} />
+        <Top.Screen
+          options={{
+            swipeEnabled: false,
+          }}
+          name="General Chats"
+          component={General}
+        />
         <Top.Screen
           name="Private Chats"
           options={{

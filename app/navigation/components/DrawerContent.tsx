@@ -96,7 +96,7 @@ const DrawerContent = ({
       />
       <DrawerLabel
         focused={state?.index === 6}
-        title="Services"
+        title="Service Request"
         icon={
           <MaterialCommunityIcons
             name="toolbox"

@@ -11,7 +11,7 @@ import { Formbtn } from "../../../../components";
 import { useFormik } from "formik";
 import * as DocumentPicker from "expo-document-picker";
 import { useAppDispatch } from './../../../../store/hooks';
-import { Reissuance_Certificate } from './../../../../store/slices/ServiceRequest/serviceSlice';
+// import { Reissuance_Certificate } from './../../../../store/slices/ServiceRequest/serviceSlice';
 
 interface DetailsProps {
   route?: any;
@@ -19,68 +19,68 @@ interface DetailsProps {
 }
 
 
-  const ReissuanceOfCertificate = ({ navigation }: any) => {
-    const dispatch = useAppDispatch();
-    const {
-      values,
-      errors,
-      setFieldValue,
-      handleChange,
-      handleBlur,
-      resetForm,
-      handleSubmit,
-      touched,
-    } = useFormik({
-      initialValues: {
-        file: { uri: null, name: "" },
-        message: "",
-      },
-      onSubmit: async (values:any) => {
-      const  {uri}= values.file
-        try {
-          await dispatch(Reissuance_Certificate(uri));
-          resetForm(); // Reset the form after submission
-        } catch (error) {
-          console.error(error);
-        }
+const ReissuanceOfCertificate = ({ navigation }: any) => {
+  const dispatch = useAppDispatch();
+  const {
+    values,
+    errors,
+    setFieldValue,
+    handleChange,
+    handleBlur,
+    resetForm,
+    handleSubmit,
+    touched,
+  } = useFormik({
+    initialValues: {
+      file: { uri: null, name: "" },
+      message: "",
+    },
+    onSubmit: async (values: any) => {
+      const { uri } = values.file
+      try {
+        // await dispatch(Reissuance_Certificate(uri));
+        resetForm(); // Reset the form after submission
+      } catch (error) {
+        console.error(error);
       }
-    });
+    }
+  });
 
-    const pickDocument = async (): Promise<void> => {
-      let result = await DocumentPicker.getDocumentAsync({});
-      if (!result.cancelled) {
-        const file = { uri: result.uri, name: result.name };
-        setFieldValue("file", file);
-      }
-    };
+  const pickDocument = async (): Promise<void> => {
+    let result = await DocumentPicker.getDocumentAsync({});
+    if (!result.cancelled) {
+      const file = { uri: result.uri, name: result.name };
+      setFieldValue("file", file);
+    }
+  };
 
 
 
-    return (
-      <View>
-        <HomeHeader
-          title={"Reissuance of certificate"}
-          back="back"
-          navigation={navigation}
-        />
-        <View style={{ marginTop: verticalScale(30) }}>
-          <Text style={styles.text}>
-            Attach requirement for reissuance of certificate
-          </Text>
-          <View style={styles.documentPickerContainer}>
-            {errors.file && <Text style={styles.error}>{errors.file}</Text>}
-            {values.file.name ? (
-              <Text>Selected file 1: {values.file.name}</Text>
-            ) : null}
-            <View style={styles.documentPicker}>
-              <Text style={styles.text}>Attach Membership Receipt</Text>
-              <Ionicons
-                name="link-sharp"
-                size={24}
-                onPress={() => pickDocument()}
-              />
-            </View>
-            {/* <TextInput
+  return (
+    <View>
+      <HomeHeader
+        title={"Reissuance of certificate"}
+        back="back"
+        navigation={navigation}
+      />
+      <View style={{ marginTop: verticalScale(30) }}>
+        <Text style={styles.text}>
+          Attach requirement for reissuance of certificate
+        </Text>
+        <View style={styles.documentPickerContainer}>
+          {errors.file && <Text style={styles.error}>{errors.file}</Text>}
+          {values.file.name ? (
+            <Text>Selected file 1: {values.file.name}</Text>
+          ) : null}
+          <View style={styles.documentPicker}>
+            <Text style={styles.text}>Attach Membership Receipt</Text>
+            <Ionicons
+              name="link-sharp"
+              size={24}
+              onPress={() => pickDocument()}
+            />
+          </View>
+          {/* <TextInput
               style={styles.input}
               onChangeText={handleChange("message")}
               onBlur={handleBlur("message")}
@@ -89,17 +89,17 @@ interface DetailsProps {
               numberOfLines={10}
               placeholder="Enter your message "
             /> */}
-            {errors.message && touched.message ? (
-              <Text style={styles.error}>{errors.message}</Text>
-            ) : null}
-          </View>
-          <View style={{ marginTop: verticalScale(40) }}>
-            <Formbtn title="Request" onPress={handleSubmit} />
-          </View>
+          {errors.message && touched.message ? (
+            <Text style={styles.error}>{errors.message}</Text>
+          ) : null}
+        </View>
+        <View style={{ marginTop: verticalScale(40) }}>
+          <Formbtn title="Request" onPress={handleSubmit} />
         </View>
       </View>
-    );
-  };
+    </View>
+  );
+};
 
 
 export default ReissuanceOfCertificate;

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet ,ScrollView} from "react-native";
 import React from "react";
 import { HomeHeader } from "../../../../components";
 import {
@@ -11,7 +11,8 @@ import { useAppDispatch } from './../../../../store/hooks';
 import { Formbtn } from "../../../../components";
 import { useFormik } from "formik";
 import * as DocumentPicker from "expo-document-picker";
-import { Change_Of_Name } from "../../../../store/slices/ServiceRequest/serviceSlice";
+import { Merge_Of_Company } from './../../../../store/slices/ServiceRequest/serviceSlice';
+
 interface DetailsProps {
   route?: any;
   navigation?: any;
@@ -24,30 +25,22 @@ const MergerOfCompanies = ({ navigation }: any) => {
     initialValues: {
       files: Array(4).fill({ uri: null, name: "" }),
     },
+
     onSubmit: async (values: any) => {
       try {
         const formData = new FormData();
-
-        values.files.forEach((file, index) => {
-          const fileKey = ['upload_request_letter', 'submit_most_recent_financial_statement', 'upload_dues_reciept', 'upload_membership_cert_for_both_companies'][index];
-          formData.append(fileKey, file || "No file was submitted.");
-        });
-
-
-
-
-
-        // console.log('HELLO THIS IS A FORMDATA',formData)
-        await dispatch(Change_Of_Name(formData));
-        resetForm(); // Reset the form after submission
+        formData.append("upload_request_letter", values.files[0]);
+        formData.append("submit_most_recent_financial_statement", values.files[1]);
+        formData.append("upload_dues_reciept", values.files[2]);
+        formData.append("upload_membership_cert_for_both_companies", values.files[3]);
+        console.log('HELLO THIS IS A FORMDATA',formData)
+        await dispatch(Merge_Of_Company(formData));
+        resetForm();
       } catch (error) {
         console.error(error);
       }
     },
   });
-
-
-
 
 
   const pickDocument = async ({ index }: any) => {
@@ -56,37 +49,42 @@ const MergerOfCompanies = ({ navigation }: any) => {
     });
     if (!result.cancelled) {
       const files = [...values.files];
-      files[index] = { uri: result.uri, name: result.name };
+      files[index] = { uri: result.uri, name: result.uri.split('/').pop(), type: result.mimeType };
       setFieldValue("files", files);
     }
   };
 
   return (
+    <ScrollView>
     <View>
       <HomeHeader
-        title={"Change of Name"}
+        title={"Merger of comapanies"}
         back="back"
         navigation={navigation}
       />
+
       <View style={{ marginTop: verticalScale(30) }}>
         <Text style={styles.text}> Attach requirement for Merger of Companies</Text>
         <View style={styles.documentPickerContainer}>
 
-          {values.files[0].name ? (
+        {values.files[0].name ? (
             <Text>Selected file 1: {values.files[0].name}</Text>
           ) : null}
 
-          <CustomPicker
-            title="Upload request letter"
+        <CustomPicker
+            title="upload request letter"
             onPress={() => pickDocument({index: 0})}
           />
+
+
+
 
           {values.files[1].name ? (
             <Text>Selected file 2: {values.files[1].name}</Text>
           ) : null}
 
           <CustomPicker
-            title="Submit most recent financial statement "
+            title="Submit most recent financial statement"
             onPress={() => pickDocument({index: 1})}
           />
 
@@ -95,7 +93,7 @@ const MergerOfCompanies = ({ navigation }: any) => {
           ) : null}
 
           <CustomPicker
-            title="Upload dues reciept"
+            title="Upload_dues_reciept"
             onPress={() => pickDocument({index: 2})}
           />
 
@@ -108,13 +106,18 @@ const MergerOfCompanies = ({ navigation }: any) => {
             onPress={() => pickDocument({index: 3})}
           />
 
+
+
         </View>
 
         <View style={{ marginTop: verticalScale(40) }}>
           <Formbtn title="Request" onPress={handleSubmit} />
         </View>
+
       </View>
+
     </View>
+    </ScrollView>
   );
 };
 

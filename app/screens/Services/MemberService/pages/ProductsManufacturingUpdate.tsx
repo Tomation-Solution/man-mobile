@@ -11,6 +11,7 @@ import { useAppDispatch } from './../../../../store/hooks';
 import { Formbtn } from "../../../../components";
 import { useFormik } from "formik";
 import * as DocumentPicker from "expo-document-picker";
+import { Product_Manufacture_Update } from "../../../../store/slices/ServiceRequest/serviceSlice";
 
 interface DetailsProps {
   route?: any;
@@ -31,19 +32,23 @@ const ProductsManufacturingUpdate = ({ navigation }: any) => {
     touched,
   } = useFormik({
     initialValues: {
-      files: Array(3).fill({ uri: null, name: "" }),
+      files: Array(4).fill({ uri: null, name: "" }),
       profile: "",
     },
     onSubmit: async (values: any) => {
       try {
         const formData = new FormData();
+      formData.append("proceed_to_update_your_profile", values.files[1]);
+      formData.append("submit_most_recent_financial_statement", values.files[1]);
+      formData.append("upload_all_levy_recipt", values.files[2]);
+      formData.append("upload_Product_update_report", values.files[3]);
 
-        values.files.forEach((file, index) => {
-          const fileKey = ['proceed_to_update_your_profile', 'submit_most_recent_financial_statement', 'upload_all_levy_recipt',' upload_Product_update_report' ][index];
-          formData.append(fileKey, file || "No file was submitted.");
-        });
 
-        await dispatch(Change_Of_Name(formData));
+      // console.log("HELLO THIS IS A FORMDATA", formData);
+
+
+
+        await dispatch(Product_Manufacture_Update(formData));
         resetForm(); // Reset the form after submission
       } catch (error) {
         console.error(error);
@@ -74,38 +79,39 @@ const ProductsManufacturingUpdate = ({ navigation }: any) => {
           Fulfill the below to get your request updated
         </Text>
         <View style={styles.documentPickerContainer}>
-          <TextInput
-            style={styles.input}
-            onChangeText={handleChange("profile")}
-            onBlur={handleBlur("profile")}
-            value={values.profile}
-            placeholder="Proceed to update your profile"
-          />
-          {values.files[0].name ? (
-            <Text>Selected file 1: {values.files[0].name}</Text>
-          ) : null}
+
+            {values.files[0].name ? (
+              <Text>Selected file 1: {values.files[0].name}</Text>
+            ) : null}
+
+            <CustomPicker
+              title="Proceed to update your profile"
+              onPress={() => pickDocument({ index: 0 })}
+            />
 
           <CustomPicker
             title="Submit most recent financial statement"
-            onPress={() => pickDocument({index: 0})}
+            onPress={() => pickDocument({index: 1})}
           />
-
-          {values.files[1].name ? (
+              {values.files[1].name ? (
             <Text>Selected file 2: {values.files[1].name}</Text>
           ) : null}
 
           <CustomPicker
             title="Upload all levy recipt(Up-to-date)"
-            onPress={() => pickDocument({index: 1})}
+            onPress={() => pickDocument({index: 2})}
           />
-
           {values.files[2].name ? (
             <Text>Selected file 3: {values.files[2].name}</Text>
           ) : null}
+
           <CustomPicker
             title="Upload Product update report "
-            onPress={() => pickDocument({index: 2})}
+            onPress={() => pickDocument({index: 3})}
           />
+          {values.files[3].name ? (
+            <Text>Selected file 4: {values.files[3].name}</Text>
+          ) : null}
 
         </View>
         <View style={{ marginTop: verticalScale(40) }}>

@@ -11,7 +11,7 @@ import { useAppDispatch } from './../../../../store/hooks';
 import { Formbtn } from "../../../../components";
 import { useFormik } from "formik";
 import * as DocumentPicker from "expo-document-picker";
-import { Change_Of_Name } from "../../../../store/slices/ServiceRequest/serviceSlice";
+import { Deactivation_Of_Membership } from "../../../../store/slices/ServiceRequest/serviceSlice";
 interface DetailsProps {
   route?: any;
   navigation?: any;
@@ -27,15 +27,14 @@ const MergerOfCompanies = ({ navigation }: any) => {
     onSubmit: async (values: any) => {
       try {
         const formData = new FormData();
-
-        values.files.forEach((file, index) => {
-          const fileKey = ['deactivation_request', 'submit_most_recent_financial_statement', 'upload_all_levy_recipt', ][index];
-          formData.append(fileKey, file || "No file was submitted.");
-        });
+        formData.append("deactivation_request", values.files[0]);
+        formData.append("submit_most_recent_financial_statement", values.files[1]);
+        formData.append("upload_all_levy_recipt", values.files[2]);
 
 
-        // console.log('HELLO THIS IS A FORMDATA',formData)
-        await dispatch(Change_Of_Name(formData));
+
+        console.log('HELLO THIS IS A FORMDATA',formData)
+        await dispatch(Deactivation_Of_Membership(formData));
         resetForm(); // Reset the form after submission
       } catch (error) {
         console.error(error);
@@ -53,7 +52,7 @@ const MergerOfCompanies = ({ navigation }: any) => {
     });
     if (!result.cancelled) {
       const files = [...values.files];
-      files[index] = { uri: result.uri, name: result.name };
+      files[index] = { uri: result.uri, name: result.uri.split('/').pop(), type: result.mimeType };
       setFieldValue("files", files);
     }
   };

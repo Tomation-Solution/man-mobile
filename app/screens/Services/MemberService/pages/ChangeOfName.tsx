@@ -39,7 +39,7 @@ const ChangeOfName = ({ navigation }: any) => {
 
   },
   );
-
+//
 
 
 

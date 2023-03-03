@@ -11,7 +11,7 @@ import { Formbtn } from "../../../../components";
 import { useFormik } from "formik";
 import * as DocumentPicker from "expo-document-picker";
 import { useAppDispatch } from './../../../../store/hooks';
-// import { Reissuance_Certificate } from './../../../../store/slices/ServiceRequest/serviceSlice';
+import { Reissuance_Certificate } from './../../../../store/slices/ServiceRequest/serviceSlice';
 
 interface DetailsProps {
   route?: any;
@@ -33,13 +33,18 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
   } = useFormik({
     initialValues: {
       file: { uri: null, name: "" },
-      message: "",
+      note: "",
     },
     onSubmit: async (values: any) => {
-      const { uri } = values.file
       try {
-        // await dispatch(Reissuance_Certificate(uri));
-        resetForm(); // Reset the form after submission
+        const formData = new FormData();
+        formData.append("attach_membership_receipt", values.file);
+        formData.append("note", values.note);
+
+        console.log("HELLO THIS IS A FORMDATA", formData);
+
+        await dispatch(Reissuance_Certificate(formData));
+        resetForm();
       } catch (error) {
         console.error(error);
       }
@@ -49,7 +54,7 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
   const pickDocument = async (): Promise<void> => {
     let result = await DocumentPicker.getDocumentAsync({});
     if (!result.cancelled) {
-      const file = { uri: result.uri, name: result.name };
+      const file = { uri: result.uri, name: result.name, type: result.mimeType };
       setFieldValue("file", file);
     }
   };
@@ -80,17 +85,17 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
               onPress={() => pickDocument()}
             />
           </View>
-          {/* <TextInput
+          <TextInput
               style={styles.input}
-              onChangeText={handleChange("message")}
-              onBlur={handleBlur("message")}
-              value={values.message}
+              onChangeText={handleChange("note")}
+              onBlur={handleBlur("note")}
+              value={values.note}
               multiline={true}
               numberOfLines={10}
               placeholder="Enter your message "
-            /> */}
-          {errors.message && touched.message ? (
-            <Text style={styles.error}>{errors.message}</Text>
+            />
+          {errors.note && touched.note ? (
+            <Text style={styles.error}>{errors.note}</Text>
           ) : null}
         </View>
         <View style={{ marginTop: verticalScale(40) }}>

@@ -19,6 +19,7 @@ import {
 import Locked from "../components/LockedWithPay";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
+import { COLORS } from "../../../constants/color";
 
 const Registration = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(true);
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "700",
     lineHeight: 32.78,
-    color: "#2B3513",
+    color: COLORS.primary,
   },
   heading: {
     fontSize: 14,
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
     right: 31,
     top: 10,
     fontWeight: "700",
-    color: "#2b3513",
+    color: COLORS.primary,
     fontSize: 13,
   },
 });

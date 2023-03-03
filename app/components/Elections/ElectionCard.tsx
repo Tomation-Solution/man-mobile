@@ -2,15 +2,21 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import Container from "../Container";
 import { horizontalScale, verticalScale } from "../../constants/metric";
+import { COLORS } from "../../constants/color";
 
 interface ElectionsCardProps {
   id: number;
   position: string;
   onPress: () => void;
-  navigation:any
+  navigation: any;
 }
 
-const ElectionCard = ({ id, position, onPress,navigation }: ElectionsCardProps) => {
+const ElectionCard = ({
+  id,
+  position,
+  onPress,
+  navigation,
+}: ElectionsCardProps) => {
   return (
     <View style={styles.containerflex}>
       <View style={styles.contianer}>
@@ -39,7 +45,10 @@ const ElectionCard = ({ id, position, onPress,navigation }: ElectionsCardProps) 
         </View>
 
         <View style={styles.rowSection}>
-          <TouchableOpacity   onPress={() => navigation.navigate('VoteStat')} style={styles.votingbtn}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("VoteStat")}
+            style={styles.votingbtn}
+          >
             <Text style={styles.btnText}> See Voting Stat</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={onPress} style={styles.asipirantbtn}>
@@ -55,7 +64,7 @@ export default ElectionCard;
 
 const styles = StyleSheet.create({
   containerflex: {
-    borderColor: "#2b3513",
+    borderColor: COLORS.primary,
     borderWidth: 1,
     borderRadius: 4,
     padding: 10,
@@ -73,16 +82,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   asipirantbtn: {
-    backgroundColor: "#2b3513",
+    backgroundColor: COLORS.primary,
     borderRadius: 4,
-    borderColor: "#2b3513",
+    borderColor: COLORS.primary,
     borderWidth: 1,
     padding: 5,
     marginLeft: 10,
   },
   votingbtn: {
     padding: 5,
-    borderColor: "#2b3513",
+    borderColor: COLORS.primary,
     borderRadius: 4,
     borderWidth: 1,
   },

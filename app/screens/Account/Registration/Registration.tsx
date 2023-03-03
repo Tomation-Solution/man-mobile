@@ -20,6 +20,7 @@ import { Formik, Field } from "formik";
 import * as yup from "yup";
 import { createMember } from "../../../store/slices/auth/loginSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { COLORS } from "../../../constants/color";
 
 const Registration = ({ route, navigation }: any) => {
   const dispatch = useAppDispatch();
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "700",
     lineHeight: 32.78,
-    color: "#2B3513",
+    color: COLORS.primary,
   },
   heading: {
     fontSize: 14,
@@ -241,7 +242,7 @@ const styles = StyleSheet.create({
     right: 31,
     top: 10,
     fontWeight: "700",
-    color: "#2b3513",
+    color: COLORS.primary,
     fontSize: 13,
   },
 });

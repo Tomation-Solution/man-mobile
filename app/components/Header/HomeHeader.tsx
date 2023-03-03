@@ -29,7 +29,7 @@ const HomeHeader = ({
   showNotification,
 }: Props) => {
   const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
-  const [userData, setUserData] = useState<{ userName: string } | null>(null);
+  const [userData, setUserData] = useState<any>();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -63,7 +63,7 @@ const HomeHeader = ({
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
             <View style={styles.imageContainer}>
               <Image
-                source={images.man}
+                source={{ uri: userData?.profile_image?.toString() }}
                 style={{
                   width: verticalScale(30),
                   height: horizontalScale(30),

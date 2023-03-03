@@ -24,6 +24,7 @@ import { login } from "../../../store/slices/auth/loginSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { loginValidationSchema } from "../../../utils/validation";
 import { normalize } from "../../../constants/metric";
+import { COLORS } from "../../../constants/color";
 
 const LoginForm = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -34,7 +35,9 @@ const LoginForm = ({ navigation }: any) => {
     setModalVisible(!modalVisible);
   };
 
-  const { loading } = useAppSelector((state) => state.authReducers.login);
+  const { loading, error } = useAppSelector(
+    (state) => state.authReducers.login
+  );
 
   return (
     <>
@@ -63,6 +66,11 @@ const LoginForm = ({ navigation }: any) => {
               text="Input details to register as alumnus"
             />
           </View>
+          {error && (
+            <Text style={{ color: "red", fontSize: normalize(12) }}>
+              {error}
+            </Text>
+          )}
 
           <FormContainer>
             <View style={[styles.card, styles.shawdowProp]}>
@@ -155,7 +163,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(24),
     fontWeight: "700",
     lineHeight: 32.78,
-    color: "#2B3513",
+    color: COLORS.primary,
   },
   heading: {
     fontSize: normalize(14),

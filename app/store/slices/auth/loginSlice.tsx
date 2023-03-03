@@ -33,18 +33,19 @@ const loginSlice = createSlice({
   reducers: {
     loginRequested: (state, action) => {
       state.loading = true;
-      // console.log("loginRequested", "looading");
     },
 
     loginReceived: (state, action) => {
       state.loading = false;
+      state.error = "";
       state.isLoggedIn = true;
-      // console.log("loginReceived", action.payload);
+      console.log("loginReceived", action.payload);
       storeUserDetails(JSON.stringify(action.payload));
       state.userData = JSON.stringify(action.payload);
     },
     loginRequestFailed: (state, action) => {
       state.loading = false;
+      state.error = action.payload.response.data.data.error[0];
       console.log("loginRequestFailed", action.payload);
     },
     logUserOut: (state) => {

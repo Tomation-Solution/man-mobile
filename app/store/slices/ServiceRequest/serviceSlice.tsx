@@ -46,7 +46,7 @@ const ServiceRequestSlice = createSlice({
 
     MergeofCompanyReceived: (state, action) => {
       state.loading = false;
-      // console.log("ServiceRequestSuccess", action.payload);
+      console.log("ServiceRequestSuccess", action.payload);
 
     },
     MergeofCompanyRequestFailed: (state, action) => {
@@ -170,7 +170,7 @@ export const Change_Of_Name = (formData: any) => async (dispatch: AppDispatch) =
 
 
 export const Merge_Of_Company = (formData: any) => async (dispatch: AppDispatch) => {
-    console.log("hey i'm  ServiceRequestDetails", formData)
+    console.log("hey i'm MergerOfComapany", formData)
 
   try {
     const getToken: any = await retrieveUserDetails();

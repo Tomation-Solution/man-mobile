@@ -34,10 +34,11 @@ const MergerOfCompanies = ({ navigation }: any) => {
       try {
         const formData = new FormData();
 
-        formData.append("upload_request_letter", values.files[3]);
         formData.append("submit_most_recent_financial_statement", values.files[0]);
         formData.append("upload_dues_reciept", values.files[1]);
         formData.append("upload_membership_cert_for_both_companies", values.files[2]);
+        formData.append("upload_request_letter", values.files[3]);
+
 
         console.log('HELLO THIS IS A FORMDATA',formData)
 
@@ -54,7 +55,7 @@ const MergerOfCompanies = ({ navigation }: any) => {
     let result = await DocumentPicker.getDocumentAsync({
       type: "application/pdf",
     });
-    if (!result.cancelled) {
+    if (result.type === 'success') {
       const files = [...values.files];
       files[index] = { uri: result.uri, name: result.uri.split('/').pop(), type: result.mimeType };
       setFieldValue("files", files);

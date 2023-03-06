@@ -53,7 +53,7 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
 
   const pickDocument = async (): Promise<void> => {
     let result = await DocumentPicker.getDocumentAsync({});
-    if (!result.cancelled) {
+    if (result.type === 'success') {
       const file = { uri: result.uri, name: result.name, type: result.mimeType };
       setFieldValue("file", file);
     }
@@ -73,7 +73,9 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
           Attach requirement for reissuance of certificate
         </Text>
         <View style={styles.documentPickerContainer}>
-          {errors.file && <Text style={styles.error}>{errors.file}</Text>}
+
+          {/* {errors.file && <Text style={styles.error}>{errors.file}</Text>} */}
+
           {values.file.name ? (
             <Text>Selected file 1: {values.file.name}</Text>
           ) : null}

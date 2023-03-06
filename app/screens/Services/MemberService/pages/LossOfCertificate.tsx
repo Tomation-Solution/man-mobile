@@ -31,7 +31,7 @@ const LossOfCertificate = ({ navigation }: any) => {
     let result = await DocumentPicker.getDocumentAsync({
       type: "application/pdf",
     });
-    if (!result.cancelled) {
+    if (result.type === 'success') {
       const files = [...values.files];
       files[index] = { uri: result.uri, name: result.name };
       setFieldValue("files", files);
@@ -50,7 +50,7 @@ const LossOfCertificate = ({ navigation }: any) => {
           Attach requirement for loss of certificate
         </Text>
         <View style={styles.documentPickerContainer}>
-          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {/* {errors.files && <Text style={styles.error}>{errors.files}</Text>} */}
           {values.files[0].name ? (
             <Text>Selected file 1: {values.files[0].name}</Text>
           ) : null}
@@ -58,7 +58,7 @@ const LossOfCertificate = ({ navigation }: any) => {
             title="Upload Membership Receipt"
             onPress={() => pickDocument(0)}
           />
-          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {/* {errors.files && <Text style={styles.error}>{errors.files}</Text>} */}
           {values.files[1].name ? (
             <Text>Selected file 1: {values.files[0].name}</Text>
           ) : null}
@@ -66,7 +66,7 @@ const LossOfCertificate = ({ navigation }: any) => {
             title="Upload certificate loss afidavit"
             onPress={() => pickDocument(1)}
           />
-          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {/* {errors.files && <Text style={styles.error}>{errors.files}</Text>} */}
           {values.files[2].name ? (
             <Text>Selected file 1: {values.files[2].name}</Text>
           ) : null}
@@ -74,7 +74,7 @@ const LossOfCertificate = ({ navigation }: any) => {
             title="Upload All dues receipt"
             onPress={() => pickDocument(2)}
           />
-          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {/* {errors.files && <Text style={styles.error}>{errors.files}</Text>} */}
           {values.files[3].name ? (
             <Text>Selected file 1: {values.files[3].name}</Text>
           ) : null}
@@ -82,7 +82,7 @@ const LossOfCertificate = ({ navigation }: any) => {
             title="Upload financial statement (2 years)"
             onPress={() => pickDocument(3)}
           />
-          {errors.files && <Text style={styles.error}>{errors.files}</Text>}
+          {/* {errors.files && <Text style={styles.error}>{errors.files}</Text>} */}
           {values.files[4].name ? (
             <Text>Selected file 1: {values.files[4].name}</Text>
           ) : null}

@@ -25,7 +25,7 @@ const getElectionSliceSlice = createSlice({
     getElectionSliceReceived: (state, action) => {
       state.loading = false;
       state.userData = action.payload;
-      console.log("getElectionSliceReceived", action.payload);
+      // console.log("getElectionSliceReceived", action.payload);
     },
     getElectionSliceRequestFailed: (state, action) => {
       state.loading = false;
@@ -36,8 +36,8 @@ const getElectionSliceSlice = createSlice({
     },
     getListOFContestantReceived: (state, action) => {
       state.loading = false;
-      state.userData = action.payload;
-      console.log("getElectionSliceReceived", action.payload);
+      // state.userData = action.payload;
+      // console.log("getElectionSliceReceived", action.payload);
     },
     getListOFContestantRequestFailed: (state, action) => {
       state.loading = false;
@@ -49,8 +49,8 @@ const getElectionSliceSlice = createSlice({
     },
     getListOFMemberReceived: (state, action) => {
       state.loading = false;
-      state.userData = action.payload;
-      console.log("getElectionSliceReceived", action.payload);
+      // state.userData = action.payload;
+      // console.log("getElectionSliceReceived", action.payload);
     },
     getListOFMemberRequestFailed: (state, action) => {
       state.loading = false;

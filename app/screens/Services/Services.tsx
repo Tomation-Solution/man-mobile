@@ -31,9 +31,9 @@ const Services = ({ navigation }: any) => {
         {/* <Stack.Screen name="StaffsService">
           {(props) => <StaffsService {...props} />}
         </Stack.Screen> */}
-        <Stack.Screen name="ReissuanceForm">
+        {/* <Stack.Screen name="ReissuanceForm">
           {(props) => <ReissuanceForm {...props} />}
-        </Stack.Screen>
+        </Stack.Screen> */}
         <Stack.Screen name="ReissuanceOfCertificate">
           {(props) => <ReissuanceOfCertificate {...props} />}
         </Stack.Screen>

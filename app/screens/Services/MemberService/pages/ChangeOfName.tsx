@@ -28,7 +28,7 @@ const ChangeOfName = ({ navigation }: any) => {
     onSubmit: async (values: any) => {
 
       const formData = new FormData();
-      formData.append("attach_membership_certificate", values.files[1]);
+      formData.append("attach_membership_certificate", values.files[0]);
       formData.append("membership_due_receipt", values.files[1]);
       formData.append("upload_financial_statement", values.files[2]);
       formData.append("upload_incorporation_certificate", values.files[3]);

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput,ScrollView } from "react-native";
 import React from "react";
 import { HomeHeader } from "../../../../components";
 import {
@@ -38,15 +38,10 @@ const ProductsManufacturingUpdate = ({ navigation }: any) => {
     onSubmit: async (values: any) => {
       try {
         const formData = new FormData();
-      formData.append("proceed_to_update_your_profile", values.files[1]);
+      formData.append("proceed_to_update_your_profile", values.files[0]);
       formData.append("submit_most_recent_financial_statement", values.files[1]);
       formData.append("upload_all_levy_recipt", values.files[2]);
       formData.append("upload_Product_update_report", values.files[3]);
-
-
-      // console.log("HELLO THIS IS A FORMDATA", formData);
-
-
 
         await dispatch(Product_Manufacture_Update(formData));
         resetForm(); // Reset the form after submission
@@ -62,12 +57,13 @@ const ProductsManufacturingUpdate = ({ navigation }: any) => {
     });
     if (!result.cancelled) {
       const files = [...values.files];
-      files[index] = { uri: result.uri, name: result.name };
+      files[index] = { uri: result.uri, name: result.uri.split('/').pop(), type: result.mimeType };
       setFieldValue("files", files);
     }
   };
 
   return (
+    <ScrollView>
     <View >
       <HomeHeader
         title={"Product Manufacturing Update"}
@@ -119,6 +115,7 @@ const ProductsManufacturingUpdate = ({ navigation }: any) => {
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 };
 

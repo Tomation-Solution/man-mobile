@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
 import { Container, HomeHeader, ElectionsCard } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 const ElectionHome = ({ navigation }: any) => {
   const data = [

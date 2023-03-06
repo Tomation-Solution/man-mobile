@@ -33,11 +33,11 @@ const data = [
     image: "laptop",
     link: "DeactivationOfMembership",
   },
-  {
-    name: "Activation of deactivated/suspended member",
-    image: "laptop",
-    link: "#",
-  },
+  // {
+  //   name: "Activation of deactivated/suspended member",
+  //   image: "laptop",
+  //   link: "#",
+  // },
   {
     name: "Update on product(s) manufactured",
     image: "shop",

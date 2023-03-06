@@ -18,6 +18,10 @@ interface DetailsProps {
   navigation?: any;
 }
 
+
+
+
+
 const MergerOfCompanies = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
 
@@ -29,11 +33,14 @@ const MergerOfCompanies = ({ navigation }: any) => {
     onSubmit: async (values: any) => {
       try {
         const formData = new FormData();
-        formData.append("upload_request_letter", values.files[0]);
-        formData.append("submit_most_recent_financial_statement", values.files[1]);
-        formData.append("upload_dues_reciept", values.files[2]);
-        formData.append("upload_membership_cert_for_both_companies", values.files[3]);
+
+        formData.append("upload_request_letter", values.files[3]);
+        formData.append("submit_most_recent_financial_statement", values.files[0]);
+        formData.append("upload_dues_reciept", values.files[1]);
+        formData.append("upload_membership_cert_for_both_companies", values.files[2]);
+
         console.log('HELLO THIS IS A FORMDATA',formData)
+
         await dispatch(Merge_Of_Company(formData));
         resetForm();
       } catch (error) {
@@ -67,24 +74,24 @@ const MergerOfCompanies = ({ navigation }: any) => {
         <Text style={styles.text}> Attach requirement for Merger of Companies</Text>
         <View style={styles.documentPickerContainer}>
 
-        {values.files[0].name ? (
+
+
+
+          {values.files[0].name ? (
             <Text>Selected file 1: {values.files[0].name}</Text>
           ) : null}
 
-        <CustomPicker
-            title="upload request letter"
+          <CustomPicker
+            title="Submit most recent financial statement"
             onPress={() => pickDocument({index: 0})}
           />
-
-
-
 
           {values.files[1].name ? (
             <Text>Selected file 2: {values.files[1].name}</Text>
           ) : null}
 
           <CustomPicker
-            title="Submit most recent financial statement"
+            title="Upload_dues_reciept"
             onPress={() => pickDocument({index: 1})}
           />
 
@@ -93,11 +100,11 @@ const MergerOfCompanies = ({ navigation }: any) => {
           ) : null}
 
           <CustomPicker
-            title="Upload_dues_reciept"
+            title="Upload membership cert for both companies"
             onPress={() => pickDocument({index: 2})}
           />
 
-          {values.files[3].name ? (
+           {values.files[3].name ? (
             <Text>Selected file 4: {values.files[3].name}</Text>
           ) : null}
 
@@ -105,9 +112,6 @@ const MergerOfCompanies = ({ navigation }: any) => {
             title="Upload membership cert for both companies"
             onPress={() => pickDocument({index: 3})}
           />
-
-
-
         </View>
 
         <View style={{ marginTop: verticalScale(40) }}>

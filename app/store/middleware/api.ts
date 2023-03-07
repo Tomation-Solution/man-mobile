@@ -43,6 +43,8 @@ const api =
         // window.location.reload()
       }
     } catch (error: any) {
+
+
       // Default
       dispatch(actions.apiCallFailed(error));
 

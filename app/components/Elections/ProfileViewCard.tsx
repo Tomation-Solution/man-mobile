@@ -19,7 +19,7 @@ const ProfileViewCard = ({ item, onPress }: profileCardProps) => {
                 <View style={styles.newsImageActionContainer}>
                     <View style={styles.newsImageContainer}>
                         <Image
-                            source={item.images[1]}
+                            source={{uri: item?.upload_manifesto_image ? item.upload_manifesto_image.toString() : undefined}}
                             resizeMode="cover"
                             style={{ width: "100%", height: 200 }}
                         />
@@ -28,12 +28,13 @@ const ProfileViewCard = ({ item, onPress }: profileCardProps) => {
 
                 </View>
 
-                <View style={{ padding: 10 }}>
+                <View style={{ padding: 10,alignItems:'flex-start'}}>
 
                     <Text style={{ textAlign: "justify", color: COLORS.primary }}>
-                        {item?.description.substring(0, 150)} ...
+                        {item?.aspirantBio[0].substring(0, 150)} ....
+
                         <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-                            <Text style={{ color: COLORS.primary, fontWeight: "700", textAlign: 'center' }}>
+                            <Text style={{ color: COLORS.primary, fontWeight: "700", textAlign: "justify"}}>
                                 Continue
                             </Text>
                         </TouchableOpacity>

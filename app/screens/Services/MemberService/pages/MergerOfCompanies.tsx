@@ -11,7 +11,7 @@ import { useAppDispatch } from './../../../../store/hooks';
 import { Formbtn } from "../../../../components";
 import { useFormik } from "formik";
 import * as DocumentPicker from "expo-document-picker";
-import { Merge_Of_Company } from './../../../../store/slices/ServiceRequest/serviceSlice';
+import { Merge_Of_Company } from '../../../../store/slices/ServiceRequest/serviceSlice';
 
 interface DetailsProps {
   route?: any;

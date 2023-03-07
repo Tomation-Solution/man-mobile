@@ -5,6 +5,8 @@ import newsPublication from "./slices/news_publication/news_publication";
 import gallery from "./slices/gallery/gallerySlice";
 import meetings from "./slices/meetings/meetingsSlice";
 import events from "./slices/events/eventsSlice";
+import electionReducers from "./slices/elections/election";
+import ServiceRequestReducers from "./slices/ServiceRequest/Servicerequest";
 
 export default combineReducers({
   authReducers,
@@ -13,4 +15,6 @@ export default combineReducers({
   gallery,
   meetings,
   events,
+  electionReducers,
+  ServiceRequestReducers
 });

@@ -11,7 +11,7 @@ import { Formbtn } from "../../../../components";
 import { useFormik } from "formik";
 import * as DocumentPicker from "expo-document-picker";
 import { useAppDispatch } from './../../../../store/hooks';
-import { Reissuance_Certificate } from './../../../../store/slices/ServiceRequest/serviceSlice';
+import { Reissuance_Certificate } from '../../../../store/slices/ServiceRequest/serviceSlice';
 
 interface DetailsProps {
   route?: any;

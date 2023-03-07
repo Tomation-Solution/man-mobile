@@ -23,7 +23,7 @@ const api =
     try {
       const response = await axios.request({
         method,
-        baseURL: "https://web-production-d5b0.up.railway.app/",
+        baseURL: "https://rel8backend-production.up.railway.app/",
         url,
         params: params,
         data,
@@ -43,8 +43,6 @@ const api =
         // window.location.reload()
       }
     } catch (error: any) {
-
-
       // Default
       dispatch(actions.apiCallFailed(error));
 

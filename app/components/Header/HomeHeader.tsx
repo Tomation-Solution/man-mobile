@@ -63,7 +63,11 @@ const HomeHeader = ({
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
             <View style={styles.imageContainer}>
               <Image
-                source={{ uri: userData?.profile_image?.toString() }}
+                source={
+                  userData?.profileImage
+                    ? { uri: userData?.profile_image?.toString() }
+                    : images.man
+                }
                 style={{
                   width: verticalScale(30),
                   height: horizontalScale(30),

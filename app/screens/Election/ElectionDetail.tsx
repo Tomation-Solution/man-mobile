@@ -42,7 +42,7 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
         <HomeHeader
           navigation={navigation}
           title={profile.title || "Details " + profile.id}
-          back={navigation.goBack}
+          back={navigation.goBack()}
         />
 
         <Text style={styles.electionTitle}>

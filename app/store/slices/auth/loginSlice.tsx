@@ -32,6 +32,7 @@ const loginSlice = createSlice({
   initialState,
   reducers: {
     loginRequested: (state, action) => {
+      state.error = "";
       state.loading = true;
     },
 
@@ -55,6 +56,7 @@ const loginSlice = createSlice({
     },
 
     validationRequested: (state, action) => {
+      state.error = "";
       state.loading = true;
       state.message = "";
       console.log("validationRequested", "looading");
@@ -70,12 +72,14 @@ const loginSlice = createSlice({
     },
 
     validationRequestFailed: (state, action) => {
+      state.isUserValidated = false;
       state.loading = false;
       state.message = "Validation Failed or Invalid Token";
       console.log("validationRequestFailed", action.payload);
     },
 
     registrationRequested: (state, action) => {
+      state.error = "";
       state.loading = true;
       console.log("registrationRequested", "looading");
     },

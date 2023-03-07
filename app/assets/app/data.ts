@@ -1,3 +1,3 @@
 export const appData = {
-  orgnizationName: "NIMN  ",
+  orgnizationName: "M.A.N  ",
 };

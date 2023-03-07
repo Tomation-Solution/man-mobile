@@ -15,6 +15,7 @@ import {
   Support,
   AdminSupport,
   TechnicalSupport,
+
 } from "../screens";
 import Meetings from "../screens/Meetings/Meetings";
 import Profile from "../screens/Profile/Profile";
@@ -74,7 +75,7 @@ const DrawerNav = () => {
         <Drawer.Screen name="Support" component={Support} />
         <Drawer.Screen name="Admin Support" component={AdminSupport} />
         <Drawer.Screen name="Technical Suport" component={TechnicalSupport} />
-
+         <Drawer.Screen name="Service Request" component={Services}/>
         {/* soupport screens  */}
 
         <Drawer.Screen name="Gallery">

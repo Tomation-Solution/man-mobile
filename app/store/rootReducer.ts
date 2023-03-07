@@ -23,7 +23,7 @@ export default combineReducers({
   meetings,
   events,
   electionReducers,
-  ServiceRequestReducers
+  ServiceRequestReducers,
   fundProjectReducers,
   chat,
   extras,

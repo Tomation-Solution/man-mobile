@@ -24,15 +24,16 @@ const Details = ({ route, navigation }: DetailsProps) => {
       <HomeHeader
         navigation={navigation}
         title={"Fund a project" || "Details " + data.id}
-        back={() => navigation.goBack("Details")}
+        back={navigation.goBack}
+
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.scrollView}
       >
         <View style={styles.imageContainer}>
-          <Image   source={{ uri: data?.image ? data.image.toString() : undefined }}
-           style={styles.image} />
+          <Image source={{ uri: data?.image ? data.image.toString() : undefined }}
+            style={styles.image} />
         </View>
         <View style={styles.descriptionContainer}>
           <Text style={styles.headText}>About project</Text>
@@ -42,7 +43,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button1}
-              onPress={() => navigation.navigate("Details2", {data} )}
+              onPress={() => navigation.navigate("Details2", { data })}
             >
               <Text style={{ color: "white" }}>Support in Kind</Text>
             </TouchableOpacity>

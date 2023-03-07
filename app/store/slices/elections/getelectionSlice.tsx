@@ -8,10 +8,12 @@ import {
 } from "../../../utils/helperFunctions/userDataHandlers";
 
 const initialState: {
-  userData: { data: any } | null;
+  userData: { data: any } | null,
+  contestantData: {data: any} | null,
   loading: boolean;
 } = {
   userData: null,
+  contestantData:null,
   loading: false,
 };
 
@@ -34,14 +36,16 @@ const getElectionSliceSlice = createSlice({
     getListOFContestantRequested: (state, action) => {
       state.loading = true;
     },
+
     getListOFContestantReceived: (state, action) => {
       state.loading = false;
-      // state.userData = action.payload;
-      // console.log("getElectionSliceReceived", action.payload);
+      state.contestantData = action.payload;
+      // console.log("getContestantReceived", action.payload);
     },
+
     getListOFContestantRequestFailed: (state, action) => {
       state.loading = false;
-      console.log("getElectionSliceRequestFailed", action.payload);
+      // console.log("getElectionSliceRequestFailed", action.payload);
     },
 
     getListOFMemberRequested: (state, action) => {
@@ -49,8 +53,6 @@ const getElectionSliceSlice = createSlice({
     },
     getListOFMemberReceived: (state, action) => {
       state.loading = false;
-      // state.userData = action.payload;
-      // console.log("getElectionSliceReceived", action.payload);
     },
     getListOFMemberRequestFailed: (state, action) => {
       state.loading = false;
@@ -138,7 +140,7 @@ export const list_of_Contestant= () => async (dispatch: AppDispatch) => {
       console.log("token", token);
       dispatch(
         apiCallBegan({
-          url: PRE_URL + "election/adminmanageballotbox/list_of_contestant/?postion_id=5",
+          url: PRE_URL + "election/adminmanageballotbox/list_of_contestant/?postion_id=1",
           extraheaders: "Token " + token,
           method: "get",
           onStart: getListOFContestantRequested.type,

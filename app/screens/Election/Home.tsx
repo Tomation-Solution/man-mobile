@@ -13,7 +13,6 @@ const ElectionHome = ({ navigation }: any) => {
 const { userData, loading } = useAppSelector(
   (state) => state.electionReducers.getelectionSlice
 )
-console.log(userData)
 
   useEffect(() => {
     dispatch(list_election());
@@ -34,7 +33,7 @@ console.log(userData)
             id={data.id}
             position={data.name}
             navigation={navigation}
-            onPress={() => navigation.navigate("ProfileDetails", { data })}
+            onPress={() => navigation.navigate("ProfileDetails")}
           />
         ))}
       </ScrollView>

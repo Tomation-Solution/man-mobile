@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React,{useEffect} from 'react'
 import { ProfileViewCard, HomeHeader, Container } from '../../components';
 import { images } from "../../assets/dummyData";
 import { ScrollView } from "react-native-gesture-handler";
+import { list_of_Contestant } from '../../store/slices/elections/getelectionSlice';
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 
 interface ProfileDetailsProps {
@@ -12,12 +14,18 @@ interface ProfileDetailsProps {
 
 
 
+const ProfileDetails = ({ navigation }: ProfileDetailsProps) => {
+    const dispatch = useAppDispatch();
 
-const ProfileDetails = ({ navigation, route }: ProfileDetailsProps) => {
+    const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
+    const { contestantData, loading } = useAppSelector(
+        (state) => state.electionReducers.getelectionSlice
+      )
+     console.log('this is profile details',contestantData?.data[0].member)
 
-    const profiledata = route.params.data;
-
-console.log('INSIDE PROFILEDETAILS',profiledata)
+    useEffect(() => {
+        dispatch(list_of_Contestant());
+      }, [dispatch]);
 
     return (
         <Container>
@@ -25,7 +33,7 @@ console.log('INSIDE PROFILEDETAILS',profiledata)
             <Text style={styles.electionTitle}> mr kunle an Aspirant for the position of  President .Man</Text>
 
             <ScrollView>
-                {profiledata?.data?.map((profile:any) => (
+                {contestantData?.data.map((profile:any) => (
                     <ProfileViewCard
                         key={profile.id}
                         item={profile}

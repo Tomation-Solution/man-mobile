@@ -11,7 +11,10 @@ import { Container, HomeHeader, CustomModal } from "../../components";
 import * as Progress from "react-native-progress";
 import { COLORS } from "../../constants/color";
 import { horizontalScale, verticalScale } from "../../constants/metric";
-import Error from "./component/OnConfirmStatus";
+import Error from './component/OnConfirmStatus';
+import { useRoute } from '@react-navigation/native';
+
+
 
 interface ElectionDetailsProps {
   route: any;
@@ -19,13 +22,16 @@ interface ElectionDetailsProps {
 }
 
 const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const onModalPress = () => {
-    setModalVisible(!modalVisible);
-  };
+   const altRoute= useRoute()
+  const   profile = route?.params?.profile || altRoute?.params || {};
 
-  const profile = route.params.profile;
-  const [progress, setProgress] = useState(1);
+    console.log('profileis our',profile.member)
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const onModalPress = () => { setModalVisible(!modalVisible); };
+
+    const [progress, setProgress] = useState(1);
+
 
   return (
     <ScrollView>
@@ -40,21 +46,18 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
           back={navigation.goBack}
         />
 
-        <Text style={styles.electionTitle}>
-          {" "}
-          {profile.name} an Aspirant for the position of {profile.position}.Man
-        </Text>
-        <View style={styles.newsCabinet}>
-          <View style={styles.newsImageActionContainer}>
-            <View style={styles.newsImageContainer}>
-              <Image
-                source={profile.images[1]}
-                resizeMode="cover"
-                style={styles.electionImage}
-              />
-            </View>
-          </View>
-        </View>
+                        <Text style={styles.electionTitle}> {profile.name} an Aspirant for the position of {profile.position}.Man</Text>
+                        <View style={styles.newsCabinet}>
+                    <View style={styles.newsImageActionContainer}>
+                    <View style={styles.newsImageContainer}>
+                            <Image
+                            source={{uri: profile?.upload_manifesto_image ? profile.upload_manifesto_image.toString() : undefined}}
+                            resizeMode="cover"
+                            style={ styles.electionImage}
+                            />
+                        </View>
+                        </View>
+                        </View>
 
         <View style={styles.containerflex}>
           <View style={styles.contianer}>
@@ -78,45 +81,31 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
               onPress={() => onModalPress()}
               style={styles.votingbtn}
             >
-              <Text style={styles.voteText}>Vote</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.electionrow}>
-          <View>
-            <Text style={styles.Bio}> Bio </Text>
-            <Text style={[styles.biotext]}>
-              {profile.name} an Aspirant for the position of {profile.position}
-              .Man
-              {profile.description}
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.detailssection}>
-          <Text style={styles.sectiontitle}> Manifesto</Text>
-          <Text style={styles.destailsText}>{profile.description} </Text>
-          <TouchableOpacity>
-            <Text
-              style={{
-                fontSize: 14,
-                lineHeight: 14,
-                color: COLORS.primary,
-                marginVertical: 18,
-                fontWeight: "500",
-                paddingBottom: 10,
-                textDecorationLine: "underline",
-              }}
-            >
-              {" "}
-              Download full Manifesto
-            </Text>
+            <Text style={styles.voteText}>Vote</Text>
           </TouchableOpacity>
-        </View>
-      </Container>
-    </ScrollView>
-  );
-};
+
+                </View>
+            </View>
+                                <View style={styles.electionrow}>
+                            <View>
+                                <Text style={styles.Bio}> Bio </Text>
+                                <Text style={[styles.biotext]}>{profile.name}an Aspirant for the position of {'ceo'}.Man
+                                {profile.aspirantBio[0]}
+                                              </Text>
+                            </View>
+                        </View>
+
+                    <View style={styles.detailssection}>
+                        <Text style={styles.sectiontitle} > Manifesto</Text>
+                        <Text style={styles.destailsText}>
+                            {profile.aspirantBio[1]}
+                            </Text>
+                        <TouchableOpacity >
+                            <Text style={{ fontSize: 14, lineHeight: 14, color: '#2b3513', marginVertical: 18, fontWeight: '500', paddingBottom:10,textDecorationLine:'underline' }}> Download full Manifesto</Text>
+                        </TouchableOpacity>
+                    </View>
+            </Container>
+        </ScrollView>
 
 export default ElectionDetail;
 

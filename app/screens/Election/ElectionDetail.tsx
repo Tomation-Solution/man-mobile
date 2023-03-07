@@ -5,6 +5,7 @@ import * as Progress from 'react-native-progress';
 import { COLORS } from "../../constants/color";
 import { horizontalScale, verticalScale } from "../../constants/metric";
 import Error from './component/OnConfirmStatus';
+import { useRoute } from '@react-navigation/native';
 
 
 
@@ -14,11 +15,14 @@ interface ElectionDetailsProps {
 }
 
 const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
+   const altRoute= useRoute()
+  const   profile = route?.params?.profile || altRoute?.params || {};
+
+    console.log('profileis our',profile.member)
 
     const [modalVisible, setModalVisible] = useState(false);
     const onModalPress = () => { setModalVisible(!modalVisible); };
 
-    const profile = route.params.profile;
     const [progress, setProgress] = useState(1);
 
 
@@ -40,9 +44,9 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
                     <View style={styles.newsImageActionContainer}>
                     <View style={styles.newsImageContainer}>
                             <Image
-                                source={profile.images[1]}
-                                resizeMode="cover"
-                                style={ styles.electionImage}
+                            source={{uri: profile?.upload_manifesto_image ? profile.upload_manifesto_image.toString() : undefined}}
+                            resizeMode="cover"
+                            style={ styles.electionImage}
                             />
                         </View>
                         </View>
@@ -77,16 +81,18 @@ const ElectionDetail = ({ navigation, route }: ElectionDetailsProps) => {
                                 <View style={styles.electionrow}>
                             <View>
                                 <Text style={styles.Bio}> Bio </Text>
-                                <Text style={[styles.biotext]}>{profile.name} an Aspirant for the position of {profile.position}.Man
-                                {profile.description}
-                                 </Text>
+                                <Text style={[styles.biotext]}>{profile.name}an Aspirant for the position of {'ceo'}.Man
+                                {profile.aspirantBio[0]}
+                                              </Text>
                             </View>
                         </View>
 
                     <View style={styles.detailssection}>
                         <Text style={styles.sectiontitle} > Manifesto</Text>
-                        <Text style={styles.destailsText}>{profile.description} </Text>
-                        <TouchableOpacity>
+                        <Text style={styles.destailsText}>
+                            {profile.aspirantBio[1]}
+                            </Text>
+                        <TouchableOpacity >
                             <Text style={{ fontSize: 14, lineHeight: 14, color: '#2b3513', marginVertical: 18, fontWeight: '500', paddingBottom:10,textDecorationLine:'underline' }}> Download full Manifesto</Text>
                         </TouchableOpacity>
                     </View>

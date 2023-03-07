@@ -65,7 +65,7 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
     <View>
       <HomeHeader
         title={"Reissuance of certificate"}
-        back="back"
+        back={navigation.goBack}
         navigation={navigation}
       />
       <View style={{ marginTop: verticalScale(30) }}>
@@ -88,14 +88,14 @@ const ReissuanceOfCertificate = ({ navigation }: any) => {
             />
           </View>
           <TextInput
-              style={styles.input}
-              onChangeText={handleChange("note")}
-              onBlur={handleBlur("note")}
-              value={values.note}
-              multiline={true}
-              numberOfLines={10}
-              placeholder="Enter your message "
-            />
+            style={styles.input}
+            onChangeText={handleChange("note")}
+            onBlur={handleBlur("note")}
+            value={values.note}
+            multiline={true}
+            numberOfLines={10}
+            placeholder="Enter your message "
+          />
           {errors.note && touched.note ? (
             <Text style={styles.error}>{errors.note}</Text>
           ) : null}

@@ -42,9 +42,9 @@ const FactoryLocationUpdate = ({ navigation }: any) => {
         const formData = new FormData();
 
         formData.append("proceed_to_update_your_profile", values.files[0]);
-       formData.append("submit_most_recent_financial_statement", values.files[1]);
-       formData.append("upload_dues_reciept", values.files[2]);
-       formData.append("upload_factory_inspection_report", values.files[3]);
+        formData.append("submit_most_recent_financial_statement", values.files[1]);
+        formData.append("upload_dues_reciept", values.files[2]);
+        formData.append("upload_factory_inspection_report", values.files[3]);
         await dispatch(Factory_location_update(formData))
         resetForm();
       } catch (error) {
@@ -68,59 +68,59 @@ const FactoryLocationUpdate = ({ navigation }: any) => {
 
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <HomeHeader
-        title={"Factory Location Update"}
-        back="back"
-        navigation={navigation}
-      />
-      <View style={{ marginTop: verticalScale(30) }}>
-        <Text style={styles.text}>
-          Fulfill the below to get your request updated
-        </Text>
-        <View style={styles.documentPickerContainer}>
+      <View style={styles.container}>
+        <HomeHeader
+          title={"Factory Location Update"}
+          back={navigation.goBack}
+          navigation={navigation}
+        />
+        <View style={{ marginTop: verticalScale(30) }}>
+          <Text style={styles.text}>
+            Fulfill the below to get your request updated
+          </Text>
+          <View style={styles.documentPickerContainer}>
 
-          {values.files[0].name ? (
-            <Text>Selected file 1: {values.files[0].name}</Text>
-          ) : null}
+            {values.files[0].name ? (
+              <Text>Selected file 1: {values.files[0].name}</Text>
+            ) : null}
 
-          <CustomPicker
-            title="Proceed to update your profile"
-            onPress={() => pickDocument({index: 0})}
-          />
+            <CustomPicker
+              title="Proceed to update your profile"
+              onPress={() => pickDocument({ index: 0 })}
+            />
 
-          {values.files[1].name ? (
-            <Text>Selected file 2: {values.files[1].name}</Text>
-          ) : null}
+            {values.files[1].name ? (
+              <Text>Selected file 2: {values.files[1].name}</Text>
+            ) : null}
 
-          <CustomPicker
-            title="Submit most recent financial statement"
-            onPress={() => pickDocument({index: 1})}
-          />
+            <CustomPicker
+              title="Submit most recent financial statement"
+              onPress={() => pickDocument({ index: 1 })}
+            />
 
-          {values.files[2].name ? (
-            <Text>Selected file 3: {values.files[2].name}</Text>
-          ) : null}
+            {values.files[2].name ? (
+              <Text>Selected file 3: {values.files[2].name}</Text>
+            ) : null}
 
-          <CustomPicker
-            title="Upload dues reciept"
-            onPress={() => pickDocument({index: 2})}
-          />
+            <CustomPicker
+              title="Upload dues reciept"
+              onPress={() => pickDocument({ index: 2 })}
+            />
 
-          {values.files[3].name ? (
-            <Text>Selected file 4: {values.files[3].name}</Text>
-          ) : null}
+            {values.files[3].name ? (
+              <Text>Selected file 4: {values.files[3].name}</Text>
+            ) : null}
 
-          <CustomPicker
-            title="Upload factory inspection report "
-            onPress={() => pickDocument({index: 3})}
-          />
-        </View>
-        <View style={{ marginTop: verticalScale(40) }}>
-          <Formbtn title="Request" onPress={handleSubmit} />
+            <CustomPicker
+              title="Upload factory inspection report "
+              onPress={() => pickDocument({ index: 3 })}
+            />
+          </View>
+          <View style={{ marginTop: verticalScale(40) }}>
+            <Formbtn title="Request" onPress={handleSubmit} />
+          </View>
         </View>
       </View>
-    </View>
     </ScrollView>
   );
 };
@@ -129,7 +129,6 @@ export default FactoryLocationUpdate;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     flex: 1,
   },
   text: {

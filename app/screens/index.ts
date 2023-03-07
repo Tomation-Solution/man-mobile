@@ -16,8 +16,7 @@ export { default as OnAccountSuccess } from "./Account/components/OnSucessScreen
 export { default as OnSuccessScreen } from "./Account/components/OnSucessScreen/OnSucess";
 export { default as OnPasswordSuccess } from "./Account/components/OnSucessScreen/OnPasswordSuccess";
 
-export { default as PaymentDetails } from "./PaymentDetails/PaymenScreen";
-// export { default as PendingPayment } from "./PaymentDetails/Tabs/PendingPayment";
+// a// export { default as PendingPayment } from "./PaymentDetails/Tabs/PendingPayment";
 
 
 

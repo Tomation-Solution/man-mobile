@@ -53,7 +53,10 @@ const data = [
 const MembersService = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
-      <HomeHeader title="Services" navigation={navigation} back="back" />
+      <HomeHeader title="Services"
+        navigation={navigation}
+        back={navigation.goBack}
+      />
 
       <FlatList
         data={data}
@@ -74,7 +77,6 @@ const MembersService = ({ navigation }: any) => {
 export default MembersService;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     flex: 1,
   },
   rowContainer: {

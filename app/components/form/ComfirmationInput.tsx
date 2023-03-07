@@ -9,14 +9,12 @@ import {
   Alert,
 } from "react-native";
 
-
 import {
   CodeField,
   Cursor,
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
-
 
 const CELL_COUNT = 4;
 
@@ -53,30 +51,29 @@ const ConfirmationInput = ({ setValue, value }) => {
       </View>
     </SafeAreaView>
   );
-
 };
 const styles = StyleSheet.create({
-    // root: { marginTop: 50, },
-    title: {
-      textAlign: "center",
-      fontSize: 20,
-      color: "rgba(0, 176, 169, 0.72)",
-    },
-    // codeFieldRoot: { marginTop: 20 },
-    cell: {
-      width: 40,
-      height: 40,
-      fontSize: 24,
-      borderWidth: 4,
-      // marginTop: 40,
-      borderColor: "#00000030",
-      textAlign: "center",
-      borderRadius: 2,
-      marginVertical:20
-    },
-    focusCell: {
-      borderColor: "#000",
-    },
-  });
+  // root: { marginTop: 50, },
+  title: {
+    textAlign: "center",
+    fontSize: 20,
+    color: "rgba(0, 176, 169, 0.72)",
+  },
+  // codeFieldRoot: { marginTop: 20 },
+  cell: {
+    width: 40,
+    height: 40,
+    fontSize: 24,
+    borderWidth: 4,
+    // marginTop: 40,
+    borderColor: "#00000030",
+    textAlign: "center",
+    borderRadius: 2,
+    marginVertical: 20,
+  },
+  focusCell: {
+    borderColor: "#000",
+  },
+});
 
 export default ConfirmationInput;

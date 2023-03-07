@@ -15,7 +15,7 @@ import {
   Support,
   AdminSupport,
   TechnicalSupport,
-
+  FundAProject
 } from "../screens";
 import Meetings from "../screens/Meetings/Meetings";
 import Profile from "../screens/Profile/Profile";
@@ -87,6 +87,8 @@ const DrawerNav = () => {
           {(props) => <Meetings environment={environment} {...props} />}
         </Drawer.Screen>
         <Drawer.Screen name="Notification" component={Notification} />
+        <Drawer.Screen name="Fund A Project" component={FundAProject} />
+
       </Drawer.Navigator>
     </EnvironmentContext.Provider>
   );

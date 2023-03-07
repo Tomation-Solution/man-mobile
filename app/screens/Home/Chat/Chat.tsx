@@ -3,9 +3,7 @@ import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import General from "./Tabs/General";
 import { COLORS } from "../../../constants/color";
-import { HomeHeader } from "../../../components";
 import Private from "./Tabs/Private/Private";
-import PrivateChat from "./PrivateChat";
 
 const Top = createMaterialTopTabNavigator();
 
@@ -34,6 +32,7 @@ const Chat = ({ navigation }: any) => {
         <Top.Screen
           name="Private Chats"
           options={{
+            swipeEnabled: false,
             tabBarStyle: { display: showTabBar ? "flex" : "none" },
           }}
         >

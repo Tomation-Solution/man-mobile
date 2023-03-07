@@ -4,7 +4,7 @@ import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../constants/color";
 import { TextInput } from "react-native-gesture-handler";
 
-const SendBox = () => {
+const SendBox = ({ disabled, onSubmit, setText, value }: any) => {
   return (
     <View
       style={{
@@ -21,6 +21,8 @@ const SendBox = () => {
     >
       <FontAwesome name="picture-o" size={20} color={COLORS.icon} />
       <TextInput
+        onChangeText={(text) => setText(text)}
+        value={value}
         placeholder="Type a message"
         multiline
         numberOfLines={2}
@@ -32,7 +34,7 @@ const SendBox = () => {
           padding: 10,
         }}
       />
-      <TouchableOpacity>
+      <TouchableOpacity disabled={disabled} onPress={onSubmit}>
         <Ionicons name="send" size={20} color={COLORS.primary} />
       </TouchableOpacity>
     </View>

@@ -101,7 +101,7 @@ const LoginForm = ({ navigation }: any) => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => navigation.navigate("Registration")}
+                onPress={() => navigation.navigate("VerifyUser")}
                 style={{ display: "flex", flexDirection: "row" }}
               >
                 <Text style={styles.register}> Don't have an account? </Text>

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from "react-native";
 import { Container, HomeHeader } from "../../../components";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { COLORS } from "../../../constants/color";
 import {CompletedPayment, PendingPayment} from './Tabs';
-
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { getDuelist } from "../../../store/slices/due_list_and_owning_members/getDuelistSlice";
 
 
 const Top = createMaterialTopTabNavigator();

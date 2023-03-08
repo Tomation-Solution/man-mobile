@@ -4,10 +4,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from "../constants/color";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { HomeScreen } from "../screens";
-import Chat from "../screens/Home/Chat/Chat";
+import Chat from "../screens/Home/Chat/Tabs/Chat";
 import { Account } from "../screens/Home";
 import Memebers from "../screens/Home/Members/Memebers";
-import PrivateChat from "../screens/Home/Chat/PrivateChat";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,8 +48,9 @@ const BottomNav = ({ environment }: any) => {
           ),
         }}
         name="Chat"
-        component={Chat}
-      />
+      >
+        {(props) => <Chat environment={environment} {...props} />}
+      </Tab.Screen>
       <Tab.Screen
         options={{
           tabBarIcon: ({ color }) => (

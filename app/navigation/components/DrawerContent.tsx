@@ -106,7 +106,7 @@ const DrawerContent = ({
         }
         navigation={navigation}
       />
-      <DrawerLabel
+      {/* <DrawerLabel
         focused={state?.index === 4}
         title="Resources"
         icon={<Ionicons name="book" size={20} color={COLORS.primary} />}
@@ -134,7 +134,7 @@ const DrawerContent = ({
             icon: <Ionicons name="book" size={20} color={COLORS.primary} />,
           },
         ]}
-      />
+      /> */}
       <DrawerLabel
         focused={state?.index === 3}
         title="Election"

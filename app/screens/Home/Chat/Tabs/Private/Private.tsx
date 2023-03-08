@@ -3,17 +3,12 @@ import React, { useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./Home.";
 import Details from "./Details";
-import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
 import { retrieveUserDetails } from "../../../../../utils/helperFunctions/userDataHandlers";
 
 const Stack = createNativeStackNavigator();
 
-const Private = ({ navigation, showTabBar, setShowTabBar }: any) => {
+const Private = ({ setShowTabBar }: any) => {
   const [userData, setUserData] = React.useState<any>(null);
-  const dispatch = useAppDispatch();
-  const { membersList, loading } = useAppSelector(
-    (state) => state.extras.members
-  );
 
   useEffect(() => {
     retrieveUserDetails().then((data: any) => {

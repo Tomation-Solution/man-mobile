@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import General from "./Tabs/General";
-import { COLORS } from "../../../constants/color";
-import Private from "./Tabs/Private/Private";
+import General from "./General";
+import { COLORS } from "../../../../constants/color";
+import Private from "./Private/Private";
 
 const Top = createMaterialTopTabNavigator();
 
-const Chat = ({ navigation }: any) => {
+const Chat = ({ environment }: any) => {
   const [showTabBar, setShowTabBar] = React.useState(true);
   const [title, setTitle] = React.useState("Chat");
 
@@ -17,9 +17,7 @@ const Chat = ({ navigation }: any) => {
         style={{
           paddingHorizontal: 10,
         }}
-      >
-        {/* <HomeHeader title={title} navigation={navigation} nestedBack /> */}
-      </View>
+      ></View>
       <Top.Navigator
         screenOptions={{
           tabBarActiveTintColor: COLORS.primary,
@@ -29,12 +27,13 @@ const Chat = ({ navigation }: any) => {
         }}
       >
         <Top.Screen
+          name="General Chats"
           options={{
             swipeEnabled: false,
           }}
-          name="General Chats"
-          component={General}
-        />
+        >
+          {(props) => <General {...props} environment={environment} />}
+        </Top.Screen>
         <Top.Screen
           name="Private Chats"
           options={{

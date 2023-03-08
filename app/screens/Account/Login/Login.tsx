@@ -108,7 +108,7 @@ const LoginForm = ({ navigation }: any) => {
                       style={[styles.btn]}
                       onPress={handleSubmit}
                       title={
-                        loading ? (
+                        loading === true ? (
                           <ActivityIndicator size="small" color="white" />
                         ) : (
                           "Login"

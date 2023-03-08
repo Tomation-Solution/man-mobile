@@ -5,6 +5,7 @@ import DrawerLabel from "./DrawerLabel";
 import {
   Ionicons,
   FontAwesome,
+  FontAwesome5,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { COLORS } from "../../constants/color";
@@ -37,7 +38,6 @@ const DrawerContent = ({
         <Image source={appImages.logo} style={styles.logo} />
         <Text style={styles.title}>{appData.orgnizationName}</Text>
       </View>
-
       {userData?.council && (
         <DrawerLabel
           focused={state?.index === null} // keep this as null for switches
@@ -53,7 +53,6 @@ const DrawerContent = ({
           hasChapter={userData?.chapter}
         />
       )}
-
       {userData?.commitee && (
         <DrawerLabel
           focused={state?.index === null} // keep this as null for switches
@@ -68,7 +67,6 @@ const DrawerContent = ({
           setEnvironment={setEnvironment}
         />
       )}
-
       <DrawerLabel
         focused={state?.index === 0}
         title="Homescreen"
@@ -87,7 +85,6 @@ const DrawerContent = ({
         icon={<Ionicons name="calendar" size={20} color={COLORS.primary} />}
         navigation={navigation}
       />
-
       <DrawerLabel
         focused={state?.index === 5}
         title="Gallery"
@@ -96,6 +93,13 @@ const DrawerContent = ({
       />
       <DrawerLabel
         focused={state?.index === 6}
+        title="Fund A Project"
+        icon={<FontAwesome5 name="gift" size={25} color={COLORS.primary} />}
+        navigation={navigation}
+      />
+
+      <DrawerLabel
+        focused={state?.index === 7}
         title="Service Request"
         icon={
           <MaterialCommunityIcons
@@ -135,13 +139,13 @@ const DrawerContent = ({
           },
         ]}
       /> */}
-      <DrawerLabel
+      {/* <DrawerLabel
         focused={state?.index === 3}
         title="Election"
         icon={<Ionicons name="flag" size={20} color={COLORS.primary} />}
         navigation={navigation}
-      />
-      {/* <DrawerLabel
+      /> */}
+      <DrawerLabel
         focused={state?.index === 7}
         title="Support"
         icon={<Ionicons name="heart" size={20} color={COLORS.primary} />}
@@ -166,7 +170,7 @@ const DrawerContent = ({
             ),
           },
         ]}
-      /> */}
+      />
       <DrawerLabel
         focused={state?.index === null} // keep this as null for switches
         title="Logout"

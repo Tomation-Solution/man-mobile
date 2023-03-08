@@ -36,7 +36,7 @@ const Account = ({ navigation }: any) => {
               }}
             >
               {" "}
-              21,0000
+              0.00
             </Text>
             <Text
               style={{ fontSize: 12, fontWeight: "500", textAlign: "center" }}

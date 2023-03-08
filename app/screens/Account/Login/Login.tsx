@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   Text,
-  TextInput,
   Image,
   TouchableOpacity,
   ActivityIndicator,
@@ -11,7 +10,6 @@ import {
 import {
   AccountHeader,
   Formbtn,
-  KeyboardAvoidingViewWrapper,
   FormContainer,
   FormInput,
   CustomModal,
@@ -19,12 +17,12 @@ import {
 } from "../../../components";
 import { Formik, Field } from "formik";
 import Locked from "../components/LockedWithPayment";
-
 import { login } from "../../../store/slices/auth/loginSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { loginValidationSchema } from "../../../utils/validation";
 import { normalize } from "../../../constants/metric";
 import { COLORS } from "../../../constants/color";
+import { appImages } from "../../../assets/app/images";
 
 const LoginForm = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -56,11 +54,18 @@ const LoginForm = ({ navigation }: any) => {
           <View
             style={{
               width: "100%",
-              display: "flex",
+              flexDirection: "row",
               justifyContent: "flex-start",
-              alignItems: "flex-start",
+              alignItems: "center",
             }}
           >
+            <Image
+              style={{
+                width: normalize(80),
+                height: normalize(80),
+              }}
+              source={appImages.logo}
+            />
             <AccountHeader
               title=" Login"
               text="Input details to register as alumnus"

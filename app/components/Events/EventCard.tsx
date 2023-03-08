@@ -43,18 +43,35 @@ const EventCard = ({ title, image, date, time, onPress }: EventCardProps) => {
           paddingHorizontal: 20,
         }}
       >
-        <Text
+        <View
           style={{
-            fontSize: 18,
-            fontWeight: "600",
-            color: COLORS.primary,
             borderBottomColor: COLORS.primary,
             borderBottomWidth: 1,
             paddingBottom: 5,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          {title}
-        </Text>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: "600",
+              color: COLORS.primary,
+            }}
+          >
+            {title}
+          </Text>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: "600",
+              color: COLORS.primary,
+            }}
+          >
+            View
+          </Text>
+        </View>
         <Text>
           {date} - {time}
         </Text>

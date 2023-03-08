@@ -91,24 +91,11 @@ const Details = ({ route, navigation }: any) => {
           marginBottom: 120,
         }}
       >
-        <View
-          style={{
-            borderTopRightRadius: 20,
-            borderTopLeftRadius: 20,
-            overflow: "hidden",
-          }}
-        >
-          <Image
-            source={{ uri: data?.image ? data.image.toString() : undefined }}
-            style={{ width: "100%", height: 300 }}
-          />
-        </View>
-
         <Text
           style={{
             fontSize: 18,
             fontWeight: "300",
-            marginTop: 3,
+            marginTop: 20,
             marginLeft: 10,
           }}
         >

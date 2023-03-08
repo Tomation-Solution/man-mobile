@@ -60,7 +60,7 @@ const Memebers = () => {
                 />
                 <View>
                   <Text>{item.full_name}</Text>
-                  <Text style={{ fontColor: "blue" }}>{item.email}</Text>
+                  <Text style={{ color: "blue" }}>{item.email}</Text>
                 </View>
               </View>
             ))}

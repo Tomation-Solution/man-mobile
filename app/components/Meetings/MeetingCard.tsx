@@ -59,10 +59,10 @@ const Appology = ({ onPress }: any) => {
   );
 };
 
-const Join = ({ onPress }: any) => {
+const Join = ({}: any) => {
   const [accepted, setAccepted] = React.useState(false);
   const handleOnPress = () => {
-    onPress();
+    alert("Comming Soon!");
     console.log("Appology");
     setAccepted(!accepted);
   };
@@ -126,7 +126,7 @@ const MeetingCard = ({ title, date, time, onPress }: any) => {
         }}
       >
         <Accept />
-        <Appology />
+        <Appology onPress={onPress} />
         <Join />
       </View>
     </View>

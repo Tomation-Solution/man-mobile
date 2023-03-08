@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Container, HomeHeader } from "../../components";
 import DonationCard from "./DonationCard";
 import { ScrollView } from "react-native-gesture-handler";
@@ -9,18 +9,18 @@ import { fundProject } from "../../store/slices/Fund_A_Project/fundSlice";
 
 
 const Home = ({ navigation }: any) => {
-  const { isLoggedIn } = useAppSelector((state:any) => state.authReducers.login);
-  const { userData,loading} = useAppSelector(
-  (state) => state.fundProjectReducers.fundProjectSlice
-);
+  const { isLoggedIn } = useAppSelector((state: any) => state.authReducers.login);
+  const { userData, loading } = useAppSelector(
+    (state) => state.fundProjectReducers.fundProjectSlice
+  );
 
-const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-useEffect(()=> {
-  if (isLoggedIn) {
+  useEffect(() => {
+    if (isLoggedIn) {
       dispatch(fundProject())
-  }
-},[dispatch,isLoggedIn])
+    }
+  }, [dispatch, isLoggedIn])
 
 
   return (
@@ -28,15 +28,15 @@ useEffect(()=> {
       <HomeHeader
         navigation={navigation}
         title={"Fund a Project"}
-        back={"back"}
+        back={navigation.goBack}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-     {userData?.data.map((item:any) => {
+        {userData?.data.map((item: any) => {
           return (
             <DonationCard
               key={item.id}
               item={item}
-              onPress={() => navigation.navigate("Details1", { item } )}
+              onPress={() => navigation.navigate("Details1", { item })}
             />
           );
         })}

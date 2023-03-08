@@ -41,7 +41,7 @@ const ReissuanceForm = ({ navigation }: any) => {
     <View style={styles.container}>
       <HomeHeader
         title={"Reissuance form"}
-        back="back"
+        back={navigation.goBack}
         navigation={navigation}
       />
       <View style={{ marginTop: verticalScale(30) }}>

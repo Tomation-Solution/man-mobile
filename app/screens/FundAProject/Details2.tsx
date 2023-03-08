@@ -25,8 +25,8 @@ interface MessageValues {
 
 
 const Details2 = ({ route, navigation }: DetailsProps) => {
-  const data = route?.params?.data|| {};
-// console.log(' inside details oh ' + data?.image)
+  const data = route?.params?.data || {};
+  // console.log(' inside details oh ' + data?.image)
 
   const initialValues: MessageValues = {
     heading: "",
@@ -36,24 +36,27 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
 
   const handleSubmit = async (values: MessageValues, { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }) => {
 
-      const { heading } = values;
-    await dispatch(kindFunding( data?.id, heading));
-      setSubmitting(false);
-      resetForm();
+    const { heading } = values;
+    await dispatch(kindFunding(data?.id, heading));
+    setSubmitting(false);
+    resetForm();
   };
 
-  const {loading} = useAppSelector(
-    (state:any) => state.fundProjectReducers.fundProjectSlice
+  const { loading } = useAppSelector(
+    (state: any) => state.fundProjectReducers.fundProjectSlice
   );
 
   return (
     <Container>
-      <HomeHeader title="Fund a Project" navigation={navigation} back="back" />
+      <HomeHeader title="Fund a Project" navigation={navigation}
+        back={navigation.goBack}
+      />
       <View style={styles.inputContainer}>
         <Formik
           initialValues={{ heading: ' ' }}
           validationSchema={Yup.object({
-          heading: Yup.string().required(),})}
+            heading: Yup.string().required(),
+          })}
           onSubmit={handleSubmit}>
 
           {({
@@ -63,11 +66,11 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
             errors,
             touched,
             handleSubmit,
-          })     =>  (
+          }) => (
             <View>
               <Text style={styles.headText}>Support in Kind</Text>
               <View style={styles.supportContainer}>
-                <Dropdown defaultButtonText={"Support Type"} />
+                {/* <Dropdown defaultButtonText={"Support Type"} /> */}
               </View>
               <TextInput
                 style={styles.input}
@@ -79,10 +82,10 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
                 placeholder='Enter your message '
               />
               {errors.heading && touched.heading ? <Text style={styles.error}>{errors.heading}</Text> : null}
-                        <Formbtn
-                        onPress={handleSubmit}
-                        title='Get Support'/>
-                       </View>
+              <Formbtn
+                onPress={handleSubmit}
+                title='Get Support' />
+            </View>
           )}
         </Formik>
       </View>
@@ -140,8 +143,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     paddingVertical: 13,
     marginVertical: 21,
-    backgroundColor:'#E8F6F8',
-    borderRadius:9
+    backgroundColor: '#E8F6F8',
+    borderRadius: 9
   },
 
 });

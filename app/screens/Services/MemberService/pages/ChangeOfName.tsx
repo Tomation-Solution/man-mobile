@@ -39,7 +39,7 @@ const ChangeOfName = ({ navigation }: any) => {
 
   },
   );
-//
+  //
 
 
 
@@ -61,9 +61,9 @@ const ChangeOfName = ({ navigation }: any) => {
       <ScrollView>
         <HomeHeader
           title={"Change of Name"}
-          back="back"
           navigation={navigation}
-        />
+          back={navigation.goBack}
+          />
         <View style={{ marginTop: verticalScale(30) }}>
           <Text style={styles.text}>Attach requirement for Change of Name</Text>
           <View style={styles.documentPickerContainer}>

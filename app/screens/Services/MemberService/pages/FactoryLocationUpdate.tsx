@@ -71,7 +71,7 @@ const FactoryLocationUpdate = ({ navigation }: any) => {
       <View style={styles.container}>
         <HomeHeader
           title={"Factory Location Update"}
-          back="back"
+          back={navigation.goBack}
           navigation={navigation}
         />
         <View style={{ marginTop: verticalScale(30) }}>

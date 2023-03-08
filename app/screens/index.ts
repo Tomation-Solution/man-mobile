@@ -18,6 +18,7 @@ export { default as OnPasswordSuccess } from "./Account/components/OnSucessScree
 
 // export { default as PaymentDetails } from "./PaymentDetails/PaymenScreen";
 // export { default as PendingPayment } from "./PaymentDetails/Tabs/PendingPayment";
+// a// export { default as PendingPayment } from "./PaymentDetails/Tabs/PendingPayment";
 
 
 

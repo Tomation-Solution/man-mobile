@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet ,ScrollView} from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import React from "react";
 import { HomeHeader } from "../../../../components";
 import {
@@ -25,7 +25,7 @@ interface DetailsProps {
 const MergerOfCompanies = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
 
-  const { values, errors, setFieldValue,resetForm, handleSubmit } = useFormik({
+  const { values, errors, setFieldValue, resetForm, handleSubmit } = useFormik({
     initialValues: {
       files: Array(4).fill({ uri: null, name: "" }),
     },
@@ -40,7 +40,7 @@ const MergerOfCompanies = ({ navigation }: any) => {
         formData.append("upload_request_letter", values.files[3]);
 
 
-        console.log('HELLO THIS IS A FORMDATA',formData)
+        console.log('HELLO THIS IS A FORMDATA', formData)
 
         await dispatch(Merge_Of_Company(formData));
         resetForm();
@@ -64,64 +64,64 @@ const MergerOfCompanies = ({ navigation }: any) => {
 
   return (
     <ScrollView>
-    <View>
-      <HomeHeader
-        title={"Merger of comapanies"}
-        back="back"
-        navigation={navigation}
-      />
+      <View>
+        <HomeHeader
+          title={"Merger of comapanies"}
+          back={navigation.goBack}
+          navigation={navigation}
+        />
 
-      <View style={{ marginTop: verticalScale(30) }}>
-        <Text style={styles.text}> Attach requirement for Merger of Companies</Text>
-        <View style={styles.documentPickerContainer}>
-
-
+        <View style={{ marginTop: verticalScale(30) }}>
+          <Text style={styles.text}> Attach requirement for Merger of Companies</Text>
+          <View style={styles.documentPickerContainer}>
 
 
-          {values.files[0].name ? (
-            <Text>Selected file 1: {values.files[0].name}</Text>
-          ) : null}
 
-          <CustomPicker
-            title="Submit most recent financial statement"
-            onPress={() => pickDocument({index: 0})}
-          />
 
-          {values.files[1].name ? (
-            <Text>Selected file 2: {values.files[1].name}</Text>
-          ) : null}
+            {values.files[0].name ? (
+              <Text>Selected file 1: {values.files[0].name}</Text>
+            ) : null}
 
-          <CustomPicker
-            title="Upload_dues_reciept"
-            onPress={() => pickDocument({index: 1})}
-          />
+            <CustomPicker
+              title="Submit most recent financial statement"
+              onPress={() => pickDocument({ index: 0 })}
+            />
 
-          {values.files[2].name ? (
-            <Text>Selected file 3: {values.files[2].name}</Text>
-          ) : null}
+            {values.files[1].name ? (
+              <Text>Selected file 2: {values.files[1].name}</Text>
+            ) : null}
 
-          <CustomPicker
-            title="Upload membership cert for both companies"
-            onPress={() => pickDocument({index: 2})}
-          />
+            <CustomPicker
+              title="Upload_dues_reciept"
+              onPress={() => pickDocument({ index: 1 })}
+            />
 
-           {values.files[3].name ? (
-            <Text>Selected file 4: {values.files[3].name}</Text>
-          ) : null}
+            {values.files[2].name ? (
+              <Text>Selected file 3: {values.files[2].name}</Text>
+            ) : null}
 
-          <CustomPicker
-            title="Upload membership cert for both companies"
-            onPress={() => pickDocument({index: 3})}
-          />
-        </View>
+            <CustomPicker
+              title="Upload membership cert for both companies"
+              onPress={() => pickDocument({ index: 2 })}
+            />
 
-        <View style={{ marginTop: verticalScale(40) }}>
-          <Formbtn title="Request" onPress={handleSubmit} />
+            {values.files[3].name ? (
+              <Text>Selected file 4: {values.files[3].name}</Text>
+            ) : null}
+
+            <CustomPicker
+              title="Upload membership cert for both companies"
+              onPress={() => pickDocument({ index: 3 })}
+            />
+          </View>
+
+          <View style={{ marginTop: verticalScale(40) }}>
+            <Formbtn title="Request" onPress={handleSubmit} />
+          </View>
+
         </View>
 
       </View>
-
-    </View>
     </ScrollView>
   );
 };

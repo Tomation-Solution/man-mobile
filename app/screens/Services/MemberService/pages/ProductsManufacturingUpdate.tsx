@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput,ScrollView } from "react-native";
+import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import React from "react";
 import { HomeHeader } from "../../../../components";
 import {
@@ -38,10 +38,10 @@ const ProductsManufacturingUpdate = ({ navigation }: any) => {
     onSubmit: async (values: any) => {
       try {
         const formData = new FormData();
-      formData.append("proceed_to_update_your_profile", values.files[0]);
-      formData.append("submit_most_recent_financial_statement", values.files[1]);
-      formData.append("upload_all_levy_recipt", values.files[2]);
-      formData.append("upload_Product_update_report", values.files[3]);
+        formData.append("proceed_to_update_your_profile", values.files[0]);
+        formData.append("submit_most_recent_financial_statement", values.files[1]);
+        formData.append("upload_all_levy_recipt", values.files[2]);
+        formData.append("upload_Product_update_report", values.files[3]);
 
         await dispatch(Product_Manufacture_Update(formData));
         resetForm(); // Reset the form after submission
@@ -64,17 +64,17 @@ const ProductsManufacturingUpdate = ({ navigation }: any) => {
 
   return (
     <ScrollView>
-    <View >
-      <HomeHeader
-        title={"Product Manufacturing Update"}
-        back="back"
-        navigation={navigation}
-      />
-      <View style={{ marginTop: verticalScale(30) }}>
-        <Text style={styles.text}>
-          Fulfill the below to get your request updated
-        </Text>
-        <View style={styles.documentPickerContainer}>
+      <View >
+        <HomeHeader
+          title={"Product Manufacturing Update"}
+          back={navigation.goBack}
+          navigation={navigation}
+        />
+        <View style={{ marginTop: verticalScale(30) }}>
+          <Text style={styles.text}>
+            Fulfill the below to get your request updated
+          </Text>
+          <View style={styles.documentPickerContainer}>
 
             {values.files[0].name ? (
               <Text>Selected file 1: {values.files[0].name}</Text>
@@ -85,36 +85,36 @@ const ProductsManufacturingUpdate = ({ navigation }: any) => {
               onPress={() => pickDocument({ index: 0 })}
             />
 
-          <CustomPicker
-            title="Submit most recent financial statement"
-            onPress={() => pickDocument({index: 1})}
-          />
-              {values.files[1].name ? (
-            <Text>Selected file 2: {values.files[1].name}</Text>
-          ) : null}
+            <CustomPicker
+              title="Submit most recent financial statement"
+              onPress={() => pickDocument({ index: 1 })}
+            />
+            {values.files[1].name ? (
+              <Text>Selected file 2: {values.files[1].name}</Text>
+            ) : null}
 
-          <CustomPicker
-            title="Upload all levy recipt(Up-to-date)"
-            onPress={() => pickDocument({index: 2})}
-          />
-          {values.files[2].name ? (
-            <Text>Selected file 3: {values.files[2].name}</Text>
-          ) : null}
+            <CustomPicker
+              title="Upload all levy recipt(Up-to-date)"
+              onPress={() => pickDocument({ index: 2 })}
+            />
+            {values.files[2].name ? (
+              <Text>Selected file 3: {values.files[2].name}</Text>
+            ) : null}
 
-          <CustomPicker
-            title="Upload Product update report "
-            onPress={() => pickDocument({index: 3})}
-          />
-          {values.files[3].name ? (
-            <Text>Selected file 4: {values.files[3].name}</Text>
-          ) : null}
+            <CustomPicker
+              title="Upload Product update report "
+              onPress={() => pickDocument({ index: 3 })}
+            />
+            {values.files[3].name ? (
+              <Text>Selected file 4: {values.files[3].name}</Text>
+            ) : null}
 
-        </View>
-        <View style={{ marginTop: verticalScale(40) }}>
-          <Formbtn title="Request" onPress={handleSubmit} />
+          </View>
+          <View style={{ marginTop: verticalScale(40) }}>
+            <Formbtn title="Request" onPress={handleSubmit} />
+          </View>
         </View>
       </View>
-    </View>
     </ScrollView>
   );
 };

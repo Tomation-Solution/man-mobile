@@ -42,7 +42,7 @@ const LossOfCertificate = ({ navigation }: any) => {
     <View style={styles.container}>
       <HomeHeader
         title={"Loss of certificate"}
-        back="back"
+        back={navigation.goBack}
         navigation={navigation}
       />
       <View style={{ marginTop: verticalScale(30) }}>

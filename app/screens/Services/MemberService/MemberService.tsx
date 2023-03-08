@@ -15,7 +15,7 @@ interface DetailsProps {
 }
 
 const data = [
-  { name: "Membership admission", image: "laptop", link: "ReissuanceForm" },
+  // { name: "Membership admission", image: "laptop", link: "ReissuanceForm" },
   {
     name: "Reissuance of certificate",
     image: "laptop",
@@ -74,7 +74,6 @@ const MembersService = ({ navigation }: any) => {
 export default MembersService;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     flex: 1,
   },
   rowContainer: {

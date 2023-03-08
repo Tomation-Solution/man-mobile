@@ -26,7 +26,6 @@ const ChangeOfName = ({ navigation }: any) => {
       files: Array(4).fill({ uri: null, name: "" }),
     },
     onSubmit: async (values: any) => {
-
       const formData = new FormData();
       formData.append("attach_membership_certificate", values.files[0]);
       formData.append("membership_due_receipt", values.files[1]);
@@ -39,7 +38,7 @@ const ChangeOfName = ({ navigation }: any) => {
 
   },
   );
-  //
+
 
 
 

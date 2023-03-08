@@ -20,7 +20,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
   const altNavigation = useNavigation();
   const data = route?.params?.item || altRoute?.params || {};
   return (
-    <Container style={styles.container}>
+    <Container >
       <HomeHeader
         navigation={navigation}
         title={"Fund a project" || "Details " + data.id}
@@ -61,7 +61,6 @@ export default Details;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
   },
   scrollView: {
     marginBottom: verticalScale(20),

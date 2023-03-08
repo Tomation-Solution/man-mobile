@@ -96,7 +96,7 @@ const DrawerContent = ({
       />
       <DrawerLabel
         focused={state?.index === 6}
-        title="Services"
+        title="Service Request"
         icon={
           <MaterialCommunityIcons
             name="toolbox"
@@ -171,7 +171,7 @@ const DrawerContent = ({
         focused={state?.index === null} // keep this as null for switches
         title="Logout"
         icon={<Ionicons name="log-out" size={20} color={COLORS.primary} />}
-        // navigation={navigation}
+      // navigation={navigation}
       />
     </ScrollView>
   );

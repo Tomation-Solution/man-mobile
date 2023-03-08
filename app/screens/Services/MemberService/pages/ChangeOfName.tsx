@@ -63,7 +63,7 @@ const ChangeOfName = ({ navigation }: any) => {
           title={"Change of Name"}
           navigation={navigation}
           back={navigation.goBack}
-          />
+        />
         <View style={{ marginTop: verticalScale(30) }}>
           <Text style={styles.text}>Attach requirement for Change of Name</Text>
           <View style={styles.documentPickerContainer}>

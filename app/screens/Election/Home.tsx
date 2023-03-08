@@ -4,19 +4,21 @@ import { Container, HomeHeader, ElectionsCard } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { list_election } from "../../store/slices/elections/getelectionSlice";
-
+import LoadingIndicator from "../../utils/LoadingIndicator";
 
 const ElectionHome = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
 
   const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
-const { userData, loading } = useAppSelector(
-  (state) => state.electionReducers.getelectionSlice
-)
+  const { userData, loading } = useAppSelector(
+    (state) => state.electionReducers.getelectionSlice
+  )
 
   useEffect(() => {
     dispatch(list_election());
   }, []);
+
+
 
 
   return (
@@ -26,17 +28,25 @@ const { userData, loading } = useAppSelector(
         navigation={navigation}
         back={navigation.goBack}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {userData?.data?.map((data:any) => (
-          <ElectionsCard
-            key={data.id}
-            id={data.id}
-            position={data.name}
-            navigation={navigation}
-            onPress={() => navigation.navigate("ProfileDetails")}
-          />
-        ))}
-      </ScrollView>
+      <View>
+        {loading ? (
+          <LoadingIndicator />
+        ) : (
+          <>
+            {
+              userData?.data?.map((data: any) => (
+                <ElectionsCard
+                  key={data.id}
+                  id={data.id}
+                  position={data.name}
+                  navigation={navigation}
+                  onPress={() => navigation.navigate("ProfileDetails")}
+                />
+              ))
+            }
+          </>
+        )}
+      </View>
     </Container>
   );
 };

@@ -6,6 +6,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { images } from "../../assets/dummyData";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fundProject } from "../../store/slices/Fund_A_Project/fundSlice";
+import LoadingIndicator from "../../utils/LoadingIndicator";
 
 
 const Home = ({ navigation }: any) => {

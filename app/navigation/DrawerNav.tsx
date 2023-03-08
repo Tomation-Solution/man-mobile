@@ -85,7 +85,6 @@ const DrawerNav = () => {
           {(props) => <Gallery environment={environment} {...props} />}
         </Drawer.Screen>
         <Drawer.Screen name="Profile" component={Profile} />
-        <Drawer.Screen name="Services" component={Services} />
         <Drawer.Screen name="Meetings">
           {(props) => <Meetings environment={environment} {...props} />}
         </Drawer.Screen>

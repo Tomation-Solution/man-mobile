@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { ProfileViewCard, HomeHeader, Container } from '../../components';
 import { images } from "../../assets/dummyData";
 import { ScrollView } from "react-native-gesture-handler";
 import { list_of_Contestant } from '../../store/slices/elections/getelectionSlice';
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import LoadingIndicator from "../../utils/LoadingIndicator";
 
 
 interface ProfileDetailsProps {
@@ -20,12 +21,12 @@ const ProfileDetails = ({ navigation }: ProfileDetailsProps) => {
     const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
     const { contestantData, loading } = useAppSelector(
         (state) => state.electionReducers.getelectionSlice
-      )
-     console.log('this is profile details',contestantData?.data[0].member)
+    )
+    console.log('this is profile details', contestantData?.data[0].member)
 
     useEffect(() => {
         dispatch(list_of_Contestant());
-      }, [dispatch]);
+    }, [dispatch]);
 
     return (
         <Container>
@@ -33,12 +34,21 @@ const ProfileDetails = ({ navigation }: ProfileDetailsProps) => {
             <Text style={styles.electionTitle}> mr kunle an Aspirant for the position of  President .Man</Text>
 
             <ScrollView>
-                {contestantData?.data.map((profile:any) => (
-                    <ProfileViewCard
-                        key={profile.id}
-                        item={profile}
-                        onPress={() => navigation.navigate("ElectionDetails", { profile })} />
-                ))}
+                <View>
+                    {loading ? (
+                        <LoadingIndicator />
+                    ) : (
+                        <>
+                            {contestantData?.data.map((profile: any) => (
+                                <ProfileViewCard
+                                    key={profile.id}
+                                    item={profile}
+                                    onPress={() => navigation.navigate("ElectionDetails", { profile })} />
+                            ))}
+                        </>
+                    )}
+
+                </View>
             </ScrollView>
         </Container>
     )

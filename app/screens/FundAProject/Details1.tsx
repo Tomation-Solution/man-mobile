@@ -24,7 +24,8 @@ const Details = ({ route, navigation }: DetailsProps) => {
       <HomeHeader
         navigation={navigation}
         title={"Fund a project" || "Details " + data.id}
-        back={() => navigation.goBack("Details")}
+        back={navigation.goBack}
+
       />
       <ScrollView
         showsVerticalScrollIndicator={false}

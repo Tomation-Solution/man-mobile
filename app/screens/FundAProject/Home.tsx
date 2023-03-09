@@ -30,25 +30,25 @@ const Home = ({ navigation }: any) => {
         navigation={navigation}
         title={"Fund a Project"}
         back={navigation.goBack}
-
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
-          {loading ? (
-            <LoadingIndicator />
-          ) : (
-            <>
-              {userData?.data.map((item: any) => {
-                return (
-                  <DonationCard
-                    key={item.id}
-                    item={item}
-                    onPress={() => navigation.navigate("Details1", { item })}
-                  />
-                );
-              })}
-            </>
-          )
+          {loading ?
+            (<LoadingIndicator />)
+            : (
+              <>
+                {userData?.data.map((item: any) => {
+                  return (
+                    <DonationCard
+                      key={item.id}
+                      item={item}
+                      onPress={() => navigation.navigate("Details1", { item })}
+                    />
+                  );
+                })}
+              </>
+            )
+
           }
         </View>
       </ScrollView>

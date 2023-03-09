@@ -33,7 +33,7 @@ const LossOfCertificate = ({ navigation }: any) => {
     });
     if (result.type === 'success') {
       const files = [...values.files];
-      files[index] = { uri: result.uri, name: result.name };
+      files[index] = { uri: result.uri, name: result.uri.split('/').pop(), type: result.mimeType };
       setFieldValue("files", files);
     }
   };

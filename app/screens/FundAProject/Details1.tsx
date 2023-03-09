@@ -20,7 +20,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
   const altNavigation = useNavigation();
   const data = route?.params?.item || altRoute?.params || {};
   return (
-    <Container style={styles.container}>
+    <Container >
       <HomeHeader
         navigation={navigation}
         title={"Fund a project" || "Details " + data.id}
@@ -45,10 +45,10 @@ const Details = ({ route, navigation }: DetailsProps) => {
               style={styles.button1}
               onPress={() => navigation.navigate("Details2", { data })}
             >
-              <Text style={{ color: "white" }}>Support in Kind</Text>
+              <Text style={{ color: "white", fontSize: 13, textAlign: 'center', marginVertical: 15 }}>Support in Kind</Text>
             </TouchableOpacity>
             <View style={styles.button2}>
-              <Text style={{ color: COLORS.primary }}>Support with cash</Text>
+              <Text style={{ color: COLORS.primary, fontSize: 13, textAlign: 'center', marginVertical: 15 }}>Support with cash</Text>
             </View>
           </View>
         </View>
@@ -61,7 +61,6 @@ export default Details;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
   },
   scrollView: {
     marginBottom: verticalScale(20),
@@ -99,19 +98,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: verticalScale(20),
     marginBottom: horizontalScale(40),
+    justifyContent: 'center'
   },
   button1: {
-    paddingVertical: moderateScale(20),
-    paddingHorizontal: moderateScale(16),
+    // paddingVertical: moderateScale(11),
+    // paddingHorizontal: moderateScale(16),
     backgroundColor: COLORS.primary,
+    alignItems: 'center',
     borderRadius: moderateScale(16),
     marginRight: horizontalScale(20),
     width: horizontalScale(130),
     height: verticalScale(67),
   },
   button2: {
-    paddingVertical: moderateScale(20),
-    paddingHorizontal: moderateScale(10),
+    // paddingVertical: moderateScale(10),
+    // paddingHorizontal: moderateScale(10),
+    alignItems: 'center',
     borderRadius: moderateScale(16),
     borderColor: COLORS.primary,
     borderWidth: moderateScale(1),

@@ -10,6 +10,7 @@ const api =
       url,
       data,
       params,
+      contentType,
       onSuccess,
       onError,
       onStart,
@@ -28,7 +29,7 @@ const api =
         params: params,
         data,
         headers: {
-          "content-type": "application/json",
+          "content-type": contentType ? contentType : "application/json",
           Authorization: extraheaders,
         },
       });

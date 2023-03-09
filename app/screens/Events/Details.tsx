@@ -21,9 +21,49 @@ import {
 } from "../../store/slices/events/eventsSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Reschedule from "./components/Reschedule";
+import Participants from "./components/Register/Components/Participants";
+import Proxy from "./components/Register/Components/Proxy";
+
+const MeetingAction = ({
+  onPress,
+  text,
+  loading,
+}: {
+  onPress: any;
+  text: string;
+  loading: boolean;
+}) => {
+  return (
+    <TouchableOpacity
+      style={{
+        backgroundColor: COLORS.primary,
+        padding: 10,
+        borderRadius: 10,
+        alignItems: "center",
+        marginTop: 10,
+        flex: 1,
+        marginHorizontal: 5,
+      }}
+      activeOpacity={0.8}
+      onPress={onPress}
+    >
+      <Text
+        style={{
+          color: "white",
+          fontWeight: "500",
+          fontSize: 16,
+          textAlign: "center",
+        }}
+      >
+        {loading ? <ActivityIndicator size="small" color="white" /> : text}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 const Details = ({ route, navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalComp, setModalComp] = useState(null);
   const altRoute = useRoute();
   const data = route?.params?.event || altRoute?.params || {};
   const { loading } = useAppSelector((state) => state.events);
@@ -33,13 +73,15 @@ const Details = ({ route, navigation }: any) => {
     dispatch(registerEvents(data.id));
   };
 
+  const handleModal = (component: any) => {
+    setModalComp(component);
+    setModalVisible(!modalVisible);
+  };
+
   return (
     <Container>
       <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
-        <Reschedule
-          event_id={data.id}
-          onPress={() => setModalVisible(!modalVisible)}
-        />
+        {modalComp}
       </CustomModal>
       <HomeHeader
         navigation={navigation}
@@ -299,33 +341,46 @@ const Details = ({ route, navigation }: any) => {
             paddingBottom: 10,
           }}
         >
-          <TouchableOpacity
+          <View
             style={{
-              backgroundColor: COLORS.primary,
-              padding: 10,
-              borderRadius: 10,
-              width: "100%",
-              alignItems: "center",
-              marginTop: 10,
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
-            activeOpacity={0.8}
-            onPress={onPress}
           >
-            <Text
-              style={{
-                color: "white",
-                fontWeight: "500",
-                fontSize: 16,
-                textAlign: "center",
-              }}
-            >
-              {loading ? (
-                <ActivityIndicator size="small" color="white" />
-              ) : (
-                "Register"
-              )}
-            </Text>
-          </TouchableOpacity>
+            <MeetingAction
+              onPress={() =>
+                handleModal(
+                  <Reschedule
+                    event_id={data.id}
+                    onPress={() => setModalVisible(false)}
+                  />
+                )
+              }
+              text="Request Reshedule"
+              loading={loading}
+            />
+            {!data?.event_access?.has_paid && (
+              <MeetingAction
+                onPress={() =>
+                  handleModal(
+                    <Proxy
+                      event_id={data.id}
+                      onPress={() => setModalVisible(false)}
+                    />
+                  )
+                }
+                text="Appoint Proxy"
+                loading={loading}
+              />
+            )}
+          </View>
+          {!data?.event_access?.has_paid && (
+            <MeetingAction
+              onPress={onPress}
+              text="Register"
+              loading={loading}
+            />
+          )}
         </View>
       </View>
     </Container>

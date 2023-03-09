@@ -15,7 +15,6 @@ interface RescheduleProps {
 
 const Reschedule = ({ close, submitApollogy }: RescheduleProps) => {
   const [reason, setReason] = React.useState<string>("");
-  const dispatch = useAppDispatch();
 
   const { appologySent, loading, message } = useAppSelector(
     (state) => state.meetings

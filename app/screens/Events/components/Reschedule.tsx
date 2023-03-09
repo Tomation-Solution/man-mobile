@@ -15,6 +15,14 @@ interface RescheduleProps {
   event_id: number;
 }
 
+const convertDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  return `${year}-${month}-${day}`;
+};
+
 const Reschedule = ({ onPress, event_id }: RescheduleProps) => {
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [date, setDate] = useState(new Date(Date.now()));
@@ -28,8 +36,8 @@ const Reschedule = ({ onPress, event_id }: RescheduleProps) => {
   const dispatch = useAppDispatch();
 
   const handleClose = () => {
-    onPress();
     dispatch(clearConfig());
+    onPress();
   };
 
   const showPicker = () => {
@@ -51,10 +59,13 @@ const Reschedule = ({ onPress, event_id }: RescheduleProps) => {
   };
 
   const handleReschedule = (data: any) => {
+    console.log("date: ", date.toISOString());
+    console.log("time: ", time.toLocaleTimeString());
+
     dispatch(
       requestReschedule({
         event: event_id,
-        startDate: date.toLocaleDateString(),
+        startDate: convertDate(date),
         startTime: time.toLocaleTimeString(),
       })
     );

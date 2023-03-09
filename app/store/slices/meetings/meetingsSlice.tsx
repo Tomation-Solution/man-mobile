@@ -42,20 +42,27 @@ const meetingsSlice = createSlice({
       state.loading = false;
       state.message = action.payload.response.data.message.error;
     },
-    appologySent: (state, action) => {
+    appologySent: (state) => {
       state.appologySent = true;
       state.loading = false;
+    },
+
+    clearMeetingConfig: (state) => {
+      state.message = "";
+      state.meetingRegistered = false;
+      state.appologySent = false;
     },
   },
 });
 
-const {
+export const {
   meetingsRequested,
   meetingsReceived,
   meetingsRequestFailed,
   meetingNotRegistered,
   meetingRegistered,
   appologySent,
+  clearMeetingConfig,
 } = meetingsSlice.actions;
 
 export default meetingsSlice.reducer;

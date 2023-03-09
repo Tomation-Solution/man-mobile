@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import LoadingIndicator from "../../utils/LoadingIndicator";
 import {
   appology,
+  clearMeetingConfig,
   resgisterForMeeting,
 } from "../../store/slices/meetings/meetingsSlice";
 import Accepted from "./components/Accepted";
@@ -41,6 +42,7 @@ const Details = ({ route, navigation }: any) => {
   };
 
   const applogy = () => {
+    dispatch(clearMeetingConfig);
     setModalVisible(true);
     setModalContent("appology");
   };
@@ -315,29 +317,31 @@ const Details = ({ route, navigation }: any) => {
             paddingBottom: 10,
           }}
         >
-          <TouchableOpacity
-            style={{
-              backgroundColor: COLORS.primary,
-              padding: 10,
-              borderRadius: 10,
-              width: "100%",
-              alignItems: "center",
-              marginTop: 10,
-            }}
-            activeOpacity={0.8}
-            onPress={register}
-          >
-            <Text
+          {!data?.is_attending && (
+            <TouchableOpacity
               style={{
-                color: "white",
-                fontWeight: "500",
-                fontSize: 16,
-                textAlign: "center",
+                backgroundColor: COLORS.primary,
+                padding: 10,
+                borderRadius: 10,
+                width: "100%",
+                alignItems: "center",
+                marginTop: 10,
               }}
+              activeOpacity={0.8}
+              onPress={register}
             >
-              Register
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={{
+                  color: "white",
+                  fontWeight: "500",
+                  fontSize: 16,
+                  textAlign: "center",
+                }}
+              >
+                Register
+              </Text>
+            </TouchableOpacity>
+          )}
 
           <TouchableOpacity
             style={{

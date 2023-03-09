@@ -38,7 +38,7 @@
     "react-native-select-dropdown": "^3.2.1",
     "react-native-svg": "13.4.0",
     "react-native-tab-view": "^3.3.4",
-    "react-native-table-component": "^1.2.2",
+    "react-native-table-component": "sturmenta/react-native-table-component#e1582aaba92b7e070c31c98b116eea9c23e17f6d",
     "react-native-web": "~0.18.9",
     "react-redux": "^8.0.5",
     "redux-devtools-extension": "^2.13.9",

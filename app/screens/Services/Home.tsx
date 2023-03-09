@@ -16,7 +16,7 @@ const Home = ({ navigation }: any) => {
       <HomeHeader
         title="Services"
         navigation={navigation}
-        back={navigation.goBack()}
+        back={navigation.goBack}
       />
       <View>
         <TouchableOpacity

@@ -53,7 +53,7 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
       <HomeHeader
         title="Fund a Project"
         navigation={navigation}
-        back={() => navigation.goBack("Details1")}
+        back={navigation.goBack}
       />
       <View style={styles.inputContainer}>
         <Formik
@@ -74,7 +74,7 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
             <View>
               <Text style={styles.headText}>Support in Kind</Text>
               <View style={styles.supportContainer}>
-                <Dropdown defaultButtonText={"Support Type"} />
+                {/* <Dropdown defaultButtonText={"Support Type"} /> */}
               </View>
               <TextInput
                 style={styles.input}

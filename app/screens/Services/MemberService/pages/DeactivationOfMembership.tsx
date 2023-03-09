@@ -20,7 +20,7 @@ interface DetailsProps {
 const MergerOfCompanies = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
 
-  const { values, errors, setFieldValue,resetForm, handleSubmit } = useFormik({
+  const { values, errors, setFieldValue, resetForm, handleSubmit } = useFormik({
     initialValues: {
       files: Array(3).fill({ uri: null, name: "" }),
     },
@@ -33,7 +33,7 @@ const MergerOfCompanies = ({ navigation }: any) => {
 
 
 
-        console.log('HELLO THIS IS A FORMDATA',formData)
+        console.log('HELLO THIS IS A FORMDATA', formData)
         await dispatch(Deactivation_Of_Membership(formData));
         resetForm(); // Reset the form after submission
       } catch (error) {
@@ -61,7 +61,7 @@ const MergerOfCompanies = ({ navigation }: any) => {
     <View>
       <HomeHeader
         title={"Deactivation of Membership"}
-        back="back"
+        back={navigation.goBack}
         navigation={navigation}
       />
       <View style={{ marginTop: verticalScale(30) }}>
@@ -74,7 +74,7 @@ const MergerOfCompanies = ({ navigation }: any) => {
 
           <CustomPicker
             title="Deactivation request( Letter)"
-            onPress={() => pickDocument({index: 0})}
+            onPress={() => pickDocument({ index: 0 })}
           />
 
           {values.files[1].name ? (
@@ -83,7 +83,7 @@ const MergerOfCompanies = ({ navigation }: any) => {
 
           <CustomPicker
             title="Submit most recent financial statement "
-            onPress={() => pickDocument({index: 1})}
+            onPress={() => pickDocument({ index: 1 })}
           />
 
           {values.files[2].name ? (
@@ -92,7 +92,7 @@ const MergerOfCompanies = ({ navigation }: any) => {
 
           <CustomPicker
             title="Upload all levy recipt(Up-to-date)"
-            onPress={() => pickDocument({index: 2})}
+            onPress={() => pickDocument({ index: 2 })}
           />
 
 

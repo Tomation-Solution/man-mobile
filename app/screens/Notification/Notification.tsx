@@ -18,7 +18,7 @@ interface NotificationProps {
 const Top = createMaterialTopTabNavigator();
 
 const NotificationScreen = ({ navigation }: NotificationProps) => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
   const onModalPress = () => {
     setModalVisible(!modalVisible);
   };

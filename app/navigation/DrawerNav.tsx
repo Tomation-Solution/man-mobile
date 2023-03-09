@@ -75,19 +75,23 @@ const DrawerNav = () => {
         <Drawer.Screen name="Support" component={Support} />
         <Drawer.Screen name="Admin Support" component={AdminSupport} />
         <Drawer.Screen name="Technical Suport" component={TechnicalSupport} />
-         <Drawer.Screen name="Service Request" component={Services}/>
+        <Drawer.Screen name="Service Request">
+          {(props) => <Services {...props} />}
+        </Drawer.Screen>
+
         {/* soupport screens  */}
 
         <Drawer.Screen name="Gallery">
           {(props) => <Gallery environment={environment} {...props} />}
         </Drawer.Screen>
         <Drawer.Screen name="Profile" component={Profile} />
-        <Drawer.Screen name="Services" component={Services} />
         <Drawer.Screen name="Meetings">
           {(props) => <Meetings environment={environment} {...props} />}
         </Drawer.Screen>
         <Drawer.Screen name="Notification" component={Notification} />
-        <Drawer.Screen name="Fund A Project" component={FundAProject} />
+        <Drawer.Screen name="Fund A Project">
+          {(props) => <FundAProject {...props} />}
+        </Drawer.Screen>
 
       </Drawer.Navigator>
     </EnvironmentContext.Provider>

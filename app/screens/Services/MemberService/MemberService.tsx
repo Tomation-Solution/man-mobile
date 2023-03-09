@@ -15,7 +15,7 @@ interface DetailsProps {
 }
 
 const data = [
-  { name: "Membership admission", image: "laptop", link: "ReissuanceForm" },
+  // { name: "Membership admission", image: "laptop", link: "ReissuanceForm" },
   {
     name: "Reissuance of certificate",
     image: "laptop",
@@ -56,7 +56,7 @@ const MembersService = ({ navigation }: any) => {
       <HomeHeader
         title="Services"
         navigation={navigation}
-        back={navigation.goBack()}
+        back={navigation.goBack}
       />
 
       <FlatList
@@ -78,7 +78,6 @@ const MembersService = ({ navigation }: any) => {
 export default MembersService;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     flex: 1,
   },
   rowContainer: {

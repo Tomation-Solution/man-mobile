@@ -24,28 +24,38 @@ const Home = ({ navigation }: any) => {
     }
   }, [dispatch, isLoggedIn]);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(fundProject());
+    }
+  }, [dispatch, isLoggedIn]);
+
   return (
     <Container>
       <HomeHeader
         navigation={navigation}
         title={"Fund a Project"}
-        // back={"back"}
+        back={navigation.goBack}
       />
-      {loading ? (
-        <LoadingIndicator />
-      ) : (
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {userData?.data.map((item: any) => {
-            return (
-              <DonationCard
-                key={item.id}
-                item={item}
-                onPress={() => navigation.navigate("Details1", { item })}
-              />
-            );
-          })}
-        </ScrollView>
-      )}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View>
+          {loading ? (
+            <LoadingIndicator />
+          ) : (
+            <>
+              {userData?.data.map((item: any) => {
+                return (
+                  <DonationCard
+                    key={item.id}
+                    item={item}
+                    onPress={() => navigation.navigate("Details1", { item })}
+                  />
+                );
+              })}
+            </>
+          )}
+        </View>
+      </ScrollView>
     </Container>
   );
 };

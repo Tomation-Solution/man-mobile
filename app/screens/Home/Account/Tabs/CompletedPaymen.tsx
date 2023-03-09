@@ -1,76 +1,78 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from "react-native"
 import { Container, AccountHeader } from "../../../../components";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { getDuelist } from "../../../../store/slices/due_list_and_owning_members/getDuelistSlice";
+import LoadingIndicator from "../../../../utils/LoadingIndicator";
 
 
 const CompletedPayment = () => {
     const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
-    const { userData,loading} = useAppSelector(
-    (state) => state.duelistReducers.getDuelistSlice
-);
+    const { userData, loading } = useAppSelector(
+        (state) => state.duelistReducers.getDuelistSlice
+    );
 
-// console.log('dues is equal to ' + userData?.data[0])
+    // console.log('dues is equal to ' + userData?.data[0])
 
 
 
-const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
-useEffect(()=> {
-    if (isLoggedIn) {
-        dispatch(getDuelist())
-    }
-},[dispatch])
+    useEffect(() => {
+        if (isLoggedIn) {
+            dispatch(getDuelist())
+        }
+    }, [dispatch])
     const tableHead = ["Reason", "Amount", "Date", "Action"];
 
     const onButtonClick = () => {
         Alert.alert('Pay your bills');
     };
 
-    const ButtonElement = ({ispaid}:any) => (
+    const ButtonElement = ({ ispaid }: any) => (
 
         <TouchableOpacity onPress={onButtonClick}>
             <View style={styles.btn}>
-            <Text style={styles.btnText}> {ispaid ? "Show Receipt" : "Pay"} </Text>
+                <Text style={styles.btnText}> {ispaid ? "Show Receipt" : "Pay"} </Text>
             </View>
         </TouchableOpacity>
     );
     return (
         <View style={styles.container}>
 
-                {loading ? (
-                    <Text> Loading...</Text>
-                ) : (
-                 <>
-            <Table borderStyle={{ borderColor: 'transparent' }}>
-                <Row data={tableHead} flexArr={[1, 1, 1, 1]} style={styles.head} textStyle={styles.text} />
-                <ScrollView>
-                     {
-                        userData?.data?.map((rowData:any, index:any) => {
-                            const { due__startDate, due__Name, amount,is_paid  } = rowData;
-                     return(
-                    <TableWrapper key={index} style={styles.row}>
-                      {
-                    <>
-                  <Cell data={due__Name} textStyle={styles.text} />
-                  <Cell data={amount} textStyle={styles.text} />
-                  <Cell data={due__startDate} textStyle={styles.text} />
+            {loading ? (
+                <LoadingIndicator />
+            ) : (
+                <>
+                    <Table borderStyle={{ borderColor: 'transparent' }}>
+                        <Row data={tableHead} flexArr={[1, 1, 1, 1]} style={styles.head} textStyle={styles.text} />
+                        <ScrollView>
+                            {
+                                userData?.data?.map((rowData: any, index: any) => {
+                                    const { due__startDate, due__Name, amount, is_paid } = rowData;
+                                    return (
+                                        <TableWrapper key={index} style={styles.row}>
+                                            {
+                                                <>
+                                                    <Cell data={due__Name} textStyle={styles.text} />
+                                                    <Cell data={amount} textStyle={styles.text} />
+                                                    <Cell data={due__startDate} textStyle={styles.text} />
 
-                  <View style={styles.dueWrapper}>
-                   <ButtonElement ispaid={is_paid} />
-                  </View>
+                                                    <View style={styles.dueWrapper}>
+                                                        <ButtonElement ispaid={is_paid} />
+                                                    </View>
 
 
-                 </>
-                  }
-                 </TableWrapper>
-                    )})}
-                </ScrollView>
-            </Table>
-            </>
-                )}
+                                                </>
+                                            }
+                                        </TableWrapper>
+                                    )
+                                })}
+                        </ScrollView>
+                    </Table>
+                </>
+            )}
         </View >
     )
 }
@@ -118,9 +120,9 @@ const styles = StyleSheet.create({
     text: { margin: 6, textAlign: 'center', width: '100%', fontWeight: '600', fontSize: 11 },
     dataWrapper: { marginTop: -8, },
     row: { flexDirection: 'row' },
-    btn: { width :80,paddingVertical:12, backgroundColor: '#555D42', borderRadius: 10, marginLeft: 14 },
+    btn: { width: 80, paddingVertical: 12, backgroundColor: '#555D42', borderRadius: 10, marginLeft: 14 },
     btnText: { textAlign: 'center', color: '#fff', fontSize: 12, },
-    dueWrapper:{ marginVertical:10}
+    dueWrapper: { marginVertical: 10 }
 });
 
 export default CompletedPayment

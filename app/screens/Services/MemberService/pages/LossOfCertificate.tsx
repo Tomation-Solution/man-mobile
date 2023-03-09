@@ -33,7 +33,7 @@ const LossOfCertificate = ({ navigation }: any) => {
     });
     if (result.type === 'success') {
       const files = [...values.files];
-      files[index] = { uri: result.uri, name: result.name };
+      files[index] = { uri: result.uri, name: result.uri.split('/').pop(), type: result.mimeType };
       setFieldValue("files", files);
     }
   };
@@ -42,7 +42,7 @@ const LossOfCertificate = ({ navigation }: any) => {
     <View style={styles.container}>
       <HomeHeader
         title={"Loss of certificate"}
-        back="back"
+        back={navigation.goBack}
         navigation={navigation}
       />
       <View style={{ marginTop: verticalScale(30) }}>
@@ -103,7 +103,6 @@ export default LossOfCertificate;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     flex: 1,
   },
   text: {

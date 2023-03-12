@@ -13,7 +13,7 @@ interface AppointProxyProps {
 
 const Register = ({ onPress }: AppointProxyProps) => {
   const initialState = {
-    section: "Personal Details",
+    section: "Company Details",
     ticketCount: 0,
     companyName: "",
     participants: [],
@@ -36,11 +36,7 @@ const Register = ({ onPress }: AppointProxyProps) => {
           ...state,
           ticketCount: action.payload,
         };
-      case "setCompanyName":
-        return {
-          ...state,
-          companyName: action.payload,
-        };
+
       case "setParticipants":
         if (ticketCount <= 10) {
           return {

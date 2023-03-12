@@ -28,7 +28,7 @@ const Reschedule = ({ close, submitApollogy }: RescheduleProps) => {
           fontWeight: "500",
         }}
       >
-        Render an Applogy
+        Render an Apology
       </Text>
 
       {loading ? (
@@ -42,7 +42,7 @@ const Reschedule = ({ close, submitApollogy }: RescheduleProps) => {
             color: "crimson",
           }}
         >
-          {message ? message : "Appology sent"}
+          {message ? message : "Apology sent"}
         </Text>
       ) : (
         <TextInput
@@ -55,7 +55,7 @@ const Reschedule = ({ close, submitApollogy }: RescheduleProps) => {
             padding: 10,
             width: "100%",
           }}
-          placeholder="Reason for appology"
+          placeholder="Reason for apology"
         />
       )}
       <View

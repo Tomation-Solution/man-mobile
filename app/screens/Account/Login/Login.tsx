@@ -51,6 +51,13 @@ const LoginForm = ({ navigation }: any) => {
             alignItems: "center",
           }}
         >
+          <Image
+            style={{
+              width: normalize(140),
+              height: normalize(60),
+            }}
+            source={appImages.full_logo}
+          />
           <View
             style={{
               width: "100%",
@@ -59,13 +66,6 @@ const LoginForm = ({ navigation }: any) => {
               alignItems: "center",
             }}
           >
-            <Image
-              style={{
-                width: normalize(80),
-                height: normalize(80),
-              }}
-              source={appImages.logo}
-            />
             <AccountHeader
               title=" Login"
               text="Input details to register as alumnus"

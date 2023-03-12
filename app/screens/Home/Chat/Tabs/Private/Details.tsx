@@ -13,6 +13,7 @@ import { addChat, getChat } from "../../../../../store/slices/chat/chat";
 import SendBox from "../../../../../components/Chats/SendBox";
 import LoadingIndicator from "../../../../../utils/LoadingIndicator";
 import { SHORT_NAME } from "../../../../../utils/ENV/envs";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 interface DetailsProps {
   route?: any;
@@ -140,11 +141,12 @@ const Details = ({ route, navigation, setShowTabBar, userData }: any) => {
           back={() => navigation.goBack()}
         />
       </View>
-      <ScrollView
+      <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         style={{
           flex: 1,
           backgroundColor: COLORS.icon,
+          paddingBottom: 90,
         }}
       >
         {chat
@@ -181,7 +183,7 @@ const Details = ({ route, navigation, setShowTabBar, userData }: any) => {
               </Text>
             </View>
           ))}
-      </ScrollView>
+      </KeyboardAwareScrollView>
       <SendBox
         disabled={text.length === 0}
         value={text}

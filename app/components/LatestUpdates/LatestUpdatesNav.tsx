@@ -8,12 +8,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { Globalstyles } from "../../globals/styles";
 import { images } from "../../assets/dummyData";
 import { horizontalScale } from "../../constants/metric";
 import { Entypo } from "@expo/vector-icons";
 import { COLORS } from "../../constants/color";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getRequest } from "../../store/slices/extras/extrasSlice";
 
 const { sectionHeaderText, section } = Globalstyles;
 
@@ -55,6 +57,15 @@ const UpdateContainer = ({ item }: any) => {
 };
 
 const LatestUpdatesNav = () => {
+  const dispatch = useAppDispatch();
+  const { loading, response } = useAppSelector(
+    (state) => state.extras.extrasSlice
+  );
+
+  useEffect(() => {
+    dispatch(getRequest());
+  }, []);
+
   return (
     <View style={[styles.container, section]}>
       <Text style={[sectionHeaderText]}>Latest Updates</Text>

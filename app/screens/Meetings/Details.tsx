@@ -23,6 +23,7 @@ import {
 } from "../../store/slices/meetings/meetingsSlice";
 import Accepted from "./components/Accepted";
 import Reschedule from "./components/Reschedule";
+import Proxy from "./components/Proxy";
 
 const Details = ({ route, navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -45,6 +46,11 @@ const Details = ({ route, navigation }: any) => {
     dispatch(clearMeetingConfig);
     setModalVisible(true);
     setModalContent("appology");
+  };
+  const proxy = () => {
+    dispatch(clearMeetingConfig);
+    setModalVisible(true);
+    setModalContent("proxy");
   };
 
   const submitApplogy = (reason: string) => {
@@ -77,6 +83,12 @@ const Details = ({ route, navigation }: any) => {
             submitApollogy={submitApplogy}
             close={onPress}
           />
+        </CustomModal>
+      )}
+
+      {modalContent === "proxy" && (
+        <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
+          <Proxy event_id={data.id} onPress={() => setModalVisible(false)} />
         </CustomModal>
       )}
 
@@ -317,7 +329,7 @@ const Details = ({ route, navigation }: any) => {
             paddingBottom: 10,
           }}
         >
-          {!data?.is_attending && (
+          {data?.is_attending && (
             <TouchableOpacity
               style={{
                 backgroundColor: COLORS.primary,
@@ -342,7 +354,31 @@ const Details = ({ route, navigation }: any) => {
               </Text>
             </TouchableOpacity>
           )}
-
+          <TouchableOpacity
+            style={{
+              backgroundColor: "white",
+              padding: 10,
+              borderRadius: 10,
+              width: "100%",
+              alignItems: "center",
+              marginTop: 10,
+              borderColor: COLORS.primary,
+              borderWidth: 1,
+            }}
+            activeOpacity={0.8}
+            onPress={proxy}
+          >
+            <Text
+              style={{
+                color: COLORS.primary,
+                fontWeight: "500",
+                fontSize: 16,
+                textAlign: "center",
+              }}
+            >
+              Appoint a Proxy
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity
             style={{
               backgroundColor: "white",
@@ -365,7 +401,7 @@ const Details = ({ route, navigation }: any) => {
                 textAlign: "center",
               }}
             >
-              Appologise
+              Apologise
             </Text>
           </TouchableOpacity>
         </View>

@@ -15,14 +15,11 @@ import { COLORS } from "../../constants/color";
 import { ScrollView } from "react-native-gesture-handler";
 import Register from "./components/Register/Register";
 import { openExternalLink } from "../../utils/helperFunctions/openExternalLink";
-import {
-  registerEvents,
-  requestReschedule,
-} from "../../store/slices/events/eventsSlice";
+import { registerEvents } from "../../store/slices/events/eventsSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import Reschedule from "./components/Reschedule";
-import Participants from "./components/Register/Components/Participants";
-import Proxy from "./components/Register/Components/Proxy";
+import Accepted from "./components/Accepted";
+import LoadingIndicator from "../../utils/LoadingIndicator";
+import Rejected from "./components/Rejected";
 
 const MeetingAction = ({
   onPress,
@@ -64,12 +61,19 @@ const MeetingAction = ({
 const Details = ({ route, navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalComp, setModalComp] = useState(null);
+  const [modalContent, setModalContent] = useState("register");
   const altRoute = useRoute();
   const data = route?.params?.event || altRoute?.params || {};
-  const { loading } = useAppSelector((state) => state.events);
+  const { loading, registerEvent } = useAppSelector((state) => state.events);
   const dispatch = useAppDispatch();
 
   const onPress = () => {
+    dispatch(registerEvents(data.id));
+  };
+
+  const handleRegister = () => {
+    setModalContent("register");
+    setModalVisible(true);
     dispatch(registerEvents(data.id));
   };
 
@@ -83,6 +87,18 @@ const Details = ({ route, navigation }: any) => {
       <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
         {modalComp}
       </CustomModal>
+
+      {modalContent === "register" && (
+        <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
+          {loading ? (
+            <LoadingIndicator />
+          ) : registerEvent ? (
+            <Accepted onPress={() => setModalVisible(false)} />
+          ) : (
+            <Rejected onPress={() => setModalVisible(false)} />
+          )}
+        </CustomModal>
+      )}
       <HomeHeader
         navigation={navigation}
         title={"Event Details"}
@@ -349,34 +365,15 @@ const Details = ({ route, navigation }: any) => {
           >
             <MeetingAction
               onPress={() =>
-                handleModal(
-                  <Reschedule
-                    event_id={data.id}
-                    onPress={() => setModalVisible(false)}
-                  />
-                )
+                handleModal(<Register onPress={() => setModalVisible(false)} />)
               }
-              text="Request Reshedule"
+              text="Add Partcipants"
               loading={loading}
             />
-            {!data?.event_access?.has_paid && (
-              <MeetingAction
-                onPress={() =>
-                  handleModal(
-                    <Proxy
-                      event_id={data.id}
-                      onPress={() => setModalVisible(false)}
-                    />
-                  )
-                }
-                text="Appoint Proxy"
-                loading={loading}
-              />
-            )}
           </View>
           {!data?.event_access?.has_paid && (
             <MeetingAction
-              onPress={onPress}
+              onPress={handleRegister}
               text="Register"
               loading={loading}
             />

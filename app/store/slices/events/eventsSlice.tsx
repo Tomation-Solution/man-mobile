@@ -10,12 +10,16 @@ const initialState: {
   eventRescheduled: boolean;
   eventNotRescheduled: boolean;
   registerEvent: boolean;
+  message: string;
+  error: string;
 } = {
   events: [],
   loading: false,
   eventRescheduled: false,
   eventNotRescheduled: false,
   registerEvent: false,
+  message: "",
+  error: "",
 };
 
 const eventsSlice = createSlice({
@@ -31,6 +35,7 @@ const eventsSlice = createSlice({
     },
     eventRequestFailed: (state, action) => {
       state.loading = false;
+      state.error = action.payload.response.data.message.error;
     },
     eventRegistered: (state, action) => {
       state.loading = false;
@@ -43,6 +48,7 @@ const eventsSlice = createSlice({
     eventNotRescheduled: (state, action) => {
       state.loading = false;
       state.eventNotRescheduled = true;
+      state.error = action.payload.response.data.message.error;
     },
     clearConfig: (state) => {
       state.loading = false;

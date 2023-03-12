@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLORS } from "../../../../constants/color";
 import SendBox from "../../../../components/Chats/SendBox";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { retrieveUserDetails } from "../../../../utils/helperFunctions/userDataHandlers";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import {
   addChat,
   clearChat,
@@ -19,6 +20,7 @@ const General = ({ navigation, environment }: any) => {
   const [userData, setUserData] = React.useState<any>(null);
   const [text, setText] = React.useState("");
   const [endPoint, setEndPoint] = React.useState<any>("genral");
+  const [generalChat, setGeneralChat] = useState();
 
   const isFocused = useIsFocused();
 
@@ -104,61 +106,57 @@ const General = ({ navigation, environment }: any) => {
         position: "relative",
       }}
     >
-      <ScrollView
+      <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         style={{
           flex: 1,
           backgroundColor: COLORS.icon,
+          paddingBottom: 90,
         }}
       >
-        {chat
-          ?.slice()
-          .reverse()
-          ?.map((item: any, index: number) => (
-            <View
-              key={index}
-              style={{
-                margin: 10,
-                alignSelf:
-                  item.user__id === userData?.user_id
-                    ? "flex-end"
-                    : "flex-start",
-              }}
-            >
-              {item.full_name && (
-                <View>
-                  <Text style={{ color: "black", fontSize: 10 }}>
-                    {item.full_name}
-                  </Text>
-                </View>
-              )}
-              <View
-                style={{
-                  padding: 10,
-                  backgroundColor:
-                    item.user__id === userData?.user_id
-                      ? COLORS.primary
-                      : "black",
-
-                  borderBottomEndRadius: 10,
-                  borderBottomLeftRadius: 10,
-                  borderTopLeftRadius:
-                    item.user__id === userData?.user_id ? 10 : 0,
-                  borderTopRightRadius:
-                    item.user__id === userData?.user_id ? 0 : 10,
-                }}
-              >
-                <Text
-                  style={{
-                    color: COLORS.icon,
-                  }}
-                >
-                  {item.message}
+        {chat?.map((item: any, index: number) => (
+          <View
+            key={index}
+            style={{
+              margin: 10,
+              alignSelf:
+                item.user__id === userData?.user_id ? "flex-end" : "flex-start",
+            }}
+          >
+            {item.full_name && (
+              <View>
+                <Text style={{ color: "black", fontSize: 10 }}>
+                  {item.full_name}
                 </Text>
               </View>
+            )}
+            <View
+              style={{
+                padding: 10,
+                backgroundColor:
+                  item.user__id === userData?.user_id
+                    ? COLORS.primary
+                    : "black",
+
+                borderBottomEndRadius: 10,
+                borderBottomLeftRadius: 10,
+                borderTopLeftRadius:
+                  item.user__id === userData?.user_id ? 10 : 0,
+                borderTopRightRadius:
+                  item.user__id === userData?.user_id ? 0 : 10,
+              }}
+            >
+              <Text
+                style={{
+                  color: COLORS.icon,
+                }}
+              >
+                {item.message}
+              </Text>
             </View>
-          ))}
-      </ScrollView>
+          </View>
+        ))}
+      </KeyboardAwareScrollView>
       <SendBox
         disabled={text.length === 0}
         value={text}

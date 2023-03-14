@@ -35,9 +35,14 @@ const lastName = Yup.string()
   .min(2, "Last name must be at least 2 digits long")
   .label("Last Name");
 
+const loginPassword = Yup.string()
+  .required("Please enter your password")
+  .min(8, "Password must be at least 8 characters long")
+  .label("Password");
+
 export const loginValidationSchema = Yup.object().shape({
   email,
-  password,
+  loginPassword,
 });
 
 export const signUpValidationSchema = Yup.object().shape({

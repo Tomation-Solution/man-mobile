@@ -111,7 +111,7 @@ const General = ({ navigation, environment }: any) => {
         style={{
           flex: 1,
           backgroundColor: COLORS.icon,
-          paddingBottom: 90,
+          marginBottom: 90,
         }}
       >
         {chat?.map((item: any, index: number) => (

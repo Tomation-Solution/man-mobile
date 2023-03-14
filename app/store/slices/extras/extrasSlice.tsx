@@ -26,6 +26,7 @@ const extrasSlice = createSlice({
     requestReceived: (state, action) => {
       state.loading = false;
       state.response = action.payload;
+      console.log("extrasSlice", action.payload);
     },
     requestFailed: (state, action) => {
       state.loading = false;

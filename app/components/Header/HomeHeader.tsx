@@ -57,7 +57,7 @@ const HomeHeader = ({
       {isTitleComponent ? (
         isTitleComponent
       ) : title ? (
-        <Text style={{ fontSize: normalize(18) }}>{title?.toUpperCase()}</Text>
+        <Text style={{ fontSize: normalize(14) }}>{title?.toUpperCase()}</Text>
       ) : (
         <>
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
@@ -79,11 +79,11 @@ const HomeHeader = ({
       )}
 
       {!back && (
-        <View style={styles.imageContainer}>
+        <View style={{}}>
           <Image
-            source={appImages.logo}
+            source={appImages.full_logo}
             style={{
-              width: verticalScale(30),
+              width: verticalScale(80),
               height: horizontalScale(30),
             }}
           />

@@ -146,7 +146,7 @@ const Details = ({ route, navigation, setShowTabBar, userData }: any) => {
         style={{
           flex: 1,
           backgroundColor: COLORS.icon,
-          paddingBottom: 90,
+          marginBottom: 90,
         }}
       >
         {chat

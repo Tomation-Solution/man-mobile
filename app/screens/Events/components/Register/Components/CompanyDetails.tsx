@@ -9,8 +9,7 @@ const CompanyDetails = ({
   handlePress,
   ticketCount,
   setTicketCount,
-  setCompanyName,
-  companyName,
+  amount,
 }: any) => {
   const [errors, setErrors] = React.useState({
     companyName: "",
@@ -71,7 +70,8 @@ const CompanyDetails = ({
             color: COLORS.icon,
           }}
         >
-          Amount :<Text style={styles.textActive}> 5000 per individual</Text>
+          Amount :
+          <Text style={styles.textActive}> {amount} per individual</Text>
         </Text>
       </View>
 
@@ -144,7 +144,7 @@ const CompanyDetails = ({
             color: COLORS.icon,
           }}
         >
-          Total :<Text style={styles.textActive}> {ticketCount * 5000}</Text>
+          Total :<Text style={styles.textActive}> {ticketCount * amount}</Text>
         </Text>
       </View>
       <View

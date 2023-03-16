@@ -51,6 +51,9 @@ const eventsSlice = createSlice({
       state.error = action.payload.response.data.message.error;
     },
     clearConfig: (state) => {
+      state.message = "";
+      state.registerEvent = false;
+      state.error = "";
       state.loading = false;
       state.eventRescheduled = false;
       state.eventNotRescheduled = false;
@@ -109,7 +112,7 @@ export const registerEvents =
     const form = new FormData();
     form.append("event_id", id.toString());
     if (proxy_participants) {
-      form.append("proxy_participants", JSON.stringify([proxy_participants]));
+      form.append("proxy_participants", JSON.stringify(proxy_participants));
     }
 
     try {

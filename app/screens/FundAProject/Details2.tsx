@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
 import { Container, HomeHeader, Dropdown, Formbtn } from "../../components";
 import {
   horizontalScale,
@@ -22,6 +22,8 @@ interface MessageValues {
 }
 
 const Details2 = ({ route, navigation }: DetailsProps) => {
+  const [selected, setSelected] = useState("Please Select a Support Type");
+
   const data = route?.params?.data || {};
   // console.log(' inside details oh ' + data?.image)
 
@@ -39,9 +41,14 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
     }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }
   ) => {
     const { heading } = values;
-    await dispatch(kindFunding(data?.id, heading));
-    setSubmitting(false);
-    resetForm();
+    if (heading === " ") {
+      return;
+    } else {
+      console.log(heading.length);
+      await dispatch(kindFunding(data?.id, heading));
+      setSubmitting(false);
+      resetForm();
+    }
   };
 
   const { loading } = useAppSelector(
@@ -57,7 +64,7 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
       />
       <View style={styles.inputContainer}>
         <Formik
-          initialValues={{ heading: " " }}
+          initialValues={{ heading: "" }}
           validationSchema={Yup.object({
             heading: Yup.string().required(),
           })}
@@ -74,7 +81,11 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
             <View>
               <Text style={styles.headText}>Support in Kind</Text>
               <View style={styles.supportContainer}>
-                {/* <Dropdown defaultButtonText={"Support Type"} /> */}
+                <Dropdown
+                  setSelectedItem={setSelected}
+                  data={data.what_project_needs}
+                  defaultButtonText={"Select Support Type"}
+                />
               </View>
               <TextInput
                 style={styles.input}
@@ -83,12 +94,13 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
                 value={values.heading}
                 multiline={true}
                 numberOfLines={7}
+                placeholderTextColor={"#010001"}
                 placeholder="Enter your message "
               />
               {errors.heading && touched.heading ? (
                 <Text style={styles.error}>{errors.heading}</Text>
               ) : null}
-              <Formbtn onPress={handleSubmit} title="Get Support" />
+              <Formbtn onPress={handleSubmit} title="Support" />
             </View>
           )}
         </Formik>
@@ -143,11 +155,10 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#E8F6F8",
+    borderColor: COLORS.primary,
     paddingHorizontal: 9,
-    paddingVertical: 13,
     marginVertical: 21,
-    backgroundColor: "#E8F6F8",
+    backgroundColor: "white",
     borderRadius: 9,
   },
 });

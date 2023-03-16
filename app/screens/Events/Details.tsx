@@ -15,7 +15,10 @@ import { COLORS } from "../../constants/color";
 import { ScrollView } from "react-native-gesture-handler";
 import Register from "./components/Register/Register";
 import { openExternalLink } from "../../utils/helperFunctions/openExternalLink";
-import { registerEvents } from "../../store/slices/events/eventsSlice";
+import {
+  clearConfig,
+  registerEvents,
+} from "../../store/slices/events/eventsSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Accepted from "./components/Accepted";
 import LoadingIndicator from "../../utils/LoadingIndicator";
@@ -72,12 +75,13 @@ const Details = ({ route, navigation }: any) => {
   };
 
   const handleRegister = () => {
-    setModalContent("register");
+    // setModalContent("register");
     setModalVisible(true);
     dispatch(registerEvents(data.id));
   };
 
   const handleModal = (component: any) => {
+    dispatch(clearConfig());
     setModalComp(component);
     setModalVisible(!modalVisible);
   };
@@ -188,13 +192,21 @@ const Details = ({ route, navigation }: any) => {
                 }}
               >
                 {data.event_access.has_paid ? (
-                  <TouchableOpacity
-                    onPress={() => openExternalLink(data.event_access.link)}
-                  >
-                    <Text style={{ color: COLORS.primary }}>
-                      {data.event_access.link}
-                    </Text>
-                  </TouchableOpacity>
+                  data.event_access.link.includes("https") ? (
+                    <TouchableOpacity
+                      style={{
+                        borderBottomColor: COLORS.primary,
+                        borderBottomWidth: 1,
+                      }}
+                      onPress={() => openExternalLink(data.event_access.link)}
+                    >
+                      <Text style={{ color: COLORS.primary }}>
+                        Join Meeting
+                      </Text>
+                    </TouchableOpacity>
+                  ) : (
+                    <Text>{data.event_access.link}</Text>
+                  )
                 ) : (
                   "Please pay to view"
                 )}
@@ -364,9 +376,16 @@ const Details = ({ route, navigation }: any) => {
             }}
           >
             <MeetingAction
-              onPress={() =>
-                handleModal(<Register onPress={() => setModalVisible(false)} />)
-              }
+              onPress={() => {
+                setModalContent("");
+                handleModal(
+                  <Register
+                    event_id={data?.id}
+                    amount={data?.amount}
+                    onPress={() => setModalVisible(false)}
+                  />
+                );
+              }}
               text="Add Partcipants"
               loading={loading}
             />

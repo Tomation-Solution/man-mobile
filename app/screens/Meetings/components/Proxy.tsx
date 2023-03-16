@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { registerEvents } from "../../../store/slices/events/eventsSlice";
 import { Globalstyles } from "../../../globals/styles";
 import { COLORS } from "../../../constants/color";
+import { resgisterForMeeting } from "../../../store/slices/meetings/meetingsSlice";
 
 const { height, width } = Dimensions.get("window");
 
@@ -18,18 +18,20 @@ const Proxy = ({ event_id, onPress }: { event_id: number; onPress: any }) => {
   const [full_name, setFullname] = React.useState("");
   const [email, setEmail] = React.useState("");
 
-  const { registerEvent } = useAppSelector((state) => state.events);
+  const { meetingRegistered } = useAppSelector((state) => state.meetings);
 
   const dispatch = useAppDispatch();
 
   const appointProxy = () => {
-    const proxy_participants = {
-      full_name,
-      email,
-    };
+    const proxy_participants = [
+      {
+        full_name,
+        email,
+      },
+    ];
 
     console.log("proxy", proxy_participants);
-    dispatch(registerEvents(event_id, proxy_participants));
+    dispatch(resgisterForMeeting(event_id, proxy_participants));
   };
 
   return (
@@ -42,7 +44,7 @@ const Proxy = ({ event_id, onPress }: { event_id: number; onPress: any }) => {
       >
         APPOINT A PROXY
       </Text>
-      {registerEvent ? (
+      {meetingRegistered ? (
         <Text
           style={{
             fontSize: 16,

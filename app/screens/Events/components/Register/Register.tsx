@@ -9,9 +9,11 @@ import CompanyDetails from "./Components/CompanyDetails";
 
 interface AppointProxyProps {
   onPress: any;
+  amount: number;
+  event_id: number;
 }
 
-const Register = ({ onPress }: AppointProxyProps) => {
+const Register = ({ onPress, amount, event_id }: AppointProxyProps) => {
   const initialState = {
     section: "Company Details",
     ticketCount: 0,
@@ -37,28 +39,34 @@ const Register = ({ onPress }: AppointProxyProps) => {
           ticketCount: action.payload,
         };
 
-      case "setParticipants":
-        if (ticketCount <= 10) {
-          return {
-            ...state,
-            participants: [
-              ...state.participants,
-              {
-                name: action.payload.name,
-                email: action.payload.email,
-                phone: action.payload.phone,
-              },
-            ],
-          };
-        }
+      case "setParticipantsEmail":
+        const participantsWithEmail = [...state.participants];
+        participantsWithEmail[action.payload.index] = {
+          ...participantsWithEmail[action.payload.index],
+          email: action.payload.email,
+        };
+        return {
+          ...state,
+          participants: participantsWithEmail,
+        };
 
+      case "setParticipantsName":
+        const participantsWithName = [...state.participants];
+        participantsWithName[action.payload.index] = {
+          ...participantsWithName[action.payload.index],
+          full_name: action.payload.full_name,
+        };
+        return {
+          ...state,
+          participants: participantsWithName,
+        };
       case "setPersonalDetails":
         return {
           ...state,
           personalDetails: {
-            name: action.payload.name,
+            full_name: action.payload.name,
             email: action.payload.email,
-            phone: action.payload.phone,
+            // phone: action.payload.phone,
           },
         };
 
@@ -80,6 +88,17 @@ const Register = ({ onPress }: AppointProxyProps) => {
         alignItems: "center",
       }}
     >
+      <View>
+        <TextInput
+          placeholder="email"
+          onChange={(e) => {
+            dispatch({
+              type: "setParticipants",
+              payload: { email: e.nativeEvent.text },
+            });
+          }}
+        />
+      </View>
       {section === "Personal Details" && (
         <PersonDetails
           handlePress={handlePress}
@@ -94,11 +113,9 @@ const Register = ({ onPress }: AppointProxyProps) => {
           handlePress={handlePress}
           ticketCount={ticketCount}
           companyName={companyName}
+          amount={amount}
           setTicketCount={(ticketCount: number) =>
             dispatch({ type: "setTicketCount", payload: ticketCount })
-          }
-          setCompanyName={(companyName: string) =>
-            dispatch({ type: "setCompanyName", payload: companyName })
           }
           setSection={(section: string) =>
             dispatch({ type: "setSection", payload: section })
@@ -111,13 +128,12 @@ const Register = ({ onPress }: AppointProxyProps) => {
           companyName={companyName}
           ticketCount={ticketCount}
           participants={participants}
+          event_id={event_id}
           onPress={onPress}
           setTicketCount={(ticketCount: number) =>
             dispatch({ type: "setTicketCount", payload: ticketCount })
           }
-          setParticipants={(participant: any) =>
-            dispatch({ type: "setParticipants", payload: participant })
-          }
+          dispatch={dispatch}
         />
       )}
     </View>

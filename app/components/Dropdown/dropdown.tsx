@@ -1,6 +1,8 @@
 import React, { useCallback } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { AntDesign } from "@expo/vector-icons";
+import { COLORS } from "../../constants/color";
+import { normalize } from "../../constants/metric";
 
 interface DropDownProps {
   data: any;
@@ -24,11 +26,11 @@ export default function Dropdown({
   setSelectedItem,
   dropdownIconPosition = "right",
   dropdownIconColor = "rgba(30, 30, 30, 0.41)",
-  dropdownIconSize = 25,
+  dropdownIconSize = 20,
   defaultValue,
 }: any) {
   const onSelect = useCallback(
-    (item: any, i) => setSelectedItem(item),
+    (item: any, index: number) => setSelectedItem(item),
     [setSelectedItem]
   );
   return (
@@ -37,20 +39,26 @@ export default function Dropdown({
       onSelect={onSelect}
       defaultButtonText={defaultButtonText}
       buttonStyle={{
-        backgroundColor: "#E8F6F8",
-        width: 280,
+        backgroundColor: COLORS.icon,
+        width: "100%",
         height: 50,
         borderRadius: 10,
         marginTop: 10,
         ...buttonStyle,
       }}
+      buttonTextStyle={{
+        fontSize: normalize(13),
+        fontWeight: "bold",
+        ...buttonTextStyle,
+      }}
       defaultValue={defaultValue}
+      dropdownStyle={{
+        backgroundColor: "white",
+        width: "85%",
+        borderRadius: 10,
+      }}
       renderDropdownIcon={() => (
-        <AntDesign
-          name="down"
-          size={dropdownIconSize}
-          color={dropdownIconColor}
-        />
+        <AntDesign name="down" size={20} color={"white"} />
       )}
       dropdownIconPosition={dropdownIconPosition}
     />

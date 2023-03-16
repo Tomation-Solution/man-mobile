@@ -1,5 +1,5 @@
-import { ScrollView, StyleSheet } from "react-native";
-import React from "react";
+import { ScrollView, StyleSheet, RefreshControl } from "react-native";
+import React, { useState } from "react";
 import {
   Container,
   FeedsNav,
@@ -10,10 +10,27 @@ import {
 import NewsNav from "../../components/News/NewsNav";
 
 const HomeScreen = ({ navigation, environment }: any) => {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+
+    // Perform the data fetching or any other asynchronous operation here
+    // ...
+
+    setRefreshing(false);
+  };
+
   return (
     <Container>
       <HomeHeader navigation={navigation} />
-      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+        }
+        style={{ flex: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
         <SearchBar />
         <LatestUpdatesNav navigation={navigation} environment={environment} />
         <FeedsNav navigation={navigation} />

@@ -10,7 +10,6 @@ import {
   OnAccountSuccess,
   OnSuccessScreen,
   OnPasswordSuccess,
-  PaymentDetails,
   FagList,
   Notification,
   Election,

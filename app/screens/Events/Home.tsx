@@ -34,7 +34,7 @@ const Home = ({ navigation, environment }: any) => {
         style={{
           paddingHorizontal: 20,
           marginTop: 20,
-          marginBottom: 100,
+          marginBottom: 140,
         }}
       >
         {loading ? (

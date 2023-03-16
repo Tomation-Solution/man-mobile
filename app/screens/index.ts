@@ -20,8 +20,6 @@ export { default as OnPasswordSuccess } from "./Account/components/OnSucessScree
 // export { default as PendingPayment } from "./PaymentDetails/Tabs/PendingPayment";
 // a// export { default as PendingPayment } from "./PaymentDetails/Tabs/PendingPayment";
 
-
-
 export { default as FagList } from "./Support/FAQ/Home";
 export { default as Notification } from "./Notification/Notification";
 export { default as Election } from "./Election/Election";

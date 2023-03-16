@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { COLORS } from "../../constants/color";
 
 const FormSubmitButton = ({
   title,
@@ -9,7 +10,7 @@ const FormSubmitButton = ({
   textStyles,
   loading,
 }: any) => {
-  const backgroundColor = submitting ? "#182005" : "#2B3513";
+  const backgroundColor = submitting ? "#182005" : COLORS.primary;
 
   return (
     <TouchableOpacity

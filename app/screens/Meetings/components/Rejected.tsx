@@ -2,12 +2,14 @@ import { Text, View } from "react-native";
 import React from "react";
 import { COLORS } from "../../../constants/color";
 import { Globalstyles } from "../../../globals/styles";
+import { useAppSelector } from "../../../store/hooks";
 
 interface AcceptedProps {
   onPress: any;
 }
 
 const Rejected = ({ onPress }: AcceptedProps) => {
+  const { message } = useAppSelector((state) => state.meetings);
   return (
     <View
       style={[
@@ -23,7 +25,7 @@ const Rejected = ({ onPress }: AcceptedProps) => {
           fontWeight: "500",
         }}
       >
-        Meeting Rejected!
+        Hey!
       </Text>
       <Text
         style={{
@@ -32,7 +34,7 @@ const Rejected = ({ onPress }: AcceptedProps) => {
           fontSize: 16,
         }}
       >
-        Meeting Rejection is being reviewed by the organizer
+        {message}
       </Text>
 
       <View

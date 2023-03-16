@@ -7,13 +7,12 @@ import {
 } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Accept = () => {
-  const [accepted, setAccepted] = React.useState(false);
+const Accept = ({ accept, accepted }: any) => {
+  const handleAccept = () => {
+    accept();
+  };
   return (
-    <TouchableOpacity
-      style={styles.actionContainer}
-      onPress={() => setAccepted(!accepted)}
-    >
+    <TouchableOpacity style={styles.actionContainer} onPress={handleAccept}>
       <Ionicons
         name="md-checkmark"
         size={18}
@@ -32,24 +31,20 @@ const Accept = () => {
   );
 };
 
-const Appology = ({ onPress }: any) => {
-  const [accepted, setAccepted] = React.useState(false);
+const Appology = ({ meeting_id, setMeetingId, appology }: any) => {
   const handleOnPress = () => {
-    onPress();
+    setMeetingId(() => meeting_id);
+    console.log("Meeting Id", meeting_id);
+    appology();
     console.log("Appology");
-    setAccepted(!accepted);
   };
   return (
     <TouchableOpacity style={styles.actionContainer} onPress={handleOnPress}>
-      <MaterialCommunityIcons
-        name="hands-pray"
-        size={18}
-        color={accepted ? "green" : "gray"}
-      />
+      <MaterialCommunityIcons name="hands-pray" size={18} color={"gray"} />
       <Text
         style={{
           fontSize: 12,
-          color: accepted ? "green" : "gray",
+          color: "gray",
           marginLeft: 5,
         }}
       >
@@ -59,10 +54,10 @@ const Appology = ({ onPress }: any) => {
   );
 };
 
-const Join = ({ onPress }: any) => {
+const Join = ({}: any) => {
   const [accepted, setAccepted] = React.useState(false);
   const handleOnPress = () => {
-    onPress();
+    alert("Comming Soon!");
     console.log("Appology");
     setAccepted(!accepted);
   };
@@ -86,7 +81,17 @@ const Join = ({ onPress }: any) => {
   );
 };
 
-const MeetingCard = ({ title, date, time, onPress }: any) => {
+const MeetingCard = ({
+  title,
+  date,
+  time,
+  onPress,
+  accept,
+  accepted,
+  appology,
+  setMeetingId,
+  meeting_id,
+}: any) => {
   return (
     <View
       style={{
@@ -125,8 +130,12 @@ const MeetingCard = ({ title, date, time, onPress }: any) => {
           alignItems: "center",
         }}
       >
-        <Accept />
-        <Appology />
+        <Accept accept={accept} accepted={accepted} />
+        <Appology
+          appology={appology}
+          setMeetingId={setMeetingId}
+          meeting_id={meeting_id}
+        />
         <Join />
       </View>
     </View>

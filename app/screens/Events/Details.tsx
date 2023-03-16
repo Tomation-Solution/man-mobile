@@ -15,32 +15,90 @@ import { COLORS } from "../../constants/color";
 import { ScrollView } from "react-native-gesture-handler";
 import Register from "./components/Register/Register";
 import { openExternalLink } from "../../utils/helperFunctions/openExternalLink";
-import {
-  registerEvents,
-  requestReschedule,
-} from "../../store/slices/events/eventsSlice";
+import { registerEvents } from "../../store/slices/events/eventsSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import Reschedule from "./components/Reschedule";
+import Accepted from "./components/Accepted";
+import LoadingIndicator from "../../utils/LoadingIndicator";
+import Rejected from "./components/Rejected";
+
+const MeetingAction = ({
+  onPress,
+  text,
+  loading,
+}: {
+  onPress: any;
+  text: string;
+  loading: boolean;
+}) => {
+  return (
+    <TouchableOpacity
+      style={{
+        backgroundColor: COLORS.primary,
+        padding: 10,
+        borderRadius: 10,
+        alignItems: "center",
+        marginTop: 10,
+        flex: 1,
+        marginHorizontal: 5,
+      }}
+      activeOpacity={0.8}
+      onPress={onPress}
+    >
+      <Text
+        style={{
+          color: "white",
+          fontWeight: "500",
+          fontSize: 16,
+          textAlign: "center",
+        }}
+      >
+        {loading ? <ActivityIndicator size="small" color="white" /> : text}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 const Details = ({ route, navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalComp, setModalComp] = useState(null);
+  const [modalContent, setModalContent] = useState("register");
   const altRoute = useRoute();
   const data = route?.params?.event || altRoute?.params || {};
-  const { loading } = useAppSelector((state) => state.events);
+  const { loading, registerEvent } = useAppSelector((state) => state.events);
   const dispatch = useAppDispatch();
 
   const onPress = () => {
     dispatch(registerEvents(data.id));
   };
 
+  const handleRegister = () => {
+    setModalContent("register");
+    setModalVisible(true);
+    dispatch(registerEvents(data.id));
+  };
+
+  const handleModal = (component: any) => {
+    setModalComp(component);
+    setModalVisible(!modalVisible);
+  };
+
   return (
     <Container>
       <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
-        <Reschedule
-          event_id={data.id}
-          onPress={() => setModalVisible(!modalVisible)}
-        />
+        {modalComp}
       </CustomModal>
+
+      {modalContent === "register" && (
+        <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
+          {loading ? (
+            <LoadingIndicator />
+          ) : registerEvent ? (
+            <Accepted onPress={() => setModalVisible(false)} />
+          ) : (
+            <Rejected onPress={() => setModalVisible(false)} />
+          )}
+        </CustomModal>
+      )}
       <HomeHeader
         navigation={navigation}
         title={"Event Details"}
@@ -299,33 +357,27 @@ const Details = ({ route, navigation }: any) => {
             paddingBottom: 10,
           }}
         >
-          <TouchableOpacity
+          <View
             style={{
-              backgroundColor: COLORS.primary,
-              padding: 10,
-              borderRadius: 10,
-              width: "100%",
-              alignItems: "center",
-              marginTop: 10,
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
-            activeOpacity={0.8}
-            onPress={onPress}
           >
-            <Text
-              style={{
-                color: "white",
-                fontWeight: "500",
-                fontSize: 16,
-                textAlign: "center",
-              }}
-            >
-              {loading ? (
-                <ActivityIndicator size="small" color="white" />
-              ) : (
-                "Register"
-              )}
-            </Text>
-          </TouchableOpacity>
+            <MeetingAction
+              onPress={() =>
+                handleModal(<Register onPress={() => setModalVisible(false)} />)
+              }
+              text="Add Partcipants"
+              loading={loading}
+            />
+          </View>
+          {!data?.event_access?.has_paid && (
+            <MeetingAction
+              onPress={handleRegister}
+              text="Register"
+              loading={loading}
+            />
+          )}
         </View>
       </View>
     </Container>

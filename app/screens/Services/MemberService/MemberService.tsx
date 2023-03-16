@@ -53,9 +53,10 @@ const data = [
 const MembersService = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
-      <HomeHeader title="Services" navigation={navigation}
+      <HomeHeader
+        title="Services"
+        navigation={navigation}
         back={navigation.goBack}
-
       />
 
       <FlatList

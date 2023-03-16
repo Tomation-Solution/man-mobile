@@ -17,26 +17,20 @@ const CompanyDetails = ({
     ticketCount: "",
   });
   const handleContinue = () => {
-    if (companyName.length >= 3) {
-      if (ticketCount === 0) {
-        setErrors({
-          ...errors,
-          ticketCount: "Please enter the number of tickets",
-        });
-      } else if (ticketCount > 10) {
-        setErrors({
-          ...errors,
-          ticketCount: "Maximum 10 tickets can be booked",
-        });
-      } else {
-        handlePress({ section: "Participants" });
-      }
-    } else {
+    if (ticketCount === 0) {
       setErrors({
         ...errors,
-        companyName: "Please enter a valid company name",
+        ticketCount: "Please enter the number of tickets",
       });
+    } else if (ticketCount > 10) {
+      setErrors({
+        ...errors,
+        ticketCount: "Maximum 10 tickets can be booked",
+      });
+    } else {
+      handlePress({ section: "Participants" });
     }
+    7;
   };
 
   return (
@@ -50,9 +44,6 @@ const CompanyDetails = ({
         REGISTER PARTICIPANTS
       </Text>
       <View>
-        {errors.companyName && (
-          <Text style={styles.textError}>{errors.companyName}</Text>
-        )}
         {errors.ticketCount && (
           <Text style={styles.textError}>{errors.ticketCount}</Text>
         )}
@@ -64,17 +55,7 @@ const CompanyDetails = ({
           alignItems: "center",
           marginTop: 20,
         }}
-      >
-        <TextInput
-          style={styles.textInput}
-          value={companyName}
-          onChange={(e) => {
-            setCompanyName(e.nativeEvent.text);
-            setErrors({ ...errors, companyName: "", ticketCount: "" });
-          }}
-          placeholder="COMPANY NAME"
-        />
-      </View>
+      ></View>
 
       <View
         style={{
@@ -174,30 +155,6 @@ const CompanyDetails = ({
           flexDirection: "row",
         }}
       >
-        <TouchableOpacity
-          style={{
-            borderColor: COLORS.primary,
-            borderWidth: 1,
-            padding: 10,
-            borderRadius: 10,
-            alignItems: "center",
-            flex: 1,
-          }}
-          activeOpacity={0.8}
-          onPress={() => handlePress({ section: "Personal Details" })}
-        >
-          <Text
-            style={{
-              color: COLORS.primary,
-              fontWeight: "500",
-              fontSize: 16,
-              textAlign: "center",
-            }}
-          >
-            Back
-          </Text>
-        </TouchableOpacity>
-
         <TouchableOpacity
           style={{
             backgroundColor: COLORS.primary,

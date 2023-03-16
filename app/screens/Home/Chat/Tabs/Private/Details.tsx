@@ -12,6 +12,8 @@ import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
 import { addChat, getChat } from "../../../../../store/slices/chat/chat";
 import SendBox from "../../../../../components/Chats/SendBox";
 import LoadingIndicator from "../../../../../utils/LoadingIndicator";
+import { SHORT_NAME } from "../../../../../utils/ENV/envs";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 interface DetailsProps {
   route?: any;
@@ -54,7 +56,6 @@ const Details = ({ route, navigation, setShowTabBar, userData }: any) => {
   const [web_socket, setWeb_socket] = React.useState<any>(null);
   const [text, setText] = React.useState("");
   const { loading, chat } = useAppSelector((state) => state.chat);
-  const [messages, setMessages] = React.useState<any>([]);
 
   const dispatch = useAppDispatch();
 
@@ -76,10 +77,9 @@ const Details = ({ route, navigation, setShowTabBar, userData }: any) => {
           : `${data.user}and${userData?.user_id}`;
 
       dispatch(getChat(`chat/?room_name=${room_name}`));
-      setMessages(chat.data);
 
       var ws = new WebSocket(
-        `wss://web-production-d5b0.up.railway.app/ws/chat/testing_org/${room_name}/`
+        `wss://rel8backend-production.up.railway.app/ws/chat/${SHORT_NAME}/${room_name}/`
       );
       setWeb_socket(ws);
       ws.onopen = (e) => {
@@ -114,6 +114,8 @@ const Details = ({ route, navigation, setShowTabBar, userData }: any) => {
     web_socket.onmessage = (e: any) => {
       // a message was received
       const response = JSON.parse(e.data);
+      console.log("response", response);
+
       dispatch(
         addChat({
           user__id: response.send_user_id,
@@ -139,36 +141,49 @@ const Details = ({ route, navigation, setShowTabBar, userData }: any) => {
           back={() => navigation.goBack()}
         />
       </View>
-      <ScrollView
+      <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         style={{
           flex: 1,
           backgroundColor: COLORS.icon,
+          marginBottom: 90,
         }}
       >
-        {chat?.map((item: any, index: number) => (
-          <View
-            key={index}
-            style={{
-              padding: 10,
-              backgroundColor:
-                item.user__id === userData?.user_id ? COLORS.primary : "black",
-              margin: 10,
-              borderRadius: 10,
-              alignSelf:
-                item.user__id === userData?.user_id ? "flex-end" : "flex-start",
-            }}
-          >
-            <Text
+        {chat
+          ?.slice()
+          .reverse()
+          ?.map((item: any, index: number) => (
+            <View
+              key={index}
               style={{
-                color: COLORS.icon,
+                padding: 10,
+                backgroundColor:
+                  item.user__id === userData?.user_id
+                    ? COLORS.primary
+                    : "black",
+                margin: 10,
+                borderBottomEndRadius: 10,
+                borderBottomLeftRadius: 10,
+                borderTopLeftRadius:
+                  item.user__id === userData?.user_id ? 10 : 0,
+                borderTopRightRadius:
+                  item.user__id === userData?.user_id ? 0 : 10,
+                alignSelf:
+                  item.user__id === userData?.user_id
+                    ? "flex-end"
+                    : "flex-start",
               }}
             >
-              {item.message}
-            </Text>
-          </View>
-        ))}
-      </ScrollView>
+              <Text
+                style={{
+                  color: COLORS.icon,
+                }}
+              >
+                {item.message}
+              </Text>
+            </View>
+          ))}
+      </KeyboardAwareScrollView>
       <SendBox
         disabled={text.length === 0}
         value={text}

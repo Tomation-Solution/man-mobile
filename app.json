@@ -1,9 +1,10 @@
 {
   "expo": {
-    "name": "man-app",
-    "slug": "man-app",
-    "version": "1.0.0",
+    "name": "MAN",
+    "slug": "man",
+    "version": "2.0.0",
     "orientation": "portrait",
+    "owner": "emetricsuite",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -21,13 +22,20 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.tomation.MAN",
+      "versionCode": 10,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c903dc84-61b6-407e-a006-5128309585a7"
+      }
     }
   }
 }

@@ -13,7 +13,6 @@ import fundProjectReducers from "./slices/Fund_A_Project/fund_a_project";
 import chat from "./slices/chat/chat";
 import extras from "./slices/extras/extras";
 
-
 export default combineReducers({
   authReducers,
   profileReducers,

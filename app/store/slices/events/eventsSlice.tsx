@@ -9,11 +9,17 @@ const initialState: {
   loading: boolean;
   eventRescheduled: boolean;
   eventNotRescheduled: boolean;
+  registerEvent: boolean;
+  message: string;
+  error: string;
 } = {
   events: [],
   loading: false,
   eventRescheduled: false,
   eventNotRescheduled: false,
+  registerEvent: false,
+  message: "",
+  error: "",
 };
 
 const eventsSlice = createSlice({
@@ -29,6 +35,11 @@ const eventsSlice = createSlice({
     },
     eventRequestFailed: (state, action) => {
       state.loading = false;
+      state.error = action.payload.response.data.message.error;
+    },
+    eventRegistered: (state, action) => {
+      state.loading = false;
+      state.registerEvent = true;
     },
     eventRescheduled: (state, action) => {
       state.loading = false;
@@ -37,6 +48,7 @@ const eventsSlice = createSlice({
     eventNotRescheduled: (state, action) => {
       state.loading = false;
       state.eventNotRescheduled = true;
+      state.error = action.payload.response.data.message.error;
     },
     clearConfig: (state) => {
       state.loading = false;
@@ -52,6 +64,7 @@ export const {
   eventRequestFailed,
   eventRescheduled,
   eventNotRescheduled,
+  eventRegistered,
   clearConfig,
 } = eventsSlice.actions;
 
@@ -91,36 +104,42 @@ export const getEvents =
     }
   };
 
-export const registerEvents = (id: number) => async (dispatch: AppDispatch) => {
-  const form = new FormData();
-  form.append("event_id", id.toString());
-  try {
-    const getToken: any = await retrieveUserDetails();
+export const registerEvents =
+  (id: number, proxy_participants?: any) => async (dispatch: AppDispatch) => {
+    const form = new FormData();
+    form.append("event_id", id.toString());
+    if (proxy_participants) {
+      form.append("proxy_participants", JSON.stringify([proxy_participants]));
+    }
 
-    if (getToken && getToken.token) {
-      const token = getToken.token;
+    try {
+      const getToken: any = await retrieveUserDetails();
 
-      dispatch(
-        apiCallBegan({
-          url: PRE_URL + `event/eventview/register_for_free_event/`,
-          extraheaders: "Token " + token,
-          form,
-          method: "post",
-          onStart: eventsRequested.type,
-          onSuccess: eventRequestFailed.type,
-          onError: eventRequestFailed.type,
-        })
-      );
-    } else {
-      const error = new Error("Unable to retrieve user token");
-      console.error(error);
+      if (getToken && getToken.token) {
+        const token = getToken.token;
+
+        dispatch(
+          apiCallBegan({
+            url: PRE_URL + `event/eventview/register_for_free_event/`,
+            extraheaders: "Token " + token,
+            contentType: "multipart/form-data",
+            data: form,
+            method: "post",
+            onStart: eventsRequested.type,
+            onSuccess: eventRegistered.type,
+            onError: eventRequestFailed.type,
+          })
+        );
+      } else {
+        const error = new Error("Unable to retrieve user token");
+        console.error(error);
+        dispatch(eventRequestFailed(error.message));
+      }
+    } catch (error: any) {
+      console.error("An error occured registerring you", error);
       dispatch(eventRequestFailed(error.message));
     }
-  } catch (error: any) {
-    console.error("An error occured registerring you", error);
-    dispatch(eventRequestFailed(error.message));
-  }
-};
+  };
 
 export const requestReschedule =
   (data: any) => async (dispatch: AppDispatch) => {

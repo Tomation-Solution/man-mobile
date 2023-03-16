@@ -8,6 +8,7 @@ import {
   verticalScale,
   horizontalScale,
   moderateScale,
+  normalize,
 } from "../../constants/metric";
 
 interface DetailsProps {
@@ -19,21 +20,23 @@ const Details = ({ route, navigation }: DetailsProps) => {
   const altRoute = useRoute();
   const altNavigation = useNavigation();
   const data = route?.params?.item || altRoute?.params || {};
+
   return (
-    <Container >
+    <Container>
       <HomeHeader
         navigation={navigation}
         title={"Fund a project" || "Details " + data.id}
-        back={navigation.goBack}
-
+        back={() => navigation.goBack("Home")}
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.scrollView}
       >
         <View style={styles.imageContainer}>
-          <Image source={{ uri: data?.image ? data.image.toString() : undefined }}
-            style={styles.image} />
+          <Image
+            source={{ uri: data?.image ? data.image.toString() : undefined }}
+            style={styles.image}
+          />
         </View>
         <View style={styles.descriptionContainer}>
           <Text style={styles.headText}>About project</Text>
@@ -45,10 +48,28 @@ const Details = ({ route, navigation }: DetailsProps) => {
               style={styles.button1}
               onPress={() => navigation.navigate("Details2", { data })}
             >
-              <Text style={{ color: "white", fontSize: 13, textAlign: 'center', marginVertical: 15 }}>Support in Kind</Text>
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 13,
+                  textAlign: "center",
+                  marginVertical: 15,
+                }}
+              >
+                Support in Kind
+              </Text>
             </TouchableOpacity>
             <View style={styles.button2}>
-              <Text style={{ color: COLORS.primary, fontSize: 13, textAlign: 'center', marginVertical: 15 }}>Support with cash</Text>
+              <Text
+                style={{
+                  color: COLORS.primary,
+                  fontSize: 13,
+                  textAlign: "center",
+                  marginVertical: 15,
+                }}
+              >
+                Support with cash
+              </Text>
             </View>
           </View>
         </View>
@@ -60,8 +81,7 @@ const Details = ({ route, navigation }: DetailsProps) => {
 export default Details;
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   scrollView: {
     marginBottom: verticalScale(20),
   },
@@ -84,11 +104,11 @@ const styles = StyleSheet.create({
     top: verticalScale(-20),
   },
   headText: {
-    fontSize: moderateScale(20),
+    fontSize: moderateScale(18),
     fontWeight: "700",
   },
   descriptionText: {
-    fontSize: moderateScale(15),
+    fontSize: moderateScale(14),
     color: "gray",
     textAlign: "justify",
     marginTop: verticalScale(20),
@@ -98,13 +118,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: verticalScale(20),
     marginBottom: horizontalScale(40),
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   button1: {
     // paddingVertical: moderateScale(11),
     // paddingHorizontal: moderateScale(16),
     backgroundColor: COLORS.primary,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: moderateScale(16),
     marginRight: horizontalScale(20),
     width: horizontalScale(130),
@@ -113,7 +133,7 @@ const styles = StyleSheet.create({
   button2: {
     // paddingVertical: moderateScale(10),
     // paddingHorizontal: moderateScale(10),
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: moderateScale(16),
     borderColor: COLORS.primary,
     borderWidth: moderateScale(1),

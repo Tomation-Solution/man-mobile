@@ -2,7 +2,12 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { images } from "../../assets/dummyData";
-import { horizontalScale, verticalScale } from "../../constants/metric";
+import { appImages } from "../../assets/app/images";
+import {
+  horizontalScale,
+  normalize,
+  verticalScale,
+} from "../../constants/metric";
 import { COLORS } from "../../constants/color";
 import { SPACING } from "../../globals/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -14,10 +19,17 @@ interface Props {
   title?: any;
   back?: any;
   isTitleComponent?: any;
+  showNotification?: boolean;
 }
-const HomeHeader = ({ navigation, title, back, isTitleComponent }: Props) => {
+const HomeHeader = ({
+  navigation,
+  title,
+  back,
+  isTitleComponent,
+  showNotification,
+}: Props) => {
   const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
-  const [userData, setUserData] = useState<{ userName: string } | null>(null);
+  const [userData, setUserData] = useState<any>();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -38,24 +50,24 @@ const HomeHeader = ({ navigation, title, back, isTitleComponent }: Props) => {
         <Ionicons
           name={back ? "chevron-back" : "menu"}
           color={COLORS.primary}
-          size={30}
+          size={normalize(30)}
         />
       </TouchableOpacity>
 
       {isTitleComponent ? (
         isTitleComponent
       ) : title ? (
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>{title}</Text>
+        <Text style={{ fontSize: normalize(14) }}>{title?.toUpperCase()}</Text>
       ) : (
         <>
-          <View>
-            <Text style={{ fontSize: 13, fontWeight: "500" }}>Welcome,</Text>
-            <Text>{isLoggedIn && userData?.userName}</Text>
-          </View>
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
             <View style={styles.imageContainer}>
               <Image
-                source={images.man}
+                source={
+                  userData?.profileImage
+                    ? { uri: userData?.profile_image?.toString() }
+                    : images.man
+                }
                 style={{
                   width: verticalScale(30),
                   height: horizontalScale(30),
@@ -65,13 +77,32 @@ const HomeHeader = ({ navigation, title, back, isTitleComponent }: Props) => {
           </TouchableOpacity>
         </>
       )}
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Notification")}
-        style={styles.notificationContainer}
-      >
-        <FontAwesome name="bell" color={COLORS.primary} size={20} />
-        <View style={styles.redDot} />
-      </TouchableOpacity>
+
+      {!back && (
+        <View style={{}}>
+          <Image
+            source={appImages.full_logo}
+            style={{
+              width: verticalScale(80),
+              height: horizontalScale(30),
+            }}
+          />
+        </View>
+      )}
+
+      {showNotification && (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Notification")}
+          style={styles.notificationContainer}
+        >
+          <FontAwesome
+            name="bell"
+            color={COLORS.primary}
+            size={normalize(20)}
+          />
+          <View style={styles.redDot} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

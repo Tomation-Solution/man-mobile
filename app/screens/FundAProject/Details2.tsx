@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { Container, HomeHeader, Dropdown, Formbtn } from "../../components";
 import {
@@ -8,12 +8,10 @@ import {
 } from "../../constants/metric";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import { COLORS } from "../../constants/color";
 import { kindFunding } from "../../store/slices/Fund_A_Project/fundSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-
 
 interface DetailsProps {
   route?: any;
@@ -22,7 +20,6 @@ interface DetailsProps {
 interface MessageValues {
   heading: string;
 }
-
 
 const Details2 = ({ route, navigation }: DetailsProps) => {
   const data = route?.params?.data || {};
@@ -34,8 +31,13 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
 
   const dispatch = useAppDispatch();
 
-  const handleSubmit = async (values: MessageValues, { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }) => {
-
+  const handleSubmit = async (
+    values: MessageValues,
+    {
+      setSubmitting,
+      resetForm,
+    }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }
+  ) => {
     const { heading } = values;
     await dispatch(kindFunding(data?.id, heading));
     setSubmitting(false);
@@ -48,17 +50,19 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
 
   return (
     <Container>
-      <HomeHeader title="Fund a Project" navigation={navigation}
+      <HomeHeader
+        title="Fund a Project"
+        navigation={navigation}
         back={navigation.goBack}
       />
       <View style={styles.inputContainer}>
         <Formik
-          initialValues={{ heading: ' ' }}
+          initialValues={{ heading: " " }}
           validationSchema={Yup.object({
             heading: Yup.string().required(),
           })}
-          onSubmit={handleSubmit}>
-
+          onSubmit={handleSubmit}
+        >
           {({
             handleChange,
             handleBlur,
@@ -74,17 +78,17 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
               </View>
               <TextInput
                 style={styles.input}
-                onChangeText={handleChange('heading')}
-                onBlur={handleBlur('heading')}
+                onChangeText={handleChange("heading")}
+                onBlur={handleBlur("heading")}
                 value={values.heading}
                 multiline={true}
                 numberOfLines={7}
-                placeholder='Enter your message '
+                placeholder="Enter your message "
               />
-              {errors.heading && touched.heading ? <Text style={styles.error}>{errors.heading}</Text> : null}
-              <Formbtn
-                onPress={handleSubmit}
-                title='Get Support' />
+              {errors.heading && touched.heading ? (
+                <Text style={styles.error}>{errors.heading}</Text>
+              ) : null}
+              <Formbtn onPress={handleSubmit} title="Get Support" />
             </View>
           )}
         </Formik>
@@ -101,8 +105,8 @@ const styles = StyleSheet.create({
   headText: {
     textAlign: "center",
     fontWeight: "700",
-    fontSize: moderateScale(24),
-    marginTop: verticalScale(20),
+    fontSize: moderateScale(20),
+    marginTop: verticalScale(18),
   },
   inputContainer: {
     marginHorizontal: horizontalScale(10),
@@ -139,12 +143,11 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#E8F6F8',
+    borderColor: "#E8F6F8",
     paddingHorizontal: 9,
     paddingVertical: 13,
     marginVertical: 21,
-    backgroundColor: '#E8F6F8',
-    borderRadius: 9
+    backgroundColor: "#E8F6F8",
+    borderRadius: 9,
   },
-
 });

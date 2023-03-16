@@ -8,9 +8,10 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fundProject } from "../../store/slices/Fund_A_Project/fundSlice";
 import LoadingIndicator from "../../utils/LoadingIndicator";
 
-
 const Home = ({ navigation }: any) => {
-  const { isLoggedIn } = useAppSelector((state: any) => state.authReducers.login);
+  const { isLoggedIn } = useAppSelector(
+    (state: any) => state.authReducers.login
+  );
   const { userData, loading } = useAppSelector(
     (state) => state.fundProjectReducers.fundProjectSlice
   );
@@ -19,10 +20,15 @@ const Home = ({ navigation }: any) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(fundProject())
+      dispatch(fundProject());
     }
-  }, [dispatch, isLoggedIn])
+  }, [dispatch, isLoggedIn]);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(fundProject());
+    }
+  }, [dispatch, isLoggedIn]);
 
   return (
     <Container>
@@ -33,23 +39,21 @@ const Home = ({ navigation }: any) => {
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
-          {loading ?
-            (<LoadingIndicator />)
-            : (
-              <>
-                {userData?.data.map((item: any) => {
-                  return (
-                    <DonationCard
-                      key={item.id}
-                      item={item}
-                      onPress={() => navigation.navigate("Details1", { item })}
-                    />
-                  );
-                })}
-              </>
-            )
-
-          }
+          {loading ? (
+            <LoadingIndicator />
+          ) : (
+            <>
+              {userData?.data.map((item: any) => {
+                return (
+                  <DonationCard
+                    key={item.id}
+                    item={item}
+                    onPress={() => navigation.navigate("Details1", { item })}
+                  />
+                );
+              })}
+            </>
+          )}
         </View>
       </ScrollView>
     </Container>

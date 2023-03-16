@@ -20,6 +20,7 @@ import { Formik, Field } from "formik";
 import * as yup from "yup";
 import { createMember } from "../../../store/slices/auth/loginSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { COLORS } from "../../../constants/color";
 
 const Registration = ({ route, navigation }: any) => {
   const dispatch = useAppDispatch();
@@ -81,7 +82,6 @@ const Registration = ({ route, navigation }: any) => {
             <Formik
               validationSchema={yup.object().shape({
                 name: yup.string().required().label("Name"),
-                EMAIL: yup.string().required().email().label("Email"),
                 password: yup.string().required().min(6).label("Password"),
                 GSM: yup.string().required().min(11).label("Phone number"),
                 TITLE: yup.string().required().label("Title"),
@@ -94,7 +94,6 @@ const Registration = ({ route, navigation }: any) => {
               })}
               initialValues={{
                 name: user_data?.name || "",
-                EMAIL: user_data?.EMAIL || "",
                 password: "",
                 rel8Email: "",
                 GSM: user_data?.GSM || "",
@@ -119,16 +118,11 @@ const Registration = ({ route, navigation }: any) => {
                     placeholder="Phone number"
                     editable={false}
                   />
-                  <Field
-                    component={FormInput}
-                    name="EMAIL"
-                    placeholder="Email address"
-                  />
 
                   <Field
                     component={FormInput}
                     name="rel8Email"
-                    placeholder="rel8Email address"
+                    placeholder="Email address"
                   />
 
                   <Field
@@ -222,7 +216,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "700",
     lineHeight: 32.78,
-    color: "#2B3513",
+    color: COLORS.primary,
   },
   heading: {
     fontSize: 14,
@@ -248,7 +242,7 @@ const styles = StyleSheet.create({
     right: 31,
     top: 10,
     fontWeight: "700",
-    color: "#2b3513",
+    color: COLORS.primary,
     fontSize: 13,
   },
 });

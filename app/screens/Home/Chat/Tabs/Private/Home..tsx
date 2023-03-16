@@ -1,16 +1,14 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 
-import { SearchBar } from "../../../../../components";
 import PrivateChatCard from "../../../../../components/Chats/PrivateChatCard";
 import { COLORS } from "../../../../../constants/color";
 import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
 import { getMembers } from "../../../../../store/slices/extras/members";
 import LoadingIndicator from "../../../../../utils/LoadingIndicator";
-import { retrieveUserDetails } from "../../../../../utils/helperFunctions/userDataHandlers";
 import { clearChat } from "../../../../../store/slices/chat/chat";
 
-const Home = ({ navigation, setShowTabBar, userData }: any) => {
+const Home = ({ navigation, userData }: any) => {
   const dispatch = useAppDispatch();
   const { membersList, loading } = useAppSelector(
     (state) => state.extras.members
@@ -26,9 +24,7 @@ const Home = ({ navigation, setShowTabBar, userData }: any) => {
         style={{
           paddingHorizontal: 20,
         }}
-      >
-        <SearchBar />
-      </View>
+      ></View>
       <ScrollView
         style={{
           padding: 10,

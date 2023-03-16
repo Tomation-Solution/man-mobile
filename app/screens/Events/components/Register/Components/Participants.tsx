@@ -37,22 +37,11 @@ const Participants = ({
         style={{
           width: "100%",
           alignItems: "center",
-          marginTop: 20,
           paddingVertical: 5,
           borderBottomColor: COLORS.primary,
           borderBottomWidth: 1,
         }}
       >
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: "600",
-            color: COLORS.primary,
-            marginBottom: 5,
-          }}
-        >
-          {companyName ? companyName : "Company Name"}
-        </Text>
         <Text style={styles.smallText}>
           Kindly input the names and email address of every participant that you
           are about to pay for

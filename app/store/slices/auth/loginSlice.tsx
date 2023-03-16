@@ -32,19 +32,21 @@ const loginSlice = createSlice({
   initialState,
   reducers: {
     loginRequested: (state, action) => {
+      state.error = "";
       state.loading = true;
-      // console.log("loginRequested", "looading");
     },
 
     loginReceived: (state, action) => {
       state.loading = false;
+      state.error = "";
       state.isLoggedIn = true;
-      // console.log("loginReceived", action.payload);
+      console.log("loginReceived", action.payload);
       storeUserDetails(JSON.stringify(action.payload));
       state.userData = JSON.stringify(action.payload);
     },
     loginRequestFailed: (state, action) => {
       state.loading = false;
+      state.error = action.payload.response.data.data.error[0];
       console.log("loginRequestFailed", action.payload);
     },
     logUserOut: (state) => {
@@ -54,6 +56,7 @@ const loginSlice = createSlice({
     },
 
     validationRequested: (state, action) => {
+      state.error = "";
       state.loading = true;
       state.message = "";
       console.log("validationRequested", "looading");
@@ -69,12 +72,14 @@ const loginSlice = createSlice({
     },
 
     validationRequestFailed: (state, action) => {
+      state.isUserValidated = false;
       state.loading = false;
       state.message = "Validation Failed or Invalid Token";
       console.log("validationRequestFailed", action.payload);
     },
 
     registrationRequested: (state, action) => {
+      state.error = "";
       state.loading = true;
       console.log("registrationRequested", "looading");
     },

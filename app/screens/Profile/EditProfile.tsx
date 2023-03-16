@@ -139,8 +139,6 @@ const EditProfile = ({ navigation }: any) => {
     appDispatch(editProfile(formState, userData?.data[0]?.id));
   };
 
-  console.log("formState", formState);
-
   return (
     <Container>
       <View

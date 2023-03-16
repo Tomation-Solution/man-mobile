@@ -10,6 +10,7 @@ const api =
       url,
       data,
       params,
+      contentType,
       onSuccess,
       onError,
       onStart,
@@ -23,12 +24,12 @@ const api =
     try {
       const response = await axios.request({
         method,
-        baseURL: "https://web-production-d5b0.up.railway.app/",
+        baseURL: "https://rel8backend-production.up.railway.app/",
         url,
         params: params,
         data,
         headers: {
-          "content-type": "application/json",
+          "content-type": contentType ? contentType : "application/json",
           Authorization: extraheaders,
         },
       });
@@ -36,15 +37,13 @@ const api =
       // Default
 
       dispatch(actions.apiCallSuccess(response.data));
-      // console.log("res: ", response);
+      console.log("res: ", response);
       // Specific
       if (onSuccess) {
         dispatch({ type: onSuccess, payload: response.data });
         // window.location.reload()
       }
     } catch (error: any) {
-
-
       // Default
       dispatch(actions.apiCallFailed(error));
 

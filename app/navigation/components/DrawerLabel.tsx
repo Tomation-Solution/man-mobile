@@ -6,6 +6,7 @@ import { COLORS } from "../../constants/color";
 import { EnvironmentContext } from "../DrawerNav";
 import { useAppDispatch } from "../../store/hooks";
 import { logout } from "../../store/slices/auth/loginSlice";
+import { moderateScale, normalize } from "../../constants/metric";
 
 interface DrawerLabelProps {
   focused: boolean;
@@ -149,7 +150,7 @@ const DrawerLabel = ({
               style={{
                 color: COLORS.primary,
                 fontWeight: focused ? "bold" : "normal",
-                fontSize: 18,
+                fontSize: moderateScale(18),
                 marginLeft: 10,
               }}
             >
@@ -223,7 +224,7 @@ const DrawerLabel = ({
                   style={{
                     color: COLORS.primary,
                     fontWeight: focused ? "bold" : "normal",
-                    fontSize: 18,
+                    fontSize: normalize(18),
                     marginLeft: 10,
                   }}
                 >
@@ -257,7 +258,7 @@ const DrawerLabel = ({
                 style={{
                   color: COLORS.primary,
                   fontWeight: switchMenuActive === 0 ? "bold" : "normal",
-                  fontSize: 18,
+                  fontSize: normalize(18),
                   marginLeft: 10,
                 }}
               >
@@ -295,7 +296,7 @@ const DrawerLabel = ({
                     color: COLORS.primary,
                     fontWeight:
                       switchMenuActive === item.id ? "bold" : "normal",
-                    fontSize: 18,
+                    fontSize: normalize(18),
                     marginLeft: 10,
                   }}
                 >

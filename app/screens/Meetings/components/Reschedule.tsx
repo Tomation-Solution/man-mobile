@@ -15,7 +15,6 @@ interface RescheduleProps {
 
 const Reschedule = ({ close, submitApollogy }: RescheduleProps) => {
   const [reason, setReason] = React.useState<string>("");
-  const dispatch = useAppDispatch();
 
   const { appologySent, loading, message } = useAppSelector(
     (state) => state.meetings
@@ -29,7 +28,7 @@ const Reschedule = ({ close, submitApollogy }: RescheduleProps) => {
           fontWeight: "500",
         }}
       >
-        Render an Applogy
+        Render an Apology
       </Text>
 
       {loading ? (
@@ -43,7 +42,7 @@ const Reschedule = ({ close, submitApollogy }: RescheduleProps) => {
             color: "crimson",
           }}
         >
-          {message ? message : "Appology sent"}
+          {message ? message : "Apology sent"}
         </Text>
       ) : (
         <TextInput
@@ -56,7 +55,7 @@ const Reschedule = ({ close, submitApollogy }: RescheduleProps) => {
             padding: 10,
             width: "100%",
           }}
-          placeholder="Reason for appology"
+          placeholder="Reason for apology"
         />
       )}
       <View

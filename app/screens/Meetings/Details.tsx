@@ -18,10 +18,12 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import LoadingIndicator from "../../utils/LoadingIndicator";
 import {
   appology,
+  clearMeetingConfig,
   resgisterForMeeting,
 } from "../../store/slices/meetings/meetingsSlice";
 import Accepted from "./components/Accepted";
 import Reschedule from "./components/Reschedule";
+import Proxy from "./components/Proxy";
 
 const Details = ({ route, navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -41,8 +43,14 @@ const Details = ({ route, navigation }: any) => {
   };
 
   const applogy = () => {
+    dispatch(clearMeetingConfig);
     setModalVisible(true);
     setModalContent("appology");
+  };
+  const proxy = () => {
+    dispatch(clearMeetingConfig);
+    setModalVisible(true);
+    setModalContent("proxy");
   };
 
   const submitApplogy = (reason: string) => {
@@ -78,6 +86,12 @@ const Details = ({ route, navigation }: any) => {
         </CustomModal>
       )}
 
+      {modalContent === "proxy" && (
+        <CustomModal visible={modalVisible} onRequestClose={setModalVisible}>
+          <Proxy event_id={data.id} onPress={() => setModalVisible(false)} />
+        </CustomModal>
+      )}
+
       <HomeHeader
         navigation={navigation}
         title={"Meeting Details" || "Details " + data.id}
@@ -91,24 +105,11 @@ const Details = ({ route, navigation }: any) => {
           marginBottom: 120,
         }}
       >
-        <View
-          style={{
-            borderTopRightRadius: 20,
-            borderTopLeftRadius: 20,
-            overflow: "hidden",
-          }}
-        >
-          <Image
-            source={{ uri: data?.image ? data.image.toString() : undefined }}
-            style={{ width: "100%", height: 300 }}
-          />
-        </View>
-
         <Text
           style={{
             fontSize: 18,
             fontWeight: "300",
-            marginTop: 3,
+            marginTop: 20,
             marginLeft: 10,
           }}
         >
@@ -328,30 +329,56 @@ const Details = ({ route, navigation }: any) => {
             paddingBottom: 10,
           }}
         >
+          {data?.is_attending && (
+            <TouchableOpacity
+              style={{
+                backgroundColor: COLORS.primary,
+                padding: 10,
+                borderRadius: 10,
+                width: "100%",
+                alignItems: "center",
+                marginTop: 10,
+              }}
+              activeOpacity={0.8}
+              onPress={register}
+            >
+              <Text
+                style={{
+                  color: "white",
+                  fontWeight: "500",
+                  fontSize: 16,
+                  textAlign: "center",
+                }}
+              >
+                Register
+              </Text>
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             style={{
-              backgroundColor: COLORS.primary,
+              backgroundColor: "white",
               padding: 10,
               borderRadius: 10,
               width: "100%",
               alignItems: "center",
               marginTop: 10,
+              borderColor: COLORS.primary,
+              borderWidth: 1,
             }}
             activeOpacity={0.8}
-            onPress={register}
+            onPress={proxy}
           >
             <Text
               style={{
-                color: "white",
+                color: COLORS.primary,
                 fontWeight: "500",
                 fontSize: 16,
                 textAlign: "center",
               }}
             >
-              Register
+              Appoint a Proxy
             </Text>
           </TouchableOpacity>
-
           <TouchableOpacity
             style={{
               backgroundColor: "white",
@@ -374,7 +401,7 @@ const Details = ({ route, navigation }: any) => {
                 textAlign: "center",
               }}
             >
-              Appologise
+              Apologise
             </Text>
           </TouchableOpacity>
         </View>

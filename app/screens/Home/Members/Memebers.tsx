@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { getMembers } from "../../../store/slices/extras/members";
 import LoadingIndicator from "../../../utils/LoadingIndicator";
 import { images } from "../../../assets/dummyData";
+import { normalize } from "../../../constants/metric";
 
 const Memebers = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ const Memebers = () => {
       <ScrollView
         style={{
           padding: 10,
+          marginTop: 20,
         }}
         showsVerticalScrollIndicator={false}
       >
@@ -59,7 +61,15 @@ const Memebers = () => {
                   }
                 />
                 <View>
-                  <Text>{item.full_name}</Text>
+                  <Text
+                    style={{
+                      fontSize: normalize(13),
+                      fontWeight: "bold",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    {item.full_name}
+                  </Text>
                   <Text style={{ color: "blue" }}>{item.email}</Text>
                 </View>
               </View>

@@ -41,9 +41,7 @@ const updatesData = [
 const { width, height } = Dimensions.get("window");
 
 const UpdateContainer = ({ item, onPress }: any) => {
-  useEffect(() => {
-    console.log("item: ", item);
-  }, [item]);
+  useEffect(() => {}, [item]);
 
   return (
     <View

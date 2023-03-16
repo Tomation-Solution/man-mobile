@@ -1,8 +1,8 @@
 import { View, Text, Image, StyleSheet } from "react-native";
-import React from "react";
-import { Container, HomeHeader } from "../../components";
+import React, { useState } from "react";
+import { Container, CustomModal, HomeHeader } from "../../components";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TextInput, TouchableOpacity } from "react-native";
 import { COLORS } from "../../constants/color";
 import {
   verticalScale,
@@ -17,64 +17,153 @@ interface DetailsProps {
 }
 
 const Details = ({ route, navigation }: DetailsProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const altRoute = useRoute();
   const altNavigation = useNavigation();
   const data = route?.params?.item || altRoute?.params || {};
 
   return (
-    <Container>
-      <HomeHeader
-        navigation={navigation}
-        title={"Fund a project" || "Details " + data.id}
-        back={() => navigation.goBack("Home")}
-      />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styles.scrollView}
-      >
-        <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: data?.image ? data.image.toString() : undefined }}
-            style={styles.image}
-          />
-        </View>
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.headText}>About project</Text>
-          <View>
-            <Text style={styles.descriptionText}>{data.about}</Text>
-          </View>
-          <View style={styles.buttonContainer}>
+    <>
+      <CustomModal visible={isOpen} onRequestClose={setIsOpen}>
+        <View style={styles.modalWrapper}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: normalize(14),
+                fontWeight: "bold",
+              }}
+            >
+              Select Action
+            </Text>
+
             <TouchableOpacity
-              style={styles.button1}
-              onPress={() => navigation.navigate("Details2", { data })}
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.1)",
+                padding: 5,
+                borderRadius: 10,
+              }}
+              onPress={() => setIsOpen(false)}
             >
               <Text
                 style={{
-                  color: "white",
-                  fontSize: 13,
-                  textAlign: "center",
-                  marginVertical: 15,
+                  fontSize: normalize(12),
+                  fontWeight: "bold",
+                  color: "red",
                 }}
               >
-                Support in Kind
+                Close
               </Text>
             </TouchableOpacity>
-            <View style={styles.button2}>
-              <Text
+          </View>
+          <View
+            style={{
+              marginTop: normalize(22),
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                width: "100%",
+              }}
+            >
+              <TextInput style={styles.input} placeholder="Amount" />
+              <TouchableOpacity
                 style={{
-                  color: COLORS.primary,
-                  fontSize: 13,
-                  textAlign: "center",
-                  marginVertical: 15,
+                  width: "100%",
+                  marginTop: normalize(15),
+                  marginBottom: normalize(10),
+                  backgroundColor: COLORS.primary,
+                  borderRadius: normalize(10),
+                }}
+                onPress={() => {
+                  setIsOpen(false);
+                  // navigation.navigate("Payment");
                 }}
               >
-                Support with cash
-              </Text>
+                <Text style={styles.modalText}>Make support</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
-      </ScrollView>
-    </Container>
+      </CustomModal>
+      <Container>
+        <HomeHeader
+          navigation={navigation}
+          title={"Fund a project" || "Details " + data.id}
+          back={() => navigation.goBack("Home")}
+        />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.scrollView}
+        >
+          <View style={styles.imageContainer}>
+            <Image
+              source={{ uri: data?.image ? data.image.toString() : undefined }}
+              style={styles.image}
+            />
+          </View>
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.headText}>About project</Text>
+            <View>
+              <Text style={styles.descriptionText}>{data.about}</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginVertical: 20,
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  backgroundColor: COLORS.primary,
+                  borderRadius: 20,
+                  padding: moderateScale(10),
+                }}
+                onPress={() => navigation.navigate("Details2", { data })}
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: normalize(13),
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Support in Kind
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setIsOpen(true)}
+                style={{
+                  borderColor: COLORS.primary,
+                  borderWidth: 1,
+                  borderRadius: 20,
+                  padding: moderateScale(10),
+                }}
+              >
+                <Text
+                  style={{
+                    color: COLORS.primary,
+                    fontSize: normalize(13),
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Support with cash
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </Container>
+    </>
   );
 };
 
@@ -113,31 +202,25 @@ const styles = StyleSheet.create({
     textAlign: "justify",
     marginTop: verticalScale(20),
   },
-  buttonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: verticalScale(20),
-    marginBottom: horizontalScale(40),
-    justifyContent: "center",
+  input: {
+    width: "100%",
+    height: verticalScale(40),
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10,
   },
-  button1: {
-    // paddingVertical: moderateScale(11),
-    // paddingHorizontal: moderateScale(16),
-    backgroundColor: COLORS.primary,
-    alignItems: "center",
-    borderRadius: moderateScale(16),
-    marginRight: horizontalScale(20),
-    width: horizontalScale(130),
-    height: verticalScale(67),
+  modalWrapper: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    width: "80%",
   },
-  button2: {
-    // paddingVertical: moderateScale(10),
-    // paddingHorizontal: moderateScale(10),
-    alignItems: "center",
-    borderRadius: moderateScale(16),
-    borderColor: COLORS.primary,
-    borderWidth: moderateScale(1),
-    width: horizontalScale(130),
-    height: verticalScale(67),
+  modalText: {
+    fontSize: normalize(14),
+    fontWeight: "bold",
+    color: "white",
+    paddingVertical: 10,
+    textAlign: "center",
   },
 });

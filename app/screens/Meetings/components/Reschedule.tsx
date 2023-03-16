@@ -87,7 +87,7 @@ const Reschedule = ({ close, submitApollogy }: RescheduleProps) => {
             ? "Loading..."
             : appologySent || message
             ? "Close"
-            : "Send Appology"}
+            : "Send Apology"}
         </Text>
       </View>
     </View>

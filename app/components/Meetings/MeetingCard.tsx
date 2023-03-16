@@ -5,7 +5,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 
 const Accept = ({ accept, accepted }: any) => {
   const handleAccept = () => {
@@ -31,12 +31,11 @@ const Accept = ({ accept, accepted }: any) => {
   );
 };
 
-const Appology = ({ meeting_id, setMeetingId, appology }: any) => {
+const Apology = ({ meeting_id, setMeetingId, appology }: any) => {
   const handleOnPress = () => {
     setMeetingId(() => meeting_id);
     console.log("Meeting Id", meeting_id);
     appology();
-    console.log("Appology");
   };
   return (
     <TouchableOpacity style={styles.actionContainer} onPress={handleOnPress}>
@@ -48,7 +47,7 @@ const Appology = ({ meeting_id, setMeetingId, appology }: any) => {
           marginLeft: 5,
         }}
       >
-        Appology
+        Apology
       </Text>
     </TouchableOpacity>
   );
@@ -58,7 +57,6 @@ const Join = ({}: any) => {
   const [accepted, setAccepted] = React.useState(false);
   const handleOnPress = () => {
     alert("Comming Soon!");
-    console.log("Appology");
     setAccepted(!accepted);
   };
   return (
@@ -131,8 +129,8 @@ const MeetingCard = ({
         }}
       >
         <Accept accept={accept} accepted={accepted} />
-        <Appology
-          appology={appology}
+        <Apology
+          apology={appology}
           setMeetingId={setMeetingId}
           meeting_id={meeting_id}
         />

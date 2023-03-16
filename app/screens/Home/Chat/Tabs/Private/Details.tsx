@@ -149,40 +149,32 @@ const Details = ({ route, navigation, setShowTabBar, userData }: any) => {
           marginBottom: 90,
         }}
       >
-        {chat
-          ?.slice()
-          .reverse()
-          ?.map((item: any, index: number) => (
-            <View
-              key={index}
+        {chat?.map((item: any, index: number) => (
+          <View
+            key={index}
+            style={{
+              padding: 10,
+              backgroundColor:
+                item.user__id === userData?.user_id ? COLORS.primary : "black",
+              margin: 10,
+              borderBottomEndRadius: 10,
+              borderBottomLeftRadius: 10,
+              borderTopLeftRadius: item.user__id === userData?.user_id ? 10 : 0,
+              borderTopRightRadius:
+                item.user__id === userData?.user_id ? 0 : 10,
+              alignSelf:
+                item.user__id === userData?.user_id ? "flex-end" : "flex-start",
+            }}
+          >
+            <Text
               style={{
-                padding: 10,
-                backgroundColor:
-                  item.user__id === userData?.user_id
-                    ? COLORS.primary
-                    : "black",
-                margin: 10,
-                borderBottomEndRadius: 10,
-                borderBottomLeftRadius: 10,
-                borderTopLeftRadius:
-                  item.user__id === userData?.user_id ? 10 : 0,
-                borderTopRightRadius:
-                  item.user__id === userData?.user_id ? 0 : 10,
-                alignSelf:
-                  item.user__id === userData?.user_id
-                    ? "flex-end"
-                    : "flex-start",
+                color: COLORS.icon,
               }}
             >
-              <Text
-                style={{
-                  color: COLORS.icon,
-                }}
-              >
-                {item.message}
-              </Text>
-            </View>
-          ))}
+              {item.message}
+            </Text>
+          </View>
+        ))}
       </KeyboardAwareScrollView>
       <SendBox
         disabled={text.length === 0}

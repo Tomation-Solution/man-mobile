@@ -3,10 +3,12 @@ import { Container, HomeHeader } from "../../../components";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { COLORS } from "../../../constants/color";
 import { CompletedPayment, PendingPayment } from "./Tabs";
+import React from "react";
 
 const Top = createMaterialTopTabNavigator();
 
 const Account = ({ navigation }: any) => {
+  const [outstanding, setOutstanding] = React.useState(0);
   return (
     <Container>
       <HomeHeader
@@ -35,8 +37,7 @@ const Account = ({ navigation }: any) => {
                 lineHeight: 21,
               }}
             >
-              {" "}
-              0.00
+              {outstanding}
             </Text>
             <Text
               style={{ fontSize: 12, fontWeight: "500", textAlign: "center" }}
@@ -57,7 +58,15 @@ const Account = ({ navigation }: any) => {
         }}
       >
         <Top.Screen name="Compeleted Payment" component={CompletedPayment} />
-        <Top.Screen name="Pending Payment" component={PendingPayment} />
+        <Top.Screen name="Peding Payment">
+          {(props) => (
+            <PendingPayment
+              {...props}
+              setOutstanding={setOutstanding}
+              outstanding={outstanding}
+            />
+          )}
+        </Top.Screen>
       </Top.Navigator>
     </Container>
   );

@@ -10,18 +10,35 @@ import React from "react";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { COLORS } from "../../../../../constants/color";
 import { Globalstyles } from "../../../../../globals/styles";
+import { registerEvents } from "../../../../../store/slices/events/eventsSlice";
+import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
+import LoadingIndicator from "../../../../../utils/LoadingIndicator";
 
 const { height, width } = Dimensions.get("window");
 
 const Participants = ({
   handlePress,
   ticketCount,
-  companyName,
-  participant,
-  setParticipants,
+  event_id,
   setTicketCount,
   onPress,
+  participants,
+  dispatch,
 }: any) => {
+  const appDispatch = useAppDispatch();
+  const { loading, error, registerEvent } = useAppSelector(
+    (state) => state.events
+  );
+
+  const regPart = () => {
+    console.log("regPart", participants);
+    let proxy_participants = participants;
+
+    if (participants.length !== 0) {
+      appDispatch(registerEvents(event_id, proxy_participants));
+    }
+  };
+
   return (
     <View style={Globalstyles.modalContainer}>
       <Text
@@ -42,10 +59,14 @@ const Participants = ({
           borderBottomWidth: 1,
         }}
       >
-        <Text style={styles.smallText}>
-          Kindly input the names and email address of every participant that you
-          are about to pay for
-        </Text>
+        {error ? (
+          <Text style={[styles.smallText, { color: "red" }]}>{error}</Text>
+        ) : (
+          <Text style={styles.smallText}>
+            Kindly input the names and email address of every participant that
+            you are about to pay for
+          </Text>
+        )}
       </View>
 
       <ScrollView
@@ -88,9 +109,9 @@ const Participants = ({
                 placeholder="Name"
                 placeholderTextColor={COLORS.icon}
                 onChangeText={(text) => {
-                  setParticipants((prev: any) => {
-                    prev[i].name = text;
-                    return [...prev];
+                  dispatch({
+                    type: "setParticipantsName",
+                    payload: { full_name: text, index: i },
                   });
                 }}
               />
@@ -105,9 +126,9 @@ const Participants = ({
                 placeholder="Email"
                 placeholderTextColor={COLORS.icon}
                 onChangeText={(text) => {
-                  setParticipants((prev: any) => {
-                    prev[i].email = text;
-                    return [...prev];
+                  dispatch({
+                    type: "setParticipantsEmail",
+                    payload: { email: text, index: i },
                   });
                 }}
               />
@@ -125,10 +146,6 @@ const Participants = ({
           onPress={() => {
             if (ticketCount < 10) {
               setTicketCount(ticketCount + 1);
-              setParticipants((prev: any) => {
-                prev.push({ name: "", email: "" });
-                return [...prev];
-              });
             }
           }}
         >
@@ -177,18 +194,23 @@ const Participants = ({
               marginLeft: 20,
             }}
             activeOpacity={0.8}
-            onPress={onPress}
+            onPress={registerEvent ? onPress : regPart}
+            disabled={loading}
           >
-            <Text
-              style={{
-                color: "white",
-                fontWeight: "500",
-                fontSize: 16,
-                textAlign: "center",
-              }}
-            >
-              Pay
-            </Text>
+            {loading ? (
+              <LoadingIndicator />
+            ) : (
+              <Text
+                style={{
+                  color: "white",
+                  fontWeight: "500",
+                  fontSize: 16,
+                  textAlign: "center",
+                }}
+              >
+                {registerEvent ? "Close" : "Register"}
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
       </ScrollView>

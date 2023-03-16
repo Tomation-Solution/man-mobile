@@ -102,7 +102,7 @@ export const loadMeetings =
   };
 
 export const resgisterForMeeting =
-  (id: number) => async (dispatch: AppDispatch) => {
+  (id: number, proxy_participants?: any) => async (dispatch: AppDispatch) => {
     try {
       const getToken: any = await retrieveUserDetails();
 
@@ -115,6 +115,7 @@ export const resgisterForMeeting =
             extraheaders: "Token " + token,
             data: {
               meeting: id,
+              proxy_participants: proxy_participants ? proxy_participants : [],
             },
             method: "post",
             onStart: meetingsRequested.type,

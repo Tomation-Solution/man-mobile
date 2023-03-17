@@ -31,11 +31,11 @@ const Accept = ({ accept, accepted }: any) => {
   );
 };
 
-const Apology = ({ meeting_id, setMeetingId, appology }: any) => {
+const Apology = ({ meeting_id, setMeetingId, apology }: any) => {
   const handleOnPress = () => {
     setMeetingId(() => meeting_id);
     console.log("Meeting Id", meeting_id);
-    appology();
+    apology();
   };
   return (
     <TouchableOpacity style={styles.actionContainer} onPress={handleOnPress}>
@@ -86,7 +86,7 @@ const MeetingCard = ({
   onPress,
   accept,
   accepted,
-  appology,
+  apology,
   setMeetingId,
   meeting_id,
 }: any) => {
@@ -130,7 +130,7 @@ const MeetingCard = ({
       >
         <Accept accept={accept} accepted={accepted} />
         <Apology
-          apology={appology}
+          apology={apology}
           setMeetingId={setMeetingId}
           meeting_id={meeting_id}
         />

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, HomeHeader, Dropdown, Formbtn } from "../../components";
 import {
   horizontalScale,
@@ -18,7 +18,7 @@ interface DetailsProps {
   navigation?: any;
 }
 interface MessageValues {
-  heading: string;
+  about: string;
 }
 
 const Details2 = ({ route, navigation }: DetailsProps) => {
@@ -28,7 +28,7 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
   // console.log(' inside details oh ' + data?.image)
 
   const initialValues: MessageValues = {
-    heading: "",
+    about: "",
   };
 
   const dispatch = useAppDispatch();
@@ -40,20 +40,26 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
       resetForm,
     }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }
   ) => {
-    const { heading } = values;
-    if (heading === " ") {
+    const { about } = values;
+    if (about === " ") {
       return;
     } else {
-      console.log(heading.length);
-      await dispatch(kindFunding(data?.id, heading));
+      let heading = selected;
+      await dispatch(kindFunding(data?.id, heading, about));
       setSubmitting(false);
       resetForm();
     }
   };
 
-  const { loading } = useAppSelector(
+  const { loading, success } = useAppSelector(
     (state: any) => state.fundProjectReducers.fundProjectSlice
   );
+
+  useEffect(() => {
+    if (success) {
+      navigation.navigate("Home");
+    }
+  }, [success]);
 
   return (
     <Container>
@@ -64,9 +70,9 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
       />
       <View style={styles.inputContainer}>
         <Formik
-          initialValues={{ heading: "" }}
+          initialValues={{ about: "" }}
           validationSchema={Yup.object({
-            heading: Yup.string().required(),
+            about: Yup.string().required(),
           })}
           onSubmit={handleSubmit}
         >
@@ -89,16 +95,16 @@ const Details2 = ({ route, navigation }: DetailsProps) => {
               </View>
               <TextInput
                 style={styles.input}
-                onChangeText={handleChange("heading")}
-                onBlur={handleBlur("heading")}
-                value={values.heading}
+                onChangeText={handleChange("about")}
+                onBlur={handleBlur("about")}
+                value={values.about}
                 multiline={true}
                 numberOfLines={7}
                 placeholderTextColor={"#010001"}
                 placeholder="Enter your message "
               />
-              {errors.heading && touched.heading ? (
-                <Text style={styles.error}>{errors.heading}</Text>
+              {errors.about && touched.about ? (
+                <Text style={styles.error}>{errors.about}</Text>
               ) : null}
               <Formbtn onPress={handleSubmit} title="Support" />
             </View>

@@ -30,7 +30,7 @@ const Home = ({ navigation, environment }: any) => {
     setModalContent("register");
   };
 
-  const applogy = () => {
+  const apology = () => {
     dispatch(clearMeetingConfig());
     setModalVisible(true);
     setModalContent("appology");
@@ -89,7 +89,7 @@ const Home = ({ navigation, environment }: any) => {
                 accept={() => register(meeting.id)}
                 accepted={meeting.is_attending}
                 setMeetingId={setMeetingId}
-                appology={applogy}
+                apology={apology}
                 key={meeting.id}
                 meeting_id={meeting.id}
                 title={meeting.name}

@@ -7,8 +7,8 @@ import { retrieveUserDetails } from "../../../utils/helperFunctions/userDataHand
 const initialState: {
   userData: { data: any } | null;
   loading: boolean;
-  success: boolean,
-  error: any,
+  success: boolean;
+  error: any;
 } = {
   userData: null,
   loading: false,
@@ -30,23 +30,23 @@ const fundProjectSlice = createSlice({
     fundProjectRequestFailed: (state, action) => {
       state.loading = false;
     },
-      kindFundingRequested: (state, action) => {
+    kindFundingRequested: (state, action) => {
       state.loading = true;
       state.success = false;
       state.error = null;
     },
-  kindFundingSuccess: (state, action) => {
+    kindFundingSuccess: (state, action) => {
       state.loading = false;
       state.success = true;
       state.error = null;
     },
-  kindFundingFailed: (state, action) => {
+    kindFundingFailed: (state, action) => {
       state.loading = false;
       state.success = false;
       state.error = action.payload;
+    },
   },
-  }
-})
+});
 
 export const {
   kindFundingRequested,
@@ -54,8 +54,8 @@ export const {
   kindFundingFailed,
   fundProjectRequested,
   fundProjectReceived,
-  fundProjectRequestFailed
-  } =fundProjectSlice.actions;
+  fundProjectRequestFailed,
+} = fundProjectSlice.actions;
 
 export default fundProjectSlice.reducer;
 
@@ -69,8 +69,8 @@ export const fundProject = () => async (dispatch: AppDispatch) => {
           url: PRE_URL + "extras/member_support_project/",
           extraheaders: "Token " + token,
           method: "get",
-          onStart:fundProjectRequested.type,
-          onSuccess:fundProjectReceived.type,
+          onStart: fundProjectRequested.type,
+          onSuccess: fundProjectReceived.type,
           onError: fundProjectRequestFailed.type,
         })
       );
@@ -85,33 +85,36 @@ export const fundProject = () => async (dispatch: AppDispatch) => {
   }
 };
 
-export const kindFunding = (projectId: number, heading: string) => async(dispatch: AppDispatch) => {
-  // console.log('inside payinkind'+ " " +projectId + ' ' +  heading )
-  try {
-    const getToken: any = await retrieveUserDetails();
-    if (getToken && getToken.token) {
-      const token = getToken.token;
-  dispatch(
-    apiCallBegan({
-        url: PRE_URL + "extras/member_support_project/support_in_kind/",
-        extraheaders: "Token " + token,
-        method: "post",
-      data: {
-       project:projectId,
-       heading:heading
-      },
-      onStart: kindFundingRequested.type,
-      onSuccess: kindFundingSuccess.type,
-      onError: kindFundingFailed.type,
-    }));
-  } else {
-    const error = new Error("Unable to retrieve user token");
-    console.error(error);
-    dispatch(kindFundingFailed(error.message));
-  }
-} catch (error: any) {
-  console.error("An error occurred while fetching duelist:", error);
-  dispatch(kindFundingFailed(error.message));
-}
-
-};
+export const kindFunding =
+  (projectId: number, heading: string, about: string) =>
+  async (dispatch: AppDispatch) => {
+    // console.log('inside payinkind'+ " " +projectId + ' ' +  heading )
+    try {
+      const getToken: any = await retrieveUserDetails();
+      if (getToken && getToken.token) {
+        const token = getToken.token;
+        dispatch(
+          apiCallBegan({
+            url: PRE_URL + "extras/member_support_project/support_in_kind/",
+            extraheaders: "Token " + token,
+            method: "post",
+            data: {
+              project: projectId,
+              heading: heading,
+              about: about,
+            },
+            onStart: kindFundingRequested.type,
+            onSuccess: kindFundingSuccess.type,
+            onError: kindFundingFailed.type,
+          })
+        );
+      } else {
+        const error = new Error("Unable to retrieve user token");
+        console.error(error);
+        dispatch(kindFundingFailed(error.message));
+      }
+    } catch (error: any) {
+      console.error("An error occurred while fetching duelist:", error);
+      dispatch(kindFundingFailed(error.message));
+    }
+  };

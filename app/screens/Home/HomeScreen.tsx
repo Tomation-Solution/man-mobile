@@ -15,27 +15,43 @@ const HomeScreen = ({ navigation, environment }: any) => {
   const handleRefresh = () => {
     setRefreshing(true);
 
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+
     // Perform the data fetching or any other asynchronous operation here
     // ...
 
-    setRefreshing(false);
+    // setRefreshing(false);
   };
 
   return (
     <Container>
-      <HomeHeader navigation={navigation} />
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        }
-        style={{ flex: 1 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <SearchBar />
-        <LatestUpdatesNav navigation={navigation} environment={environment} />
-        <FeedsNav navigation={navigation} />
-        <NewsNav environment={environment} navigation={navigation} />
-      </ScrollView>
+      {refreshing ? (
+        <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+      ) : (
+        <>
+          <HomeHeader navigation={navigation} />
+          <ScrollView
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+              />
+            }
+            style={{ flex: 1 }}
+            showsVerticalScrollIndicator={false}
+          >
+            <SearchBar />
+            <LatestUpdatesNav
+              navigation={navigation}
+              environment={environment}
+            />
+            <FeedsNav navigation={navigation} />
+            <NewsNav environment={environment} navigation={navigation} />
+          </ScrollView>
+        </>
+      )}
     </Container>
   );
 };

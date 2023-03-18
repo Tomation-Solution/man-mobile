@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MAN",
-    "slug": "man",
+    "name": "AANI",
+    "slug": "aani",
     "version": "2.0.0",
     "orientation": "portrait",
     "owner": "emetricsuite",
@@ -22,8 +22,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.tomation.MAN",
-      "versionCode": 12,
+      "package": "com.tomation.AANI",
+      "versionCode": 9,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "c903dc84-61b6-407e-a006-5128309585a7"
+        "projectId": "d183e178-058d-48dc-acc3-35f21e9e4422"
       }
     }
   }

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "BUKAA",
-    "slug": "bukan",
+    "name": "APFTIA",
+    "slug": "apftia",
     "version": "1.0.0",
     "orientation": "portrait",
     "owner": "emetricsuite",
@@ -22,8 +22,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.tomation.BUKAN",
-      "versionCode": 7,
+      "package": "com.tomation.APFTIA",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "529ac31c-286d-4749-bc40-dc1eb17c2b4b"
+        "projectId": "0b32707b-186e-4dec-a058-c96242a4e9dd"
       }
     }
   }

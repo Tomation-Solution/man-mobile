@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "AANI",
-    "slug": "AANI",
-    "version": "2.0.0",
+    "name": "BPMI",
+    "slug": "bpmi",
+    "version": "1.0.0",
     "orientation": "portrait",
     "owner": "emetricsuite",
     "icon": "./assets/icon.png",
@@ -22,8 +22,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.tomation.AANI",
-      "versionCode": 9,
+      "package": "com.tomation.BPMI",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "d183e178-058d-48dc-acc3-35f21e9e4422"
+        "projectId": "2e106d2d-66f0-4d8d-a261-4849b8756eb5"
       }
     }
   }

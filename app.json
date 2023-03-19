@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "BPMI",
-    "slug": "bpmi",
+    "name": "BUKAA",
+    "slug": "bukan",
     "version": "1.0.0",
     "orientation": "portrait",
     "owner": "emetricsuite",
@@ -22,7 +22,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.tomation.BPMI",
+      "package": "com.tomation.BUKAN",
       "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "2e106d2d-66f0-4d8d-a261-4849b8756eb5"
+        "projectId": "529ac31c-286d-4749-bc40-dc1eb17c2b4b"
       }
     }
   }

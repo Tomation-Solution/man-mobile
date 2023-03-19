@@ -53,11 +53,20 @@ const LoginForm = ({ navigation }: any) => {
         >
           <Image
             style={{
-              width: normalize(140),
-              height: normalize(110),
+              width: normalize(100),
+              height: normalize(100),
             }}
             source={appImages.full_logo}
           />
+          <Text
+            style={{
+              fontSize: normalize(18),
+              fontWeight: "700",
+              color: COLORS.primary,
+            }}
+          >
+            BUKAA
+          </Text>
           <View
             style={{
               width: "100%",

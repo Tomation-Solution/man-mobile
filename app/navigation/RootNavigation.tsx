@@ -16,7 +16,7 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        {isLoggedIn ? <DrawerNav /> : <DrawerNav />}
+        {isLoggedIn ? <DrawerNav /> : <AuthNavigation />}
       </View>
     </NavigationContainer>
   );

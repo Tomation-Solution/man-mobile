@@ -24,6 +24,7 @@ import {
 import Accepted from "./components/Accepted";
 import Reschedule from "./components/Reschedule";
 import Proxy from "./components/Proxy";
+import { openExternalLink } from "../../utils/helperFunctions/openExternalLink";
 
 const Details = ({ route, navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -289,7 +290,8 @@ const Details = ({ route, navigation }: any) => {
           </View>
 
           <View>
-            <View
+            <TouchableOpacity
+              onPress={() => openExternalLink(data?.meeting_docs)}
               style={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -305,9 +307,9 @@ const Details = ({ route, navigation }: any) => {
                   marginLeft: 10,
                 }}
               >
-                attachment.doc
+                Download Attachment
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -329,7 +331,7 @@ const Details = ({ route, navigation }: any) => {
             paddingBottom: 10,
           }}
         >
-          {data?.is_attending && (
+          {!data?.is_attending && (
             <TouchableOpacity
               style={{
                 backgroundColor: COLORS.primary,

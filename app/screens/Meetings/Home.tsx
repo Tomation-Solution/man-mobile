@@ -90,6 +90,7 @@ const Home = ({ navigation, environment }: any) => {
                 accepted={meeting.is_attending}
                 setMeetingId={setMeetingId}
                 apology={apology}
+                address={meeting.addresse}
                 key={meeting.id}
                 meeting_id={meeting.id}
                 title={meeting.name}

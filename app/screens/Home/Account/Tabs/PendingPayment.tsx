@@ -23,6 +23,7 @@ import { getDuelist } from "../../../../store/slices/due_list_and_owning_members
 import LoadingIndicator from "../../../../utils/LoadingIndicator";
 import { normalize } from "../../../../constants/metric";
 import { COLORS } from "../../../../constants/color";
+import { useIsFocused } from "@react-navigation/native";
 
 const PendingPayment = ({
   setOutstanding,
@@ -37,6 +38,8 @@ const PendingPayment = ({
     (state) => state.duelistReducers.getDuelistSlice
   );
 
+  const isFocused = useIsFocused();
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -47,7 +50,7 @@ const PendingPayment = ({
     setOutstanding(() =>
       outstandingPayment?.reduce((a: any, b: any) => a + parseInt(b.amount), 0)
     );
-  }, []);
+  }, [userData, isFocused]);
 
   useEffect(() => {
     if (isLoggedIn) {

@@ -41,7 +41,7 @@ const CompletedPayment = () => {
       dispatch(getDuelist());
     }
   }, [dispatch]);
-  const tableHead = ["Reason", "Amount", "Date", "Action"];
+  const tableHead = ["Purpose of Payment", "#Amount", "Date", "Action"];
 
   const onButtonClick = () => {
     setIsOpen(true);
@@ -143,11 +143,11 @@ const CompletedPayment = () => {
                       <TableWrapper key={index} style={styles.row}>
                         {
                           <>
-                            <Cell data={due__Name} textStyle={styles.text} />
-                            <Cell data={amount} textStyle={styles.text} />
+                            <Cell data={due__Name} textStyle={styles.rowText} />
+                            <Cell data={amount} textStyle={styles.rowText} />
                             <Cell
                               data={due__startDate}
-                              textStyle={styles.text}
+                              textStyle={styles.rowText}
                             />
 
                             <View style={styles.dueWrapper}>
@@ -168,7 +168,7 @@ const CompletedPayment = () => {
 };
 
 const styles = StyleSheet.create({
-  head: { width: "100%", height: 45, backgroundColor: "#555D42" },
+  head: { width: "100%", height: 45, backgroundColor: COLORS.primary },
   wrapper: { flexDirection: "row" },
 
   container: {
@@ -204,6 +204,14 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   text: {
+    margin: 6,
+    textAlign: "center",
+    width: "100%",
+    fontWeight: "600",
+    fontSize: 11,
+    color: "white",
+  },
+  rowText: {
     margin: 6,
     textAlign: "center",
     width: "100%",

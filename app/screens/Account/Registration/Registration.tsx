@@ -85,6 +85,7 @@ const Registration = ({ route, navigation }: any) => {
                 password: yup.string().required().min(6).label("Password"),
                 GSM: yup.string().required().min(11).label("Phone number"),
                 TITLE: yup.string().required().label("Title"),
+
                 alumni_year: yup.string().required().label("Alumni year"),
                 MEMBERSHIP_NO: yup
                   .string()
@@ -99,6 +100,7 @@ const Registration = ({ route, navigation }: any) => {
                 GSM: user_data?.GSM || "",
                 TITLE: user_data?.TITLE || "",
                 alumni_year: user_data?.alumni_year || "",
+                MEMBERSHIP_GRADE: user_data?.MEMBERSHIP_GRADE || "",
                 MEMBERSHIP_NO: data,
                 "POSITION HELD": user_data?.["POSITION HELD"] || "",
               }}
@@ -118,13 +120,17 @@ const Registration = ({ route, navigation }: any) => {
                     placeholder="Phone number"
                     editable={false}
                   />
-
+                  <Field
+                    editable={false}
+                    component={FormInput}
+                    name="MEMBERSHIP_GRADE"
+                    placeholder="Membership Grade"
+                  />
                   <Field
                     component={FormInput}
                     name="rel8Email"
                     placeholder="Email address"
                   />
-
                   <Field
                     component={FormInput}
                     name="password"
@@ -170,7 +176,6 @@ const Registration = ({ route, navigation }: any) => {
                       />
                     </View>
                   </View>
-
                   <Formbtn
                     disabeld={loading}
                     style={[styles.btn]}

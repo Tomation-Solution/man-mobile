@@ -18,7 +18,7 @@ import {
 
 const CELL_COUNT = 4;
 
-const ConfirmationInput = ({ setValue, value }) => {
+const ConfirmationInput = ({ setValue, value }: any) => {
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -53,13 +53,13 @@ const ConfirmationInput = ({ setValue, value }) => {
   );
 };
 const styles = StyleSheet.create({
-  // root: { marginTop: 50, },
+  root: { marginTop: 50 },
   title: {
     textAlign: "center",
     fontSize: 20,
     color: "rgba(0, 176, 169, 0.72)",
   },
-  // codeFieldRoot: { marginTop: 20 },
+  codeFieldRoot: { marginTop: 20 },
   cell: {
     width: 40,
     height: 40,

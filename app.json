@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MAN",
-    "slug": "man",
+    "name": "NIMN",
+    "slug": "nimn",
     "version": "2.0.0",
     "orientation": "portrait",
     "owner": "emetricsuite",
@@ -23,7 +23,7 @@
     },
     "android": {
       "package": "com.tomation.MAN",
-      "versionCode": 13,
+      "versionCode": 15,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "c903dc84-61b6-407e-a006-5128309585a7"
+        "projectId": "4764c951-9dfb-4e1b-a545-b52f0869bbb9"
       }
     }
   }

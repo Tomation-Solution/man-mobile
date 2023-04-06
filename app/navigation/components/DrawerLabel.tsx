@@ -150,7 +150,7 @@ const DrawerLabel = ({
               style={{
                 color: COLORS.primary,
                 fontWeight: focused ? "bold" : "normal",
-                fontSize: moderateScale(18),
+                fontSize: normalize(15),
                 marginLeft: 10,
               }}
             >
@@ -224,7 +224,7 @@ const DrawerLabel = ({
                   style={{
                     color: COLORS.primary,
                     fontWeight: focused ? "bold" : "normal",
-                    fontSize: normalize(18),
+                    fontSize: normalize(15),
                     marginLeft: 10,
                   }}
                 >
@@ -258,7 +258,7 @@ const DrawerLabel = ({
                 style={{
                   color: COLORS.primary,
                   fontWeight: switchMenuActive === 0 ? "bold" : "normal",
-                  fontSize: normalize(18),
+                  fontSize: normalize(15),
                   marginLeft: 10,
                 }}
               >
@@ -284,8 +284,8 @@ const DrawerLabel = ({
                   flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  paddingHorizontal: 15,
-                  paddingVertical: 10,
+                  paddingHorizontal: normalize(10),
+                  paddingVertical: normalize(8),
                   paddingLeft: 35,
                   width: "100%",
                   marginBottom: 10,
@@ -296,11 +296,13 @@ const DrawerLabel = ({
                     color: COLORS.primary,
                     fontWeight:
                       switchMenuActive === item.id ? "bold" : "normal",
-                    fontSize: normalize(18),
+                    fontSize: normalize(15),
                     marginLeft: 10,
                   }}
                 >
-                  {item.name}
+                  {item?.name.length > 20
+                    ? item?.name.slice(0, 25) + "..."
+                    : item?.name}
                 </Text>
                 <MaterialCommunityIcons
                   name={

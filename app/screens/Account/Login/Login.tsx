@@ -112,6 +112,7 @@ const LoginForm = ({ navigation }: any) => {
                     <Formbtn
                       style={[styles.btn]}
                       onPress={handleSubmit}
+                      disabled={!isValid || loading === true}
                       title={
                         loading === true ? (
                           <ActivityIndicator size="small" color="white" />

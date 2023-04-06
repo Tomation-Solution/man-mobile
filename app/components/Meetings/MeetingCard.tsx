@@ -6,6 +6,7 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import { openExternalLink } from "../../utils/helperFunctions/openExternalLink";
 
 const Accept = ({ accept, accepted }: any) => {
   const handleAccept = () => {
@@ -53,11 +54,15 @@ const Apology = ({ meeting_id, setMeetingId, apology }: any) => {
   );
 };
 
-const Join = ({}: any) => {
+const Join = ({ address }: any) => {
   const [accepted, setAccepted] = React.useState(false);
   const handleOnPress = () => {
-    alert("Comming Soon!");
-    setAccepted(!accepted);
+    if (address.includes("https")) {
+      openExternalLink(address);
+    } else {
+      alert(address);
+    }
+    // setAccepted(!accepted);
   };
   return (
     <TouchableOpacity style={styles.actionContainer} onPress={handleOnPress}>
@@ -84,6 +89,7 @@ const MeetingCard = ({
   date,
   time,
   onPress,
+  address,
   accept,
   accepted,
   apology,
@@ -134,7 +140,7 @@ const MeetingCard = ({
           setMeetingId={setMeetingId}
           meeting_id={meeting_id}
         />
-        <Join />
+        <Join address={address} />
       </View>
     </View>
   );

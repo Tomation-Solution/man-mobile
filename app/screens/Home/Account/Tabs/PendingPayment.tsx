@@ -23,6 +23,7 @@ import { getDuelist } from "../../../../store/slices/due_list_and_owning_members
 import LoadingIndicator from "../../../../utils/LoadingIndicator";
 import { normalize } from "../../../../constants/metric";
 import { COLORS } from "../../../../constants/color";
+import { useIsFocused } from "@react-navigation/native";
 
 const PendingPayment = ({
   setOutstanding,
@@ -37,6 +38,8 @@ const PendingPayment = ({
     (state) => state.duelistReducers.getDuelistSlice
   );
 
+  const isFocused = useIsFocused();
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -47,7 +50,7 @@ const PendingPayment = ({
     setOutstanding(() =>
       outstandingPayment?.reduce((a: any, b: any) => a + parseInt(b.amount), 0)
     );
-  }, []);
+  }, [userData, isFocused]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -55,7 +58,7 @@ const PendingPayment = ({
     }
   }, [dispatch]);
 
-  const tableHead = ["Reason", "Amount", "Date", "Action"];
+  const tableHead = ["Purpose of Payment", "#Amount", "Date", "Action"];
 
   const onButtonClick = () => {
     setIsOpen(true);
@@ -156,11 +159,11 @@ const PendingPayment = ({
                       <TableWrapper key={index} style={styles.row}>
                         {
                           <>
-                            <Cell data={due__Name} textStyle={styles.text} />
-                            <Cell data={amount} textStyle={styles.text} />
+                            <Cell data={due__Name} textStyle={styles.rowText} />
+                            <Cell data={amount} textStyle={styles.rowText} />
                             <Cell
                               data={due__startDate}
-                              textStyle={styles.text}
+                              textStyle={styles.rowText}
                             />
 
                             <View style={styles.dueWrapper}>
@@ -180,7 +183,7 @@ const PendingPayment = ({
   );
 };
 const styles = StyleSheet.create({
-  head: { width: "100%", height: 45, backgroundColor: "#555D42" },
+  head: { width: "100%", height: 45, backgroundColor: COLORS.primary },
   wrapper: { flexDirection: "row" },
   tableButton: {},
   container: {
@@ -221,13 +224,21 @@ const styles = StyleSheet.create({
     width: "100%",
     fontWeight: "600",
     fontSize: 11,
+    color: "white",
+  },
+  rowText: {
+    margin: 6,
+    textAlign: "center",
+    width: "100%",
+    fontWeight: "600",
+    fontSize: 11,
   },
   dataWrapper: {},
   row: { flexDirection: "row" },
   btn: {
     width: 80,
     paddingVertical: 11,
-    backgroundColor: "#555D42",
+    backgroundColor: COLORS.primary,
     borderRadius: 10,
     marginLeft: 14,
   },

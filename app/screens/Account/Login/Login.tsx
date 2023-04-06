@@ -80,7 +80,7 @@ const LoginForm = ({ navigation }: any) => {
           <FormContainer>
             <View style={[styles.card, styles.shawdowProp]}>
               <Formik
-                // validationSchema={loginValidationSchema}
+                validationSchema={loginValidationSchema}
                 initialValues={{
                   email: "",
                   password: "",
@@ -102,7 +102,6 @@ const LoginForm = ({ navigation }: any) => {
                       isSecureEntry={true}
                       hidePassword={hidePassword}
                       handlePasswordVisibility={() => {
-                        console.log("clicked");
                         setHidePassword(() => !hidePassword);
                       }}
                       name="password"
@@ -112,6 +111,7 @@ const LoginForm = ({ navigation }: any) => {
                     <Formbtn
                       style={[styles.btn]}
                       onPress={handleSubmit}
+                      disabled={loading || !isValid}
                       title={
                         loading === true ? (
                           <ActivityIndicator size="small" color="white" />

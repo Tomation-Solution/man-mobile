@@ -83,8 +83,9 @@ const HomeHeader = ({
           <Image
             source={appImages.full_logo}
             style={{
-              width: verticalScale(80),
-              height: horizontalScale(30),
+              width: verticalScale(35),
+              height: horizontalScale(35),
+              borderRadius: 100,
             }}
           />
         </View>

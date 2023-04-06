@@ -1,14 +1,7 @@
 import Container from "./../../../components/Container";
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-import { ComfirmationInput, Formbtn, AccountHeader } from "../../../components";
+import { View, StyleSheet, Text, TextInput } from "react-native";
+import { Formbtn, AccountHeader } from "../../../components";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { validateUser } from "../../../store/slices/auth/loginSlice";
 
@@ -23,12 +16,13 @@ const VerifyUser = ({ navigation }: any) => {
 
   const onVerify = () => {
     setNewInput(input!);
-    setInput("");
     dispatch(validateUser({ MEMBERSHIP_NO: input }));
+    console.log(newInput);
   };
 
   useEffect(() => {
     if (isUserValidated) {
+      setInput("");
       navigation.navigate("Registration", { data: newInput });
     }
   }, [isUserValidated, loading]);
@@ -51,6 +45,7 @@ const VerifyUser = ({ navigation }: any) => {
           <View style={[styles.card, styles.shawdowProp]}>
             <View>
               <TextInput
+                editable={!loading}
                 onChangeText={(text: string) => setInput(text)}
                 value={input}
                 style={styles.input}

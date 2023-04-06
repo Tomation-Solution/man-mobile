@@ -31,15 +31,19 @@ const registrationSlice = createSlice({
   },
 });
 
-export const { registrationRequested, registrationSuccess, registrationFailed } = registrationSlice.actions;
+export const {
+  registrationRequested,
+  registrationSuccess,
+  registrationFailed,
+} = registrationSlice.actions;
 
 export default registrationSlice.reducer;
 
 export const register = (userData: any) => (dispatch: AppDispatch) => {
   dispatch(
     apiCallBegan({
-        url: PRE_URL + "auth/register/",
-        method: "post",
+      url: PRE_URL + "auth/register/",
+      method: "post",
       data: userData,
       onStart: registrationRequested.type,
       onSuccess: registrationSuccess.type,

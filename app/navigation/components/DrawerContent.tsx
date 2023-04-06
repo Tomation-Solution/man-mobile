@@ -139,12 +139,12 @@ const DrawerContent = ({
           },
         ]}
       /> */}
-      {/* <DrawerLabel
+      <DrawerLabel
         focused={state?.index === 3}
         title="Election"
         icon={<Ionicons name="flag" size={20} color={COLORS.primary} />}
         navigation={navigation}
-      /> */}
+      />
       <DrawerLabel
         focused={state?.index === 7}
         title="Support"

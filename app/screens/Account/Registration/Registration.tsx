@@ -95,9 +95,11 @@ const Registration = ({ route, navigation }: any) => {
                 password: "",
                 rel8Email: "",
                 GSM: user_data?.GSM || "",
-
+                EMAIL: user_data?.EMAIL,
+                POSITION_HELD: user_data?.POSITION_HELD,
                 MEMBERSHIP_GRADE: user_data?.MEMBERSHIP_GRADE || "",
                 MEMBERSHIP_NO: data,
+                TITLE: user_data?.TITLE,
               }}
               onSubmit={(values) => handleRegister(values)}
             >
@@ -107,22 +109,26 @@ const Registration = ({ route, navigation }: any) => {
                     component={FormInput}
                     name="name"
                     placeholder="Full name"
+                    editable={false}
                   />
                   <Field
                     component={FormInput}
                     name="GSM"
                     placeholder="Phone number"
+                    editable={false}
                   />
                   <Field
                     component={FormInput}
                     name="MEMBERSHIP_GRADE"
                     placeholder="Membership Grade"
+                    editable={false}
                   />
 
                   <Field
                     component={FormInput}
                     name="MEMBERSHIP_NO"
                     placeholder="Membership number"
+                    editable={false}
                   />
                   <Field
                     component={FormInput}

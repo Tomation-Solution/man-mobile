@@ -19,10 +19,14 @@ import {
   Cell,
 } from "react-native-table-component";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { getDuelist } from "../../../../store/slices/due_list_and_owning_members/getDuelistSlice";
+import {
+  getDuelist,
+  payDue,
+} from "../../../../store/slices/due_list_and_owning_members/getDuelistSlice";
 import LoadingIndicator from "../../../../utils/LoadingIndicator";
 import { normalize } from "../../../../constants/metric";
 import { COLORS } from "../../../../constants/color";
+import { openExternalLink } from "../../../../utils/helperFunctions/openExternalLink";
 
 const PendingPayment = ({
   setOutstanding,
@@ -32,10 +36,17 @@ const PendingPayment = ({
   outstanding: any;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedDueId, setSelectedDueId] = useState(0);
   const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
-  const { userData, loading } = useAppSelector(
+  const { userData, loading, duePaymentGateway } = useAppSelector(
     (state) => state.duelistReducers.getDuelistSlice
   );
+
+  useEffect(() => {
+    if (duePaymentGateway?.authorization_url) {
+      openExternalLink(duePaymentGateway?.authorization_url);
+    }
+  }, [duePaymentGateway]);
 
   const dispatch = useAppDispatch();
 
@@ -55,21 +66,26 @@ const PendingPayment = ({
     }
   }, [dispatch]);
 
-  const tableHead = ["Reason", "Amount", "Date", "Action"];
-
-  const onButtonClick = () => {
-    setIsOpen(true);
+  const handlePay = () => {
+    dispatch(payDue(selectedDueId));
   };
 
-  const ButtonElement = React.memo(({ ispaid }: any) => (
-    <TouchableOpacity onPress={onButtonClick}>
+  const tableHead = ["Reason", "Amount", "Date", "Action"];
+
+  const ButtonElement = React.memo(({ due_id }: any) => (
+    <TouchableOpacity
+      onPress={() => {
+        setIsOpen(true);
+        setSelectedDueId(due_id);
+      }}
+    >
       <View style={styles.btn}>
         <Text style={styles.btnText}> Select Action</Text>
       </View>
     </TouchableOpacity>
   ));
 
-  const ActionButton = ({ action }: any) => (
+  const ActionButton = ({ action, loading, onPress }: any) => (
     <TouchableOpacity
       style={{
         width: "80%",
@@ -77,11 +93,9 @@ const PendingPayment = ({
         backgroundColor: COLORS.primary,
         borderRadius: normalize(10),
       }}
-      onPress={() => {
-        // navigation.navigate("Payment");
-      }}
+      onPress={onPress}
     >
-      <Text style={styles.modalText}>{action}</Text>
+      <Text style={styles.modalText}>{loading ? "Processing..." : action}</Text>
     </TouchableOpacity>
   );
 
@@ -129,7 +143,7 @@ const PendingPayment = ({
               alignItems: "center",
             }}
           >
-            <ActionButton action="Pay" />
+            <ActionButton onPress={handlePay} loading={loading} action="Pay" />
             <ActionButton action="Demand Notice" />
           </View>
         </View>
@@ -148,23 +162,25 @@ const PendingPayment = ({
               />
               <ScrollView>
                 {userData?.data
-                  ?.filter((item: any) => item.is_paid === false)
+                  ?.filter((item: any, index: number) => item.is_paid === false)
                   ?.map((rowData: any, index: any) => {
-                    const { due__startDate, due__Name, amount, is_paid } =
-                      rowData;
+                    const { due__startDate, due__Name, amount, id } = rowData;
                     return (
                       <TableWrapper key={index} style={styles.row}>
                         {
                           <>
-                            <Cell data={due__Name} textStyle={styles.text} />
-                            <Cell data={amount} textStyle={styles.text} />
+                            <Cell
+                              data={due__Name}
+                              textStyle={styles.bodyText}
+                            />
+                            <Cell data={amount} textStyle={styles.bodyText} />
                             <Cell
                               data={due__startDate}
-                              textStyle={styles.text}
+                              textStyle={styles.bodyText}
                             />
 
                             <View style={styles.dueWrapper}>
-                              <ButtonElement />
+                              <ButtonElement due_id={id} />
                             </View>
                           </>
                         }
@@ -179,8 +195,9 @@ const PendingPayment = ({
     </>
   );
 };
+
 const styles = StyleSheet.create({
-  head: { width: "100%", height: 45, backgroundColor: "#555D42" },
+  head: { width: "100%", height: 45, backgroundColor: COLORS.primary },
   wrapper: { flexDirection: "row" },
   tableButton: {},
   container: {
@@ -221,13 +238,21 @@ const styles = StyleSheet.create({
     width: "100%",
     fontWeight: "600",
     fontSize: 11,
+    color: "white",
+  },
+  bodyText: {
+    margin: 6,
+    textAlign: "center",
+    width: "100%",
+    fontWeight: "600",
+    fontSize: 11,
   },
   dataWrapper: {},
   row: { flexDirection: "row" },
   btn: {
     width: 80,
     paddingVertical: 11,
-    backgroundColor: "#555D42",
+    backgroundColor: COLORS.primary,
     borderRadius: 10,
     marginLeft: 14,
   },

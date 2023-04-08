@@ -6,6 +6,7 @@ import { PRE_URL } from "../../../utils/ENV/envs";
 
 const initialState: {
   events: any;
+  paidEventDetails: any;
   loading: boolean;
   eventRescheduled: boolean;
   eventNotRescheduled: boolean;
@@ -14,6 +15,7 @@ const initialState: {
   error: string;
 } = {
   events: [],
+  paidEventDetails: {},
   loading: false,
   eventRescheduled: false,
   eventNotRescheduled: false,
@@ -21,7 +23,6 @@ const initialState: {
   message: "",
   error: "",
 };
-
 const eventsSlice = createSlice({
   name: "events",
   initialState,
@@ -41,6 +42,13 @@ const eventsSlice = createSlice({
       state.loading = false;
       state.registerEvent = true;
     },
+    paidEventRegistered: (state, action) => {
+      state.loading = false;
+      state.registerEvent = true;
+      state.paidEventDetails = action.payload?.data?.data;
+      console.log("action.payload", state.paidEventDetails);
+    },
+
     eventRescheduled: (state, action) => {
       state.loading = false;
       state.eventRescheduled = true;
@@ -57,6 +65,7 @@ const eventsSlice = createSlice({
       state.loading = false;
       state.eventRescheduled = false;
       state.eventNotRescheduled = false;
+      state.paidEventDetails = {};
     },
   },
 });
@@ -64,6 +73,7 @@ const eventsSlice = createSlice({
 export const {
   eventsRequested,
   eventsReceived,
+  paidEventRegistered,
   eventRequestFailed,
   eventRescheduled,
   eventNotRescheduled,
@@ -108,7 +118,8 @@ export const getEvents =
   };
 
 export const registerEvents =
-  (id: number, proxy_participants?: any) => async (dispatch: AppDispatch) => {
+  (id: number, is_paid: boolean, proxy_participants?: any) =>
+  async (dispatch: AppDispatch) => {
     const form = new FormData();
     form.append("event_id", id.toString());
     if (proxy_participants) {
@@ -123,13 +134,17 @@ export const registerEvents =
 
         dispatch(
           apiCallBegan({
-            url: PRE_URL + `event/eventview/register_for_free_event/`,
+            url: is_paid
+              ? `${PRE_URL}dues/process_payment/event_payment/${id}/`
+              : `${PRE_URL}0event/eventview/register_for_free_event/`,
             extraheaders: "Token " + token,
             contentType: "multipart/form-data",
-            data: form,
+            data: !is_paid && proxy_participants ? form : "",
             method: "post",
             onStart: eventsRequested.type,
-            onSuccess: eventRegistered.type,
+            onSuccess: is_paid
+              ? paidEventRegistered.type
+              : eventRegistered.type,
             onError: eventRequestFailed.type,
           })
         );

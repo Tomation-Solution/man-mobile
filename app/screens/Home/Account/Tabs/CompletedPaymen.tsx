@@ -143,11 +143,14 @@ const CompletedPayment = () => {
                       <TableWrapper key={index} style={styles.row}>
                         {
                           <>
-                            <Cell data={due__Name} textStyle={styles.text} />
-                            <Cell data={amount} textStyle={styles.text} />
+                            <Cell
+                              data={due__Name}
+                              textStyle={styles.bodyText}
+                            />
+                            <Cell data={amount} textStyle={styles.bodyText} />
                             <Cell
                               data={due__startDate}
-                              textStyle={styles.text}
+                              textStyle={styles.bodyText}
                             />
 
                             <View style={styles.dueWrapper}>
@@ -168,9 +171,9 @@ const CompletedPayment = () => {
 };
 
 const styles = StyleSheet.create({
-  head: { width: "100%", height: 45, backgroundColor: "#555D42" },
+  head: { width: "100%", height: 45, backgroundColor: COLORS.primary },
   wrapper: { flexDirection: "row" },
-
+  tableButton: {},
   container: {
     flex: 1,
     paddingVertical: 15,
@@ -209,17 +212,25 @@ const styles = StyleSheet.create({
     width: "100%",
     fontWeight: "600",
     fontSize: 11,
+    color: "white",
   },
-  dataWrapper: { marginTop: -8 },
+  bodyText: {
+    margin: 6,
+    textAlign: "center",
+    width: "100%",
+    fontWeight: "600",
+    fontSize: 11,
+  },
+  dataWrapper: {},
   row: { flexDirection: "row" },
   btn: {
     width: 80,
-    paddingVertical: 12,
-    backgroundColor: "#555D42",
+    paddingVertical: 11,
+    backgroundColor: COLORS.primary,
     borderRadius: 10,
     marginLeft: 14,
   },
-  btnText: { textAlign: "center", color: "#fff", fontSize: 12 },
+  btnText: { textAlign: "center", color: "#fff", fontSize: 12, padding: 2 },
   dueWrapper: { marginVertical: 10 },
   modalWrapper: {
     backgroundColor: "white",

@@ -84,23 +84,22 @@ const Registration = ({ route, navigation }: any) => {
                 name: yup.string().required().label("Name"),
                 password: yup.string().required().min(6).label("Password"),
                 GSM: yup.string().required().min(11).label("Phone number"),
-                TITLE: yup.string().required().label("Title"),
-                alumni_year: yup.string().required().label("Alumni year"),
+
                 MEMBERSHIP_NO: yup
                   .string()
                   .required()
                   .label("Membership number"),
-                "POSITION HELD": yup.string().required().label("Position held"),
               })}
               initialValues={{
                 name: user_data?.name || "",
                 password: "",
                 rel8Email: "",
                 GSM: user_data?.GSM || "",
-                TITLE: user_data?.TITLE || "",
-                alumni_year: user_data?.alumni_year || "",
+                EMAIL: user_data?.EMAIL,
+                POSITION_HELD: user_data?.POSITION_HELD,
+                MEMBERSHIP_GRADE: user_data?.MEMBERSHIP_GRADE || "",
                 MEMBERSHIP_NO: data,
-                "POSITION HELD": user_data?.["POSITION HELD"] || "",
+                TITLE: user_data?.TITLE,
               }}
               onSubmit={(values) => handleRegister(values)}
             >
@@ -118,58 +117,29 @@ const Registration = ({ route, navigation }: any) => {
                     placeholder="Phone number"
                     editable={false}
                   />
+                  <Field
+                    component={FormInput}
+                    name="MEMBERSHIP_GRADE"
+                    placeholder="Membership Grade"
+                    editable={false}
+                  />
 
+                  <Field
+                    component={FormInput}
+                    name="MEMBERSHIP_NO"
+                    placeholder="Membership number"
+                    editable={false}
+                  />
                   <Field
                     component={FormInput}
                     name="rel8Email"
                     placeholder="Email address"
                   />
-
                   <Field
                     component={FormInput}
                     name="password"
                     placeholder="Password"
                   />
-
-                  <View
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      width: "100%",
-                      paddingVertical: 21,
-                    }}
-                  >
-                    <View
-                      style={{
-                        width: "45%",
-                        flexDirection: "column",
-                        display: "flex",
-                      }}
-                    >
-                      <Field
-                        component={FormInput}
-                        name="TITLE"
-                        placeholder="Title"
-                      />
-                      <Field
-                        component={FormInput}
-                        name="MEMBERSHIP_NO"
-                        placeholder="Membership number"
-                      />
-                    </View>
-                    <View style={{ width: "50%", marginLeft: 15 }}>
-                      <Field
-                        component={FormInput}
-                        name="alumni_year"
-                        placeholder="Alumni year"
-                      />
-                      <Field
-                        component={FormInput}
-                        name="POSITION HELD"
-                        placeholder="Position held"
-                      />
-                    </View>
-                  </View>
 
                   <Formbtn
                     disabeld={loading}

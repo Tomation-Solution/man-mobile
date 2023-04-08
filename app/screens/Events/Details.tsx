@@ -2,12 +2,13 @@ import {
   ActivityIndicator,
   Button,
   Image,
+  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRoute } from "@react-navigation/native";
 import { Container, CustomModal, HomeHeader } from "../../components";
 import { Ionicons } from "@expo/vector-icons";
@@ -23,6 +24,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Accepted from "./components/Accepted";
 import LoadingIndicator from "../../utils/LoadingIndicator";
 import Rejected from "./components/Rejected";
+import { normalize } from "../../constants/metric";
 
 const MeetingAction = ({
   onPress,
@@ -67,17 +69,15 @@ const Details = ({ route, navigation }: any) => {
   const [modalContent, setModalContent] = useState("register");
   const altRoute = useRoute();
   const data = route?.params?.event || altRoute?.params || {};
-  const { loading, registerEvent } = useAppSelector((state) => state.events);
+  const { loading, registerEvent, paidEventDetails } = useAppSelector(
+    (state) => state.events
+  );
   const dispatch = useAppDispatch();
-
-  const onPress = () => {
-    dispatch(registerEvents(data.id));
-  };
 
   const handleRegister = () => {
     // setModalContent("register");
     setModalVisible(true);
-    dispatch(registerEvents(data.id));
+    dispatch(registerEvents(data.id, data?.is_paid_event));
   };
 
   const handleModal = (component: any) => {
@@ -85,6 +85,12 @@ const Details = ({ route, navigation }: any) => {
     setModalComp(component);
     setModalVisible(!modalVisible);
   };
+
+  useEffect(() => {
+    if (paidEventDetails?.authorization_url) {
+      openExternalLink(paidEventDetails?.authorization_url);
+    }
+  }, [paidEventDetails]);
 
   return (
     <Container>
@@ -103,6 +109,7 @@ const Details = ({ route, navigation }: any) => {
           )}
         </CustomModal>
       )}
+
       <HomeHeader
         navigation={navigation}
         title={"Event Details"}
@@ -131,14 +138,49 @@ const Details = ({ route, navigation }: any) => {
 
         <Text
           style={{
-            fontSize: 18,
-            fontWeight: "300",
+            fontSize: normalize(15),
+            fontWeight: "500",
             marginTop: 3,
             marginLeft: 10,
           }}
         >
-          {data.title}
+          {data?.name}
         </Text>
+
+        {data?.event_docs &&
+          (data.event_access.has_paid ? (
+            <Pressable
+              onPress={() => openExternalLink(data?.event_docs)}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 10,
+                paddingHorizontal: 10,
+                alignSelf: "flex-end",
+              }}
+            >
+              <Ionicons name="document-attach-sharp" size={24} color="black" />
+              <Text style={{ marginLeft: 7, fontWeight: "400" }}>
+                Download Event Attachment
+              </Text>
+            </Pressable>
+          ) : (
+            <Pressable
+              onPress={() => alert("Please pay to download attachment")}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 10,
+                paddingHorizontal: 10,
+                alignSelf: "flex-end",
+              }}
+            >
+              <Ionicons name="document-attach-sharp" size={24} color="gray" />
+              <Text style={{ marginLeft: 7, fontWeight: "500" }}>
+                Download Event Attachment
+              </Text>
+            </Pressable>
+          ))}
 
         <View
           style={{

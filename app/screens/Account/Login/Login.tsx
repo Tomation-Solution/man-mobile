@@ -23,6 +23,7 @@ import { loginValidationSchema } from "../../../utils/validation";
 import { normalize } from "../../../constants/metric";
 import { COLORS } from "../../../constants/color";
 import { appImages } from "../../../assets/app/images";
+import * as yup from "yup";
 
 const LoginForm = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -89,7 +90,10 @@ const LoginForm = ({ navigation }: any) => {
           <FormContainer>
             <View style={[styles.card, styles.shawdowProp]}>
               <Formik
-                // validationSchema={loginValidationSchema}
+                validationSchema={yup.object().shape({
+                  email: yup.string().required().label("Email"),
+                  password: yup.string().required().min(6).label("Password"),
+                })}
                 initialValues={{
                   email: "",
                   password: "",
@@ -98,29 +102,38 @@ const LoginForm = ({ navigation }: any) => {
                   if (loading === false) dispatch(login(values));
                 }}
               >
-                {({ handleSubmit, isValid }) => (
+                {({ handleSubmit, isValid, errors }) => (
                   <>
                     <Field
                       component={FormInput}
                       name="email"
                       placeholder="email"
                     />
-
+                    {/* {errors.email && (
+                      <Text style={{ color: "red", fontSize: normalize(12) }}>
+                        {errors.email}
+                      </Text>
+                    )} */}
                     <Field
                       component={FormInput}
                       isSecureEntry={true}
                       hidePassword={hidePassword}
                       handlePasswordVisibility={() => {
-                        console.log("clicked");
                         setHidePassword(() => !hidePassword);
                       }}
                       name="password"
                       placeholder="password"
                     />
+                    {errors.password && (
+                      <Text style={{ color: "red", fontSize: normalize(12) }}>
+                        {errors.password}
+                      </Text>
+                    )}
 
                     <Formbtn
                       style={[styles.btn]}
                       onPress={handleSubmit}
+                      disabled={loading === true || !isValid}
                       title={
                         loading === true ? (
                           <ActivityIndicator size="small" color="white" />

@@ -54,7 +54,7 @@ const LoginForm = ({ navigation }: any) => {
         >
           <Image
             style={{
-              width: normalize(110),
+              width: normalize(100),
               height: normalize(100),
             }}
             source={appImages.full_logo}

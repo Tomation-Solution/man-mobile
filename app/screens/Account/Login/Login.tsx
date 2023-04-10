@@ -66,7 +66,7 @@ const LoginForm = ({ navigation }: any) => {
               color: COLORS.primary,
             }}
           >
-            APFTIA
+            REL8
           </Text>
           <View
             style={{

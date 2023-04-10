@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "APFTIA",
-    "slug": "apftia",
-    "version": "1.0.0",
+    "name": "REL8",
+    "slug": "rel8",
+    "version": "1.2.0",
     "orientation": "portrait",
     "owner": "emetricsuite",
     "icon": "./assets/icon.png",
@@ -22,8 +22,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.tomation.APFTIA",
-      "versionCode": 4,
+      "package": "com.tomation.REL8",
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "0b32707b-186e-4dec-a058-c96242a4e9dd"
+        "projectId": "10dfa44f-bbce-4957-8042-8d3a6f68b7dd"
       }
     }
   }

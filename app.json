@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "REL8",
-    "slug": "rel8",
+    "name": "REL8 Admin",
+    "slug": "rel8-admin",
     "version": "1.2.0",
     "orientation": "portrait",
     "owner": "emetricsuite",
@@ -22,8 +22,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.tomation.REL8",
-      "versionCode": 3,
+      "package": "com.rel8admin",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "10dfa44f-bbce-4957-8042-8d3a6f68b7dd"
+        "projectId": "71909b00-b309-4c35-8dc0-f29fb3d7a1c3"
       }
     }
   }

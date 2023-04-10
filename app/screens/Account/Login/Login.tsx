@@ -66,7 +66,7 @@ const LoginForm = ({ navigation }: any) => {
               color: COLORS.primary,
             }}
           >
-            BUKAA
+            APFTIA
           </Text>
           <View
             style={{

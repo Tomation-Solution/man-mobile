@@ -1,3 +1,3 @@
-export const SHORT_NAME = "aani";
+export const SHORT_NAME = "apftia";
 
 export const PRE_URL = `tenant/${SHORT_NAME}/tenant/`;

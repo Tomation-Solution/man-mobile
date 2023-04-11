@@ -66,7 +66,7 @@ const LoginForm = ({ navigation }: any) => {
               color: COLORS.primary,
             }}
           >
-            REL8
+            NIM
           </Text>
           <View
             style={{

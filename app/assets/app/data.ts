@@ -1,3 +1,3 @@
 export const appData = {
-  orgnizationName: "REL8 Admin  ",
+  orgnizationName: "NIM  ",
 };

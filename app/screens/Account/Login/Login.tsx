@@ -54,7 +54,7 @@ const LoginForm = ({ navigation }: any) => {
         >
           <Image
             style={{
-              width: normalize(100),
+              width: normalize(158),
               height: normalize(100),
             }}
             source={appImages.full_logo}
@@ -66,7 +66,7 @@ const LoginForm = ({ navigation }: any) => {
               color: COLORS.primary,
             }}
           >
-            REL8
+            NBCC
           </Text>
           <View
             style={{

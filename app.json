@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "REL8 Admin",
-    "slug": "rel8-admin",
-    "version": "1.2.0",
+    "name": "NBCC",
+    "slug": "nbcc",
+    "version": "1.0.0",
     "orientation": "portrait",
     "owner": "emetricsuite",
     "icon": "./assets/icon.png",
@@ -22,8 +22,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.rel8admin",
-      "versionCode": 2,
+      "package": "com.tomation.nbcc",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "71909b00-b309-4c35-8dc0-f29fb3d7a1c3"
+        "projectId": "9c3d1b51-c014-427b-9043-d6b4b1388498"
       }
     }
   }

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "NBCC",
-    "slug": "nbcc",
+    "name": "SBAGC",
+    "slug": "sbagc",
     "version": "1.0.0",
     "orientation": "portrait",
     "owner": "emetricsuite",
@@ -22,7 +22,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.tomation.nbcc",
+      "package": "com.tomation.sbagc",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "9c3d1b51-c014-427b-9043-d6b4b1388498"
+        "projectId": "2c364841-c98e-4a33-b1fc-e3d2682e9865"
       }
     }
   }

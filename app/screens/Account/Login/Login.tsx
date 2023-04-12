@@ -66,7 +66,7 @@ const LoginForm = ({ navigation }: any) => {
               color: COLORS.primary,
             }}
           >
-            NBCC
+            SBAGC
           </Text>
           <View
             style={{

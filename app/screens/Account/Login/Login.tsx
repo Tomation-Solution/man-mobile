@@ -69,7 +69,7 @@ const LoginForm = ({ navigation }: any) => {
           >
             <AccountHeader
               title=" Login"
-              text="Input details to register as alumnus"
+              text="Input details to register as Member"
             />
           </View>
           {error && (

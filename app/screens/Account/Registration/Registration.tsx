@@ -63,7 +63,7 @@ const Registration = ({ route, navigation }: any) => {
         >
           <AccountHeader
             title="Registration"
-            text="Input details to register as alumnus"
+            text="Input details to register as Member"
           />
           {error && (
             <Text

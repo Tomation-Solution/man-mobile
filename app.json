@@ -22,8 +22,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.rel8admin",
-      "versionCode": 2,
+      "package": "com.tomation.RELATE",
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"

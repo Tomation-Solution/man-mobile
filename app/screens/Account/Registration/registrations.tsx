@@ -42,7 +42,7 @@ const Registration = ({ navigation }: any) => {
         >
           <AccountHeader
             title="  Registration"
-            text=" Input details to register as alumnus"
+            text=" Input details to register as Member"
           />
         </View>
 

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "NBCC",
-    "slug": "nbcc",
+    "name": "CIPDM",
+    "slug": "cipdm",
     "version": "1.0.0",
     "orientation": "portrait",
     "owner": "emetricsuite",
@@ -22,8 +22,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.tomation.nbcc",
-      "versionCode": 2,
+      "package": "com.tomation.cipdm",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "9c3d1b51-c014-427b-9043-d6b4b1388498"
+        "projectId": "04c76b97-5e00-47eb-be60-6a5c82da84c1"
       }
     }
   }

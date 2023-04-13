@@ -55,7 +55,7 @@ const LoginForm = ({ navigation }: any) => {
           <Image
             style={{
               width: normalize(50),
-              height: normalize(100),
+              height: normalize(50),
             }}
             source={appImages.full_logo}
           />
@@ -66,7 +66,7 @@ const LoginForm = ({ navigation }: any) => {
               color: COLORS.primary,
             }}
           >
-            NBCC
+            CIPDM
           </Text>
           <View
             style={{

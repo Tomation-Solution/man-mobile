@@ -29,7 +29,7 @@ const VerifyUser = ({ navigation }: any) => {
           >
             <AccountHeader
               title=" Code "
-              text={"Enter 4 digit code recieved to proceed"}
+              text={"Enter 4 digit code received to proceed"}
             />
           </View>
           <View style={[styles.card, styles.shawdowProp]}>

@@ -23,7 +23,7 @@
     },
     "android": {
       "package": "com.tomation.NIMN",
-      "versionCode": 17,
+      "versionCode": 18,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"

@@ -9,11 +9,13 @@ const initialState: {
   comments: any;
   loading: boolean;
   commenstLoading: boolean;
+  newsError: any;
 } = {
   news: [],
   comments: [],
   loading: false,
   commenstLoading: false,
+  newsError: null,
 };
 
 const newsSlice = createSlice({
@@ -30,6 +32,7 @@ const newsSlice = createSlice({
 
     newsRequestFailed: (state, action) => {
       state.loading = false;
+      state.newsError = action.payload.response.data.message;
     },
 
     commentRequested: (state, action) => {

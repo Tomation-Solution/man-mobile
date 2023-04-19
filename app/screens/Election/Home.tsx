@@ -12,14 +12,11 @@ const ElectionHome = ({ navigation }: any) => {
   const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
   const { userData, loading } = useAppSelector(
     (state) => state.electionReducers.getelectionSlice
-  )
+  );
 
   useEffect(() => {
     dispatch(list_election());
   }, []);
-
-
-
 
   return (
     <Container>
@@ -33,7 +30,7 @@ const ElectionHome = ({ navigation }: any) => {
           <LoadingIndicator />
         ) : (
           <>
-            {
+            {userData?.data ? (
               userData?.data?.map((data: any) => (
                 <ElectionsCard
                   key={data.id}
@@ -43,7 +40,17 @@ const ElectionHome = ({ navigation }: any) => {
                   onPress={() => navigation.navigate("ProfileDetails")}
                 />
               ))
-            }
+            ) : (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text>No Election Data</Text>
+              </View>
+            )}
           </>
         )}
       </View>

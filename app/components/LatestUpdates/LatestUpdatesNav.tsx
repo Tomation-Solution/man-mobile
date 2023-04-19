@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { Globalstyles } from "../../globals/styles";
 import { images } from "../../assets/dummyData";
 import { horizontalScale } from "../../constants/metric";
@@ -20,6 +20,7 @@ import { toSentenceCase } from "../../utils/helperFunctions/toSentenceCase";
 import { getEvents } from "../../store/slices/events/eventsSlice";
 import { getNews } from "../../store/slices/news_publication/newsSlice";
 import { getPublication } from "../../store/slices/news_publication/publicationSlice";
+import AsyncAlert from "../CustomAlert";
 
 const { sectionHeaderText, section } = Globalstyles;
 
@@ -118,10 +119,12 @@ const LatestUpdatesNav = ({ navigation, environment }: any) => {
   const dispatch = useAppDispatch();
   const { response } = useAppSelector((state) => state.extras.extrasSlice);
 
-  const { publications } = useAppSelector(
+  const { publications, error } = useAppSelector(
     (state) => state.newsPublication.publication
   );
-  const { news } = useAppSelector((state) => state.newsPublication.news);
+  const { news, newsError } = useAppSelector(
+    (state) => state.newsPublication.news
+  );
   const { events, loading } = useAppSelector((state) => state.events);
 
   useEffect(() => {
@@ -140,6 +143,22 @@ const LatestUpdatesNav = ({ navigation, environment }: any) => {
     console.log("publications", publications);
     // console.log("latestUpdates", latestUpdates);
   }, [environment, navigation]);
+
+  useEffect(() => {
+    const alertMessage = async () => {
+      if (error || newsError) {
+        if (error?.is_inancial || newsError?.is_inancial) {
+          // const res = await AsyncAlert("Notice", error?.is_inancial, (resolve, reject)=> console.log("som"));
+          // alert(error?.is_inancial);
+          // console.log(res);
+          // navigation.navigate("Homescreen", {
+          //   screen: "Account",
+          // });
+        }
+      }
+    };
+    alertMessage();
+  }, [error]);
 
   // const [latestUpdates, setLatestUpdates] = React.useState<any>([
   //   {
@@ -201,7 +220,7 @@ const LatestUpdatesNav = ({ navigation, environment }: any) => {
   );
 };
 
-export default LatestUpdatesNav;
+export default memo(LatestUpdatesNav);
 
 const styles = StyleSheet.create({
   container: {},

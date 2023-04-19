@@ -9,11 +9,13 @@ const initialState: {
   comments: any;
   loading: boolean;
   commenstLoading: boolean;
+  error: any;
 } = {
   publications: [],
   comments: [],
   loading: false,
   commenstLoading: false,
+  error: null,
 };
 
 const publicationSlice = createSlice({
@@ -29,7 +31,9 @@ const publicationSlice = createSlice({
     },
     publicationRequestFailed: (state, action) => {
       state.loading = false;
+      state.error = action.payload.response.data.message;
     },
+
     commentRequested: (state, action) => {
       state.commenstLoading = true;
     },

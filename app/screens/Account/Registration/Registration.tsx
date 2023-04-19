@@ -44,13 +44,16 @@ const Registration = ({ route, navigation }: any) => {
     (state) => state.authReducers.login
   );
 
-  const user_data = validationData?.data[0]?.user;
+  const user_data = validationData.data[0]?.user;
 
   useEffect(() => {
     if (registrationStatus) {
       navigation.navigate("Login");
     }
-  }, [registrationStatus]);
+    if (!data) {
+      navigation.navigate("Login");
+    }
+  }, [registrationStatus, data]);
 
   return (
     <KeyboardAvoidingViewWrapper>
@@ -81,22 +84,36 @@ const Registration = ({ route, navigation }: any) => {
           <View style={[styles.card, styles.shawdowProp]}>
             <Formik
               validationSchema={yup.object().shape({
-                name: yup.string().required().label("Name"),
                 password: yup.string().required().min(6).label("Password"),
-                GSM: yup.string().required().min(11).label("Phone number"),
-
+                rel8Email: yup.string().required().min(6).label("Email"),
                 MEMBERSHIP_NO: yup
                   .string()
                   .required()
                   .label("Membership number"),
               })}
               initialValues={{
-                name: user_data?.name || "",
-                password: "",
-                rel8Email: "",
-                GSM: user_data?.GSM || "",
-                MEMBERSHIP_GRADE: user_data?.MEMBERSHIP_GRADE || "",
                 MEMBERSHIP_NO: data,
+                names: user_data?.names || "",
+                email: "",
+                cellular: user_data?.Cellular_Phone || "",
+                "PHONE NUMBER": user_data?.["PHONE NUMBER"] || "",
+                FACTORY_ADDRESS: user_data?.FACTORY_ADDRESS || "",
+                "PRODUCTS MANUFACTURED":
+                  user_data?.["PRODUCTS MANUFACTURED"] || "",
+                SECTOR: user_data?.SECTOR || "",
+                CLASSIFICATION: user_data?.CLASSIFICATION || "",
+                "SUB-SECTOR": user_data?.["SUB-SECTOR"] || "",
+                "TAX IDENTIFICATION NUMBER (TIN)":
+                  user_data?.["TAX IDENTIFICATION NUMBER (TIN)"] || "",
+                chapter: user_data?.chapter || "",
+                "Web Page": user_data?.["Web Page"] || "",
+                CAC_REGISTRATION_NUMBER:
+                  user_data?.CAC_REGISTRATION_NUMBER || "",
+                Telephone_1: user_data?.Telephone_1 || "",
+                Telephone_2: user_data?.Telephone_2 || "",
+                ADDRESS: user_data?.ADDRESS || "",
+
+                password: "",
               }}
               onSubmit={(values) => handleRegister(values)}
             >
@@ -104,40 +121,95 @@ const Registration = ({ route, navigation }: any) => {
                 <>
                   <Field
                     component={FormInput}
-                    name="name"
-                    placeholder="Full name"
+                    name="MEMBERSHIP_NO"
+                    placeholder="Membership number"
                     editable={false}
                   />
                   <Field
-                    editable={false}
                     component={FormInput}
-                    name="GSM"
+                    name="names"
+                    placeholder="Names"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="cellular"
+                    placeholder="Cellular"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="PHONE NUMBER"
                     placeholder="Phone number"
                   />
                   <Field
-                    editable={false}
                     component={FormInput}
-                    name="MEMBERSHIP_GRADE"
-                    placeholder="Membership Grade"
+                    name="FACTORY_ADDRESS"
+                    placeholder="Factory address"
                   />
-
                   <Field
-                    editable={false}
                     component={FormInput}
-                    name="MEMBERSHIP_NO"
-                    placeholder="Membership number"
+                    name="PRODUCTS MANUFACTURED"
+                    placeholder="Products manufactured"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="SECTOR"
+                    placeholder="Sector"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="CLASSIFICATION"
+                    placeholder="Classification"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="SUB-SECTOR"
+                    placeholder="Sub-sector"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="TAX IDENTIFICATION NUMBER (TIN)"
+                    placeholder="Tax identification number"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="chapter"
+                    placeholder="Chapter"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="Web Page"
+                    placeholder="Web page"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="CAC_REGISTRATION_NUMBER"
+                    placeholder="CAC registration number"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="Telephone_1"
+                    placeholder="Telephone 1"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="Telephone_2"
+                    placeholder="Telephone 2"
+                  />
+                  <Field
+                    component={FormInput}
+                    name="ADDRESS"
+                    placeholder="Address"
                   />
                   <Field
                     component={FormInput}
                     name="rel8Email"
-                    placeholder="Email address"
+                    placeholder="Email"
                   />
                   <Field
                     component={FormInput}
                     name="password"
                     placeholder="Password"
                   />
-
                   <Formbtn
                     disabeld={loading}
                     style={[styles.btn]}

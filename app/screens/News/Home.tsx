@@ -9,7 +9,7 @@ import LoadingIndicator from "../../utils/LoadingIndicator";
 
 const Home = ({ navigation, environment }: any) => {
   const dispatch = useAppDispatch();
-  const { news, loading } = useAppSelector(
+  const { news, loading, newsError } = useAppSelector(
     (state) => state.newsPublication.news
   );
 
@@ -20,6 +20,17 @@ const Home = ({ navigation, environment }: any) => {
       dispatch(getNews());
     }
   }, [environment]);
+
+  useEffect(() => {
+    if (newsError) {
+      if (newsError?.is_inancial) {
+        // alert(error?.is_inancial);
+        navigation.navigate("Homescreen", {
+          screen: "Account",
+        });
+      }
+    }
+  }, [newsError]);
 
   return (
     <View>

@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Pressable,
 } from "react-native";
 import {
   AccountHeader,
@@ -124,13 +125,11 @@ const LoginForm = ({ navigation }: any) => {
                 )}
               </Formik>
 
-              <TouchableOpacity
-                onPress={() => navigation.navigate("ForgotPassword")}
-              >
+              <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
                 <Text style={styles.forgotPassword}> Forgot password?</Text>
-              </TouchableOpacity>
+              </Pressable>
 
-              <TouchableOpacity
+              <Pressable
                 onPress={() => navigation.navigate("VerifyUser")}
                 style={{ display: "flex", flexDirection: "row" }}
               >
@@ -138,7 +137,7 @@ const LoginForm = ({ navigation }: any) => {
                   {" "}
                   Don't have an account? <Text style={{}}> Register</Text>
                 </Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </FormContainer>
         </View>

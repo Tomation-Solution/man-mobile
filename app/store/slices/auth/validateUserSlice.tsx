@@ -11,7 +11,7 @@ const initialState: {
   validation: "",
 };
 
-const validateUserSlice = createSlice({
+const validateUserSlice: any = createSlice({
   name: "validateUser",
   initialState,
   reducers: {

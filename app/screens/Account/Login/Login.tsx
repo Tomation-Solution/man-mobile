@@ -54,8 +54,8 @@ const LoginForm = ({ navigation }: any) => {
         >
           <Image
             style={{
-              width: normalize(140),
-              height: normalize(60),
+              width: normalize(70),
+              height: normalize(70),
             }}
             source={appImages.full_logo}
           />
@@ -113,6 +113,7 @@ const LoginForm = ({ navigation }: any) => {
                     <Formbtn
                       style={[styles.btn]}
                       onPress={handleSubmit}
+                      disabled={!isValid || loading === true}
                       title={
                         loading === true ? (
                           <ActivityIndicator size="small" color="white" />

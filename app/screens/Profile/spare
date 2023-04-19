@@ -1,0 +1,214 @@
+{/* 
+            <View
+              style={[
+                styles.feidlContainer,
+                { marginTop: 40, flexDirection: "row" },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.label,
+                  {
+                    borderBottomColor: COLORS.primary,
+                    borderBottomWidth: 1,
+                    paddingVertical: 6,
+                    fontWeight: "bold",
+                    flex: 1,
+                    fontSize: 18,
+                  },
+                ]}
+              >
+                EMPLOYMENT HISTORY
+              </Text>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={handleAddEmployment}
+              >
+                <Ionicons name={"add"} color={COLORS.primary} size={30} />
+              </TouchableOpacity>
+            </View> */}
+
+
+
+
+                {/* <View
+          style={{
+            marginTop: 20,
+          }}
+        >
+          <View style={styles.feidlContainer}>
+            <Text
+              style={[
+                styles.label,
+                {
+                  borderBottomColor: COLORS.primary,
+                  borderBottomWidth: 1,
+                  paddingVertical: 6,
+                  fontWeight: "bold",
+                },
+              ]}
+            >
+              LANGUAGE PROFICIENCY
+            </Text>
+          </View>
+
+          <View style={styles.outerContainer}>
+            <View style={[styles.feidlContainer, { flex: 1 }]}>
+              <Text style={styles.label}>LANGUAGE</Text>
+              <Text style={styles.text}>lorem</Text>
+            </View>
+            <View style={[styles.feidlContainer, { flex: 1, marginLeft: 20 }]}>
+              <Text style={styles.label}>Speaking</Text>
+              <Text style={styles.text}>lorem</Text>
+            </View>
+            <View style={[styles.feidlContainer, { flex: 1, marginLeft: 20 }]}>
+              <Text style={styles.label}>Reading</Text>
+              <Text style={styles.text}>lorem</Text>
+            </View>
+          </View>
+        </View> */}
+
+
+                  {/* <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => {
+                    handleEducationChange(index, "is_delete", true);
+                    console.log("formastae", formState);
+                  }}
+                >
+                  <Ionicons name={"remove"} color={COLORS.primary} size={30} />
+                </TouchableOpacity> */}
+
+
+
+                {/* 
+              <View
+                style={[
+                  styles.feidlContainer,
+                  {
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  },
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.label,
+                    {
+                      borderBottomColor: COLORS.primary,
+                      borderBottomWidth: 1,
+                      paddingVertical: 6,
+                      fontWeight: "bold",
+                      flex: 1,
+                      fontSize: 18,
+                    },
+                  ]}
+                >
+                  EDUCATION
+                  <Text
+                    style={{
+                      fontStyle: "italic",
+                    }}
+                  >
+                    (include all college or university degrees)
+                  </Text>
+                </Text>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={handleAddEducation}
+                >
+                  <Ionicons name={"add"} color={COLORS.primary} size={30} />
+                </TouchableOpacity>
+              </View>
+              {formState.membereducation.map(
+                (education: any, index: number) => (
+                  <View key={index}>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        style={{
+                          color: COLORS.primary,
+                          fontWeight: "bold",
+                          fontSize: 16,
+                          marginTop: 10,
+                          textDecorationColor: "crimson",
+                          textDecorationLine: education.is_delete
+                            ? "line-through"
+                            : "none",
+                        }}
+                      >
+                        Education {index + 1}
+                      </Text>
+                    </View>
+                    <View style={styles.feidlContainer}>
+                      <Text style={styles.label}>Institution Name</Text>
+
+                      <TextInput
+                        value={education.name_of_institution}
+                        editable={education.is_delete ? false : true}
+                        onChangeText={(value) =>
+                          handleEducationChange(
+                            index,
+                            "name_of_institution",
+                            value
+                          )
+                        }
+                        style={styles.inputField}
+                        placeholder="Enter INSTITUTION NAME"
+                      />
+                    </View>
+                    <View style={styles.feidlContainer}>
+                      <Text style={styles.label}>Degree</Text>
+
+                      <TextInput
+                        editable={education.is_delete ? false : true}
+                        value={education.degree}
+                        style={styles.inputField}
+                        onChangeText={(value) =>
+                          handleEducationChange(index, "degree", value)
+                        }
+                        placeholder="Enter Degree"
+                      />
+                    </View>
+
+                    <View style={styles.outerContainer}>
+                      <View style={[styles.feidlContainer, { flex: 1 }]}>
+                        <Text style={styles.label}>Major</Text>
+                        <TextInput
+                          editable={education.is_delete ? false : true}
+                          value={education.major}
+                          style={styles.inputField}
+                          onChangeText={(value) =>
+                            handleEducationChange(index, "major", value)
+                          }
+                          placeholder="Enter Major"
+                        />
+                      </View>
+                      <View
+                        style={[
+                          styles.feidlContainer,
+                          { flex: 1, marginLeft: 20 },
+                        ]}
+                      >
+                        <Text style={styles.label}>Year</Text>
+                        <TextInput
+                          editable={education.is_delete ? false : true}
+                          value={education.year}
+                          style={styles.inputField}
+                          onChangeText={(value) =>
+                            handleEducationChange(index, "year", value)
+                          }
+                          placeholder="Enter Year"
+                        />
+                      </View>
+                    </View>
+                  </View>
+                )
+              )} */}

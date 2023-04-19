@@ -5,6 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { list_election } from "../../store/slices/elections/getelectionSlice";
 import LoadingIndicator from "../../utils/LoadingIndicator";
+import NoData from "../../components/NoData";
 
 const ElectionHome = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
@@ -41,15 +42,7 @@ const ElectionHome = ({ navigation }: any) => {
                 />
               ))
             ) : (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text>No Election Data</Text>
-              </View>
+              <NoData />
             )}
           </>
         )}

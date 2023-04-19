@@ -1,4 +1,5 @@
 import {
+  Alert,
   Dimensions,
   FlatList,
   Image,
@@ -144,21 +145,29 @@ const LatestUpdatesNav = ({ navigation, environment }: any) => {
     // console.log("latestUpdates", latestUpdates);
   }, [environment, navigation]);
 
-  useEffect(() => {
-    const alertMessage = async () => {
-      if (error || newsError) {
-        if (error?.is_inancial || newsError?.is_inancial) {
-          // const res = await AsyncAlert("Notice", error?.is_inancial, (resolve, reject)=> console.log("som"));
-          // alert(error?.is_inancial);
-          // console.log(res);
-          // navigation.navigate("Homescreen", {
-          //   screen: "Account",
-          // });
-        }
-      }
-    };
-    alertMessage();
-  }, [error]);
+  // useEffect(() => {
+  //   if (error || newsError) {
+  //     if (error?.is_inancial || newsError?.is_inancial) {
+  //       Alert.alert("Notice", "Please pay your annual due", [
+  //         {
+  //           text: "Cancel",
+  //           onPress: () =>
+  //             navigation.navigate("Homescreen", {
+  //               screen: "Account",
+  //             }),
+  //           style: "cancel",
+  //         },
+  //         {
+  //           text: "OK",
+  //           onPress: () =>
+  //             navigation.navigate("Homescreen", {
+  //               screen: "Account",
+  //             }),
+  //         },
+  //       ]);
+  //     }
+  //   }
+  // }, [error, newsError]);
 
   // const [latestUpdates, setLatestUpdates] = React.useState<any>([
   //   {

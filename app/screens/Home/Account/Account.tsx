@@ -57,7 +57,6 @@ const Account = ({ navigation }: any) => {
           tabBarStyle: { backgroundColor: "white", marginTop: 2 },
         }}
       >
-        <Top.Screen name="Compeleted Payment" component={CompletedPayment} />
         <Top.Screen name="Peding Payment">
           {(props) => (
             <PendingPayment
@@ -67,6 +66,7 @@ const Account = ({ navigation }: any) => {
             />
           )}
         </Top.Screen>
+        <Top.Screen name="Compeleted Payment" component={CompletedPayment} />
       </Top.Navigator>
     </Container>
   );

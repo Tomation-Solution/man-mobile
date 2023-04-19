@@ -35,8 +35,8 @@ const DrawerContent = ({
   return (
     <ScrollView showsHorizontalScrollIndicator={false} style={styles.container}>
       <View style={styles.header}>
-        <Image source={appImages.logo} style={styles.logo} />
-        <Text style={styles.title}>{appData.orgnizationName}</Text>
+        <Image source={appImages.full_logo} style={styles.logo} />
+        {/* <Text style={styles.title}>{appData.orgnizationName}</Text> */}
       </View>
       {userData?.council && (
         <DrawerLabel
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   logo: {
-    width: 50,
+    width: 120,
     height: 50,
     marginRight: 10,
   },

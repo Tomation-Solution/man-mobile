@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import React, { useEffect } from "react";
 import { HomeHeader, SearchBar } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
@@ -6,6 +6,7 @@ import PublicationsCard from "../../components/Publications/PubicationsCard";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getPublication } from "../../store/slices/news_publication/publicationSlice";
 import LoadingIndicator from "../../utils/LoadingIndicator";
+import NoData from "../../components/NoData";
 
 const Home = ({ navigation, environment }: any) => {
   const dispatch = useAppDispatch();
@@ -21,16 +22,29 @@ const Home = ({ navigation, environment }: any) => {
     }
   }, [environment]);
 
-  useEffect(() => {
-    if (error) {
-      if (error?.is_inancial) {
-        // alert(error?.is_inancial);
-        navigation.navigate("Homescreen", {
-          screen: "Account",
-        });
-      }
-    }
-  }, [error]);
+  // useEffect(() => {
+  //   if (error) {
+  //     if (error?.is_inancial) {
+  //       Alert.alert("Notice", "Please pay your annual due", [
+  //         {
+  //           text: "Cancel",
+  //           onPress: () =>
+  //             navigation.navigate("Homescreen", {
+  //               screen: "Account",
+  //             }),
+  //           style: "cancel",
+  //         },
+  //         {
+  //           text: "OK",
+  //           onPress: () =>
+  //             navigation.navigate("Homescreen", {
+  //               screen: "Account",
+  //             }),
+  //         },
+  //       ]);
+  //     }
+  //   }
+  // }, [error]);
 
   return (
     <View>
@@ -57,15 +71,19 @@ const Home = ({ navigation, environment }: any) => {
             <LoadingIndicator />
           ) : (
             <>
-              {publications?.data?.map((publication: any, index: number) => (
-                <PublicationsCard
-                  key={index}
-                  item={publication}
-                  onPress={() =>
-                    navigation.navigate("Details", { publication })
-                  }
-                />
-              ))}
+              {publications?.data?.length === 0 ? (
+                publications?.data?.map((publication: any, index: number) => (
+                  <PublicationsCard
+                    key={index}
+                    item={publication}
+                    onPress={() =>
+                      navigation.navigate("Details", { publication })
+                    }
+                  />
+                ))
+              ) : (
+                <NoData />
+              )}
             </>
           )}
         </View>

@@ -15,7 +15,7 @@ import {
   Support,
   AdminSupport,
   TechnicalSupport,
-  FundAProject
+  FundAProject,
 } from "../screens";
 import Meetings from "../screens/Meetings/Meetings";
 import Profile from "../screens/Profile/Profile";
@@ -92,7 +92,6 @@ const DrawerNav = () => {
         <Drawer.Screen name="Fund A Project">
           {(props) => <FundAProject {...props} />}
         </Drawer.Screen>
-
       </Drawer.Navigator>
     </EnvironmentContext.Provider>
   );

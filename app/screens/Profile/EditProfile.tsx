@@ -35,6 +35,7 @@ const EditProfile = ({ navigation }: any) => {
 
   const memberEducation = userData?.data[0]?.member_education;
   const memberEmploymentHistory = userData?.data[0]?.member_employment_history;
+  const member_info = userData?.data[0]?.member_info;
   // const languageProficiency = userData?.data[0]?.language_proficiency;
 
   const initialFormState = {
@@ -54,8 +55,13 @@ const EditProfile = ({ navigation }: any) => {
         end_date: employment.end_date || "",
       };
     }),
+
+    member_info: member_info.map((item: any) => {
+      return { [item.name]: item.value || "" };
+    }),
   };
 
+  console.log(initialFormState);
   const formReducer = (state: any, action: any) => {
     switch (action.type) {
       case "ADD_EDUCATION":
@@ -117,6 +123,22 @@ const EditProfile = ({ navigation }: any) => {
                 : employment
           ),
         };
+
+      case "UPDATE_MEMBER_INFO":
+        const temp_mem_info = [...state.member_info];
+        const index = temp_mem_info.findIndex(
+          (item: any) => Object.keys(item)[0] === action.payload.field
+        );
+        temp_mem_info[index] = {
+          [action.payload.field]: action.payload.value,
+        };
+        console.log(temp_mem_info);
+
+        return {
+          ...state,
+          member_info: temp_mem_info,
+        };
+
       default:
         return state;
     }
@@ -138,6 +160,9 @@ const EditProfile = ({ navigation }: any) => {
     console.log("sending: ", formState);
     appDispatch(editProfile(formState, userData?.data[0]?.id));
   };
+
+  const handleMemberInfoChange = (field: any, value: any) =>
+    dispatch({ type: "UPDATE_MEMBER_INFO", payload: { field, value } });
 
   return (
     <Container>
@@ -215,152 +240,42 @@ const EditProfile = ({ navigation }: any) => {
                     },
                   ]}
                 >
-                  EDUCATION
-                  <Text
-                    style={{
-                      fontStyle: "italic",
-                    }}
-                  >
-                    (include all college or university degrees)
-                  </Text>
+                  MEMBER INFORMATION
                 </Text>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={handleAddEducation}
-                >
-                  <Ionicons name={"add"} color={COLORS.primary} size={30} />
-                </TouchableOpacity>
+                <View />
               </View>
 
-              {formState.membereducation.map(
-                (education: any, index: number) => (
+              {formState.member_info?.map((item: any, index: number) => {
+                let curValue: string = Object.values(item)[0] as string;
+
+                return (
                   <View key={index}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        width: "100%",
-                      }}
-                    >
-                      <Text
-                        style={{
-                          color: COLORS.primary,
+                    <Text
+                      style={[
+                        styles.label,
+                        {
+                          borderBottomColor: COLORS.primary,
+                          borderBottomWidth: 1,
+                          paddingVertical: 6,
                           fontWeight: "bold",
-                          fontSize: 16,
-                          marginTop: 10,
-                          textDecorationColor: "crimson",
-                          textDecorationLine: education.is_delete
-                            ? "line-through"
-                            : "none",
-                        }}
-                      >
-                        Education {index + 1}
-                      </Text>
-                      {/* <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={() => {
-                    handleEducationChange(index, "is_delete", true);
-                    console.log("formastae", formState);
-                  }}
-                >
-                  <Ionicons name={"remove"} color={COLORS.primary} size={30} />
-                </TouchableOpacity> */}
-                    </View>
-                    <View style={styles.feidlContainer}>
-                      <Text style={styles.label}>Institution Name</Text>
-
-                      <TextInput
-                        value={education.name_of_institution}
-                        editable={education.is_delete ? false : true}
-                        onChangeText={(value) =>
-                          handleEducationChange(
-                            index,
-                            "name_of_institution",
-                            value
-                          )
-                        }
-                        style={styles.inputField}
-                        placeholder="Enter INSTITUTION NAME"
-                      />
-                    </View>
-                    <View style={styles.feidlContainer}>
-                      <Text style={styles.label}>Degree</Text>
-
-                      <TextInput
-                        editable={education.is_delete ? false : true}
-                        value={education.degree}
-                        style={styles.inputField}
-                        onChangeText={(value) =>
-                          handleEducationChange(index, "degree", value)
-                        }
-                        placeholder="Enter Degree"
-                      />
-                    </View>
-
-                    <View style={styles.outerContainer}>
-                      <View style={[styles.feidlContainer, { flex: 1 }]}>
-                        <Text style={styles.label}>Major</Text>
-                        <TextInput
-                          editable={education.is_delete ? false : true}
-                          value={education.major}
-                          style={styles.inputField}
-                          onChangeText={(value) =>
-                            handleEducationChange(index, "major", value)
-                          }
-                          placeholder="Enter Major"
-                        />
-                      </View>
-                      <View
-                        style={[
-                          styles.feidlContainer,
-                          { flex: 1, marginLeft: 20 },
-                        ]}
-                      >
-                        <Text style={styles.label}>Year</Text>
-                        <TextInput
-                          editable={education.is_delete ? false : true}
-                          value={education.year}
-                          style={styles.inputField}
-                          onChangeText={(value) =>
-                            handleEducationChange(index, "year", value)
-                          }
-                          placeholder="Enter Year"
-                        />
-                      </View>
-                    </View>
+                          flex: 1,
+                          fontSize: 18,
+                        },
+                      ]}
+                    >
+                      {Object.keys(item)[0]}
+                    </Text>
+                    <TextInput
+                      style={styles.inputField}
+                      placeholder={`Enter ${Object.keys(item)[0]}`}
+                      value={curValue}
+                      onChangeText={(value) =>
+                        handleMemberInfoChange(Object.keys(item)[0], value)
+                      }
+                    />
                   </View>
-                )
-              )}
-            </View>
-
-            <View
-              style={[
-                styles.feidlContainer,
-                { marginTop: 40, flexDirection: "row" },
-              ]}
-            >
-              <Text
-                style={[
-                  styles.label,
-                  {
-                    borderBottomColor: COLORS.primary,
-                    borderBottomWidth: 1,
-                    paddingVertical: 6,
-                    fontWeight: "bold",
-                    flex: 1,
-                    fontSize: 18,
-                  },
-                ]}
-              >
-                EMPLOYMENT HISTORY
-              </Text>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={handleAddEmployment}
-              >
-                <Ionicons name={"add"} color={COLORS.primary} size={30} />
-              </TouchableOpacity>
+                );
+              })}
             </View>
 
             {formState.memberemploymenthistory.map(
@@ -461,43 +376,6 @@ const EditProfile = ({ navigation }: any) => {
                 </View>
               )
             )}
-
-            {/* <View
-          style={{
-            marginTop: 20,
-          }}
-        >
-          <View style={styles.feidlContainer}>
-            <Text
-              style={[
-                styles.label,
-                {
-                  borderBottomColor: COLORS.primary,
-                  borderBottomWidth: 1,
-                  paddingVertical: 6,
-                  fontWeight: "bold",
-                },
-              ]}
-            >
-              LANGUAGE PROFICIENCY
-            </Text>
-          </View>
-
-          <View style={styles.outerContainer}>
-            <View style={[styles.feidlContainer, { flex: 1 }]}>
-              <Text style={styles.label}>LANGUAGE</Text>
-              <Text style={styles.text}>lorem</Text>
-            </View>
-            <View style={[styles.feidlContainer, { flex: 1, marginLeft: 20 }]}>
-              <Text style={styles.label}>Speaking</Text>
-              <Text style={styles.text}>lorem</Text>
-            </View>
-            <View style={[styles.feidlContainer, { flex: 1, marginLeft: 20 }]}>
-              <Text style={styles.label}>Reading</Text>
-              <Text style={styles.text}>lorem</Text>
-            </View>
-          </View>
-        </View> */}
           </ScrollView>
         )}
       </>

@@ -7,6 +7,7 @@ import { images } from "../../assets/dummyData";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fundProject } from "../../store/slices/Fund_A_Project/fundSlice";
 import LoadingIndicator from "../../utils/LoadingIndicator";
+import NoData from "../../components/NoData";
 
 const Home = ({ navigation }: any) => {
   const { isLoggedIn } = useAppSelector(
@@ -43,15 +44,19 @@ const Home = ({ navigation }: any) => {
             <LoadingIndicator />
           ) : (
             <>
-              {userData?.data.map((item: any) => {
-                return (
-                  <DonationCard
-                    key={item.id}
-                    item={item}
-                    onPress={() => navigation.navigate("Details1", { item })}
-                  />
-                );
-              })}
+              {userData?.data.length > 0 ? (
+                userData?.data.map((item: any) => {
+                  return (
+                    <DonationCard
+                      key={item.id}
+                      item={item}
+                      onPress={() => navigation.navigate("Details1", { item })}
+                    />
+                  );
+                })
+              ) : (
+                <NoData />
+              )}
             </>
           )}
         </View>

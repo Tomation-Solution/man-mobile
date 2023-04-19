@@ -14,8 +14,6 @@ import {
   TableWrapper,
   Row,
   Rows,
-  Col,
-  Cols,
   Cell,
 } from "react-native-table-component";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";

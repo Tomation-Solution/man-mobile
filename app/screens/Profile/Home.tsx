@@ -16,6 +16,7 @@ import PicturePreview from "../../components/Profile/PicturePreview";
 // import Picture from "../../components/Profile/Picture";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getProfile } from "../../store/slices/profile/getProfileSlice";
+import { useIsFocused } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
@@ -39,12 +40,13 @@ const Home = ({ navigation }: any) => {
     (state) => state.profileReducers.getProfileSlice
   );
   const dispatch = useAppDispatch();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getProfile());
     }
-  }, []);
+  }, [isFocused]);
 
   return (
     <>

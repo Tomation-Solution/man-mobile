@@ -1,4 +1,4 @@
 export const COLORS = {
-  primary: "#1c2e4a",
+  primary: "#2C3513",
   icon: "#9DA292",
 };

@@ -14,6 +14,7 @@ import LoadingIndicator from "../../utils/LoadingIndicator";
 import Accepted from "./components/Accepted";
 import Rejected from "./components/Rejected";
 import Reschedule from "./components/Reschedule";
+import NoData from "../../components/NoData";
 
 const Home = ({ navigation, environment }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -84,21 +85,25 @@ const Home = ({ navigation, environment }: any) => {
           <LoadingIndicator />
         ) : (
           <>
-            {meetings?.data?.map((meeting: any) => (
-              <MeetingCard
-                accept={() => register(meeting.id)}
-                accepted={meeting.is_attending}
-                setMeetingId={setMeetingId}
-                apology={apology}
-                address={meeting.addresse}
-                key={meeting.id}
-                meeting_id={meeting.id}
-                title={meeting.name}
-                date={meeting.event_date.split("T")[0]}
-                time={meeting.event_date.split("T")[1].split("+")[1]}
-                onPress={() => navigation.navigate("Details", { meeting })}
-              />
-            ))}
+            {meetings ? (
+              meetings?.data?.map((meeting: any) => (
+                <MeetingCard
+                  accept={() => register(meeting.id)}
+                  accepted={meeting.is_attending}
+                  setMeetingId={setMeetingId}
+                  apology={apology}
+                  address={meeting.addresse}
+                  key={meeting.id}
+                  meeting_id={meeting.id}
+                  title={meeting.name}
+                  date={meeting.event_date.split("T")[0]}
+                  time={meeting.event_date.split("T")[1].split("+")[1]}
+                  onPress={() => navigation.navigate("Details", { meeting })}
+                />
+              ))
+            ) : (
+              <NoData />
+            )}
           </>
         )}
       </ScrollView>

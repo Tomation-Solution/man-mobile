@@ -54,7 +54,7 @@ const BottomNav = ({ environment }: any) => {
         },
       }}
     >
-      {isInancial && (
+      {!isInancial && (
         <>
           <Tab.Screen
             options={{

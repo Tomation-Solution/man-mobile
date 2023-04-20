@@ -21,6 +21,7 @@ import * as yup from "yup";
 import { createMember } from "../../../store/slices/auth/loginSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { COLORS } from "../../../constants/color";
+import { Alert } from "react-native";
 
 const Registration = ({ route, navigation }: any) => {
   const dispatch = useAppDispatch();
@@ -48,7 +49,12 @@ const Registration = ({ route, navigation }: any) => {
 
   useEffect(() => {
     if (registrationStatus) {
-      navigation.navigate("Login");
+      Alert.alert("Success", "Registration Succesful", [
+        {
+          text: "OK",
+          onPress: () => navigation.navigate("Login"),
+        },
+      ]);
     }
     if (!data) {
       navigation.navigate("Login");

@@ -1,4 +1,5 @@
 import {
+  Alert,
   Dimensions,
   Platform,
   StyleSheet,
@@ -7,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useReducer } from "react";
+import React, { memo, useEffect, useReducer } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../constants/color";
 import { Container } from "../../components";
@@ -15,10 +16,12 @@ import { Container } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
+  clearConfig,
   editProfile,
   getProfile,
 } from "../../store/slices/profile/getProfileSlice";
 import LoadingIndicator from "../../utils/LoadingIndicator";
+import { normalize } from "../../constants/metric";
 
 const EditProfile = ({ navigation }: any) => {
   const appDispatch = useAppDispatch();
@@ -29,101 +32,31 @@ const EditProfile = ({ navigation }: any) => {
 
   useEffect(() => {
     if (profileEditted) {
-      appDispatch(getProfile());
+      dispatch(clearConfig());
+      Alert.alert("Notice", "Profile Edited!", [
+        {
+          text: "OK",
+          onPress: () => {
+            navigation.goBack();
+          },
+        },
+      ]);
     }
   }, [profileEditted]);
 
-  const memberEducation = userData?.data[0]?.member_education;
-  const memberEmploymentHistory = userData?.data[0]?.member_employment_history;
   const member_info = userData?.data[0]?.member_info;
-  // const languageProficiency = userData?.data[0]?.language_proficiency;
 
   const initialFormState = {
-    membereducation: memberEducation.map((education: any) => {
-      return {
-        name_of_institution: education.name_of_institution || "",
-        degree: education.degree || "",
-        major: education.major || "",
-        year: education.year || "",
-      };
-    }),
-    memberemploymenthistory: memberEmploymentHistory.map((employment: any) => {
-      return {
-        postion_title: employment.postion_title || "",
-        employer_name_and_addresse: employment.employer_name_and_addresse || "",
-        start_date: employment.start_date || "",
-        end_date: employment.end_date || "",
-      };
-    }),
+    membereducation: [],
+    memberemploymenthistory: [],
 
-    member_info: member_info.map((item: any) => {
+    member_info: member_info?.map((item: any) => {
       return { [item.name]: item.value || "" };
     }),
   };
 
-  console.log(initialFormState);
   const formReducer = (state: any, action: any) => {
     switch (action.type) {
-      case "ADD_EDUCATION":
-        return {
-          ...state,
-          membereducation: [
-            ...state.membereducation,
-            {
-              name_of_institution: "",
-              degree: "",
-              major: "",
-              year: "",
-            },
-          ],
-        };
-      case "REMOVE_EDUCATION":
-        return {
-          ...state,
-          membereducation: state.membereducation.slice(0, -1),
-        };
-      case "UPDATE_EDUCATION":
-        return {
-          ...state,
-          membereducation: state.membereducation.map(
-            (education: any, index: number) =>
-              index === action.payload.index
-                ? { ...education, [action.payload.field]: action.payload.value }
-                : education
-          ),
-        };
-      case "ADD_EMPLOYMENT":
-        return {
-          ...state,
-          memberemploymenthistory: [
-            ...state.memberemploymenthistory,
-            {
-              company: "",
-              position: "",
-              startYear: "",
-              endYear: "",
-            },
-          ],
-        };
-      case "REMOVE_EMPLOYMENT":
-        return {
-          ...state,
-          memberemploymenthistory: state.memberemploymenthistory.slice(0, -1),
-        };
-      case "UPDATE_EMPLOYMENT":
-        return {
-          ...state,
-          memberemploymenthistory: state.memberemploymenthistory.map(
-            (employment: any, index: number) =>
-              index === action.payload.index
-                ? {
-                    ...employment,
-                    [action.payload.field]: action.payload.value,
-                  }
-                : employment
-          ),
-        };
-
       case "UPDATE_MEMBER_INFO":
         const temp_mem_info = [...state.member_info];
         const index = temp_mem_info.findIndex(
@@ -132,7 +65,6 @@ const EditProfile = ({ navigation }: any) => {
         temp_mem_info[index] = {
           [action.payload.field]: action.payload.value,
         };
-        console.log(temp_mem_info);
 
         return {
           ...state,
@@ -146,19 +78,21 @@ const EditProfile = ({ navigation }: any) => {
 
   const [formState, dispatch] = useReducer(formReducer, initialFormState);
 
-  const handleAddEducation = () => dispatch({ type: "ADD_EDUCATION" });
-  // const handleRemoveEducation = () => dispatch({ type: "REMOVE_EDUCATION" });
-  const handleEducationChange = (index: number, field: any, value: any) =>
-    dispatch({ type: "UPDATE_EDUCATION", payload: { index, field, value } });
-
-  const handleAddEmployment = () => dispatch({ type: "ADD_EMPLOYMENT" });
-  // const handleRemoveEmployment = () => dispatch({ type: "REMOVE_EMPLOYMENT" });
-  const handleEmploymentChange = (index: number, field: any, value: any) =>
-    dispatch({ type: "UPDATE_EMPLOYMENT", payload: { index, field, value } });
-
   const submitForm = () => {
-    console.log("sending: ", formState);
-    appDispatch(editProfile(formState, userData?.data[0]?.id));
+    appDispatch(editProfile(formState, userData?.data[0]?.id)).then(
+      (res: any) => {
+        if (res) {
+          Alert.alert("Notice", res.message, [
+            {
+              text: "OK",
+              onPress: () => navigation.goBack(),
+            },
+          ]);
+          console.log("Profile edited successfully", res);
+          // navigation.goBack();
+        }
+      }
+    );
   };
 
   const handleMemberInfoChange = (field: any, value: any) =>
@@ -211,7 +145,13 @@ const EditProfile = ({ navigation }: any) => {
         {loading ? (
           <LoadingIndicator />
         ) : (
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView
+            style={{
+              flex: 1,
+              marginBottom: 10,
+            }}
+            showsVerticalScrollIndicator={false}
+          >
             <View
               style={{
                 marginTop: 20,
@@ -277,105 +217,6 @@ const EditProfile = ({ navigation }: any) => {
                 );
               })}
             </View>
-
-            {formState.memberemploymenthistory.map(
-              (employment: any, index: number) => (
-                <View key={index}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      width: "100%",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: COLORS.primary,
-                        fontWeight: "bold",
-                        fontSize: 16,
-                        marginTop: 10,
-                        textDecorationColor: "crimson",
-                        textDecorationLine: employment.is_delete
-                          ? "line-through"
-                          : "none",
-                      }}
-                    >
-                      Employment History {index + 1}
-                    </Text>
-                    {/* <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={() => {
-                    handleEmploymentChange(index, "is_delete", true);
-                    console.log("formastae", formState);
-                  }}
-                >
-                  <Ionicons name={"remove"} color={COLORS.primary} size={30} />
-                </TouchableOpacity> */}
-                  </View>
-                  <View style={[styles.feidlContainer, { flex: 1 }]}>
-                    <Text style={styles.label}>Company Name and Address</Text>
-                    <TextInput
-                      editable={employment.is_delete ? false : true}
-                      value={employment.employer_name_and_addresse}
-                      style={styles.inputField}
-                      onChangeText={(value) =>
-                        handleEmploymentChange(
-                          index,
-                          "employer_name_and_addresse",
-                          value
-                        )
-                      }
-                      placeholder="Enter Comapny Name"
-                    />
-                  </View>
-                  <View style={[styles.feidlContainer, { flex: 1 }]}>
-                    <Text style={styles.label}>Job Title</Text>
-                    <TextInput
-                      editable={employment.is_delete ? false : true}
-                      value={employment.postion_title}
-                      style={styles.inputField}
-                      onChangeText={(value) =>
-                        handleEmploymentChange(index, "postion_title", value)
-                      }
-                      placeholder="Enter Job Title"
-                    />
-                  </View>
-
-                  <View style={styles.outerContainer}>
-                    <View style={[styles.feidlContainer, { flex: 1 }]}>
-                      <Text style={styles.label}>Start Date</Text>
-                      <TextInput
-                        editable={employment.is_delete ? false : true}
-                        value={employment.start_date}
-                        style={styles.inputField}
-                        onChangeText={(value) =>
-                          handleEmploymentChange(index, "start_date", value)
-                        }
-                        placeholder="Enter Start Date"
-                      />
-                    </View>
-                    <View
-                      style={[
-                        styles.feidlContainer,
-                        { flex: 1, marginLeft: 20 },
-                      ]}
-                    >
-                      <Text style={styles.label}>End Date</Text>
-                      <TextInput
-                        editable={employment.is_delete ? false : true}
-                        value={employment.end_date}
-                        style={styles.inputField}
-                        onChangeText={(value) =>
-                          handleEmploymentChange(index, "end_date", value)
-                        }
-                        placeholder="Enter End Date"
-                      />
-                    </View>
-                  </View>
-                </View>
-              )
-            )}
           </ScrollView>
         )}
       </>
@@ -383,7 +224,7 @@ const EditProfile = ({ navigation }: any) => {
   );
 };
 
-export default EditProfile;
+export default memo(EditProfile);
 
 const styles = StyleSheet.create({
   outerContainer: {
@@ -394,21 +235,21 @@ const styles = StyleSheet.create({
     marginVertical: 12,
   },
   label: {
-    fontSize: 14,
-    fontWeight: "300",
-    color: COLORS.primary,
+    fontSize: normalize(11),
+    fontWeight: "200",
+    color: "black",
   },
   text: {
-    fontSize: 16,
+    fontSize: normalize(14),
     paddingBottom: 10,
     borderBottomColor: COLORS.primary,
     borderBottomWidth: 1,
   },
   inputField: {
-    fontSize: 14,
+    fontSize: normalize(14),
     fontWeight: "500",
     color: COLORS.primary,
-    paddingBottom: 10,
+    marginTop: 8,
     borderBottomColor: COLORS.primary,
     borderBottomWidth: 1,
   },

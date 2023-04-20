@@ -54,7 +54,7 @@ const BottomNav = ({ environment }: any) => {
         },
       }}
     >
-      {!isInancial && (
+      {isInancial && (
         <>
           <Tab.Screen
             options={{
@@ -97,8 +97,15 @@ const BottomNav = ({ environment }: any) => {
           ),
         }}
         name="Account"
-        component={Account}
-      />
+      >
+        {(props) => (
+          <Account
+            environment={environment}
+            {...props}
+            hideHeader={!isInancial}
+          />
+        )}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 };

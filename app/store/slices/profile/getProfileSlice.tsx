@@ -45,16 +45,22 @@ const getProfileSlice = createSlice({
       state.loading = false;
       console.log("editProfileRequestFailed", action.payload);
     },
+    clearConfig: (state) => {
+      state.loading = false;
+      state.error = null;
+      state.profileEditted = false;
+    },
   },
 });
 
-const {
+export const {
   getProfileRequested,
   getProfileReceived,
   getProfileRequestFailed,
   editProfileReceived,
   editProfileRequestFailed,
   editProfileRequested,
+  clearConfig,
 } = getProfileSlice.actions;
 
 export default getProfileSlice.reducer;

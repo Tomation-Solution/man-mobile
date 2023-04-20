@@ -21,7 +21,6 @@ import { toSentenceCase } from "../../utils/helperFunctions/toSentenceCase";
 import { getEvents } from "../../store/slices/events/eventsSlice";
 import { getNews } from "../../store/slices/news_publication/newsSlice";
 import { getPublication } from "../../store/slices/news_publication/publicationSlice";
-import AsyncAlert from "../CustomAlert";
 
 const { sectionHeaderText, section } = Globalstyles;
 

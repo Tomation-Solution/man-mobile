@@ -24,6 +24,7 @@ import LoadingIndicator from "../../../../utils/LoadingIndicator";
 import { normalize } from "../../../../constants/metric";
 import { COLORS } from "../../../../constants/color";
 import { useIsFocused } from "@react-navigation/native";
+import NoData from "../../../../components/NoData";
 
 const PendingPayment = ({
   setOutstanding,
@@ -151,6 +152,7 @@ const PendingPayment = ({
               />
               <ScrollView>
                 {userData?.data
+                  ?.filter((item: any) => item.is_paid === false) ? userData?.data
                   ?.filter((item: any) => item.is_paid === false)
                   ?.map((rowData: any, index: any) => {
                     const { due__startDate, due__Name, amount, is_paid } =
@@ -173,7 +175,9 @@ const PendingPayment = ({
                         }
                       </TableWrapper>
                     );
-                  })}
+                  })
+                :<NoData />
+                }
               </ScrollView>
             </Table>
           </>

@@ -7,15 +7,17 @@ import React from "react";
 
 const Top = createMaterialTopTabNavigator();
 
-const Account = ({ navigation }: any) => {
+const Account = ({ navigation, hideHeader }: any) => {
   const [outstanding, setOutstanding] = React.useState(0);
   return (
     <Container>
-      <HomeHeader
-        title=" My Account"
-        navigation={navigation}
-        back={navigation.goBack}
-      />
+      {hideHeader && (
+        <HomeHeader
+          title=" My Account"
+          navigation={navigation}
+          back={navigation.goBack}
+        />
+      )}
       <View style={[styles.card]}>
         <View
           style={{

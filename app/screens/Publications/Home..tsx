@@ -71,7 +71,7 @@ const Home = ({ navigation, environment }: any) => {
             <LoadingIndicator />
           ) : (
             <>
-              {publications?.data?.length === 0 ? (
+              {publications?.data?.length > 0 ? (
                 publications?.data?.map((publication: any, index: number) => (
                   <PublicationsCard
                     key={index}

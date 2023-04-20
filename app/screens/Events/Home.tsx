@@ -42,7 +42,7 @@ const Home = ({ navigation, environment }: any) => {
           <LoadingIndicator />
         ) : (
           <>
-            {events?.data?.length === 0 ? (
+            {events?.data?.length > 0 ? (
               events?.data?.map((event: any, index: number) => (
                 <EventCard
                   key={index}

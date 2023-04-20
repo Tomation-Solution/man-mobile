@@ -58,6 +58,7 @@ const EventCard = ({ title, image, date, time, onPress }: EventCardProps) => {
               fontSize: 18,
               fontWeight: "600",
               color: COLORS.primary,
+              width: "80%",
             }}
           >
             {title}

@@ -23,7 +23,7 @@
     },
     "android": {
       "package": "com.tomation.MAN",
-      "versionCode": 15,
+      "versionCode": 19,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -34,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "4764c951-9dfb-4e1b-a545-b52f0869bbb9"
+        "projectId": "c903dc84-61b6-407e-a006-5128309585a7"
       }
     }
   }

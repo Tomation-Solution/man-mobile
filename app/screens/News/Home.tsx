@@ -71,7 +71,7 @@ const Home = ({ navigation, environment }: any) => {
             <LoadingIndicator />
           ) : (
             <>
-              {news?.data?.length === 0 ? (
+              {news?.data?.length > 0 ? (
                 news?.data?.map((news: any) => (
                   <NewsCard
                     key={news?.id}

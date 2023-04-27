@@ -1,6 +1,7 @@
 import {
   Dimensions,
   Image,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,9 +14,16 @@ import { images } from "../../assets/dummyData";
 import { COLORS } from "../../constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import PicturePreview from "../../components/Profile/PicturePreview";
+import * as DocumentPicker from "expo-document-picker";
 // import Picture from "../../components/Profile/Picture";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getProfile } from "../../store/slices/profile/getProfileSlice";
+import {
+  editProfilePhoto,
+  getProfile,
+} from "../../store/slices/profile/getProfileSlice";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { normalize } from "../../constants/metric";
+import LoadingIndicator from "../../utils/LoadingIndicator";
 
 const { width } = Dimensions.get("window");
 
@@ -34,6 +42,7 @@ const Home = ({ navigation }: any) => {
   const [slice, setSlice] = useState(3);
   const [modal, setShowModal] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
+  const [photo, setPhoto] = useState<any>(null);
   const { isLoggedIn } = useAppSelector((state) => state.authReducers.login);
   const { userData, loading } = useAppSelector(
     (state) => state.profileReducers.getProfileSlice
@@ -41,10 +50,24 @@ const Home = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(getProfile());
-    }
+    dispatch(getProfile());
   }, []);
+
+  useEffect(() => {
+    if (photo !== null) {
+      console.log(photo);
+      dispatch(editProfilePhoto(photo));
+    }
+  }, [photo]);
+
+  const pickDocument = async () => {
+    let result = await DocumentPicker.getDocumentAsync({
+      type: "image/*",
+    });
+    if (result.type === "success") {
+      setPhoto(result);
+    }
+  };
 
   return (
     <>
@@ -64,6 +87,19 @@ const Home = ({ navigation }: any) => {
               imageIndex={imageIndex}
               length={pictures.length}
             />
+          </View>
+        </CustomModal>
+      )}
+      {loading && (
+        <CustomModal>
+          <View
+            style={{
+              flexDirection: "row",
+              width: width * 0.9,
+              flex: 1,
+            }}
+          >
+            <LoadingIndicator />
           </View>
         </CustomModal>
       )}
@@ -90,23 +126,49 @@ const Home = ({ navigation }: any) => {
                 size={30}
               />
             </TouchableOpacity>
-            <Image
-              source={images.man}
+            <View
               style={{
-                width: width / 5,
-                height: width / 5,
-                borderRadius: 100,
+                position: "relative",
               }}
-            />
-
-            <TouchableOpacity
-              activeOpacity={0.8}
+            >
+              <Image
+                source={
+                  userData?.data[0]?.photo
+                    ? { uri: userData?.data[0]?.photo?.toString() }
+                    : images.man
+                }
+                style={{
+                  width: width / 5,
+                  height: width / 5,
+                  borderRadius: 100,
+                }}
+              />
+              <Pressable
+                onPress={() => {
+                  pickDocument();
+                }}
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  right: -5,
+                  borderRadius: 100,
+                  padding: 5,
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="pencil-circle"
+                  size={normalize(24)}
+                  color={COLORS.primary}
+                />
+              </Pressable>
+            </View>
+            <Pressable
               onPress={() => {
                 navigation.navigate("EditProfile");
               }}
             >
               <Text style={{ color: COLORS.primary }}>Edit Profile</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           <View>

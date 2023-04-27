@@ -112,3 +112,37 @@ export const editProfile =
       dispatch(getProfileRequestFailed(error.message));
     }
   };
+
+export const editProfilePhoto =
+  (photo: any) => async (dispatch: AppDispatch) => {
+    const data = new FormData();
+
+    data.append("photo", photo);
+
+    console.log("data", data);
+    try {
+      const getToken: any = await retrieveUserDetails();
+      if (getToken && getToken.token) {
+        const token = getToken.token;
+        dispatch(
+          apiCallBegan({
+            url: PRE_URL + "user/memberlist-info/update_profile_img/",
+            extraheaders: "Token " + token,
+            method: "post",
+            contentType: "multipart/form-data",
+            data,
+            onStart: editProfileRequested.type,
+            onSuccess: editProfileReceived.type,
+            onError: editProfileRequestFailed.type,
+          })
+        );
+      } else {
+        const error = new Error("Unable to retrieve user token");
+        console.error(error);
+        dispatch(getProfileRequestFailed(error.message));
+      }
+    } catch (error: any) {
+      console.error("An error occurred while update profile image:", error);
+      dispatch(getProfileRequestFailed(error.message));
+    }
+  };

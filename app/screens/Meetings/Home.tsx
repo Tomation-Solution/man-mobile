@@ -84,20 +84,26 @@ const Home = ({ navigation, environment }: any) => {
           <LoadingIndicator />
         ) : (
           <>
-            {meetings?.data?.map((meeting: any) => (
-              <MeetingCard
-                accept={() => register(meeting.id)}
-                accepted={meeting.is_attending}
-                setMeetingId={setMeetingId}
-                apology={apology}
-                key={meeting.id}
-                meeting_id={meeting.id}
-                title={meeting.name}
-                date={meeting.event_date.split("T")[0]}
-                time={meeting.event_date.split("T")[1].split("+")[1]}
-                onPress={() => navigation.navigate("Details", { meeting })}
-              />
-            ))}
+            {meetings?.data.length > 0 ? (
+              meetings?.data?.map((meeting: any) => (
+                <MeetingCard
+                  accept={() => register(meeting.id)}
+                  accepted={meeting.is_attending}
+                  setMeetingId={setMeetingId}
+                  apology={apology}
+                  key={meeting.id}
+                  meeting_id={meeting.id}
+                  title={meeting.name}
+                  date={meeting.event_date.split("T")[0]}
+                  time={meeting.event_date.split("T")[1].split("+")[1]}
+                  onPress={() => navigation.navigate("Details", { meeting })}
+                />
+              ))
+            ) : (
+              <Text style={{ textAlign: "center", marginTop: 20 }}>
+                No Data Found
+              </Text>
+            )}
           </>
         )}
       </ScrollView>

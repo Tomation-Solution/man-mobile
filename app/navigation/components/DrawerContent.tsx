@@ -86,20 +86,20 @@ const DrawerContent = ({
         navigation={navigation}
       />
       <DrawerLabel
-        focused={state?.index === 5}
+        focused={state?.index === 3}
         title="Gallery"
         icon={<Ionicons name="images" size={20} color={COLORS.primary} />}
         navigation={navigation}
       />
       <DrawerLabel
-        focused={state?.index === 6}
+        focused={state?.index === 4}
         title="Fund A Project"
         icon={<FontAwesome5 name="gift" size={25} color={COLORS.primary} />}
         navigation={navigation}
       />
 
       <DrawerLabel
-        focused={state?.index === 7}
+        focused={state?.index === 5}
         title="Service Request"
         icon={
           <MaterialCommunityIcons
@@ -140,7 +140,7 @@ const DrawerContent = ({
         ]}
       /> */}
       <DrawerLabel
-        focused={state?.index === 3}
+        focused={state?.index === 6}
         title="Election"
         icon={<Ionicons name="flag" size={20} color={COLORS.primary} />}
         navigation={navigation}

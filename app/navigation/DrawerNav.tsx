@@ -15,7 +15,7 @@ import {
   Support,
   AdminSupport,
   TechnicalSupport,
-  FundAProject
+  FundAProject,
 } from "../screens";
 import Meetings from "../screens/Meetings/Meetings";
 import Profile from "../screens/Profile/Profile";
@@ -64,35 +64,34 @@ const DrawerNav = () => {
             />
           )}
         </Drawer.Screen>
-        <Drawer.Screen name="Publications">
-          {(props) => <Publications environment={environment} {...props} />}
-        </Drawer.Screen>
         <Drawer.Screen name="Events">
           {(props) => <Events environment={environment} {...props} />}
         </Drawer.Screen>
-        <Drawer.Screen name="Election" component={Election} />
-        <Drawer.Screen name="Resources" component={Resources} />
-        <Drawer.Screen name="Support" component={Support} />
-        <Drawer.Screen name="Admin Support" component={AdminSupport} />
-        <Drawer.Screen name="Technical Suport" component={TechnicalSupport} />
-        <Drawer.Screen name="Service Request">
-          {(props) => <Services {...props} />}
-        </Drawer.Screen>
-
-        {/* soupport screens  */}
-
         <Drawer.Screen name="Gallery">
           {(props) => <Gallery environment={environment} {...props} />}
         </Drawer.Screen>
+        <Drawer.Screen name="Fund A Project">
+          {(props) => <FundAProject {...props} />}
+        </Drawer.Screen>
+        <Drawer.Screen name="Service Request">
+          {(props) => <Services {...props} />}
+        </Drawer.Screen>
+        <Drawer.Screen name="Election" component={Election} />
+        <Drawer.Screen name="Support" component={Support} />
+        <Drawer.Screen name="Publications">
+          {(props) => <Publications environment={environment} {...props} />}
+        </Drawer.Screen>
+        <Drawer.Screen name="Resources" component={Resources} />
+        <Drawer.Screen name="Admin Support" component={AdminSupport} />
+        <Drawer.Screen name="Technical Suport" component={TechnicalSupport} />
+
+        {/* soupport screens  */}
+
         <Drawer.Screen name="Profile" component={Profile} />
         <Drawer.Screen name="Meetings">
           {(props) => <Meetings environment={environment} {...props} />}
         </Drawer.Screen>
         <Drawer.Screen name="Notification" component={Notification} />
-        <Drawer.Screen name="Fund A Project">
-          {(props) => <FundAProject {...props} />}
-        </Drawer.Screen>
-
       </Drawer.Navigator>
     </EnvironmentContext.Provider>
   );

@@ -126,6 +126,7 @@ export const registerEvents =
       form.append("proxy_participants", JSON.stringify(proxy_participants));
     }
 
+    console.log("proxy_participants", form);
     try {
       const getToken: any = await retrieveUserDetails();
 
@@ -136,10 +137,10 @@ export const registerEvents =
           apiCallBegan({
             url: is_paid
               ? `${PRE_URL}dues/process_payment/event_payment/${id}/`
-              : `${PRE_URL}0event/eventview/register_for_free_event/`,
+              : `${PRE_URL}event/eventview/register_for_free_event/`,
             extraheaders: "Token " + token,
             contentType: "multipart/form-data",
-            data: !is_paid && proxy_participants ? form : "",
+            data: form,
             method: "post",
             onStart: eventsRequested.type,
             onSuccess: is_paid

@@ -43,15 +43,21 @@ const Home = ({ navigation }: any) => {
             <LoadingIndicator />
           ) : (
             <>
-              {userData?.data.map((item: any) => {
-                return (
-                  <DonationCard
-                    key={item.id}
-                    item={item}
-                    onPress={() => navigation.navigate("Details1", { item })}
-                  />
-                );
-              })}
+              {userData?.data.length > 0 ? (
+                userData?.data.map((item: any) => {
+                  return (
+                    <DonationCard
+                      key={item.id}
+                      item={item}
+                      onPress={() => navigation.navigate("Details1", { item })}
+                    />
+                  );
+                })
+              ) : (
+                <Text style={{ textAlign: "center", marginTop: 20 }}>
+                  No Data Found
+                </Text>
+              )}
             </>
           )}
         </View>

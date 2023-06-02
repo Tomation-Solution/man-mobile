@@ -24,11 +24,15 @@ import { loginValidationSchema } from "../../../utils/validation";
 import { normalize } from "../../../constants/metric";
 import { COLORS } from "../../../constants/color";
 import { appImages } from "../../../assets/app/images";
+import SelectInput from "../../../components/Input/CustomSelectInput";
+import { company_list } from "../../../assets/app/list-of-comp";
 
 const LoginForm = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useAppDispatch();
   const [hidePassword, setHidePassword] = useState(true);
+
+  const [company, setCompany] = useState("");
 
   const onModalPress = () => {
     setModalVisible(!modalVisible);
@@ -87,11 +91,28 @@ const LoginForm = ({ navigation }: any) => {
                   password: "",
                 }}
                 onSubmit={(values) => {
-                  if (loading === false) dispatch(login(values));
+                  if (loading === false)
+                    dispatch(
+                      login({
+                        email: values.email,
+                        password: values.password,
+                        company: company,
+                      })
+                    );
                 }}
               >
                 {({ handleSubmit, isValid }) => (
                   <>
+                    <SelectInput
+                      data={company_list()}
+                      onChange={(item) => setCompany(item.value)}
+                      label="Select Company"
+                    />
+                    <View
+                      style={{
+                        marginVertical: 10,
+                      }}
+                    />
                     <Field
                       component={FormInput}
                       name="email"

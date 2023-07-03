@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLORS } from "../../../../constants/color";
 import SendBox from "../../../../components/Chats/SendBox";
@@ -35,12 +35,12 @@ const General = ({ navigation, environment }: any) => {
     }
   }, [environment]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(clearChat());
     retrieveUserDetails().then((data: any) => {
       setUserData(data);
     });
-  }, [navigation, isFocused]);
+  }, []);
 
   useEffect(() => {
     console.log("in general");
@@ -111,13 +111,13 @@ const General = ({ navigation, environment }: any) => {
         style={{
           flex: 1,
           backgroundColor: COLORS.icon,
-          marginBottom: 90,
         }}
       >
         {chat?.map((item: any, index: number) => (
           <View
             key={index}
             style={{
+              // paddingBottom: 90,
               margin: 10,
               alignSelf:
                 item.user__id === userData?.user_id ? "flex-end" : "flex-start",
@@ -156,6 +156,8 @@ const General = ({ navigation, environment }: any) => {
             </View>
           </View>
         ))}
+
+        <View style={{ height: 100 }} />
       </KeyboardAwareScrollView>
       <SendBox
         disabled={text.length === 0}

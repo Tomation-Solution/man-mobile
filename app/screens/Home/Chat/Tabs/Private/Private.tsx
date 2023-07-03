@@ -1,20 +1,26 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./Home.";
 import Details from "./Details";
 import { retrieveUserDetails } from "../../../../../utils/helperFunctions/userDataHandlers";
+import { useIsFocused } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
 const Private = ({ setShowTabBar }: any) => {
   const [userData, setUserData] = React.useState<any>(null);
+  const isFocused = useIsFocused();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     retrieveUserDetails().then((data: any) => {
       setUserData(data);
     });
   }, []);
+
+  if (!userData) return null;
+  if (!isFocused) return null;
+
   return (
     <>
       <Stack.Navigator

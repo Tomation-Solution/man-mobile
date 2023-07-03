@@ -1,4 +1,11 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useEffect } from "react";
 import { Container } from "../../../components";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
@@ -19,23 +26,28 @@ const Memebers = () => {
 
   return (
     <Container>
-      <ScrollView
+      <View
         style={{
-          padding: 10,
           marginTop: 20,
         }}
-        showsVerticalScrollIndicator={false}
-      >
-        {loading ? (
-          <LoadingIndicator />
-        ) : (
-          <View
-            style={{
-              flex: 1,
-              height: "100%",
-            }}
-          >
-            {membersList?.data?.map((item: any) => (
+      />
+      {loading ? (
+        <LoadingIndicator />
+      ) : (
+        <View
+          style={{
+            flex: 1,
+            height: "100%",
+          }}
+        >
+          {/* {membersList?.data?.map((item: any) => (
+           
+            ))} */}
+
+          <FlatList
+            data={membersList?.data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
               <View
                 key={item.id}
                 style={{
@@ -49,8 +61,8 @@ const Memebers = () => {
               >
                 <Image
                   style={{
-                    width: 100,
-                    height: 100,
+                    width: 35,
+                    height: 35,
                     borderBottomLeftRadius: 10,
                     borderTopLeftRadius: 10,
                     borderTopRightRadius: 10,
@@ -73,10 +85,10 @@ const Memebers = () => {
                   {/* <Text style={{ color: "blue" }}>{item.email}</Text> */}
                 </View>
               </View>
-            ))}
-          </View>
-        )}
-      </ScrollView>
+            )}
+          />
+        </View>
+      )}
     </Container>
   );
 };

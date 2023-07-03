@@ -145,7 +145,7 @@ const DrawerContent = ({
         icon={<Ionicons name="flag" size={20} color={COLORS.primary} />}
         navigation={navigation}
       /> */}
-      <DrawerLabel
+      {/* <DrawerLabel
         focused={state?.index === 7}
         title="Support"
         icon={<Ionicons name="heart" size={20} color={COLORS.primary} />}
@@ -170,7 +170,7 @@ const DrawerContent = ({
             ),
           },
         ]}
-      />
+      /> */}
       <DrawerLabel
         focused={state?.index === null} // keep this as null for switches
         title="Logout"

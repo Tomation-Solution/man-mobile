@@ -5,16 +5,16 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { moderateScale } from "../../constants/metric";
 
 const SelectInput = ({
+  value,
   data,
   onChange,
   label,
 }: {
+  value: string;
   data: { label: string; value: string }[];
   onChange: (item: { label: string; value: string }) => void;
   label?: string;
 }) => {
-  const [value, setValue] = useState<null | string>(null);
-
   return (
     <View style={{ marginTop: moderateScale(12) }}>
       {label && (

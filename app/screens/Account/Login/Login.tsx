@@ -21,7 +21,7 @@ import Locked from "../components/LockedWithPayment";
 import { login } from "../../../store/slices/auth/loginSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { loginValidationSchema } from "../../../utils/validation";
-import { normalize } from "../../../constants/metric";
+import { moderateScale, normalize } from "../../../constants/metric";
 import { COLORS } from "../../../constants/color";
 import { appImages } from "../../../assets/app/images";
 import SelectInput from "../../../components/Input/CustomSelectInput";
@@ -96,7 +96,7 @@ const LoginForm = ({ navigation }: any) => {
                       login({
                         email: values.email,
                         password: values.password,
-                        company: company,
+                        company_name: company,
                       })
                     );
                 }}
@@ -105,6 +105,7 @@ const LoginForm = ({ navigation }: any) => {
                   <>
                     <SelectInput
                       data={company_list()}
+                      value={company}
                       onChange={(item) => setCompany(item.value)}
                       label="Select Company"
                     />
@@ -131,18 +132,43 @@ const LoginForm = ({ navigation }: any) => {
                       placeholder="password"
                     />
 
-                    <Formbtn
+                    <Pressable
+                      style={{
+                        backgroundColor: COLORS.primary,
+                        paddingVertical: 15,
+                        borderRadius: 8,
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                      onPress={() => handleSubmit()}
+                      disabled={!isValid || loading === true}
+                    >
+                      {loading ? (
+                        <ActivityIndicator size="small" color="white" />
+                      ) : (
+                        <Text
+                          style={{
+                            color: "white",
+                            fontSize: moderateScale(16),
+                          }}
+                        >
+                          Login
+                        </Text>
+                      )}
+                    </Pressable>
+
+                    {/* <Formbtn
                       style={[styles.btn]}
                       onPress={handleSubmit}
                       disabled={!isValid || loading === true}
                       title={
-                        loading === true ? (
+                        loading ? (
                           <ActivityIndicator size="small" color="white" />
                         ) : (
                           "Login"
                         )
                       }
-                    />
+                    /> */}
                   </>
                 )}
               </Formik>

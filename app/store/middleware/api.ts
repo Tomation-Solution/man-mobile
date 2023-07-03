@@ -22,17 +22,36 @@ const api =
 
     next(action);
     try {
-      const response = await axios.request({
-        method,
-        baseURL: "https://rel8backend-production.up.railway.app/",
-        url,
-        params: params,
-        data,
-        headers: {
-          "content-type": contentType ? contentType : "application/json",
-          Authorization: extraheaders,
-        },
-      });
+      let response;
+      if (contentType) {
+        console.log("sdfsdf");
+        response = await axios.request({
+          method,
+          baseURL: "https://rel8-corporate-backend-production.up.railway.app/",
+          url,
+          params: params,
+          data,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "*/*",
+            Authorization: extraheaders,
+          },
+        });
+      } else {
+        response = await axios.request({
+          method,
+          baseURL: "https://rel8-corporate-backend-production.up.railway.app/",
+          url,
+          params: params,
+          data,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: extraheaders,
+            Accept: "*/*",
+          },
+        });
+      }
+      // Generalz
 
       // Default
 
@@ -44,11 +63,13 @@ const api =
         // window.location.reload()
       }
     } catch (error: any) {
+      dispatch({ type: onError, payload: error });
+      console.log("        turep");
+      // dispatch(actions.apiCallFailed(error));
+      // if (onError) {
+      // }
       // Default
-      dispatch(actions.apiCallFailed(error));
-
       // Specific
-      if (onError) dispatch({ type: onError, payload: error });
     }
   };
 

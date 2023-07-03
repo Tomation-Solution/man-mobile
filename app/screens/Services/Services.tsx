@@ -5,7 +5,6 @@ import { Container } from "../../components";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MembersService from "../Services/MemberService/MemberService";
 //import StaffsService from "../Services/StaffService";
-import ReissuanceForm from "./MemberService/pages/ReissuanceForm";
 import ReissuanceOfCertificate from "../Services/MemberService/pages/ReissuanceOfCertificate";
 import LossOfCertificate from "../Services/MemberService/pages/LossOfCertificate";
 import ChangeOfName from "../Services/MemberService/pages/ChangeOfName";
@@ -13,6 +12,7 @@ import MergerOfCompanies from "./MemberService/pages/MergerOfCompanies";
 import DeactivationOfMembership from "./MemberService/pages/DeactivationOfMembership";
 import ProductsManufacturingUpdate from "./MemberService/pages/ProductsManufacturingUpdate";
 import FactoryLocationUpdate from "./MemberService/pages/FactoryLocationUpdate";
+import ReissuanceForm from "./MemberService/pages/ReissuanceForm";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +54,9 @@ const Services = ({ navigation }: any) => {
         </Stack.Screen>
         <Stack.Screen name="FactoryLocationUpdate">
           {(props) => <FactoryLocationUpdate {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="ReissuanceForm">
+          {(props) => <ReissuanceForm {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </Container>

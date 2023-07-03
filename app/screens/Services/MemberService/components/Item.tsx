@@ -13,7 +13,11 @@ const Item = ({ image, name, link, navigation }: any) => {
     <View style={{ borderBottomWidth: moderateScale(1) }}>
       <TouchableOpacity
         style={styles.container}
-        onPress={() => navigation.navigate(link)}
+        onPress={() =>
+          navigation.navigate("ReissuanceForm", {
+            nextScreen: link,
+          })
+        }
       >
         <MaterialIcons name={image} size={20} style={styles.icon} />
         <Text style={styles.text}>{name}</Text>

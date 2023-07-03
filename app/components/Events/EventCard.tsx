@@ -11,7 +11,7 @@ interface EventCardProps {
   image: string;
   date: string;
   time: string;
-  onPress: () => void;
+  onPress: any;
 }
 
 const EventCard = ({ title, image, date, time, onPress }: EventCardProps) => {

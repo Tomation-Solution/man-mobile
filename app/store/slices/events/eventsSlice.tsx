@@ -3,6 +3,7 @@ import { apiCallBegan } from "../../apiActions";
 import { AppDispatch } from "../../configureStore";
 import { retrieveUserDetails } from "../../../utils/helperFunctions/userDataHandlers";
 import { PRE_URL } from "../../../utils/ENV/envs";
+import { Alert } from "react-native";
 
 const initialState: {
   events: any;
@@ -35,12 +36,14 @@ const eventsSlice = createSlice({
       state.events = action.payload;
     },
     eventRequestFailed: (state, action) => {
-      state.loading = false;
       state.error = action.payload.response.data.message.error;
+      state.loading = false;
+      Alert.alert("Error", state.error);
     },
     eventRegistered: (state, action) => {
       state.loading = false;
       state.registerEvent = true;
+      Alert.alert("Success", "You have successfully registered for this event");
     },
     paidEventRegistered: (state, action) => {
       state.loading = false;
@@ -84,7 +87,8 @@ export const {
 export default eventsSlice.reducer;
 
 export const getEvents =
-  (environment?: string, id?: number) => async (dispatch: AppDispatch) => {
+  (environment?: string, id?: number, single?: boolean) =>
+  async (dispatch: AppDispatch) => {
     try {
       const getToken: any = await retrieveUserDetails();
 
@@ -98,7 +102,9 @@ export const getEvents =
                 ? PRE_URL +
                   `event/eventview/get_events/?not_council=True&not_commitee=True&not_chapters=True&${environment}=${id}`
                 : PRE_URL +
-                  `event/eventview/get_events/?not_council=True&not_commitee=True&not_chapters=True`,
+                  `event/eventview/get_events/?not_council=True&not_commitee=True&not_chapters=True${
+                    single ? "?id=" + id : ""
+                  }`,
             extraheaders: "Token " + token,
             method: "get",
             onStart: eventsRequested.type,
@@ -136,10 +142,11 @@ export const registerEvents =
           apiCallBegan({
             url: is_paid
               ? `${PRE_URL}dues/process_payment/event_payment/${id}/`
-              : `${PRE_URL}0event/eventview/register_for_free_event/`,
+              : `${PRE_URL}event/eventview/register_for_free_event/`,
+
             extraheaders: "Token " + token,
             contentType: "multipart/form-data",
-            data: !is_paid && proxy_participants ? form : "",
+            data: form,
             method: "post",
             onStart: eventsRequested.type,
             onSuccess: is_paid

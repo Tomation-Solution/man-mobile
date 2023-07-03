@@ -6,6 +6,7 @@ import {
   retrieveUserDetails,
   storeUserDetails,
 } from "../../../utils/helperFunctions/userDataHandlers";
+import { Alert } from "react-native";
 
 const initialState: {
   userData: string;
@@ -45,9 +46,9 @@ const loginSlice = createSlice({
       state.userData = JSON.stringify(action.payload);
     },
     loginRequestFailed: (state, action) => {
-      state.loading = false;
       state.error = action.payload.response.data.data.error[0];
-      console.log("loginRequestFailed", action.payload);
+      Alert.alert("Error", state.error);
+      state.loading = false;
     },
     logUserOut: (state) => {
       state.loading = false;

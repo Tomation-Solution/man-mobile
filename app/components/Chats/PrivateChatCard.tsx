@@ -9,20 +9,25 @@ const PrivateChatCard = ({ item, onPress }: any) => {
         padding: 10,
         flexDirection: "row",
         alignItems: "center",
+        borderWidth: StyleSheet.hairlineWidth,
+        borderColor: "lightgray",
       }}
     >
       <Image
-        source={{ uri: item?.photo.toString() || undefined }}
-        style={{ width: 50, height: 50, borderRadius: 25 }}
+        source={{
+          uri:
+            item?.photo.toString() ||
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png",
+        }}
+        style={{ width: 35, height: 35, borderRadius: 25 }}
       />
+
       <TouchableOpacity
         onPress={onPress}
         style={{
           marginLeft: 10,
           flex: 1,
-          paddingVertical: 20,
-          borderBottomWidth: 1,
-          borderBottomColor: "lightgray",
+          paddingVertical: 5,
         }}
       >
         <View

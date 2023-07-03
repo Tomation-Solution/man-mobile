@@ -1,5 +1,5 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useLayoutEffect } from "react";
 
 import PrivateChatCard from "../../../../../components/Chats/PrivateChatCard";
 import { COLORS } from "../../../../../constants/color";
@@ -14,48 +14,36 @@ const Home = ({ navigation, userData }: any) => {
     (state) => state.extras.members
   );
 
-  useEffect(() => {
+  const filteredMembers = membersList?.data?.filter(
+    (user: any) => user.user !== userData.user_id
+  );
+
+  useLayoutEffect(() => {
     dispatch(getMembers());
   }, []);
 
   return (
-    <View style={{}}>
-      <View
-        style={{
-          paddingHorizontal: 20,
-        }}
-      ></View>
-      <ScrollView
-        style={{
-          padding: 10,
-        }}
-        showsVerticalScrollIndicator={false}
-      >
-        {loading ? (
-          <LoadingIndicator />
-        ) : (
-          <View
-            style={{
-              flex: 1,
-              height: "100%",
-            }}
-          >
-            {userData &&
-              membersList?.data
-                ?.filter((user: any) => user.user !== userData.user_id)
-                .map((message: any) => (
-                  <PrivateChatCard
-                    key={message.id}
-                    item={message}
-                    onPress={() => {
-                      dispatch(clearChat());
-                      navigation.navigate("Details", { message });
-                    }}
-                  />
-                ))}
-          </View>
-        )}
-      </ScrollView>
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
+      {userData && (
+        <FlatList
+          data={membersList?.data}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <PrivateChatCard
+              key={item.id}
+              item={item}
+              onPress={() => {
+                dispatch(clearChat());
+                navigation.navigate("Details", { message: item });
+              }}
+            />
+          )}
+        />
+      )}
     </View>
   );
 };

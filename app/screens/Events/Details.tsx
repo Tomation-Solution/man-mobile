@@ -76,7 +76,7 @@ const Details = ({ route, navigation }: any) => {
 
   const handleRegister = () => {
     // setModalContent("register");
-    setModalVisible(true);
+    // setModalVisible(true);
     dispatch(registerEvents(data.id, data?.is_paid_event));
   };
 
@@ -233,24 +233,18 @@ const Details = ({ route, navigation }: any) => {
                   alignContent: "flex-start",
                 }}
               >
-                {data.event_access.has_paid ? (
-                  data.event_access.link.includes("https") ? (
-                    <TouchableOpacity
-                      style={{
-                        borderBottomColor: COLORS.primary,
-                        borderBottomWidth: 1,
-                      }}
-                      onPress={() => openExternalLink(data.event_access.link)}
-                    >
-                      <Text style={{ color: COLORS.primary }}>
-                        Join Meeting
-                      </Text>
-                    </TouchableOpacity>
-                  ) : (
-                    <Text>{data.event_access.link}</Text>
-                  )
+                {data.event_access.link.includes("https") ? (
+                  <TouchableOpacity
+                    style={{
+                      borderBottomColor: COLORS.primary,
+                      borderBottomWidth: 1,
+                    }}
+                    onPress={() => openExternalLink(data.event_access.link)}
+                  >
+                    <Text style={{ color: COLORS.primary }}>Join Meeting</Text>
+                  </TouchableOpacity>
                 ) : (
-                  "Please pay to view"
+                  <Text>{data.event_access.link}</Text>
                 )}
               </Text>
             </View>
@@ -435,7 +429,7 @@ const Details = ({ route, navigation }: any) => {
           {!data?.event_access?.has_paid && (
             <MeetingAction
               onPress={handleRegister}
-              text="Register"
+              text={loading ? "Please wait..." : "Register"}
               loading={loading}
             />
           )}

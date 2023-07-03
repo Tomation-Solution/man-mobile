@@ -21,8 +21,8 @@ const data = [
     image: "laptop",
     link: "ReissuanceOfCertificate",
   },
-  { name: "Loss of certificate", image: "laptop", link: "LossOfCertificate" },
-  { name: "Change of Name", image: "people", link: "ChangeOfName" },
+  // { name: "Loss of certificate", image: "laptop", link: "LossOfCertificate" },
+  // { name: "Change of Name", image: "people", link: "ChangeOfName" },
   {
     name: "Merger of member companies",
     image: "laptop",

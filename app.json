@@ -24,6 +24,7 @@
     "android": {
       "package": "com.tomation.MAN",
       "versionCode": 19,
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"

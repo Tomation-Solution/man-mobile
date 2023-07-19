@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "625772391423",
+    "project_id": "man-app-6d1c0",
+    "storage_bucket": "man-app-6d1c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625772391423:android:363543e00d3210732395ca",
+        "android_client_info": {
+          "package_name": "com.tomation.MAN"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625772391423-s4no95tj9njd552q4q9a7vocb62ps0ju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tomation.MAN",
+            "certificate_hash": "12da2a8d6b4e1351149ca78d44d3df515ac87f4a"
+          }
+        },
+        {
+          "client_id": "625772391423-59k5middpnv01mqr188s30at1rcm9c7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZvdL_ov-DcxMHt0cZXxL1MdEWGwssLJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625772391423-59k5middpnv01mqr188s30at1rcm9c7t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

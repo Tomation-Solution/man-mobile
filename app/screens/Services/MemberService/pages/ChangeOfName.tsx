@@ -1,5 +1,12 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  Modal,
+} from "react-native";
+import React, { useEffect } from "react";
 import { HomeHeader } from "../../../../components";
 import {
   horizontalScale,
@@ -7,11 +14,13 @@ import {
   verticalScale,
 } from "../../../../constants/metric";
 import CustomPicker from "../components/CustomPicker";
-import { useAppDispatch } from './../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from "./../../../../store/hooks";
 import { Formbtn } from "../../../../components";
-import { useFormik } from "formik";
+import { ErrorMessage, useFormik } from "formik";
 import * as DocumentPicker from "expo-document-picker";
 import { Change_Of_Name } from "../../../../store/slices/ServiceRequest/serviceSlice";
+import { toTitleCase } from "../../../../utils/helperFunctions/toSentenceCase";
+import { Pressable } from "react-native";
 
 interface DetailsProps {
   route?: any;
@@ -20,93 +29,238 @@ interface DetailsProps {
 
 const ChangeOfName = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
-
-  const { values, errors, setFieldValue, resetForm, handleSubmit } = useFormik({
-    initialValues: {
-      files: Array(4).fill({ uri: null, name: "" }),
-    },
-    onSubmit: async (values: any) => {
-      const formData = new FormData();
-      formData.append("attach_membership_certificate", values.files[0]);
-      formData.append("membership_due_receipt", values.files[1]);
-      formData.append("upload_financial_statement", values.files[2]);
-      formData.append("upload_incorporation_certificate", values.files[3]);
-      console.log("HELLO THIS IS A FORMDATA", formData);
-      await dispatch(Change_Of_Name(formData));
-      resetForm();
-    }
-
-  },
+  const [errors, setErrors] = React.useState<any>({});
+  const { loading, error, success } = useAppSelector(
+    (state) => state.ServiceRequestReducers.ServiceSlice
   );
 
+  const { values, setFieldValue, resetForm, handleSubmit } = useFormik({
+    initialValues: {
+      files: [
+        {
+          uri: "",
+          name: "",
+          title:
+            "Change Of Name Certificate As Issued By Corporate Affairs Commission (CAC).",
+          type: "",
+        },
+        {
+          uri: "",
+          name: "",
+          title:
+            "Bank Payment Teller In The Sum Of Fifty Thousand Naira Only (N50,000) In Favour Of",
+          type: "",
+        },
+        {
+          uri: "",
+          name: "",
+          title:
+            "Return Of MAN Membership Certificate Which Expired On The 31st December.",
+          type: "",
+        },
+        {
+          uri: "",
+          name: "",
+          title: "Certificate of Incorporation",
+          type: "",
+        },
+        {
+          uri: "",
+          name: "",
+          title: "Audited Finicial Statement (One)",
+          type: "",
+        },
+        {
+          uri: "",
+          name: "",
+          title: "Audited Finicial Statement (Two)",
+          type: "",
+        },
+      ],
 
+      // files: Array(5).fill({ uri: null, name: "" }),
+    },
+    onSubmit: async (values: any) => {
+      if (success) {
+        navigation.goBack();
+        return;
+      }
+      const formData = new FormData();
+      formData.append("submit_change_of_name_cert", values.files[0]);
+      if (values.files[0].uri) {
+      }
+      if (values.files[1].uri) {
+        formData.append("bank_teller_of_payment", values.files[1]);
+      }
+      if (values.files[2].uri) {
+        formData.append(
+          "certificate_which_expired_on_thirtyone",
+          values.files[2]
+        );
+      }
+      if (values.files[3].uri) {
+        formData.append("copy_of_certificate_incoporation", values.files[3]);
+      }
+      if (values.files[4].uri) {
+        formData.append("audited_finicial_statement_one", values.files[4]);
+      }
+      if (values.files[5].uri) {
+        formData.append("audited_finicial_statement_two", values.files[5]);
+      }
 
+      console.log("HELLO THIS IS A FORMDATA", formData);
 
-
+      await dispatch(Change_Of_Name(formData));
+      // resetForm();
+    },
+  });
 
   const pickDocument = async ({ index }: any) => {
     let result = await DocumentPicker.getDocumentAsync({
       type: "application/pdf",
     });
-    if (result.type === 'success') {
+    if (result.type === "success") {
       const files = [...values.files];
-      files[index] = { uri: result.uri, name: result.uri.split('/').pop(), type: result.mimeType };
+      files[index] = {
+        uri: result.uri,
+        name: result.name,
+        type: result.mimeType,
+      };
       setFieldValue("files", files);
       // console.log(files)
     }
-  }
+  };
+
+  useEffect(() => {
+    if (error) {
+      const _errors: any = { ...error };
+      console.log("error: ", _errors);
+      // errors.map((item: any) => {
+      //   _errors[item.field] = item.message[0];
+      // });
+
+      setErrors(_errors);
+    }
+    console.log("error: ", error);
+  }, [error]);
+
   return (
     <View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <HomeHeader
           title={"Change of Name"}
           navigation={navigation}
           back={navigation.goBack}
         />
-        <View style={{ marginTop: verticalScale(30) }}>
+        <View style={{ marginTop: verticalScale(10) }}>
           <Text style={styles.text}>Attach requirement for Change of Name</Text>
+
           <View style={styles.documentPickerContainer}>
-
-            {values.files[0].name ? (
-              <Text>Selected file 1: {values.files[0].name}</Text>
-            ) : null}
-
+            {errors["submit_change_of_name_cert"] && (
+              <Text style={styles.errorText}>
+                {errors["submit_change_of_name_cert"]}
+              </Text>
+            )}
             <CustomPicker
-              title="Attach Membership Certificate"
+              title={
+                values.files[0].name
+                  ? values.files[0].name
+                  : values.files[0].title
+              }
               onPress={() => pickDocument({ index: 0 })}
             />
-
-            {values.files[1].name ? (
-              <Text>Selected file 2: {values.files[1].name}</Text>
-            ) : null}
-
+            {errors["bank_teller_of_payment"] && (
+              <Text style={styles.errorText}>
+                {errors["bank_teller_of_payment"]}
+              </Text>
+            )}
             <CustomPicker
-              title="Membership due receipt"
+              title={
+                values.files[1].name
+                  ? values.files[1].name
+                  : values.files[1].title
+              }
               onPress={() => pickDocument({ index: 1 })}
             />
-
-            {values.files[2].name ? (
-              <Text>Selected file 3: {values.files[2].name}</Text>
-            ) : null}
-
+            {errors["certificate_which_expired_on_thirtyone"] && (
+              <Text style={styles.errorText}>
+                {errors["certificate_which_expired_on_thirtyone"]}
+              </Text>
+            )}
             <CustomPicker
-              title="Upload financial statement (2 years)"
+              title={
+                values.files[2].name
+                  ? values.files[2].name
+                  : values.files[2].title
+              }
               onPress={() => pickDocument({ index: 2 })}
             />
-
-            {values.files[3].name ? (
-              <Text>Selected file 4: {values.files[3].name}</Text>
-            ) : null}
-
+            {errors["copy_of_certificate_incoporation"] && (
+              <Text style={styles.errorText}>
+                {errors["copy_of_certificate_incoporation"]}
+              </Text>
+            )}
             <CustomPicker
-              title="Upload Incorporation Certificate"
+              title={
+                values.files[3].name
+                  ? values.files[3].name
+                  : values.files[3].title
+              }
               onPress={() => pickDocument({ index: 3 })}
             />
-
+            {errors["audited_finicial_statement_one"] && (
+              <Text style={styles.errorText}>
+                {errors["audited_finicial_statement_one"]}
+              </Text>
+            )}
+            <CustomPicker
+              title={
+                values.files[4].name
+                  ? values.files[4].name
+                  : values.files[4].title
+              }
+              onPress={() => pickDocument({ index: 4 })}
+            />
+            {errors["audited_finicial_statement_two"] && (
+              <Text style={styles.errorText}>
+                {errors["audited_finicial_statement_two"]}
+              </Text>
+            )}
+            <CustomPicker
+              title={
+                values.files[5].name
+                  ? values.files[5].name
+                  : values.files[5].title
+              }
+              onPress={() => pickDocument({ index: 5 })}
+            />
           </View>
 
-          <View style={{ marginTop: verticalScale(40) }}>
-            <Formbtn title="Request" onPress={handleSubmit} />
+          <View style={{ marginVertical: verticalScale(40) }}>
+            <Pressable
+              disabled={loading}
+              style={{
+                marginBottom: verticalScale(40),
+                alignSelf: "center",
+                borderColor: "#000",
+                borderWidth: 1,
+                borderRadius: 10,
+                width: "100%",
+                paddingVertical: verticalScale(8),
+              }}
+              onPress={() => handleSubmit()}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "#000",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                {loading ? "Loading..." : "Submit"}
+              </Text>
+            </Pressable>
           </View>
         </View>
       </ScrollView>
@@ -118,12 +272,16 @@ export default ChangeOfName;
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: moderateScale(14),
-    fontWeight: "400",
+    fontSize: moderateScale(18),
+    fontWeight: "500",
     textAlign: "center",
     lineHeight: moderateScale(24),
   },
   documentPickerContainer: {
-    marginTop: verticalScale(50),
+    marginTop: verticalScale(25),
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
   },
 });

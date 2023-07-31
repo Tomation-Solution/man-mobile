@@ -32,7 +32,7 @@ const HomeScreen = ({ navigation, environment }: any) => {
         showsVerticalScrollIndicator={false}
       >
         <SearchBar />
-        <LatestUpdatesNav navigation={navigation} environment={environment} />
+        {/* <LatestUpdatesNav navigation={navigation} environment={environment} /> */}
         <FeedsNav navigation={navigation} />
         <NewsNav environment={environment} navigation={navigation} />
       </ScrollView>

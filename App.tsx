@@ -1,10 +1,13 @@
 import "react-native-gesture-handler";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RootNavigation from "./app/navigation/RootNavigation";
 import { Provider } from "react-redux";
 import store from "./app/store/configureStore";
+import messaging from "@react-native-firebase/messaging";
+import { Alert } from "react-native";
 
 export default function App() {
   const [isHidden, setIsHidden] = useState(false);
@@ -68,7 +71,8 @@ export default function App() {
     });
 
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      Alert.alert("A new FCM message arrived!", JSON.stringify(remoteMessage));
+      Alert.alert("A new FCM message arrived!");
+      // Alert.alert("A new FCM message arrived!", JSON.stringify(remoteMessage));
     });
 
     return unsubscribe;

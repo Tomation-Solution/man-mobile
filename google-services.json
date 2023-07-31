@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "738402908737",
+    "project_id": "nimn-c6df2",
+    "storage_bucket": "nimn-c6df2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738402908737:android:27282f8b6c24617d8fe4c0",
+        "android_client_info": {
+          "package_name": "com.tomation.NIMN"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738402908737-5fno73793jia30qarl88gg46r3252f5r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tomation.NIMN",
+            "certificate_hash": "9bda3738eb4eb037c2bb6d0c654440bcb97062a0"
+          }
+        },
+        {
+          "client_id": "738402908737-t7abd0btddmobs48o7hk71sg9h8aeu1o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tomation.NIMN",
+            "certificate_hash": "64a8bea3500706d4cf7bc8840328e0873b87e642"
+          }
+        },
+        {
+          "client_id": "738402908737-1sea88vtbk5ggudths04cqblf8afcja1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1xPvonXUXmITCE9XXmqycmffM4h3xSM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738402908737-1sea88vtbk5ggudths04cqblf8afcja1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

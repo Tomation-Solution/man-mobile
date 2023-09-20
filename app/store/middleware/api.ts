@@ -24,10 +24,9 @@ const api =
     try {
       let response;
       if (contentType) {
-        console.log("sdfsdf");
         response = await axios.request({
           method,
-          baseURL: "https://rel8-corporate-backend-production.up.railway.app/",
+          baseURL: "https://rel8backend-production-adfb.up.railway.app/",
           url,
           params: params,
           data,
@@ -40,7 +39,7 @@ const api =
       } else {
         response = await axios.request({
           method,
-          baseURL: "https://rel8-corporate-backend-production.up.railway.app/",
+          baseURL: "https://rel8backend-production-adfb.up.railway.app/",
           url,
           params: params,
           data,

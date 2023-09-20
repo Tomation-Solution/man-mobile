@@ -74,4 +74,7 @@ web-build/
 dist/
 
 android/
+credentials.json
+credentials/
+upload_cert.pem
 # @end expo-cli

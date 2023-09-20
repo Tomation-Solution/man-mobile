@@ -24,7 +24,7 @@ const api =
     try {
       const response = await axios.request({
         method,
-        baseURL: "https://rel8backend-production.up.railway.app/",
+        baseURL: "https://rel8backend-production-adfb.up.railway.app/",
         url,
         params: params,
         data,

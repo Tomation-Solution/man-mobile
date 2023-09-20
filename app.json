@@ -23,7 +23,7 @@
     },
     "android": {
       "package": "com.tomation.BUKAN",
-      "versionCode": 7,
+      "versionCode": 8,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -36,6 +36,18 @@
       "eas": {
         "projectId": "529ac31c-286d-4749-bc40-dc1eb17c2b4b"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33,
+            "buildToolsVersion": "33.0.0"
+          }
+        }
+      ]
+    ]
   }
 }
